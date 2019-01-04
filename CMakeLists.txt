@@ -1,6 +1,6 @@
 # This file specifies how the project should be built, using CMake.
 # If you are unfamiliar with CMake, don't worry about all the details.
-# The sections you might want to edit are marked as such, and 
+# The sections you might want to edit are marked as such, and
 # the comments should hopefully make most of it clear.
 #
 # For many purposes, you may not need to change anything about this file.
@@ -12,7 +12,7 @@ project(CPP_BOILERPLATE)
 enable_language(C CXX)
 
 # Set version number (change as needed). These definitions are available
-# by including "exampleConfig.h" in the source. 
+# by including "exampleConfig.h" in the source.
 # See exampleConfig.h.in for some more details.
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 0)
@@ -33,7 +33,7 @@ include(Colors)
 set(CMAKE_CXX_STANDARD 14)
 
 # Things to always include as flags. Change as needed.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")  
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
 # Build-type specific flags. Change as needed.
 SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
@@ -81,7 +81,7 @@ target_link_libraries(main.x engine)  # Link the executable to the 'engine'.
 add_executable(${TEST_MAIN} ${TESTFILES})
 add_dependencies(${TEST_MAIN} googletest engine)
 target_link_libraries(${TEST_MAIN} googletest engine pthread)
-add_custom_target(gtest 
+add_custom_target(gtest
     COMMAND "${PROJECT_BINARY_DIR}/${TEST_MAIN}"
     DEPENDS engine ${TEST_MAIN})
 
@@ -94,7 +94,7 @@ add_test(unit_tests ${PROJECT_BINARY_DIR}/${TEST_MAIN})
 # --------------------------------------------------------------------------------
 #                         Code Coverage (no change needed).
 # --------------------------------------------------------------------------------
-# If CMake aborts due to missing dependencies for code coverage 
+# If CMake aborts due to missing dependencies for code coverage
 # (gcov, lcov, genhtml and supported compiler), comment this line.
 include(CodeCoverage)
 
@@ -106,7 +106,7 @@ include(CodeCoverage)
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-    add_custom_target(doc 
+    add_custom_target(doc
         ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile &> doxygen.log
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "${BoldMagenta}Generating API documentation with Doxygen (open ./html/index.html to view).${ColourReset}" VERBATIM
@@ -118,7 +118,7 @@ endif(DOXYGEN_FOUND)
 #                         Google Test (no change needed).
 # --------------------------------------------------------------------------------
 # The following makes sure that an up-to-date version of googletest is available,
-# and built so that it may be used by your tests. 
+# and built so that it may be used by your tests.
 add_custom_target( git_update
     COMMAND git submodule init
     COMMAND git submodule update
