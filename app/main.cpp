@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "exampleConfig.h"
 #include "point3f.h"
+#include "film.h"
 #include <stdio.h>
 #include <string.h>
 #include <image.h>
@@ -38,10 +39,13 @@ void computeContribution(int id, render_task renderTask) {
 }
 
 // spawns n threads
-void runRenderer(int n, int width, int height) {
+void runRenderer(int n, Film film) {
     thread threads[n];
     vector<int> indexLists[n];
     vector<int> indexValues;
+
+    int height = film.height();
+    int width = film.width();
 
     // initialize a vector that contains all 1d image coordinates
     for (int i = 0; i < width * height; ++i) {
@@ -71,7 +75,7 @@ void runRenderer(int n, int width, int height) {
       th.join();
     }
 
-    Image img = Image(width, height);
+    Image img = Image(width, height, film.measurements());
     img.print();
 }
 
@@ -82,12 +86,17 @@ int main(int argc, char *argv[]) {
          << PROJECT_VERSION_MINOR
          << endl;
 
+    //BoxFilterFilm film = BoxFilterFilm();
+
     // don't hard-code these values, read from argv
     int threadCount = 5;
     int width = 500;
     int height = 500;
 
-    runRenderer(threadCount, width, height);
+
+    Film film = Film(width, height);
+
+    runRenderer(threadCount, film);
 
     return 0;
 }

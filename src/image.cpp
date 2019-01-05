@@ -4,12 +4,10 @@
 #include <string.h>
 #include <iostream>
 
-Image::Image() {
-  Image(100, 100);
-}
-Image::Image(int width, int height) {
+Image::Image(int width, int height, Spectrum* values) {
   _width = width;
   _height = height;
+  _values = values;
 }
 
 void Image::print() {
@@ -30,12 +28,13 @@ void Image::print() {
 
   for (int i = 0; i < _width; i++) {
     for (int j = 0; j < _height; j++) {
+      Spectrum s = _values[i * _width + j];
+
       x = i;
       y = (_height - 1) - j;
-      r = ((float) i / _width) * 255;
-      g = ((float) j / _height) * 255;
-      float foo = ((float)(i + j)) / (_width + _height);
-      b = (1 - foo) * 255;
+      r = s.r() * 255;
+      g = s.g() * 255;
+      b = s.b() * 255;
       if (r > 255)
         r = 255;
       if (g > 255)
