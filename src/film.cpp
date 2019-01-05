@@ -5,12 +5,10 @@
 Film::Film(int width, int height) {
   _width = width;
   _height = height;
-  // Spectrum m[width * height];
-
   Spectrum *m = NULL;
   m = (Spectrum*)malloc(sizeof(Spectrum) * _width * _height);
+  _measurements = m;
 
-  int c = 0;
   // TOOD: remove these dummy values later
   for (int i = 0; i < _width; i++) {
     for (int j = 0; j < _height; j++) {
@@ -22,10 +20,14 @@ Film::Film(int width, int height) {
       float shift = ((float)(i + j)) / (_width + _height);
       float b = (1 - shift);
       Spectrum s = Spectrum(r, g, b);
-      m[x + y * _width] = s;
+
+      addSample(x, y, s);
     }
   }
-  _measurements = m;
+}
+
+void Film::addSample(int x, int y, Spectrum s) {
+  _measurements[x + y * _width] = s;
 }
 
 int Film::width() {

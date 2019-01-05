@@ -25,7 +25,6 @@ void Image::print() {
 
   img = (unsigned char *)malloc(3 * _width * _height);
   memset(img, 0, 3 * _width * _height);
-  int c = 0;
 
   for (int i = 0; i < _width; i++) {
     for (int j = 0; j < _height; j++) {
