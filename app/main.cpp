@@ -93,7 +93,6 @@ int main(int argc, char *argv[]) {
     int width = 500;
     int height = 500;
 
-
     Film film = Film(width, height);
 
     runRenderer(threadCount, film);

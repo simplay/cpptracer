@@ -25,16 +25,20 @@ void Image::print() {
 
   img = (unsigned char *)malloc(3 * _width * _height);
   memset(img, 0, 3 * _width * _height);
+  int c = 0;
 
   for (int i = 0; i < _width; i++) {
     for (int j = 0; j < _height; j++) {
-      Spectrum s = _values[i * _width + j];
 
       x = i;
       y = (_height - 1) - j;
+
+      Spectrum s = _values[x + y * _width];
+
       r = s.r() * 255;
       g = s.g() * 255;
       b = s.b() * 255;
+
       if (r > 255)
         r = 255;
       if (g > 255)
