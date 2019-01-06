@@ -1,6 +1,7 @@
 #include "camera.h"
 #include "point3f.h"
 #include "vector4f.h"
+#include <math.h>
 
 Camera::Camera(
   Point3f* eye,
@@ -40,6 +41,13 @@ Camera::Camera(
   Vector4f e(from.x(), from.y(), from.z(), 1.0);
 
   matrix = new Matrix4f(xc, yc, zc, e);
+
+  // compute image corners
+  double angularFov = M_PI * (fov / 180.0);
+  top = std::tan(angularFov / 2.0);
+  bottom = -top;
+  right = aspectRatio * top;
+  left = -right;
 }
 
 Matrix4f* Camera::transformation() {

@@ -14,6 +14,10 @@ class Camera {
   float aspectRatio;
   float width;
   float height;
+  double top;
+  double bottom;
+  double right;
+  double left;
 
   public:
 
