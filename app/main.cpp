@@ -10,6 +10,7 @@
 #include <thread>
 #include <algorithm>
 #include <vector>
+#include "camera.h"
 
 using namespace std;
 
@@ -101,6 +102,7 @@ int main(int argc, char *argv[]) {
          << endl;
 
     //BoxFilterFilm film = BoxFilterFilm();
+    // Camera camera;
 
     unsigned threadCount = thread::hardware_concurrency();
     cout << "Using " << threadCount << " threads" << endl;
