@@ -38,6 +38,25 @@ void Point3f::scale(float factor) {
   _z *= factor;
 }
 
+void Point3f::add(Point3f other) {
+  _x += other.x();
+  _y += other.y();
+  _z += other.z();
+}
+
+void Point3f::sub(Point3f other) {
+  _x -= other.x();
+  _y -= other.y();
+  _z -= other.z();
+}
+
+Point3f Point3f::cross(Point3f other) {
+  float cx = this->y() * other.z() - this->z() * other.y();
+  float cy = this->z() * other.x() - this->x() * other.z();
+  float cz = this->x() * other.y() - this->y() * other.x();
+  return Point3f(cx, cy, cz);
+}
+
 void Point3f::normalize() {
   float scale = this->dot();
   if (scale == 0) return;

@@ -20,6 +20,15 @@ class Point3f {
   // scale components of this point equally.
   void scale(float factor);
 
+  // Modifies the components of this point.
+  void sub(Point3f other);
+
+  // Modifies the components of this point.
+  void add(Point3f other);
+
+  // compute the cross product between this and another point.
+  Point3f cross(Point3f other);
+
   /**
    * @return l2-dot product of this point's coordinates.
    */

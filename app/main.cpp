@@ -37,8 +37,6 @@ void computeContribution(int id, render_task renderTask) {
     Spectrum s = Spectrum(r, g, b);
     renderTask.film.addSample(x, y, s);
 
-
-
     // TODO compute contribution
     // ray = renderTask.scene.camera.make_world_space_ray(ii, jj, samples[k-1])
     // ray_spectrum = integrator.integrate(ray)
@@ -101,15 +99,23 @@ int main(int argc, char *argv[]) {
          << PROJECT_VERSION_MINOR
          << endl;
 
-    //BoxFilterFilm film = BoxFilterFilm();
-    // Camera camera;
-
     unsigned threadCount = thread::hardware_concurrency();
     cout << "Using " << threadCount << " threads" << endl;
 
     // don't hard-code these values, read from argv
     int width = 1000;
     int height = 1000;
+
+    // build camera matrix
+    Point3f eye(0.0, 0.0, 3.0);
+    Point3f lookAt(0.0, 0.0, 0.0);
+    Point3f up(0.0, 1.0, 0.0);
+    float fov = 60.0;
+    float aspectRatio = (float)width / height;
+
+    Camera camera(
+      &eye, &lookAt, &up, fov, aspectRatio, width, height
+    );
 
     Film film = Film(width, height);
 

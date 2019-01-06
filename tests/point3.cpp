@@ -48,3 +48,33 @@ TEST(Point3f, normalize_zero) {
   p.normalize();
   ASSERT_EQ(0, p.dot());
 }
+
+TEST(Point3f, sub) {
+  Point3f p = Point3f(9, 1, 7.5);
+  Point3f q = Point3f(1, 2, 3);
+  p.sub(q);
+
+  ASSERT_EQ(8, p.x());
+  ASSERT_EQ(-1, p.y());
+  ASSERT_EQ(4.5, p.z());
+}
+
+TEST(Point3f, add) {
+  Point3f p = Point3f(9, -1, 7.5);
+  Point3f q = Point3f(1, -2, 3);
+  p.add(q);
+
+  ASSERT_EQ(10, p.x());
+  ASSERT_EQ(-3, p.y());
+  ASSERT_EQ(10.5, p.z());
+}
+
+TEST(Point3f, cross) {
+  Point3f p = Point3f(2, 3, 4);
+  Point3f q = Point3f(5, 6, 7);
+  Point3f u = p.cross(q);
+
+  ASSERT_EQ(-3, u.x());
+  ASSERT_EQ(6, u.y());
+  ASSERT_EQ(-3, u.z());
+}
