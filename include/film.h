@@ -11,6 +11,7 @@ class Film {
 
   public:
 
+  Film();
   Film(int width, int height);
   void addSample(int x, int y, Spectrum s);
   int width();

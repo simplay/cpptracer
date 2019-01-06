@@ -5,6 +5,7 @@
 #include "film.h"
 #include <stdio.h>
 #include <string.h>
+#include "spectrum.h"
 #include <image.h>
 #include <thread>
 #include <algorithm>
@@ -16,7 +17,7 @@ struct render_task {
   vector<int> indices;
   int width;
   int height;
-  // Scene scene;
+  Film film;
 };
 
 void computeContribution(int id, render_task renderTask) {
@@ -24,6 +25,18 @@ void computeContribution(int id, render_task renderTask) {
     // 2d image coordinates
     int ii = *it / renderTask.width;
     int jj = *it % renderTask.height;
+
+    int x = ii;
+    int y = (renderTask.height - 1) - jj;
+
+    float r = ((float) ii / (renderTask.film.width()));
+    float g = ((float) jj / (renderTask.film.height()));
+    float shift = ((float)(ii + jj)) / (renderTask.film.width() + renderTask.film.height());
+    float b = (1 - shift);
+    Spectrum s = Spectrum(r, g, b);
+    renderTask.film.addSample(x, y, s);
+
+
 
     // TODO compute contribution
     // ray = renderTask.scene.camera.make_world_space_ray(ii, jj, samples[k-1])
@@ -68,6 +81,7 @@ void runRenderer(int n, Film film) {
       rt.width = width;
       rt.height = height;
       rt.indices = indexLists[i];
+      rt.film = film;
       threads[i] = thread(computeContribution, i + 1, rt);
     }
 
