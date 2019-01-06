@@ -102,10 +102,12 @@ int main(int argc, char *argv[]) {
 
     //BoxFilterFilm film = BoxFilterFilm();
 
+    unsigned threadCount = thread::hardware_concurrency();
+    cout << "Using " << threadCount << " threads" << endl;
+
     // don't hard-code these values, read from argv
-    int threadCount = 5;
-    int width = 500;
-    int height = 500;
+    int width = 1000;
+    int height = 1000;
 
     Film film = Film(width, height);
 
