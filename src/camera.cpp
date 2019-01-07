@@ -45,7 +45,7 @@ Camera::Camera(
 
   // compute image corners
   double angularFov = M_PI * (fov / 180.0);
-  top = std::tan(angularFov / 2.0);
+  top = tanf(angularFov / 2.0);
   bottom = -top;
   right = aspectRatio * top;
   left = -right;
