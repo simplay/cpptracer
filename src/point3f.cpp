@@ -1,4 +1,5 @@
 #include "point3f.h"
+#include "vector4f.h"
 #include <cmath>
 #include <iostream>
 
@@ -15,6 +16,12 @@ Point3f::Point3f(float x, float y, float z) {
 }
 
 Point3f::Point3f(Point3f* other) {
+  _x = other->x();
+  _y = other->y();
+  _z = other->z();
+}
+
+Point3f::Point3f(Vector4f* other) {
   _x = other->x();
   _y = other->y();
   _z = other->z();
@@ -65,4 +72,8 @@ void Point3f::normalize() {
 
 float Point3f::dot() {
   return sqrtf(_x * _x + _y * _y + _z * _z);
+}
+
+void Point3f::debug() {
+  std::cout << "(" << _x << ", " << _y << ", " << _z << ")" << std::endl;
 }

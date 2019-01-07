@@ -13,3 +13,17 @@ Matrix4f::Matrix4f(Vector4f row1, Vector4f row2, Vector4f row3, Vector4f row4) {
   m20 = row3.x(); m21 = row3.y(); m22 = row3.z(); m23 = row3.w();
   m30 = row4.x(); m31 = row4.y(); m32 = row4.z(); m33 = row4.w();
 }
+
+Vector4f* Matrix4f::mult(Vector4f& other) {
+  Vector4f row1(m00, m01, m02, m03);
+  Vector4f row2(m10, m11, m12, m13);
+  Vector4f row3(m20, m21, m22, m23);
+  Vector4f row4(m30, m31, m32, m33);
+
+  return new Vector4f(
+    row1.dot(other),
+    row2.dot(other),
+    row3.dot(other),
+    row4.dot(other)
+  );
+}

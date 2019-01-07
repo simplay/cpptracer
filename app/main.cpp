@@ -19,6 +19,7 @@ struct render_task {
   int width;
   int height;
   Film film;
+  Camera* camera;
 };
 
 void computeContribution(int id, render_task renderTask) {
@@ -37,6 +38,8 @@ void computeContribution(int id, render_task renderTask) {
     Spectrum s = Spectrum(r, g, b);
     renderTask.film.addSample(x, y, s);
 
+    Ray* ray = renderTask.camera->makeWorldspaceRay(ii, jj);
+
     // TODO compute contribution
     // ray = renderTask.scene.camera.make_world_space_ray(ii, jj, samples[k-1])
     // ray_spectrum = integrator.integrate(ray)
@@ -51,7 +54,7 @@ void computeContribution(int id, render_task renderTask) {
 }
 
 // spawns n threads
-void runRenderer(int n, Film film) {
+void runRenderer(int n, Film film, Camera camera) {
     thread threads[n];
     vector<int> indexLists[n];
     vector<int> indexValues;
@@ -81,6 +84,7 @@ void runRenderer(int n, Film film) {
       rt.height = height;
       rt.indices = indexLists[i];
       rt.film = film;
+      rt.camera = &camera;
       threads[i] = thread(computeContribution, i + 1, rt);
     }
 
@@ -119,7 +123,7 @@ int main(int argc, char *argv[]) {
 
     Film film = Film(width, height);
 
-    runRenderer(threadCount, film);
+    runRenderer(threadCount, film, camera);
 
     return 0;
 }

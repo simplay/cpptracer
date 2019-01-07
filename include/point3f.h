@@ -1,3 +1,5 @@
+#include "vector4f.h"
+
 #ifndef POINT3_H
 #define POINT3_H
 
@@ -12,6 +14,7 @@ class Point3f {
   Point3f();
   Point3f(float, float, float);
   Point3f(Point3f*);
+  Point3f(Vector4f*);
 
   float x();
   float y();
@@ -37,6 +40,8 @@ class Point3f {
   // Make length of this vector equal 1 (in l2 norm's sense) but preserve its
   // direction.
   void normalize();
+
+  void debug();
 };
 
 #endif

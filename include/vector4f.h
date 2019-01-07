@@ -13,6 +13,8 @@ class Vector4f {
   float y();
   float z();
   float w();
+
+  float dot(Vector4f other);
 };
 
 #endif

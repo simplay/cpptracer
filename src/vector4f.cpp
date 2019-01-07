@@ -29,3 +29,7 @@ float Vector4f::z() {
 float Vector4f::w() {
   return _w;
 }
+
+float Vector4f::dot(Vector4f other) {
+  return _x * other.x() + _y * other.y() + _z * other.z() + _w * other.w();
+}
