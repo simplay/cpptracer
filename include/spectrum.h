@@ -1,3 +1,5 @@
+#include "point3f.h"
+
 #ifndef SPECTRUM_H
 #define SPECTRUM_H
 
@@ -11,6 +13,7 @@ class Spectrum {
 
   Spectrum();
   Spectrum(float, float, float);
+  Spectrum(Spectrum*);
 
   float r();
   float g();
