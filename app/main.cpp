@@ -45,7 +45,7 @@ void computeContribution(int id, render_task renderTask) {
       Spectrum s = Spectrum(r, g, b);
       renderTask.film.addSample(x, y, s);
 
-      Ray* ray = renderTask.camera->makeWorldspaceRay(ii, jj, samples);
+      Ray* ray = renderTask.camera->makeWorldspaceRay(ii, jj, sample);
 
       // TODO compute contribution
       // ray = renderTask.scene.camera.make_world_space_ray(ii, jj, samples[k-1])
