@@ -1,3 +1,4 @@
+#include <vector>
 #include "matrix4f.h"
 #include "point3f.h"
 #include "ray.h"
@@ -24,7 +25,7 @@ class Camera {
 
   Camera(Point3f* eye, Point3f* lookAt, Point3f* up, float fov, float aspectRatio, float width, float height);
   Matrix4f* transformation();
-  Ray* makeWorldspaceRay(int i, int j);
+  Ray* makeWorldspaceRay(int i, int j, std::vector<float>);
 };
 
 #endif

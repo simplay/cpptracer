@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <vector>
 #include "camera.h"
+#include "oneSampler.h"
 
 using namespace std;
 
@@ -24,32 +25,39 @@ struct render_task {
 
 void computeContribution(int id, render_task renderTask) {
   for (vector<int>::iterator it = renderTask.indices.begin(); it != renderTask.indices.end(); ++it) {
-    // 2d image coordinates
-    int ii = *it / renderTask.width;
-    int jj = *it % renderTask.height;
+    // samples = integrator.make_pixel_samples(sampler, scene.spp);
+    OneSampler os;
+    auto samples = os.makeSample(1, 2);
+    for (unsigned k = 0; k < samples.size(); k++) {
+      auto sample = samples.at(k);
 
-    int x = ii;
-    int y = (renderTask.height - 1) - jj;
+      // 2d image coordinates
+      int ii = *it / renderTask.width;
+      int jj = *it % renderTask.height;
 
-    float r = ((float) ii / (renderTask.film.width()));
-    float g = ((float) jj / (renderTask.film.height()));
-    float shift = ((float)(ii + jj)) / (renderTask.film.width() + renderTask.film.height());
-    float b = (1 - shift);
-    Spectrum s = Spectrum(r, g, b);
-    renderTask.film.addSample(x, y, s);
+      int x = ii;
+      int y = (renderTask.height - 1) - jj;
 
-    Ray* ray = renderTask.camera->makeWorldspaceRay(ii, jj);
+      float r = ((float) ii / (renderTask.film.width()));
+      float g = ((float) jj / (renderTask.film.height()));
+      float shift = ((float)(ii + jj)) / (renderTask.film.width() + renderTask.film.height());
+      float b = (1 - shift);
+      Spectrum s = Spectrum(r, g, b);
+      renderTask.film.addSample(x, y, s);
 
-    // TODO compute contribution
-    // ray = renderTask.scene.camera.make_world_space_ray(ii, jj, samples[k-1])
-    // ray_spectrum = integrator.integrate(ray)
+      Ray* ray = renderTask.camera->makeWorldspaceRay(ii, jj, samples);
 
-    // write to film
-    // scene.film.add_sample(
-    //     ii + samples[k-1][0].to_f,
-    //     jj + samples[k-1][1].to_f,
-    //     ray_spectrum
-    //  )
+      // TODO compute contribution
+      // ray = renderTask.scene.camera.make_world_space_ray(ii, jj, samples[k-1])
+      // ray_spectrum = integrator.integrate(ray)
+
+      // write to film
+      // scene.film.add_sample(
+      //     ii + sample.at(0),
+      //     jj + sample.at(1),
+      //     ray_spectrum
+      //  )
+    }
   }
 }
 
