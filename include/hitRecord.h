@@ -1,5 +1,8 @@
 #include "point3f.h"
-#include "material.h"
+
+// forward declaration:
+// See https://stackoverflow.com/questions/4757565/what-are-forward-declarations-in-c
+class Material;
 
 #ifndef HIT_RECORD_H
 #define HIT_RECORD_H

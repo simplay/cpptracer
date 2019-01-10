@@ -6,17 +6,17 @@
 #ifndef POINT_LIGHT_MATERIAL_H
 #define POINT_LIGHT_MATERIAL_H
 
-class PointLightMaterial : Material {
+class PointLightMaterial : public Material {
   public:
     Spectrum* emission;
 
     PointLightMaterial(Spectrum*);
-    Spectrum* evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn);
-    Spectrum* evaluateEmission(HitRecord* hitRecord, Point3f* wOut);
+    virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn);
+    virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Point3f* wOut);
 
-    bool hasSpecularReflection();
-    bool hasSpecularRefraction();
-    bool castsShadows();
+    virtual bool hasSpecularReflection();
+    virtual bool hasSpecularRefraction();
+    virtual bool castsShadows();
 };
 
 #endif
