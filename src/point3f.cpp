@@ -74,6 +74,10 @@ float Point3f::dot() {
   return sqrtf(_x * _x + _y * _y + _z * _z);
 }
 
+float Point3f::dot(Point3f other) {
+  return sqrtf(_x * other.x() + _y * other.y() + _z * other.z());
+}
+
 void Point3f::debug() {
   std::cout << "(" << _x << ", " << _y << ", " << _z << ")" << std::endl;
 }
