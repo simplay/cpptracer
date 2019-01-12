@@ -18,6 +18,8 @@ class Spectrum {
   float r();
   float g();
   float b();
+
+  void scale(float);
 };
 
 #endif

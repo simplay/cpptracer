@@ -30,3 +30,9 @@ float Spectrum::g() {
 float Spectrum::b() {
   return _b;
 }
+
+void Spectrum::scale(float factor) {
+  _r /= factor;
+  _g /= factor;
+  _b /= factor;
+}
