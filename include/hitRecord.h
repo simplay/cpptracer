@@ -3,6 +3,7 @@
 // forward declaration:
 // See https://stackoverflow.com/questions/4757565/what-are-forward-declarations-in-c
 class Material;
+class Intersectable;
 
 #ifndef HIT_RECORD_H
 #define HIT_RECORD_H
@@ -30,24 +31,36 @@ class Material;
 // material: Material
 //   The material at the hit point.
 class HitRecord {
+  private:
+    // by default, a HitRecord is valid
+    bool isNull = false;
+
   public:
+    float epsilon = 0.000001;
     float t;
     Point3f* position;
     Point3f* normal;
     Point3f* tangent;
     Point3f* wIn;
     Material* material;
-    Point3f* w;
+    Intersectable* intersectable;
+
+    // the null-hitrecord
+    HitRecord();
 
     HitRecord(
-      float t,
+      float &t,
       Point3f* position,
       Point3f* normal,
       Point3f* tangent,
       Point3f* wIn,
       Material* material,
-      Point3f* w
+      Intersectable* intersectable
     );
+
+    // HitRecord objects are marked as invalid return true
+    // Used to avoid null-checks
+    bool isValid();
 };
 
 #endif

@@ -57,6 +57,12 @@ void Point3f::sub(Point3f other) {
   _z -= other.z();
 }
 
+void Point3f::negate() {
+  _x *= 1.0;
+  _y *= 1.0;
+  _z *= 1.0;
+}
+
 Point3f Point3f::cross(Point3f other) {
   float cx = this->y() * other.z() - this->z() * other.y();
   float cy = this->z() * other.x() - this->x() * other.z();

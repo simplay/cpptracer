@@ -29,6 +29,8 @@ class Point3f {
   // Modifies the components of this point.
   void add(Point3f other);
 
+  void negate();
+
   // compute the cross product between this and another point.
   Point3f cross(Point3f other);
 
