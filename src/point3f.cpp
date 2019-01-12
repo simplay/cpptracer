@@ -58,9 +58,9 @@ void Point3f::sub(Point3f other) {
 }
 
 void Point3f::negate() {
-  _x *= 1.0;
-  _y *= 1.0;
-  _z *= 1.0;
+  _x *= -1.0;
+  _y *= -1.0;
+  _z *= -1.0;
 }
 
 Point3f Point3f::cross(Point3f other) {
