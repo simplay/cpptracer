@@ -6,7 +6,7 @@
 #ifndef POINT_LIGHT_MATERIAL_H
 #define POINT_LIGHT_MATERIAL_H
 
-class PointLightMaterial : public Material {
+class PointLightMaterial {
   public:
     Spectrum* emission;
 
