@@ -58,6 +58,11 @@ class HitRecord {
       Intersectable* intersectable
     );
 
+    HitRecord(
+      Point3f* position,
+      Material* material
+    );
+
     // HitRecord objects are marked as invalid return true
     // Used to avoid null-checks
     bool isValid();
