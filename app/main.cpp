@@ -29,6 +29,13 @@ struct render_task {
   Camera* camera;
 };
 
+struct Scene {
+  Film* film;
+  Camera* camera;
+  std::vector<PointLight*>* lightList;
+  IntersectableList* intersectableList;
+};
+
 void computeContribution(int id, render_task renderTask) {
   for (vector<int>::iterator it = renderTask.indices.begin(); it != renderTask.indices.end(); ++it) {
     // samples = integrator.make_pixel_samples(sampler, scene.spp);
@@ -68,13 +75,13 @@ void computeContribution(int id, render_task renderTask) {
 }
 
 // spawns n threads
-void runRenderer(int n, Film film, Camera camera) {
+void runRenderer(int n, Scene& scene) {
     thread threads[n];
     vector<int> indexLists[n];
     vector<int> indexValues;
 
-    int height = film.height();
-    int width = film.width();
+    int height = scene.film->height();
+    int width = scene.film->width();
 
     // initialize a vector that contains all 1d image coordinates
     for (int i = 0; i < width * height; ++i) {
@@ -97,8 +104,8 @@ void runRenderer(int n, Film film, Camera camera) {
       rt.width = width;
       rt.height = height;
       rt.indices = indexLists[i];
-      rt.film = film;
-      rt.camera = &camera;
+      rt.film = *scene.film;
+      rt.camera = scene.camera;
       threads[i] = thread(computeContribution, i + 1, rt);
     }
 
@@ -106,7 +113,7 @@ void runRenderer(int n, Film film, Camera camera) {
       th.join();
     }
 
-    Image img = Image(width, height, film.measurements());
+    Image img = Image(width, height, scene.film->measurements());
     img.print();
 }
 
@@ -148,7 +155,13 @@ int main(int argc, char *argv[]) {
     std::vector<PointLight*>* lightList = new vector<PointLight*>;
     lightList->push_back(new PointLight(new Point3f(0.0, 0.0, 3.0), new Spectrum(10.0, 10, 10)));
 
-    runRenderer(threadCount, film, camera);
+    Scene scene;
+    scene.film = &film;
+    scene.camera = &camera;
+    scene.lightList = lightList;
+    scene.intersectableList = intersectableList;
+
+    runRenderer(threadCount, scene);
 
     return 0;
 }
