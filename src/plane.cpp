@@ -1,20 +1,21 @@
 #include "plane.h"
+#include <iostream>
+#include <cmath>
 
 Plane::Plane(Material* material, Point3f* normal, float distance)
   : material(material), normal(normal), distance(distance)
 {}
 
 HitRecord* Plane::intersect(Ray* ray) {
+  float epsilon = 0.000001;
 
   // incident angle: angle between the ray direction and the plane normal
   auto cosTheta = normal->dot(ray->direction);
-
-  float epsilon = 0.000001;
-  if (cosTheta <= epsilon) {
+  if (std::abs(cosTheta) <= epsilon) {
     return new HitRecord();
   }
 
-  float t = (normal->dot(ray->origin) + distance) / cosTheta;
+  float t = -(normal->dot(ray->origin) + distance) / cosTheta;
   if (t <= 0) {
     return new HitRecord();
   }
