@@ -1,3 +1,4 @@
+#include <iostream>
 #include "pointLightIntegrator.h"
 
 PointLightIntegrator::PointLightIntegrator(Scene* scene): scene(scene) {}
@@ -7,6 +8,8 @@ Spectrum* PointLightIntegrator::integrate(Ray* ray) {
   if (!hitRecord->isValid()) {
     return new Spectrum();
   }
+
+  // std::cout << hitRecord->t << std::endl;
 
   if (hitRecord->t > 0.0) {
     return new Spectrum(1, 0, 0);

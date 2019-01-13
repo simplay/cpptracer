@@ -14,20 +14,12 @@
 #include "oneSampler.h"
 #include "scene.h"
 #include "pointLightIntegrator.h"
+#include "renderTask.h"
 
 using namespace std;
 
-struct render_task {
-  vector<int> indices;
-  int width;
-  int height;
-  Film film;
-  Camera* camera;
-  PointLightIntegrator* integrator;
-};
-
-void computeContribution(int id, render_task renderTask) {
-  for (vector<int>::iterator it = renderTask.indices.begin(); it != renderTask.indices.end(); ++it) {
+void computeContribution(int id, RenderTask* renderTask) {
+  for (vector<int>::iterator it = (*renderTask->indices).begin(); it != (*renderTask->indices).end(); ++it) {
     // samples = integrator.make_pixel_samples(sampler, scene.spp);
     OneSampler os;
     auto samples = os.makeSample(1, 2);
@@ -35,11 +27,11 @@ void computeContribution(int id, render_task renderTask) {
       auto sample = samples.at(k);
 
       // 2d image coordinates
-      int ii = *it / renderTask.width;
-      int jj = *it % renderTask.height;
+      int ii = *it / renderTask->width;
+      int jj = *it % renderTask->height;
 
       int x = ii;
-      int y = (renderTask.height - 1) - jj;
+      int y = (renderTask->height - 1) - jj;
 
       // TODO remove
       // float r = ((float) ii / (renderTask.film.width()));
@@ -48,9 +40,9 @@ void computeContribution(int id, render_task renderTask) {
       // float b = (1 - shift);
       // Spectrum s = Spectrum(r, g, b);
 
-      Ray* ray = renderTask.camera->makeWorldspaceRay(ii, jj, sample);
-      Spectrum* raySpectrum = renderTask.integrator->integrate(ray);
-      renderTask.film.addSample(x + sample.at(0), y + sample.at(1), raySpectrum);
+      Ray* ray = renderTask->scene->camera->makeWorldspaceRay(ii, jj, sample);
+      Spectrum* raySpectrum = renderTask->scene->integrator->integrate(ray);
+      renderTask->scene->film->addSample(x + sample.at(0), y + sample.at(1), raySpectrum);
     }
   }
 }
@@ -81,13 +73,9 @@ void runRenderer(int n, Scene* scene) {
 
     // spawn n threads:
     for (int i = 0; i < n; i++) {
-      render_task rt = render_task();
-      rt.width = width;
-      rt.height = height;
-      rt.indices = indexLists[i];
-      rt.film = *scene->film;
-      rt.camera = scene->camera;
-      rt.integrator = scene->integrator;
+      RenderTask* rt = new RenderTask(
+          width, height, &indexLists[i], scene
+      );
       threads[i] = thread(computeContribution, i + 1, rt);
     }
 
