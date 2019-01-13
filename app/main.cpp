@@ -13,6 +13,7 @@
 #include "camera.h"
 #include "oneSampler.h"
 #include "scene.h"
+#include "pointLightIntegrator.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ struct render_task {
   int height;
   Film film;
   Camera* camera;
+  PointLightIntegrator* integrator;
 };
 
 void computeContribution(int id, render_task renderTask) {
@@ -39,25 +41,16 @@ void computeContribution(int id, render_task renderTask) {
       int x = ii;
       int y = (renderTask.height - 1) - jj;
 
-      float r = ((float) ii / (renderTask.film.width()));
-      float g = ((float) jj / (renderTask.film.height()));
-      float shift = ((float)(ii + jj)) / (renderTask.film.width() + renderTask.film.height());
-      float b = (1 - shift);
-      Spectrum s = Spectrum(r, g, b);
-      renderTask.film.addSample(x, y, s);
+      // TODO remove
+      // float r = ((float) ii / (renderTask.film.width()));
+      // float g = ((float) jj / (renderTask.film.height()));
+      // float shift = ((float)(ii + jj)) / (renderTask.film.width() + renderTask.film.height());
+      // float b = (1 - shift);
+      // Spectrum s = Spectrum(r, g, b);
 
       Ray* ray = renderTask.camera->makeWorldspaceRay(ii, jj, sample);
-
-      // TODO compute contribution
-      // ray = renderTask.scene.camera.make_world_space_ray(ii, jj, samples[k-1])
-      // ray_spectrum = integrator.integrate(ray)
-
-      // write to film
-      // scene.film.add_sample(
-      //     ii + sample.at(0),
-      //     jj + sample.at(1),
-      //     ray_spectrum
-      //  )
+      Spectrum* raySpectrum = renderTask.integrator->integrate(ray);
+      renderTask.film.addSample(x + sample.at(0), y + sample.at(1), raySpectrum);
     }
   }
 }
@@ -94,6 +87,7 @@ void runRenderer(int n, Scene* scene) {
       rt.indices = indexLists[i];
       rt.film = *scene->film;
       rt.camera = scene->camera;
+      rt.integrator = scene->integrator;
       threads[i] = thread(computeContribution, i + 1, rt);
     }
 

@@ -2,6 +2,7 @@
 #include "scene.h"
 #include "plane.h"
 #include "diffuse.h"
+#include "pointLightIntegrator.h"
 
 Scene::Scene(int width, int height) {
   // build camera matrix
@@ -32,4 +33,5 @@ Scene::Scene(int width, int height) {
   this->camera = camera;
   this->lightList = lightList;
   this->intersectableList = intersectableList;
+  this->integrator = new PointLightIntegrator(this);
 }
