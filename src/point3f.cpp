@@ -71,7 +71,7 @@ Point3f Point3f::cross(Point3f other) {
 }
 
 void Point3f::normalize() {
-  float scale = this->dot();
+  float scale = sqrt(this->dot());
   if (scale == 0) return;
   this->scale(1.0 / scale);
 }

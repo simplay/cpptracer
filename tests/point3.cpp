@@ -26,7 +26,7 @@ TEST(Point3f, new_without_arguments) {
 
 TEST(Point3f, dot) {
   Point3f d = Point3f(0, 3, 4);
-  ASSERT_EQ(5, d.dot());
+  ASSERT_EQ(25, d.dot());
 }
 
 TEST(Point3f, scale) {
