@@ -12,6 +12,11 @@
 #include <vector>
 #include "camera.h"
 #include "oneSampler.h"
+#include "intersectableList.h"
+#include "intersectable.h"
+#include "plane.h"
+#include "diffuse.h"
+#include "spectrum.h"
 
 using namespace std;
 
@@ -130,6 +135,14 @@ int main(int argc, char *argv[]) {
     );
 
     Film film = Film(width, height);
+
+    Material* material = new Diffuse(new Spectrum(1.0, 1.0, 1.0));
+    IntersectableList* intersectableList = new IntersectableList();
+    intersectableList->put(new Plane(material, new Point3f(1.0, 0.0, 0.0), 1));
+    intersectableList->put(new Plane(material, new Point3f(-1.0, 0.0, 0.0), 1));
+    intersectableList->put(new Plane(material, new Point3f(0.0, 1.0, 0.0), 1));
+    intersectableList->put(new Plane(material, new Point3f(0.0, -1.0, 0.0), 1));
+    intersectableList->put(new Plane(material, new Point3f(0.0, 0.0, 1.0), 1));
 
     runRenderer(threadCount, film, camera);
 

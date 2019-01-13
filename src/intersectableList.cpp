@@ -2,7 +2,10 @@
 #include "hitRecord.h"
 #include <limits>
 
-IntersectableList::IntersectableList() {}
+IntersectableList::IntersectableList() {
+  container = new std::vector<Intersectable*>;
+}
+
 HitRecord* IntersectableList::intersect(Ray* ray) {
   float eps = 0.00001;
   float minT = std::numeric_limits<float>::max();
