@@ -12,12 +12,7 @@
 #include <vector>
 #include "camera.h"
 #include "oneSampler.h"
-#include "intersectableList.h"
-#include "intersectable.h"
-#include "plane.h"
-#include "diffuse.h"
-#include "spectrum.h"
-#include "pointLight.h"
+#include "scene.h"
 
 using namespace std;
 
@@ -27,13 +22,6 @@ struct render_task {
   int height;
   Film film;
   Camera* camera;
-};
-
-struct Scene {
-  Film* film;
-  Camera* camera;
-  std::vector<PointLight*>* lightList;
-  IntersectableList* intersectableList;
 };
 
 void computeContribution(int id, render_task renderTask) {
@@ -75,13 +63,13 @@ void computeContribution(int id, render_task renderTask) {
 }
 
 // spawns n threads
-void runRenderer(int n, Scene& scene) {
+void runRenderer(int n, Scene* scene) {
     thread threads[n];
     vector<int> indexLists[n];
     vector<int> indexValues;
 
-    int height = scene.film->height();
-    int width = scene.film->width();
+    int height = scene->film->height();
+    int width = scene->film->width();
 
     // initialize a vector that contains all 1d image coordinates
     for (int i = 0; i < width * height; ++i) {
@@ -104,8 +92,8 @@ void runRenderer(int n, Scene& scene) {
       rt.width = width;
       rt.height = height;
       rt.indices = indexLists[i];
-      rt.film = *scene.film;
-      rt.camera = scene.camera;
+      rt.film = *scene->film;
+      rt.camera = scene->camera;
       threads[i] = thread(computeContribution, i + 1, rt);
     }
 
@@ -113,7 +101,7 @@ void runRenderer(int n, Scene& scene) {
       th.join();
     }
 
-    Image img = Image(width, height, scene.film->measurements());
+    Image img = Image(width, height, scene->film->measurements());
     img.print();
 }
 
@@ -128,38 +116,7 @@ int main(int argc, char *argv[]) {
     cout << "Using " << threadCount << " threads" << endl;
 
     // don't hard-code these values, read from argv
-    int width = 1000;
-    int height = 1000;
-
-    // build camera matrix
-    Point3f eye(0.0, 0.0, 3.0);
-    Point3f lookAt(0.0, 0.0, 0.0);
-    Point3f up(0.0, 1.0, 0.0);
-    float fov = 60.0;
-    float aspectRatio = (float)width / height;
-
-    Camera camera(
-      &eye, &lookAt, &up, fov, aspectRatio, width, height
-    );
-
-    Film film = Film(width, height);
-
-    Material* material = new Diffuse(new Spectrum(1.0, 1.0, 1.0));
-    IntersectableList* intersectableList = new IntersectableList();
-    intersectableList->put(new Plane(material, new Point3f(1.0, 0.0, 0.0), 1));
-    intersectableList->put(new Plane(material, new Point3f(-1.0, 0.0, 0.0), 1));
-    intersectableList->put(new Plane(material, new Point3f(0.0, 1.0, 0.0), 1));
-    intersectableList->put(new Plane(material, new Point3f(0.0, -1.0, 0.0), 1));
-    intersectableList->put(new Plane(material, new Point3f(0.0, 0.0, 1.0), 1));
-
-    std::vector<PointLight*>* lightList = new vector<PointLight*>;
-    lightList->push_back(new PointLight(new Point3f(0.0, 0.0, 3.0), new Spectrum(10.0, 10, 10)));
-
-    Scene scene;
-    scene.film = &film;
-    scene.camera = &camera;
-    scene.lightList = lightList;
-    scene.intersectableList = intersectableList;
+    Scene* scene = new Scene(1000, 1000);
 
     runRenderer(threadCount, scene);
 
