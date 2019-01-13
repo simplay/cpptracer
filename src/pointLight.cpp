@@ -12,3 +12,7 @@ HitRecord* PointLight::sample() {
       material
   );
 }
+
+HitRecord* PointLight::intersect(Ray*) {
+  return new HitRecord();
+}

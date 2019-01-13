@@ -17,6 +17,7 @@
 #include "plane.h"
 #include "diffuse.h"
 #include "spectrum.h"
+#include "pointLight.h"
 
 using namespace std;
 
@@ -143,6 +144,9 @@ int main(int argc, char *argv[]) {
     intersectableList->put(new Plane(material, new Point3f(0.0, 1.0, 0.0), 1));
     intersectableList->put(new Plane(material, new Point3f(0.0, -1.0, 0.0), 1));
     intersectableList->put(new Plane(material, new Point3f(0.0, 0.0, 1.0), 1));
+
+    std::vector<PointLight*>* lightList = new vector<PointLight*>;
+    lightList->push_back(new PointLight(new Point3f(0.0, 0.0, 3.0), new Spectrum(10.0, 10, 10)));
 
     runRenderer(threadCount, film, camera);
 
