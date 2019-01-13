@@ -31,5 +31,5 @@ HitRecord::HitRecord(
 {}
 
 bool HitRecord::isValid() {
-  return isNull;
+  return !isNull;
 }
