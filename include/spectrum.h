@@ -20,6 +20,8 @@ class Spectrum {
   float b();
 
   void scale(float);
+  void add(Spectrum*);
+  void mult(Spectrum*);
 };
 
 #endif

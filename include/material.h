@@ -6,11 +6,12 @@
 #define IMATERIAL_H
 
 class Material {
-  virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn) = 0;
-  virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Point3f* wOut) = 0;
+  public:
+    virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn) = 0;
+    virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Point3f* wOut) = 0;
 
-  virtual bool hasSpecularReflection() = 0;
-  virtual bool hasSpecularRefraction() = 0;
-  virtual bool castsShadows() = 0;
+    virtual bool hasSpecularReflection() = 0;
+    virtual bool hasSpecularRefraction() = 0;
+    virtual bool castsShadows() = 0;
 };
 #endif

@@ -36,3 +36,15 @@ void Spectrum::scale(float factor) {
   _g /= factor;
   _b /= factor;
 }
+
+void Spectrum::add(Spectrum* other) {
+  _r += other->r();
+  _g += other->g();
+  _b += other->b();
+}
+
+void Spectrum::mult(Spectrum* other) {
+  _r *= other->r();
+  _g *= other->g();
+  _b *= other->b();
+}
