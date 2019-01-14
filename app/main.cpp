@@ -1,3 +1,5 @@
+// usage: ./main.x IMG_DIM
+
 #include <iostream>
 #include <stdlib.h>
 #include "exampleConfig.h"
@@ -18,7 +20,7 @@
 
 using namespace std;
 
-void computeContribution(int id, RenderTask* renderTask) {
+void computeContribution(RenderTask* renderTask) {
   for (vector<int>::iterator it = (*renderTask->indices).begin(); it != (*renderTask->indices).end(); ++it) {
     // samples = integrator.make_pixel_samples(sampler, scene.spp);
     OneSampler os;
@@ -76,7 +78,7 @@ void runRenderer(int n, Scene* scene) {
       RenderTask* rt = new RenderTask(
           width, height, &indexLists[i], scene
       );
-      threads[i] = thread(computeContribution, i + 1, rt);
+      threads[i] = thread(computeContribution, rt);
     }
 
     for (auto& th : threads) {
@@ -94,11 +96,16 @@ int main(int argc, char *argv[]) {
          << PROJECT_VERSION_MINOR
          << endl;
 
+    int dim = 400;
+    if (argc > 1) {
+      dim = std::atoi(argv[1]);
+    }
+
     unsigned threadCount = thread::hardware_concurrency();
     cout << "Using " << threadCount << " threads" << endl;
 
     // don't hard-code these values, read from argv
-    Scene* scene = new Scene(1000, 1000);
+    Scene* scene = new Scene(dim, dim);
 
     runRenderer(threadCount, scene);
 
