@@ -13,6 +13,12 @@ Spectrum::Spectrum(float r, float g, float b) {
   _b = b;
 }
 
+Spectrum::Spectrum(float v) {
+  _r = v;
+  _g = v;
+  _b = v;
+}
+
 Spectrum::Spectrum(Spectrum* s) {
   _r = s->r();
   _g = s->g();

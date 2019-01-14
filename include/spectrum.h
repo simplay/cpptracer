@@ -13,6 +13,7 @@ class Spectrum {
 
   Spectrum();
   Spectrum(float, float, float);
+  Spectrum(float);
   Spectrum(Spectrum*);
 
   float r();
