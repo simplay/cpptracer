@@ -48,7 +48,7 @@ Spectrum* PointLightIntegrator::contributionOf(PointLight* lightSource, HitRecor
   contribution->scale(cosTheta);
 
   // find a better scaling approach
-  contribution->scale(1.0 / d2 * 1000);
+  contribution->scale(1.0 / d2 * 1000.0);
   return contribution;
 }
 

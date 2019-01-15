@@ -8,12 +8,13 @@ class Film {
   int _width;
   int _height;
   Spectrum* _measurements;
+  int* _sampleCounts;
 
   public:
 
   Film();
   Film(int width, int height);
-  void addSample(int x, int y, Spectrum s);
+  void addSample(int x, int y, Spectrum* s);
   int width();
   int height();
   Spectrum* measurements();

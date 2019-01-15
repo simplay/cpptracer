@@ -27,7 +27,7 @@ Scene::Scene(int width, int height) {
   intersectableList->put(new Plane(material, new Point3f(0.0, 0.0, 1.0), 1));
 
   std::vector<PointLight*>* lightList = new std::vector<PointLight*>;
-  lightList->push_back(new PointLight(new Point3f(0.0, 0.0, 3.0), new Spectrum(1.0)));
+  lightList->push_back(new PointLight(new Point3f(0.0, 0.0, 3.0), new Spectrum(10.0)));
 
   this->film = film;
   this->camera = camera;
