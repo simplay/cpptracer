@@ -7,22 +7,20 @@
  * Float valued point with 3 coordinates.
  */
 class Spectrum {
-  float _r, _g, _b;
 
   public:
+    float r;
+    float g;
+    float b;
 
-  Spectrum();
-  Spectrum(float, float, float);
-  Spectrum(float);
-  Spectrum(Spectrum*);
+    Spectrum();
+    Spectrum(float, float, float);
+    Spectrum(float);
+    Spectrum(Spectrum*);
 
-  float r();
-  float g();
-  float b();
-
-  void scale(float);
-  void add(Spectrum*);
-  void mult(Spectrum*);
+    void scale(float);
+    void add(Spectrum*);
+    void mult(Spectrum*);
 };
 
 #endif

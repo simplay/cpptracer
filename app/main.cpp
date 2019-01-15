@@ -22,9 +22,8 @@ using namespace std;
 
 void computeContribution(RenderTask* renderTask) {
   for (vector<int>::iterator it = (*renderTask->indices).begin(); it != (*renderTask->indices).end(); ++it) {
-    // samples = integrator.make_pixel_samples(sampler, scene.spp);
-    OneSampler os;
-    auto samples = os.makeSample(1, 2);
+    OneSampler* os = new OneSampler();
+    auto samples = os->makeSample(1, 2);
     for (unsigned k = 0; k < samples.size(); k++) {
       auto sample = samples.at(k);
 

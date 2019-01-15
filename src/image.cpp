@@ -30,9 +30,9 @@ void Image::print() {
 
       Spectrum s = values[x + y * width];
 
-      r = s.r() * 255;
-      g = s.g() * 255;
-      b = s.b() * 255;
+      r = s.r * 255;
+      g = s.g * 255;
+      b = s.b * 255;
 
       if (r > 255) {
         r = 255;
