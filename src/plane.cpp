@@ -31,7 +31,7 @@ HitRecord* Plane::intersect(Ray* ray) {
   // do something more
 
   Point3f* hitNormal = new Point3f(normal);
-  Point3f tangent = (new Point3f(1, 0, 0))->cross(*hitNormal);
+  Point3f tangent = (new Point3f(1, 0, 0))->cross(hitNormal);
 
   return new HitRecord(
       t,

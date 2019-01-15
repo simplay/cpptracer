@@ -6,14 +6,14 @@
 
 Scene::Scene(int width, int height) {
   // build camera matrix
-  Point3f eye(0.5, 0.5, 3.0);
-  Point3f lookAt(0.5, 0.0, 0.0);
-  Point3f up(0.2, 1.0, 0.0);
+  Point3f* eye = new Point3f(0.5, 0.5, 3.0);
+  Point3f* lookAt = new Point3f(0.5, 0.0, 0.0);
+  Point3f* up = new Point3f(0.2, 1.0, 0.0);
   float fov = 60.0;
   float aspectRatio = (float)width / height;
 
   Camera* camera = new Camera(
-      &eye, &lookAt, &up, fov, aspectRatio, width, height
+      eye, lookAt, up, fov, aspectRatio, width, height
   );
 
   Film* film = new Film(width, height);

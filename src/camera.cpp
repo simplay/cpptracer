@@ -21,25 +21,25 @@ Camera::Camera(
   width(width),
   height(height)
 {
-  Point3f from(eye);
-  Point3f to(lookAt);
-  Point3f upCopy(up);
+  Point3f* from = new Point3f(eye);
+  Point3f* to = new Point3f(lookAt);
+  Point3f* upCopy = new Point3f(up);
 
   // z-axis
-  Point3f w(from);
-  w.sub(to);
-  w.normalize();
-  Vector4f zc(w.x(), w.y(), w.z(), 0.0);
+  Point3f* w = new Point3f(from);
+  w->sub(to);
+  w->normalize();
+  Vector4f* zc = new Vector4f(w->x, w->y, w->z, 0.0);
 
   // # x-axis
-  Point3f u = up->cross(w);
-  u.normalize();
-  Vector4f xc(u.x(), u.y(), u.z(), 0.0);
+  Point3f* u = up->cross(w);
+  u->normalize();
+  Vector4f* xc = new Vector4f(u->x, u->y, u->z, 0.0);
 
   // # y-axis
-  Point3f v = w.cross(u);
-  Vector4f yc(v.x(), v.y(), v.z(), 0.0);
-  Vector4f e(from.x(), from.y(), from.z(), 1.0);
+  Point3f* v = w->cross(u);
+  Vector4f* yc = new Vector4f(v->x, v->y, v->z, 0.0);
+  Vector4f* e = new Vector4f(from->x, from->y, from->z, 1.0);
 
   matrix = new Matrix4f(xc, yc, zc, e);
 

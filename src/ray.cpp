@@ -11,9 +11,3 @@ Point3f Ray::pointAt(float t) {
   p.add(origin);
   return p;
 }
-
-void Ray::debug() {
-  origin->debug();
-  direction->debug();
-  std::cout << "t = " << t << std::endl;
-}
