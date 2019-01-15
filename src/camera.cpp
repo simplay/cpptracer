@@ -32,7 +32,7 @@ Camera::Camera(
   Vector4f* zc = new Vector4f(w->x, w->y, w->z, 0.0);
 
   // # x-axis
-  Point3f* u = up->cross(w);
+  Point3f* u = upCopy->cross(w);
   u->normalize();
   Vector4f* xc = new Vector4f(u->x, u->y, u->z, 0.0);
 
@@ -72,7 +72,7 @@ Ray* Camera::makeWorldspaceRay(int i, int j, std::vector<float> samples) {
   float u_ij = left + (right - left) * ((i - 1) + s1) / width;
   float v_ij = bottom + (top - bottom) * ((j - 1) + s2) / height;
   float w_ij = -1.0;
-  Vector4f v(u_ij, v_ij, w_ij, 0);
+  Vector4f* v = new Vector4f(u_ij, v_ij, w_ij, 0);
 
   Vector4f* p_uvw = matrix->mult(v);
   float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);

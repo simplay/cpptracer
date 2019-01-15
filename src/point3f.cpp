@@ -5,7 +5,7 @@
 
 Point3f::Point3f() : x(0), y(0), z(0) {}
 
-Point3f::Point3f(float x, float y, float z) 
+Point3f::Point3f(float x, float y, float z)
   : x(x), y(y), z(z) {}
 
 Point3f::Point3f(Point3f* other) {
@@ -15,9 +15,9 @@ Point3f::Point3f(Point3f* other) {
 }
 
 Point3f::Point3f(Vector4f* other) {
-  x = other->x();
-  y = other->y();
-  z = other->z();
+  x = other->x;
+  y = other->y;
+  z = other->z;
 }
 
 void Point3f::scale(float factor) {

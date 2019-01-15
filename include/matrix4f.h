@@ -14,7 +14,7 @@ class Matrix4f {
   Matrix4f();
   Matrix4f(Vector4f* row1, Vector4f* row2, Vector4f* row3, Vector4f* row4);
 
-  Vector4f* mult(Vector4f& other);
+  Vector4f* mult(Vector4f* other);
 };
 
 #endif
