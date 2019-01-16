@@ -17,9 +17,9 @@ Spectrum::Spectrum(Spectrum* s) {
 }
 
 void Spectrum::scale(float factor) {
-  r /= factor;
-  g /= factor;
-  b /= factor;
+  r *= factor;
+  g *= factor;
+  b *= factor;
 }
 
 void Spectrum::add(Spectrum* other) {

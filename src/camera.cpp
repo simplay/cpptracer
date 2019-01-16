@@ -2,6 +2,7 @@
 #include "point3f.h"
 #include "vector4f.h"
 #include <math.h>
+#include <math.h>
 #include "ray.h"
 
 Camera::Camera(
@@ -23,7 +24,6 @@ Camera::Camera(
 {
   Point3f* from = new Point3f(eye);
   Point3f* to = new Point3f(lookAt);
-  Point3f* upCopy = new Point3f(up);
 
   // z-axis
   Point3f* w = new Point3f(from);
@@ -32,7 +32,7 @@ Camera::Camera(
   Vector4f* zc = new Vector4f(w->x, w->y, w->z, 0.0);
 
   // # x-axis
-  Point3f* u = upCopy->cross(w);
+  Point3f* u = up->cross(w);
   u->normalize();
   Vector4f* xc = new Vector4f(u->x, u->y, u->z, 0.0);
 
@@ -76,5 +76,6 @@ Ray* Camera::makeWorldspaceRay(int i, int j, std::vector<float> samples) {
 
   Vector4f* p_uvw = matrix->mult(v);
   float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
   return new Ray(new Point3f(eye), new Point3f(p_uvw), r);
 }

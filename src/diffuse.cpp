@@ -10,7 +10,7 @@ Spectrum* Diffuse::evaluateBrdf(HitRecord* , Point3f* , Point3f* ) {
 }
 
 Spectrum* Diffuse::evaluateEmission(HitRecord*, Point3f*) {
-  return new Spectrum(emission);
+  return new Spectrum();
 }
 
 bool Diffuse::hasSpecularReflection() {

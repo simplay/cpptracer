@@ -9,6 +9,7 @@ IntersectableList::IntersectableList() {
 HitRecord* IntersectableList::intersect(Ray* ray) {
   float eps = 0.00001;
   float minT = std::numeric_limits<float>::max();
+
   HitRecord* hitRecord = new HitRecord();
   for(auto const& intersectable: *container) {
     auto currentHitRecord = intersectable->intersect(ray);

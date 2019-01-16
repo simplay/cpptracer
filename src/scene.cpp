@@ -3,6 +3,7 @@
 #include "plane.h"
 #include "diffuse.h"
 #include "pointLightIntegrator.h"
+#include <iostream>
 
 Scene::Scene(int width, int height) {
   // build camera matrix
@@ -10,6 +11,7 @@ Scene::Scene(int width, int height) {
   Point3f* lookAt = new Point3f(0.5, 0.0, 0.0);
   Point3f* up = new Point3f(0.2, 1.0, 0.0);
   float fov = 60.0;
+
   float aspectRatio = (float)width / height;
 
   Camera* camera = new Camera(

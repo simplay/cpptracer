@@ -11,6 +11,7 @@ HitRecord* Plane::intersect(Ray* ray) {
 
   // incident angle: angle between the ray direction and the plane normal
   auto cosTheta = normal->dot(ray->direction);
+
   if (std::abs(cosTheta) <= epsilon) {
     return new HitRecord();
   }
@@ -31,13 +32,13 @@ HitRecord* Plane::intersect(Ray* ray) {
   // do something more
 
   Point3f* hitNormal = new Point3f(normal);
-  Point3f tangent = (new Point3f(1, 0, 0))->cross(hitNormal);
+  Point3f* tangent = (new Point3f(1, 0, 0))->cross(hitNormal);
 
   return new HitRecord(
       t,
       intersectionPosition,
       hitNormal,
-      &tangent,
+      tangent,
       wIn,
       material,
       this

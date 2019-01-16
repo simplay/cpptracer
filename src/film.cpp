@@ -7,24 +7,26 @@ Film::Film() {}
 Film::Film(int width, int height) {
   _width = width;
   _height = height;
-  Spectrum *m = NULL;
-  m = (Spectrum*)malloc(sizeof(Spectrum) * _width * _height);
-  _measurements = m;
 
-  int *s = NULL;
-  s = (int*)malloc(sizeof(int) * _width * _height);
-  _sampleCounts = s;
+  measurements = new std::vector<Spectrum*>(width * height);
+  sampleCounts = new std::vector<int>(width * height);
 
-  for (int k = 0; k < width; k++) {
-    for (int l = 0; l < height; l++) {
-      _sampleCounts[k + l * _width] = 0;
+  for (int k = 0; k < height; k++) {
+    for (int l = 0; l < width; l++) {
+      sampleCounts->at(access(k, l)) = 0;
     }
   }
 }
 
 void Film::addSample(int x, int y, Spectrum* s) {
-  _sampleCounts[x + y * _width]++;
-  _measurements[x + y * _width] = s;
+  // std::cout << "addSample: " << x << " " << y << std::endl;
+  // std::cout << "foo" << std::endl;
+  // sampleCounts->at(access(x, y))++;
+  measurements->at(access(x, y)) = s;
+}
+
+int Film::access(int x, int y) {
+  return x + y * _height;
 }
 
 int Film::width() {
@@ -35,16 +37,16 @@ int Film::height() {
   return _height;
 }
 
-Spectrum* Film::measurements() {
-  for (int k = 0; k < _width; k++) {
-    for (int l = 0; l < _height; l++) {
-      int f = _sampleCounts[k + l * _width];
-      Spectrum s = _measurements[k + l * _width];
+std::vector<Spectrum*>* Film::normalMeasurements() {
+  for (int k = 0; k < _height; k++) {
+    for (int l = 0; l < _width; l++) {
+      int f = 1; sampleCounts->at(access(k, l));
+      Spectrum* s = measurements->at(access(k, l));
       if (f > 0) {
-        s.scale(1.0 / (float) f);
+        s->scale(1.0 / (float) f);
       }
     }
   }
 
-  return _measurements;
+  return measurements;
 }
