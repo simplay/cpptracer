@@ -78,8 +78,8 @@ void runRenderer(int n, Scene* scene) {
     th.join();
   }
 
-  // Image img = Image(width, height, scene->film->normalMeasurements());
-  // img.print();
+  Image img = Image(width, height, scene->film->normalMeasurements());
+  img.print();
 }
 
 int main(int argc, char *argv[]) {
