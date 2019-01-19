@@ -2,7 +2,6 @@
 #include "point3f.h"
 #include "vector4f.h"
 #include <math.h>
-#include <math.h>
 #include "ray.h"
 
 Camera::Camera(
@@ -69,9 +68,10 @@ Matrix4f* Camera::transformation() {
 Ray* Camera::makeWorldspaceRay(int i, int j, std::vector<float> samples) {
   float s1 = samples.at(0);
   float s2 = samples.at(1);
-  float u_ij = left + (right - left) * ((i - 1) + s1) / width;
-  float v_ij = bottom + (top - bottom) * ((j - 1) + s2) / height;
+  float u_ij = left + (right - left) * (i + s1) / width;
+  float v_ij = bottom + (top - bottom) * (j + s2) / height;
   float w_ij = -1.0;
+
   Vector4f* v = new Vector4f(u_ij, v_ij, w_ij, 0);
 
   Vector4f* p_uvw = matrix->mult(v);
