@@ -21,22 +21,28 @@
 using namespace std;
 
 void computeContribution(RenderTask* renderTask) {
-  for (vector<int>::iterator it = (*renderTask->indices).begin(); it != (*renderTask->indices).end(); ++it) {
+  // for each image index value
+  for (vector<int>::iterator idxValue = (*renderTask->indices).begin(); idxValue != (*renderTask->indices).end(); ++idxValue) {
     OneSampler* os = new OneSampler();
     auto samples = os->makeSample(1, 2);
-    for (unsigned k = 0; k < samples.size(); k++) {
-      auto sample = samples.at(k);
 
-      // 2d image coordinates
-      int ii = *it / renderTask->width;
-      int jj = *it % renderTask->width;
+    // for each sample index
+    for (unsigned sampleIdx = 0; sampleIdx < samples.size(); sampleIdx++) {
+      auto sample = samples.at(sampleIdx);
 
-      int x = ii;
-      int y = renderTask->width - jj - 1;
+      // compute 2d image lookup coordinates (i, j) from 1d index value *idx
+      int rowIdx = *idxValue / renderTask->width;
+      int colIdx = *idxValue % renderTask->width;
 
-      Ray* ray = renderTask->scene->camera->makeWorldspaceRay(ii, jj, sample);
+      // int x = ii;
+      // int y = renderTask->width - jj - 1;
+
+      Ray* ray = renderTask->scene->camera->makeWorldspaceRay(rowIdx, colIdx, sample);
       Spectrum* raySpectrum = renderTask->scene->integrator->integrate(ray);
-      renderTask->scene->film->addSample(x + sample.at(0), y + sample.at(1), raySpectrum);
+
+      // consider coordinates in between pixel locations
+      // store in row-first order
+      renderTask->scene->film->addSample(rowIdx + sample.at(0), colIdx + sample.at(1), raySpectrum);
     }
   }
 }

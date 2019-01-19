@@ -22,13 +22,12 @@ void Image::print() {
   unsigned char* img = (unsigned char *)malloc(3 * width * height);
   memset(img, 0, 3 * width * height);
 
-  for (int i = 0; i < width; i++) {
-    for (int j = 0; j < height; j++) {
+  for (int colIdx = 0; colIdx < width; colIdx++) {
+    for (int rowIdx = 0; rowIdx < height; rowIdx++) {
+      x = colIdx;
+      y = rowIdx;
 
-      x = i;
-      y = j;
-
-      Spectrum* s = values->at(x + y * height);
+      Spectrum* s = values->at(colIdx + rowIdx * width);
 
       r = s->r * 255;
       g = s->g * 255;
