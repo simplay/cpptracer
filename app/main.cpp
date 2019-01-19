@@ -1,4 +1,6 @@
-// usage: ./main.x IMG_DIM
+// usage:
+//  ./main.x IMG_DIM
+//  ./main.x IMG_WIDTH IMG_HEIGHT
 
 #include <iostream>
 #include <stdlib.h>
@@ -30,12 +32,9 @@ void computeContribution(RenderTask* renderTask) {
     for (unsigned sampleIdx = 0; sampleIdx < samples.size(); sampleIdx++) {
       auto sample = samples.at(sampleIdx);
 
-      // compute 2d image lookup coordinates (i, j) from 1d index value *idx
+      // compute 2D image lookup coordinates (rowIdx, colIdx) from 1D index value *idxValue
       int rowIdx = *idxValue / renderTask->width;
       int colIdx = *idxValue % renderTask->width;
-
-      // int x = ii;
-      // int y = renderTask->width - jj - 1;
 
       Ray* ray = renderTask->scene->camera->makeWorldspaceRay(rowIdx, colIdx, sample);
       Spectrum* raySpectrum = renderTask->scene->integrator->integrate(ray);
@@ -47,43 +46,46 @@ void computeContribution(RenderTask* renderTask) {
   }
 }
 
-// spawns n threads
-void runRenderer(int n, Scene* scene) {
-  thread threads[n];
-  // vector<int> indexLists[n];
-  vector<vector<int>>* indexLists = new vector<vector<int>>(n);
+// Spawns a given number of threads that render the given scene in parallel.
+// Writes the result to an image.
+void runRenderer(int threadCount, Scene* scene) {
+  thread threads[threadCount];
+  vector<vector<int>>* indexLists = new vector<vector<int>>(threadCount);
   vector<int> indexValues;
 
   int height = scene->film->height();
   int width = scene->film->width();
 
-  // initialize a vector that contains all 1d image coordinates
-  for (int i = 0; i < width * height; ++i) {
-    indexValues.push_back(i);
+  // initialize a vector that contains all 1D image coordinates. I.e. store the
+  // numbers (0..pixelcount - 1)
+  for (int index = 0; index < width * height; ++index) {
+    indexValues.push_back(index);
   }
 
-  // permutate image coordiantes
+  // Permutate image coordiantes so that every thread receives random image locations.
   random_shuffle(indexValues.begin(), indexValues.end());
 
-  // assign image coordinates to tasks
+  // Equally assign each indexList random 1D image indices.
   int counter = 0;
   for (vector<int>::iterator it=indexValues.begin(); it != indexValues.end(); ++it) {
-    indexLists->at(counter % n).push_back(*it);
+    indexLists->at(counter % threadCount).push_back(*it);
     counter++;
   }
 
-  // spawn n threads:
-  for (int i = 0; i < n; i++) {
+  // spawn threadCount threads:
+  for (int i = 0; i < threadCount; i++) {
     RenderTask* rt = new RenderTask(
       width, height, &indexLists->at(i), scene
     );
     threads[i] = thread(computeContribution, rt);
   }
 
-  for (auto& th : threads) {
-    th.join();
+  // wait until all threads have completed their task
+  for (auto& threads : threads) {
+    threads.join();
   }
 
+  // write computed contribution to image and save it
   Image img = Image(width, height, scene->film->normalMeasurements());
   img.print();
 }
@@ -95,23 +97,23 @@ int main(int argc, char *argv[]) {
          << PROJECT_VERSION_MINOR
          << endl;
 
-    int dimX = 400;
-    int dimY = 400;
+    // Default image resolution that should be used in case there were no args
+    // provided
+    int width = 400;
+    int height = 400;
 
     if (argc == 2) {
-      dimX = std::atoi(argv[1]);
-      dimY = dimX;
+      width = std::atoi(argv[1]);
+      height = width;
     } else if (argc == 3) {
-      dimX = std::atoi(argv[1]);
-      dimY = std::atoi(argv[2]);
+      width = std::atoi(argv[1]);
+      height = std::atoi(argv[2]);
     }
 
     unsigned threadCount = thread::hardware_concurrency();
     cout << "Using " << threadCount << " threads" << endl;
 
-    // don't hard-code these values, read from argv
-    Scene* scene = new Scene(dimX, dimY);
-
+    Scene* scene = new Scene(width, height);
     runRenderer(threadCount, scene);
 
     return 0;
