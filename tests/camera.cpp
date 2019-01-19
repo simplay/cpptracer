@@ -30,10 +30,10 @@ TEST(Camera, camera_matrix) {
   ASSERT_EQ(0, camera.transformation()->m20);
   ASSERT_EQ(0, camera.transformation()->m21);
   ASSERT_EQ(1, camera.transformation()->m22);
-  ASSERT_EQ(0, camera.transformation()->m23);
+  ASSERT_EQ(3, camera.transformation()->m23);
 
   ASSERT_EQ(0, camera.transformation()->m30);
   ASSERT_EQ(0, camera.transformation()->m31);
-  ASSERT_EQ(3, camera.transformation()->m32);
+  ASSERT_EQ(0, camera.transformation()->m32);
   ASSERT_EQ(1, camera.transformation()->m33);
 }

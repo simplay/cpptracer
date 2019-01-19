@@ -40,7 +40,7 @@ Camera::Camera(
   Vector4f* yc = new Vector4f(v->x, v->y, v->z, 0.0);
   Vector4f* e = new Vector4f(from->x, from->y, from->z, 1.0);
 
-  matrix = new Matrix4f(xc, yc, zc, e);
+  matrix = new Matrix4f(xc, yc, zc, e, false);
 
   // compute image corners
   double angularFov = M_PI * (fov / 180.0);
