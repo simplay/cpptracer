@@ -53,8 +53,8 @@ void runRenderer(int threadCount, Scene* scene) {
   vector<vector<int>>* indexLists = new vector<vector<int>>(threadCount);
   vector<int> indexValues;
 
-  int height = scene->film->height();
-  int width = scene->film->width();
+  int height = scene->film->height;
+  int width = scene->film->width;
 
   // initialize a vector that contains all 1D image coordinates. I.e. store the
   // numbers (0..pixelcount - 1)
