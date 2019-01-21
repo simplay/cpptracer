@@ -46,18 +46,25 @@ message(STATUS "Building with the following extra flags: ${CMAKE_CXX_FLAGS}")
 # --------------------------------------------------------------------------------
 # We make sure that CMake sees all the files.
 include_directories(
-    ${PROJECT_SOURCE_DIR}/src
-    ${PROJECT_SOURCE_DIR}/include
-    ${PROJECT_SOURCE_DIR}/include/intersectables
-    ${PROJECT_SOURCE_DIR}/include/materials
-    ${PROJECT_SOURCE_DIR}/tests
-    ${PROJECT_SOURCE_DIR}/external/googletest
-    ${PROJECT_SOURCE_DIR}/external/googletest/include)
+  ${PROJECT_SOURCE_DIR}/src
+  ${PROJECT_SOURCE_DIR}/include
+  ${PROJECT_SOURCE_DIR}/include/intersectables
+  ${PROJECT_SOURCE_DIR}/include/materials
+  ${PROJECT_SOURCE_DIR}/include/lights
+  ${PROJECT_SOURCE_DIR}/include/integrators
+  ${PROJECT_SOURCE_DIR}/include/math
+  ${PROJECT_SOURCE_DIR}/tests
+  ${PROJECT_SOURCE_DIR}/external/googletest
+  ${PROJECT_SOURCE_DIR}/external/googletest/include
+)
 
 # Make variables referring to all the sources and test files.
 file(GLOB SOURCES "src/*.cpp")
 file(GLOB INTERSECTABLE_SOURCES "src/intersectables/*.cpp")
 file(GLOB MATERIAL_SOURCES "src/materials/*.cpp")
+file(GLOB LIGHT_SOURCES "src/lights/*.cpp")
+file(GLOB INTEGRATOR_SOURCES "src/integrators/*.cpp")
+file(GLOB MATH_SOURCES "src/math/*.cpp")
 file(GLOB TESTFILES "tests/*.cpp")
 set(TEST_MAIN unit_tests.x)  # Default name for test executable (change if you wish).
 
@@ -65,7 +72,7 @@ set(TEST_MAIN unit_tests.x)  # Default name for test executable (change if you w
 #                            Build! (Change as needed)
 # --------------------------------------------------------------------------------
 # Compile all sources into a library. Called engine here (change if you wish).
-add_library(engine ${SOURCES} ${INTERSECTABLE_SOURCES} ${MATERIAL_SOURCES})
+add_library(engine ${SOURCES} ${INTERSECTABLE_SOURCES} ${MATERIAL_SOURCES} ${LIGHT_SOURCES} ${MATH_SOURCES} ${INTEGRATOR_SOURCES})
 
 # Add an executable for the file main.cpp, here called main.x.
 # If you add more executables, copy these three lines accordingly.
