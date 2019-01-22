@@ -52,6 +52,7 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/include/materials
   ${PROJECT_SOURCE_DIR}/include/lights
   ${PROJECT_SOURCE_DIR}/include/integrators
+  ${PROJECT_SOURCE_DIR}/include/scenes
   ${PROJECT_SOURCE_DIR}/include/math
   ${PROJECT_SOURCE_DIR}/tests
   ${PROJECT_SOURCE_DIR}/external/googletest
@@ -64,6 +65,7 @@ file(GLOB INTERSECTABLE_SOURCES "src/intersectables/*.cpp")
 file(GLOB MATERIAL_SOURCES "src/materials/*.cpp")
 file(GLOB LIGHT_SOURCES "src/lights/*.cpp")
 file(GLOB INTEGRATOR_SOURCES "src/integrators/*.cpp")
+file(GLOB SCENE_SOURCES "src/scenes/*.cpp")
 file(GLOB MATH_SOURCES "src/math/*.cpp")
 file(GLOB TESTFILES "tests/*.cpp")
 set(TEST_MAIN unit_tests.x)  # Default name for test executable (change if you wish).
@@ -72,7 +74,7 @@ set(TEST_MAIN unit_tests.x)  # Default name for test executable (change if you w
 #                            Build! (Change as needed)
 # --------------------------------------------------------------------------------
 # Compile all sources into a library. Called engine here (change if you wish).
-add_library(engine ${SOURCES} ${INTERSECTABLE_SOURCES} ${MATERIAL_SOURCES} ${LIGHT_SOURCES} ${MATH_SOURCES} ${INTEGRATOR_SOURCES})
+add_library(engine ${SOURCES} ${INTERSECTABLE_SOURCES} ${MATERIAL_SOURCES} ${LIGHT_SOURCES} ${MATH_SOURCES} ${INTEGRATOR_SOURCES} ${SCENE_SOURCES})
 
 # Add an executable for the file main.cpp, here called main.x.
 # If you add more executables, copy these three lines accordingly.
