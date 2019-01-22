@@ -1,11 +1,13 @@
 // usage:
 //  ./main.x IMG_DIM
 //  ./main.x IMG_WIDTH IMG_HEIGHT
+//  ./main.x IMG_WIDTH IMG_HEIGHT SCENE_NR
 
 #include "exampleConfig.h"
 #include <iostream>
 #include <thread>
 #include "renderer.h"
+#include "cameraTest.h"
 
 using namespace std;
 
@@ -20,6 +22,7 @@ int main(int argc, char *argv[]) {
     // provided
     int width = 400;
     int height = 400;
+    int sceneNr = 1;
 
     if (argc == 2) {
       width = std::atoi(argv[1]);
@@ -27,12 +30,26 @@ int main(int argc, char *argv[]) {
     } else if (argc == 3) {
       width = std::atoi(argv[1]);
       height = std::atoi(argv[2]);
+    } else if (argc == 4) {
+      width = std::atoi(argv[1]);
+      height = std::atoi(argv[2]);
+      sceneNr = std::atoi(argv[3]);
     }
 
     unsigned threadCount = thread::hardware_concurrency();
     cout << "Using " << threadCount << " threads" << endl;
+    cout << "Rendering scene Nr " << sceneNr << endl;
 
-    Scene* scene = new Scene(width, height);
+    Scene* scene;
+    switch(sceneNr) {
+      case 1:
+        scene = new CameraTest(width, height);
+        break;
+      default:
+        scene = new CameraTest(width, height);
+    };
+    scene->setup();
+
     Renderer* renderer = new Renderer(scene);
     renderer->render(threadCount);
 

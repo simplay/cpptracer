@@ -12,7 +12,17 @@ class Scene {
     Camera* camera;
     std::vector<PointLight*>* lightList;
     IntersectableList* intersectableList;
-    Scene(int widht, int height);
     PointLightIntegrator* integrator;
+    Scene(int widht, int height);
+    void setup();
+
+  protected:
+    int width;
+    int height;
+    virtual void buildFilm();
+    virtual void buildCamera();
+    virtual void buildLights() = 0;
+    virtual void buildIntersectables() = 0;
+    virtual void buildIntegrator();
 };
 #endif
