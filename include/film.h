@@ -1,5 +1,5 @@
-#include "spectrum.h"
 #include <vector>
+#include "spectrum.h"
 
 #ifndef FILM_H
 #define FILM_H

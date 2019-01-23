@@ -1,5 +1,5 @@
 #include "intersectable.h"
-#include "hitRecord.h"
+#include "../hitRecord.h"
 
 #ifndef LIGHT_GEOMETRY_H
 #define LIGHT_GEOMETRY_H

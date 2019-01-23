@@ -1,6 +1,6 @@
-#include "point3f.h"
-#include "spectrum.h"
-#include "hitRecord.h"
+#include "../math/point3f.h"
+#include "../spectrum.h"
+#include "../hitRecord.h"
 
 #ifndef IMATERIAL_H
 #define IMATERIAL_H

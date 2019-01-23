@@ -1,7 +1,7 @@
-#include "film.h"
-#include "camera.h"
-#include "pointLight.h"
-#include "intersectableList.h"
+#include "../film.h"
+#include "../camera.h"
+#include "../lights/pointLight.h"
+#include "../intersectables/intersectableList.h"
 class PointLightIntegrator;
 
 #ifndef SCENE_H

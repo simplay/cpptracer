@@ -1,5 +1,5 @@
 #include <vector>
-#include "scene.h"
+#include "scenes/scene.h"
 
 #ifndef RENDER_TASK_H
 #define RENDER_TASK_H

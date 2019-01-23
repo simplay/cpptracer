@@ -1,8 +1,8 @@
 #include <vector>
 #include <iostream>
-#include "scene.h"
-#include "pointLightIntegrator.h"
 #include <iostream>
+#include "scene.h"
+#include "../integrators/pointLightIntegrator.h"
 
 Scene::Scene(int width, int height): width(width), height(height) {}
 

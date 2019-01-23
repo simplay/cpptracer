@@ -1,7 +1,7 @@
-#include "point3f.h"
-#include "vector4f.h"
 #include <cmath>
 #include <iostream>
+#include "point3f.h"
+#include "vector4f.h"
 
 Point3f::Point3f() : x(0), y(0), z(0) {}
 

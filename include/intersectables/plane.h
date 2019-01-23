@@ -1,7 +1,7 @@
 #include "intersectable.h"
-#include "point3f.h"
-#include "hitRecord.h"
-#include "ray.h"
+#include "../math/point3f.h"
+#include "../hitRecord.h"
+#include "../ray.h"
 
 class Material;
 

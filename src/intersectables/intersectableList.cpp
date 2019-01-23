@@ -1,6 +1,6 @@
-#include "intersectableList.h"
-#include "hitRecord.h"
 #include <limits>
+#include "../hitRecord.h"
+#include "../intersectables/intersectableList.h"
 
 IntersectableList::IntersectableList() {
   container = new std::vector<Intersectable*>;

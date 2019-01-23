@@ -1,8 +1,8 @@
-#include "camera.h"
-#include "point3f.h"
-#include "vector4f.h"
 #include <math.h>
+#include "camera.h"
 #include "ray.h"
+#include "math/point3f.h"
+#include "math/vector4f.h"
 
 Camera::Camera(
   Point3f* eye,

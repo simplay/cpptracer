@@ -1,4 +1,4 @@
-#include "point3f.h"
+#include "math/point3f.h"
 
 #ifndef SPECTRUM_H
 #define SPECTRUM_H

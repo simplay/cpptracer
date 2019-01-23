@@ -1,4 +1,4 @@
-#include "scene.h"
+#include "scenes/scene.h"
 #include <renderTask.h>
 
 #ifndef RENDER_H

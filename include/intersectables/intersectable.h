@@ -1,5 +1,5 @@
-#include "hitRecord.h"
-#include "ray.h"
+#include "../hitRecord.h"
+#include "../ray.h"
 
 #ifndef INTERSECTABLE_H
 #define INTERSECTABLE_H

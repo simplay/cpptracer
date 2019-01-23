@@ -1,7 +1,7 @@
 #include <iostream>
-#include "pointLightIntegrator.h"
-#include "material.h"
 #include <algorithm>
+#include "pointLightIntegrator.h"
+#include "../materials/material.h"
 
 
 bool PointLightIntegrator::isOccluded(Point3f* hitPosition, Point3f* lightDir, float t, float eps) {

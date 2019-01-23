@@ -1,6 +1,6 @@
 #include <vector>
-#include "matrix4f.h"
-#include "point3f.h"
+#include "math/matrix4f.h"
+#include "math/point3f.h"
 #include "ray.h"
 
 #ifndef CAMERA_H

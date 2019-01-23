@@ -1,7 +1,7 @@
 #include "material.h"
-#include "point3f.h"
-#include "spectrum.h"
-#include "hitRecord.h"
+#include "../math/point3f.h"
+#include "../spectrum.h"
+#include "../hitRecord.h"
 
 #ifndef POINT_LIGHT_MATERIAL_H
 #define POINT_LIGHT_MATERIAL_H

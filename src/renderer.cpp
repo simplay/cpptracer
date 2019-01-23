@@ -1,13 +1,13 @@
-#include <renderer.h>
-#include <renderTask.h>
-#include <vector>
-#include <thread>
 #include <algorithm>
-#include <oneSampler.h>
-#include <ray.h>
-#include <spectrum.h>
-#include <image.h>
-#include <pointLightIntegrator.h>
+#include <thread>
+#include <vector>
+#include "renderer.h"
+#include "renderTask.h"
+#include "oneSampler.h"
+#include "ray.h"
+#include "spectrum.h"
+#include "image.h"
+#include "integrators/pointLightIntegrator.h"
 
 using namespace std;
 

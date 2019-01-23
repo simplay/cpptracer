@@ -1,5 +1,5 @@
-#include "intersectable.h"
 #include <vector>
+#include "intersectable.h"
 
 #ifndef INTERSECTABLE_LIST_H
 #define INTERSECTABLE_LIST_H

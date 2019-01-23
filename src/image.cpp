@@ -1,8 +1,8 @@
-#include "image.h"
 #include <cmath>
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include "image.h"
 
 Image::Image(int width, int height, std::vector<Spectrum*>* values)
   : width(width), height(height), values(values) {}

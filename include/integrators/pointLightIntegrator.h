@@ -1,6 +1,6 @@
-#include "spectrum.h"
-#include "scene.h"
-#include "ray.h"
+#include "../spectrum.h"
+#include "../scenes/scene.h"
+#include "../ray.h"
 
 #ifndef POINT_LIGHT_INTEGRATOR_H
 #define POINT_LIGHT_INTEGRATOR_H

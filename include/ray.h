@@ -1,5 +1,5 @@
 #include <string>
-#include "point3f.h"
+#include "math/point3f.h"
 
 #ifndef RAY_H
 #define RAY_H

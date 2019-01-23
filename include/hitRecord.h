@@ -1,4 +1,4 @@
-#include "point3f.h"
+#include "math/point3f.h"
 
 // forward declaration:
 // See https://stackoverflow.com/questions/4757565/what-are-forward-declarations-in-c

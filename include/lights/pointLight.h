@@ -1,5 +1,5 @@
-#include "lightGeometry.h"
-#include "spectrum.h"
+#include "../intersectables/lightGeometry.h"
+#include "../spectrum.h"
 
 class Material;
 

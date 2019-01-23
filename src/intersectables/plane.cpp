@@ -1,6 +1,6 @@
-#include "plane.h"
 #include <iostream>
 #include <cmath>
+#include "plane.h"
 
 Plane::Plane(Material* material, Point3f* normal, float distance)
   : material(material), normal(normal), distance(distance)

@@ -1,6 +1,6 @@
+#include <iostream>
 #include "film.h"
 #include "spectrum.h"
-#include <iostream>
 
 Film::Film(int width, int height): width(width), height(height) {
   measurements = new std::vector<Spectrum*>(width * height);
