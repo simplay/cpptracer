@@ -8,6 +8,7 @@
 #include <thread>
 #include "renderer.h"
 #include "cameraTest.h"
+#include "blinnTest.h"
 
 using namespace std;
 
@@ -44,6 +45,9 @@ int main(int argc, char *argv[]) {
     switch(sceneNr) {
       case 1:
         scene = new CameraTest(width, height);
+        break;
+      case 2:
+        scene = new BlinnTest(width, height);
         break;
       default:
         scene = new CameraTest(width, height);
