@@ -17,7 +17,7 @@ class Ray {
     Ray(Point3f* origin, Point3f* direction, float t);
 
     // Get point on ray at origin + direction * t
-    Point3f pointAt(float t);
+    Point3f* pointAt(float t);
 };
 
 #endif

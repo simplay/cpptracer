@@ -9,9 +9,9 @@ Ray::Ray(Point3f* origin, Point3f* direction, float t):  direction(direction), t
   this->origin = origin;
 }
 
-Point3f Ray::pointAt(float t) {
-  Point3f p(*direction);
-  p.scale(t);
-  p.add(origin);
+Point3f* Ray::pointAt(float t) {
+  Point3f* p = new Point3f(*direction);
+  p->scale(t);
+  p->add(origin);
   return p;
 }
