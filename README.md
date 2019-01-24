@@ -4,6 +4,8 @@
 
 # C++ Raytracer
 
+![alt tag](https://github.com/simplay/cpptracer/blob/master/examples/blinn.bmp)
+
 Boilerplate taken from: https://github.com/bsamseth/cpp-project
 
 ## Building
