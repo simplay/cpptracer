@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "matrix4f.h"
-#include "vector4f.h"
 #include <iostream>
+#include "math/matrix4f.h"
+#include "math/vector4f.h"
 
 TEST(Matrix4f, mult) {
   Vector4f* r1 = new Vector4f(1, 0, 0, 0);

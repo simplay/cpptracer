@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "camera.h"
-#include "point3f.h"
 #include <iostream>
+#include "camera.h"
+#include "math/point3f.h"
 
 TEST(Camera, camera_matrix) {
   int width = 1000;

@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
-#include "point3f.h"
 #include <iostream>
+#include "math/point3f.h"
+#include "math/vector4f.h"
 
 TEST(Point3f, create_with_arguments) {
   Point3f d = Point3f(1, 2, 3);
@@ -17,6 +18,14 @@ TEST(Point3f, create_from_other) {
   ASSERT_EQ(3, p.z);
 }
 
+TEST(Point3f, create_from_vector4) {
+  Vector4f other = Vector4f(1, 2, 3, 4);
+  Point3f p = Point3f(&other);
+  ASSERT_EQ(1, p.x);
+  ASSERT_EQ(2, p.y);
+  ASSERT_EQ(3, p.z);
+}
+
 TEST(Point3f, new_without_arguments) {
   Point3f d = Point3f();
   ASSERT_EQ(0, d.x);
@@ -27,6 +36,12 @@ TEST(Point3f, new_without_arguments) {
 TEST(Point3f, dot) {
   Point3f d = Point3f(0, 3, 4);
   ASSERT_EQ(25, d.dot());
+}
+
+TEST(Point3f, dot_with_other) {
+  Point3f d = Point3f(1, 2, 3);
+  Point3f p = Point3f(10, 20, 30);
+  ASSERT_EQ(140, d.dot(&p));
 }
 
 TEST(Point3f, scale) {
@@ -67,6 +82,15 @@ TEST(Point3f, add) {
   ASSERT_EQ(10, p->x);
   ASSERT_EQ(-3, p->y);
   ASSERT_EQ(10.5, p->z);
+}
+
+TEST(Point3f, negate) {
+  Point3f* p = new Point3f(1, -2, 3);
+  p->negate();
+
+  ASSERT_EQ(-1, p->x);
+  ASSERT_EQ(2, p->y);
+  ASSERT_EQ(-3, p->z);
 }
 
 TEST(Point3f, cross) {
