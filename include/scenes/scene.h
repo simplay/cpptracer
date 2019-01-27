@@ -17,8 +17,12 @@ class Scene {
     void setup();
 
   protected:
+    // image width
     int width;
+
+    // image height
     int height;
+
     virtual void buildFilm();
     virtual void buildCamera();
     virtual void buildLights() = 0;

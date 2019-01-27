@@ -6,6 +6,25 @@ Plane::Plane(Material* material, Point3f* normal, float distance)
   : material(material), normal(normal), distance(distance)
 {}
 
+/**
+ * The distance D between a point p and a plane can be computed by:
+ * D := dot((p - a), n) [0]
+ * where n is a unit normal on the plane, and a is a reference point on the
+ * plane
+ *
+ * Notice: dot((p - a), n) = 0 gives us all points p on the plane
+ *
+ * A point on ray is given by the parametrization
+ * r(t) = o + t*d [1] where
+ * o := (ox, oy, oz) denotes the origin of the ray and
+ * d := (dx, dy, dz) denotes the direction of the ray and
+ * t is float-valued parameter
+ *
+ * We can compute the distance between a point on the ray and the plane by
+ * setting p = r(t), which gives us: D = dot(o + t*d - a)
+ * t = dot(a - o, n) / dot(d, n) and a = (0, 0, D)
+ *
+ */
 HitRecord* Plane::intersect(Ray* ray) {
   float epsilon = 0.000001;
 

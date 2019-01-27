@@ -54,17 +54,18 @@ Matrix4f* Camera::transformation() {
   return this->matrix;
 }
 
-// Given a ray in image space, make a ray in world space according to the
-// camera specifications. The method receives a sample that the camera can use
-// to generate the ray. Typically the first two sample dimensions are used to
-// sample a location in the current pixel. The samples are assumed to be in
-// the range [0,1].
-//
-// @param i pixel column index: Integer, start counting at 1
-// @param j pixel row index: Integer, start counting at 1
-// @param sample random sample that the camera can use to generate a ray float
-//   array.
-// @return the ray in world coordinates
+/**
+ * Given a ray in image space, make a ray in world space according to the
+ * camera specifications. The method receives a sample that the camera can use
+ * to generate the ray. Typically the first two sample dimensions are used to
+ * sample a location in the current pixel. The samples are assumed to be in
+ * the range [0,1].
+ *
+ * @param i row index, start counting at 0.
+ * @param j column index, start counting at 0
+ * @param random sample that the camera can use to generate a ray float array.
+ * @return the ray in world coordinates
+ */
 Ray* Camera::makeWorldspaceRay(int i, int j, std::vector<float> samples) {
   float s1 = samples.at(0);
   float s2 = samples.at(1);

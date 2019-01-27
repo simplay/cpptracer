@@ -23,7 +23,7 @@ void Scene::buildFilm() {
 void Scene::buildCamera() {
   Point3f* eye = new Point3f(0.5, 0.5, 3.0);
   Point3f* lookAt = new Point3f(0.5, 0.0, 0.0);
-  Point3f* up = new Point3f(0.2, 1.0, 0.0);
+  Point3f* up = new Point3f(0.0, 1.0, 0.0);
   float fov = 60.0;
 
   float aspectRatio = (float)width / height;
