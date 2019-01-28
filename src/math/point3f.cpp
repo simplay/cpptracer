@@ -51,8 +51,12 @@ Point3f* Point3f::cross(Point3f* other) {
   return new Point3f(cx, cy, cz);
 }
 
+float Point3f::norm() {
+  return sqrt(this->dot());
+}
+
 void Point3f::normalize() {
-  float scale = sqrt(this->dot());
+  float scale = norm();
   if (scale == 0) return;
   this->scale(1.0 / scale);
 }
