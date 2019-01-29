@@ -7,5 +7,8 @@ class CameraTest : public Scene {
     CameraTest(int width, int height);
     void buildLights();
     void buildIntersectables();
+    std::string filename() {
+      return "camera_test.bmp";
+    }
 };
 #endif

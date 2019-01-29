@@ -78,6 +78,6 @@ void Renderer::render(int threadCount) {
   }
 
   // write computed contribution to image and save it
-  Image img = Image(width, height, scene->film->normalMeasurements());
+  Image img = Image(width, height, scene->film->normalMeasurements(), scene->filename());
   img.print();
 }

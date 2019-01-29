@@ -1,3 +1,4 @@
+#include <string.h>
 #include "../film.h"
 #include "../camera.h"
 #include "../lights/pointLight.h"
@@ -15,6 +16,7 @@ class Scene {
     PointLightIntegrator* integrator;
     Scene(int widht, int height);
     void setup();
+    virtual std::string filename();
 
   protected:
     // image width

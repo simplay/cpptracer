@@ -4,8 +4,8 @@
 #include <iostream>
 #include "image.h"
 
-Image::Image(int width, int height, std::vector<Spectrum*>* values)
-  : width(width), height(height), values(values) {}
+Image::Image(int width, int height, std::vector<Spectrum*>* values, std::string filename)
+  : width(width), height(height), values(values), filename(filename) {}
 
 void Image::print() {
   std::cout << "Printing " << width << " x " << height << " image" << std::endl;
@@ -67,7 +67,7 @@ void Image::print() {
   bmpinfoheader[10] = (unsigned char)(height >> 16);
   bmpinfoheader[11] = (unsigned char)(height >> 24);
 
-  f = fopen("img.bmp", "wb");
+  f = fopen(filename.c_str(), "wb");
   fwrite(bmpfileheader, 1, 14, f);
   fwrite(bmpinfoheader, 1, 40, f);
   for (int i = 0; i < height; i++) {

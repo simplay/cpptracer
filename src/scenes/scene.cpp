@@ -15,6 +15,10 @@ void Scene::setup() {
   buildIntegrator();
 }
 
+std::string Scene::filename() {
+  return "image.bmp";
+}
+
 void Scene::buildFilm() {
   Film* film = new Film(width, height);
   this->film = film;
