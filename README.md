@@ -23,3 +23,7 @@ $ make gtest     # Makes and runs the tests.
 $ make coverage  # Generate a coverage report.
 $ make doc       # Generate html documentation.
 ```
+
+## Usage
+
+Inside `build/`, execute `./main.x WIDTH HEIGHT SCENE_NR`
