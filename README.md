@@ -27,3 +27,7 @@ $ make doc       # Generate html documentation.
 ## Usage
 
 Inside `build/`, execute `./main.x WIDTH HEIGHT SCENE_NR`
+
+## Sources
+
++ https://github.com/ssloy/tinykaboom/wiki
