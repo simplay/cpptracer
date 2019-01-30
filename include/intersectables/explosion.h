@@ -19,15 +19,16 @@ class Explosion : public Intersectable {
     virtual HitRecord* intersect(Ray* ray);
     float signed_distance(Point3f* p);
     float fractal_brownian_motion(Point3f* x);
-    Point3f* rotate(Point3f* v);
+    Point3f rotate(Point3f* v);
     float noise(Point3f* x);
+
     template <typename T> inline T lerp(const T &v0, const T &v1, float t) {
       return v0 + (v1-v0)*std::max(0.f, std::min(1.f, t));
     }
 
     float hash(const float n) {
-      float x = sin(n)*43758.5453f;
-      return x-floor(x);
+      float x = sin(n) * 43758.5453f;
+      return x - floor(x);
     }
 };
 #endif
