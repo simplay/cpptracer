@@ -78,5 +78,5 @@ void Image::print() {
   free(img);
   fclose(f);
 
-  std::cout << "Saved image 'img.bmp'" << std::endl;
+  std::cout << "Saved image '" << filename << "'" << std::endl;
 }
