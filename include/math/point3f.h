@@ -38,6 +38,8 @@ class Point3f {
 
     float dot(Point3f* other);
 
+    float norm();
+
     // Make length of this vector equal 1 (in l2 norm's sense) but preserve its
     // direction.
     void normalize();

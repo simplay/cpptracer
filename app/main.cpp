@@ -9,6 +9,7 @@
 #include "renderer.h"
 #include "cameraTest.h"
 #include "blinnTest.h"
+#include "explosionTest.h"
 
 using namespace std;
 
@@ -48,6 +49,9 @@ int main(int argc, char *argv[]) {
         break;
       case 2:
         scene = new BlinnTest(width, height);
+        break;
+      case 3:
+        scene = new ExplosionTest(width, height);
         break;
       default:
         scene = new CameraTest(width, height);
