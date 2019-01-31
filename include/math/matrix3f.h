@@ -16,6 +16,9 @@ class Matrix3f {
              float m20, float m21, float m22);
 
     Point3f* mult(Point3f* other);
+    float det();
+    void scale(float);
+    Matrix3f* inv();
 };
 
 #endif
