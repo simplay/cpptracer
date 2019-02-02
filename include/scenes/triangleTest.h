@@ -7,6 +7,8 @@ class TriangleTest : public Scene {
     TriangleTest(int width, int height);
     void buildLights();
     void buildIntersectables();
+    void buildIntegrator();
+
     std::string filename() {
       return "triangle_test.bmp";
     }

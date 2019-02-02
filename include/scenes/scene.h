@@ -3,7 +3,8 @@
 #include "../camera.h"
 #include "../lights/pointLight.h"
 #include "../intersectables/intersectableList.h"
-class PointLightIntegrator;
+
+class Integrator;
 
 #ifndef SCENE_H
 #define SCENE_H
@@ -13,7 +14,7 @@ class Scene {
     Camera* camera;
     std::vector<PointLight*>* lightList;
     IntersectableList* intersectableList;
-    PointLightIntegrator* integrator;
+    Integrator* integrator;
     Scene(int widht, int height);
     void setup();
     virtual std::string filename();

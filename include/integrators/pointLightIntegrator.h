@@ -1,10 +1,11 @@
+#include "integrator.h"
 #include "../spectrum.h"
 #include "../scenes/scene.h"
 #include "../ray.h"
 
 #ifndef POINT_LIGHT_INTEGRATOR_H
 #define POINT_LIGHT_INTEGRATOR_H
-class PointLightIntegrator {
+class PointLightIntegrator : public Integrator {
   private:
     Scene* scene;
 
