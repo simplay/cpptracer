@@ -8,9 +8,11 @@
 class DebugIntegrator : public Integrator {
   private:
     Scene* scene;
+    bool showBinary;
 
   public:
     DebugIntegrator(Scene*);
+    DebugIntegrator(Scene*, bool showBinary);
     Spectrum* integrate(Ray*);
 };
 #endif

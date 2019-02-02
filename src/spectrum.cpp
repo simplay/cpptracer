@@ -16,6 +16,12 @@ Spectrum::Spectrum(Spectrum* s) {
   b = s->b;
 }
 
+Spectrum::Spectrum(Point3f* s) {
+  r = s->x;
+  g = s->y;
+  b = s->z;
+}
+
 void Spectrum::scale(float factor) {
   r *= factor;
   g *= factor;

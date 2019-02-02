@@ -17,6 +17,7 @@ class Spectrum {
     Spectrum(float, float, float);
     Spectrum(float);
     Spectrum(Spectrum*);
+    Spectrum(Point3f*);
 
     void scale(float);
     void add(Spectrum*);

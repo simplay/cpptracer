@@ -20,8 +20,14 @@ HitRecord* Triangle::intersect(Ray* ray) {
     ab->y, ac->y, ray->direction->y,
     ab->z, ac->z, ray->direction->z
   );
+
+  delete ab;
+  delete ac;
+
   Matrix3f* invM = m.inv();
   Point3f b(ao->x, ao->y, ao->z);
+
+  delete ao;
 
   Point3f* params = invM->mult(&b);
 
@@ -48,7 +54,14 @@ HitRecord* Triangle::intersect(Ray* ray) {
   wIn->negate();
   wIn->normalize();
 
-  Point3f* normal = ab->cross(ac);
+  // outward pointing normal
+  Point3f ba(b);
+  ba.sub(a);
+
+  Point3f ca(c);
+  ca.sub(a);
+
+  normal = (&ba)->cross(&ca);
   normal->normalize();
 
   return new HitRecord(
