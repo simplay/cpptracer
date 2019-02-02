@@ -1,3 +1,4 @@
+#include <iostream>
 #include "triangle.h"
 #include "matrix3f.h"
 
@@ -47,10 +48,13 @@ HitRecord* Triangle::intersect(Ray* ray) {
   wIn->negate();
   wIn->normalize();
 
+  Point3f* normal = ab->cross(ac);
+  normal->normalize();
+
   return new HitRecord(
     t,
     intersectionPosition,
-    NULL, // TODO compute and set normal
+    normal,
     NULL,
     wIn,
     material,
