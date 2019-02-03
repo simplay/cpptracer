@@ -1,16 +1,19 @@
+#include <algorithm>
 #include "material.h"
 #include "../math/point3f.h"
 #include "../spectrum.h"
 #include "../hitRecord.h"
 
-#ifndef DIFFUSE_H
-#define DIFFUSE_H
+#ifndef REFLECTIVE_MATERIAL_H
+#define REFLECTIVE_MATERIAL_H
 
-class Diffuse : public Material {
+class ReflectiveMaterial : public Material {
   public:
-    Spectrum* emission;
+    Spectrum* ks;
 
-    Diffuse(Spectrum*);
+    ReflectiveMaterial();
+    ReflectiveMaterial(Spectrum*);
+
     virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn);
     virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Point3f* wOut);
 

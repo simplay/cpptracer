@@ -40,3 +40,7 @@ bool Blinn::hasSpecularRefraction() {
 bool Blinn::castsShadows() {
   return true;
 }
+
+ShadingSample* Blinn::evaluateSpecularReflection(HitRecord* hitRecord) {
+  return new ShadingSample();
+}

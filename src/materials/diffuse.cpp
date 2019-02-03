@@ -24,3 +24,7 @@ bool Diffuse::hasSpecularRefraction() {
 bool Diffuse::castsShadows() {
   return true;
 }
+
+ShadingSample* Diffuse::evaluateSpecularReflection(HitRecord* hitRecord) {
+  return new ShadingSample();
+}

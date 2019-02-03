@@ -31,5 +31,6 @@ class ExplosionMaterial : public Material {
       s0.add(&s1);
       return new Spectrum(s0.r, s0.g, s0.b);
     }
+    virtual ShadingSample* evaluateSpecularReflection(HitRecord* hitRecord);
 };
 #endif

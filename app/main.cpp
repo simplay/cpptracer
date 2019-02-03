@@ -11,6 +11,7 @@
 #include "blinnTest.h"
 #include "explosionTest.h"
 #include "triangleTest.h"
+#include "reflectionTest.h"
 
 using namespace std;
 
@@ -56,6 +57,9 @@ int main(int argc, char *argv[]) {
         break;
       case 4:
         scene = new TriangleTest(width, height);
+        break;
+      case 5:
+        scene = new ReflectionTest(width, height);
         break;
       default:
         scene = new CameraTest(width, height);

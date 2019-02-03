@@ -12,4 +12,3 @@ class ExplosionTest : public Scene {
     }
 };
 #endif
-

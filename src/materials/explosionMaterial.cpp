@@ -59,3 +59,6 @@ bool ExplosionMaterial::castsShadows() {
   return true;
 }
 
+ShadingSample* ExplosionMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
+  return new ShadingSample();
+}

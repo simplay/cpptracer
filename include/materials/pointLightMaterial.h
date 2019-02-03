@@ -17,6 +17,7 @@ class PointLightMaterial {
     virtual bool hasSpecularReflection();
     virtual bool hasSpecularRefraction();
     virtual bool castsShadows();
+    virtual ShadingSample* evaluateSpecularReflection(HitRecord* hitRecord);
 };
 
 #endif
