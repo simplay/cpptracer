@@ -1,7 +1,7 @@
 #include <math.h>
 #include "reflectiveMaterial.h"
 
-ReflectiveMaterial::ReflectiveMaterial(): ks(new Spectrum()) {}
+ReflectiveMaterial::ReflectiveMaterial(): ks(new Spectrum(1, 1, 1)) {}
 ReflectiveMaterial::ReflectiveMaterial(Spectrum* ks): ks(ks) {}
 
 Spectrum* ReflectiveMaterial::evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn) {

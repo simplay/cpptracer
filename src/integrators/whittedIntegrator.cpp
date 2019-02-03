@@ -59,6 +59,21 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
   if (!hitRecord->isValid()) {
     return new Spectrum();
   }
+  int MAX_DEPTH = 10;
+
+  Spectrum* reflection = new Spectrum();
+  if(hitRecord->material->hasSpecularReflection() && ray->depth < MAX_DEPTH) {
+    ShadingSample* sample = hitRecord->material->evaluateSpecularReflection(hitRecord);
+    reflection = new Spectrum(sample->brdf);
+
+    Ray* reflectedRay = new Ray(hitRecord->position, sample->w, ray->depth + 1);
+    Spectrum* spec = integrate(reflectedRay);
+    reflection->mult(spec);
+  }
+
+  if(hitRecord->material->hasSpecularReflection()) {
+    return reflection;
+  }
 
   Spectrum* contribution = new Spectrum();
   for(auto const& lightSource: *scene->lightList) {
