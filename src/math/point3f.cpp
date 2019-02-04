@@ -77,11 +77,13 @@ Point3f* Point3f::scaleAdd(float scale, Point3f* base, Point3f* other) {
   return this;
 }
 
-Point3f* Point3f::reflected(Point3f* normal) {
+Point3f* Point3f::invReflected(Point3f* normal) {
   float cosThetaI = normal->dot(this);
 
   Point3f* reflectedDir = new Point3f();
   Point3f* wInCopy = new Point3f(this);
+
+  // inverse direction
   wInCopy->negate();
 
   reflectedDir->scaleAdd(2 * cosThetaI, normal, wInCopy);

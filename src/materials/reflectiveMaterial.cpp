@@ -25,7 +25,7 @@ bool ReflectiveMaterial::castsShadows() {
 }
 
 ShadingSample* ReflectiveMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
-  auto reflectedDir = hitRecord->wIn->reflected(hitRecord->normal);
+  auto reflectedDir = hitRecord->wIn->invReflected(hitRecord->normal);
   ShadingSample* sample = new ShadingSample(
     new Spectrum(ks),
     new Spectrum(),

@@ -102,3 +102,23 @@ TEST(Point3f, cross) {
   ASSERT_EQ(6, u->y);
   ASSERT_EQ(-3, u->z);
 }
+
+TEST(Point3f, reflected) {
+  Point3f* v = new Point3f(1, 2, 4);
+  Point3f* normal = new Point3f(0, 0, 1);
+  Point3f* r = v->invReflected(normal);
+
+  // reflected := v - 2 * dot(v, normal) * normal
+  // dot(v, normal) = 4
+  // 2 * dot(v, normal) * normal = (0, 0, 8)
+  // r = (1, 2, 4) - (0, 0, 8) = (1, 2, -4)
+  // invReflected = -reflected
+
+  std::cout << r->x << std::endl;
+  std::cout << r->y << std::endl;
+  std::cout << r->z << std::endl;
+
+  ASSERT_EQ(-1, r->x);
+  ASSERT_EQ(-2, r->y);
+  ASSERT_EQ(4, r->z);
+}
