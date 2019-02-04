@@ -28,3 +28,7 @@ bool Diffuse::castsShadows() {
 ShadingSample* Diffuse::evaluateSpecularReflection(HitRecord* hitRecord) {
   return new ShadingSample();
 }
+
+ShadingSample* Diffuse::evaluateSpecularRefraction(HitRecord* hitRecord) {
+  return new ShadingSample();
+}

@@ -25,3 +25,7 @@ bool PointLightMaterial::castsShadows() {
 ShadingSample* PointLightMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
   return new ShadingSample();
 }
+
+ShadingSample* PointLightMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) {
+  return new ShadingSample();
+}

@@ -43,3 +43,7 @@ ShadingSample* ReflectiveMaterial::evaluateSpecularReflection(HitRecord* hitReco
   );
   return sample;
 }
+
+ShadingSample* ReflectiveMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) {
+  return new ShadingSample();
+}

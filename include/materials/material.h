@@ -60,5 +60,11 @@ class Material {
      * ray tracer to follow the path of specular reflection.
      */
     virtual ShadingSample* evaluateSpecularReflection(HitRecord* hitRecord) = 0;
+
+    /**
+     * Evaluate specular refraction. This method is typically called by a
+     * recursive ray tracer to follow the path of specular refraction.
+     */
+    virtual ShadingSample* evaluateSpecularRefraction(HitRecord* hitRecord) = 0;
 };
 #endif

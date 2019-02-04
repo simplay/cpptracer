@@ -21,5 +21,6 @@ class ReflectiveMaterial : public Material {
     virtual bool hasSpecularRefraction();
     virtual bool castsShadows();
     virtual ShadingSample* evaluateSpecularReflection(HitRecord* hitRecord);
+    virtual ShadingSample* evaluateSpecularRefraction(HitRecord* hitRecord);
 };
 #endif
