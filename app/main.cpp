@@ -12,6 +12,7 @@
 #include "explosionTest.h"
 #include "triangleTest.h"
 #include "reflectionTest.h"
+#include "refractiveScene.h"
 
 using namespace std;
 
@@ -60,6 +61,9 @@ int main(int argc, char *argv[]) {
         break;
       case 5:
         scene = new ReflectionTest(width, height);
+        break;
+      case 6:
+        scene = new RefractiveTest(width, height);
         break;
       default:
         scene = new CameraTest(width, height);

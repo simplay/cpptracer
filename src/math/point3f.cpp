@@ -44,6 +44,12 @@ void Point3f::negate() {
   z *= -1.0;
 }
 
+void Point3f::abs() {
+  x = std::abs(x);
+  y = std::abs(y);
+  z = std::abs(z);
+}
+
 Point3f* Point3f::cross(Point3f* other) {
   float cx = this->y * other->z - this->z * other->y;
   float cy = this->z * other->x - this->x * other->z;

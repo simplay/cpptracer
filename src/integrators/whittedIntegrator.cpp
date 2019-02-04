@@ -6,10 +6,10 @@
 
 bool WhittedIntegrator::isOccluded(Point3f* hitPosition, Point3f* lightDir, float t, float eps) {
   Ray* shadowRay = new Ray(
-      hitPosition,
-      lightDir,
-      t
-      );
+    hitPosition,
+    lightDir,
+    t
+  );
   HitRecord* shadowHit = scene->intersectableList->intersect(shadowRay);
   if (!shadowHit->isValid()) {
     return true;
@@ -29,7 +29,8 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
   lightDir->normalize();
 
   if (isOccluded(hitRecord->position, lightDir, t, d2)) {
-    return new Spectrum();
+    // TODO: re-enable
+    // return new Spectrum();
   }
 
   Spectrum* brdfContribution = hitRecord->material->evaluateBrdf(hitRecord, hitRecord->wIn, lightDir);

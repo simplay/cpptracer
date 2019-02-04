@@ -28,6 +28,8 @@ class Point3f {
 
     void negate();
 
+    void abs();
+
     // compute the cross product between this and another point.
     Point3f* cross(Point3f* other);
 
