@@ -25,15 +25,7 @@ bool ReflectiveMaterial::castsShadows() {
 }
 
 ShadingSample* ReflectiveMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
-  // compute reflection direction
-  float cosThetaI = hitRecord->normal->dot(hitRecord->wIn);
-  Point3f* reflectedDir= new Point3f();
-  Point3f wInCopy(hitRecord->wIn);
-  wInCopy.negate();
-  wInCopy.add(hitRecord->normal);
-  wInCopy.scale(2 * cosThetaI);
-  reflectedDir->add(&wInCopy);
-
+  auto reflectedDir = hitRecord->wIn->reflected(hitRecord->normal);
   ShadingSample* sample = new ShadingSample(
     new Spectrum(ks),
     new Spectrum(),

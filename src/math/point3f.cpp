@@ -68,3 +68,22 @@ float Point3f::dot() {
 float Point3f::dot(Point3f* other) {
   return x * other->x + y * other->y + z * other->z;
 }
+
+Point3f* Point3f::scaleAdd(float scale, Point3f* base, Point3f* other) {
+  x = scale * base->x + other->x;
+  y = scale * base->y + other->y;
+  z = scale * base->z + other->z;
+
+  return this;
+}
+
+Point3f* Point3f::reflected(Point3f* normal) {
+  float cosThetaI = normal->dot(this);
+
+  Point3f* reflectedDir = new Point3f();
+  Point3f* wInCopy = new Point3f(this);
+  wInCopy->negate();
+
+  reflectedDir->scaleAdd(2 * cosThetaI, normal, wInCopy);
+  return reflectedDir;
+}

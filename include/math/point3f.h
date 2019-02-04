@@ -43,6 +43,11 @@ class Point3f {
     // Make length of this vector equal 1 (in l2 norm's sense) but preserve its
     // direction.
     void normalize();
+
+    Point3f* scaleAdd(float, Point3f*, Point3f*);
+
+    // reflect this vector, given a normal
+    Point3f* reflected(Point3f*);
 };
 
 #endif
