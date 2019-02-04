@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cmath>
 #include "spectrum.h"
 
@@ -38,4 +39,18 @@ void Spectrum::mult(Spectrum* other) {
   r *= other->r;
   g *= other->g;
   b *= other->b;
+}
+
+void Spectrum::clamp() {
+  if (r > 1) {
+    r = 1.0;
+  }
+
+  if (g > 1) {
+    g = 1.0;
+  }
+
+  if (b > 1) {
+    b = 1.0;
+  }
 }

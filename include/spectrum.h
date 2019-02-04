@@ -22,6 +22,7 @@ class Spectrum {
     void scale(float);
     void add(Spectrum*);
     void mult(Spectrum*);
+    void clamp();
 };
 
 #endif

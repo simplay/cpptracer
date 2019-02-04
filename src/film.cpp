@@ -15,7 +15,15 @@ Film::Film(int width, int height): width(width), height(height) {
 
 // store spectrum in row-first order
 void Film::addSample(int rowIdx, int colIdx, Spectrum* spectrum) {
-  measurements->at(access(rowIdx, colIdx)) = spectrum;
+  auto v = measurements->at(access(rowIdx, colIdx));
+  sampleCounts->at(access(rowIdx, colIdx))++;
+  if (v) {
+    v->add(spectrum);
+    v->clamp();
+    measurements->at(access(rowIdx, colIdx)) = v;
+  } else {
+    measurements->at(access(rowIdx, colIdx)) = spectrum;
+  }
 }
 
 // access values in row-first order
@@ -29,7 +37,7 @@ std::vector<Spectrum*>* Film::normalMeasurements() {
       int f = sampleCounts->at(access(rowIdx, colIdx));
       Spectrum* s = measurements->at(access(rowIdx, colIdx));
       if (f > 0) {
-        s->scale(1.0 / (float) f);
+        s->scale(1.0 / f);
       }
     }
   }
