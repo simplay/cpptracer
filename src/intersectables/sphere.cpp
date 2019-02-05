@@ -55,25 +55,31 @@ Sphere::Sphere(Material* material, Point3f* center, float radius)
  * smaller and positive t.
  */
 HitRecord* Sphere::intersect(Ray* ray) {
-  Point3f* oc = new Point3f(ray->origin);
-  oc->sub(center);
+  Point3f oc(ray->origin);
+  oc.sub(center);
 
   float a = ray->direction->dot();
-  float b = 2.0 * oc->dot(ray->direction);
-  float c = oc->dot()- radius * radius;
+  float b = 2.0 * ray->direction->dot(&oc);
+  float c = oc.dot() - radius * radius;
   float discriminant = b * b - 4 * a * c;
-  if(discriminant < 0){
+
+  if(discriminant < 0) {
     return new HitRecord();
-  }
-  else{
-    float t1 =  (-b + sqrt(discriminant)) / (2.0 * a);
-    float t2 =  (-b - sqrt(discriminant)) / (2.0 * a);
+  } else {
+    float t1 = (-b + sqrt(discriminant)) / (2.0 * a);
+    float t2 = (-b - sqrt(discriminant)) / (2.0 * a);
+
     float t = std::min(t1, t2);
+    if (t < 0) {
+      t = std::max(t1, t2);
+      if (t < 0) {
+        return new HitRecord();
+      }
+    }
 
-    Point3f* intersectionPosition = ray->pointAt(t);
-
-    Point3f* hitNormal = new Point3f(intersectionPosition);
-    intersectionPosition->sub(center);
+    Point3f* hitPosition = new Point3f(ray->pointAt(t));
+    Point3f* hitNormal = new Point3f(hitPosition);
+    hitNormal->sub(center);
     hitNormal->scale(1.0 / radius);
 
     Point3f* wIn = new Point3f(ray->direction);
@@ -82,7 +88,7 @@ HitRecord* Sphere::intersect(Ray* ray) {
 
     return new HitRecord(
       t,
-      intersectionPosition,
+      hitPosition,
       hitNormal,
       NULL,
       wIn,

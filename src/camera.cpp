@@ -78,5 +78,5 @@ Ray* Camera::makeWorldspaceRay(int i, int j, std::vector<float> samples) {
   Vector4f* p_uvw = matrix->mult(v);
   float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 
-  return new Ray(new Point3f(eye), new Point3f(p_uvw), r);
+  return new Ray(new Point3f(eye), new Point3f(p_uvw));
 }

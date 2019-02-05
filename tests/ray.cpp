@@ -12,8 +12,6 @@ TEST(Ray, new_ray_no_args) {
   ASSERT_EQ(0, r->direction->x);
   ASSERT_EQ(0, r->direction->y);
   ASSERT_EQ(0, r->direction->z);
-
-  ASSERT_EQ(0, r->t);
 }
 
 TEST(Ray, new_ray_with_args) {

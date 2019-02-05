@@ -12,11 +12,10 @@ class Ray {
     Point3f* origin;
     Point3f* direction;
     int depth;
-    float t;
 
     Ray();
-    Ray(Point3f* origin, Point3f* direction, float t);
-    Ray(Point3f* origin, Point3f* direction, float t, int depth);
+    Ray(Point3f* origin, Point3f* direction);
+    Ray(Point3f* origin, Point3f* direction, int depth);
 
     // Get point on ray at origin + direction * t
     Point3f* pointAt(float t);

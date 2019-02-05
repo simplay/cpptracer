@@ -15,7 +15,7 @@ class WhittedIntegrator : public Integrator {
     // @param L light direction vector
     // @param t parameter of ray equation p_uvw(t) = 0 + t(s_uvw-0)
     // @return is light source occluded by object at hitPostion?
-    bool isOccluded(Point3f* hitPosition, Point3f* lightDir, float t, float eps);
+    bool isOccluded(Point3f* hitPosition, Point3f* lightDir, float eps);
 
 
     // Compute BRDF contribution for a given source at closest intersection point.
@@ -24,7 +24,7 @@ class WhittedIntegrator : public Integrator {
     // @param hitRecord closest intersection primary ray with scene.
     // @param t parameter of ray equation p_uvw(t) = 0 + t(s_uvw-0).
     // @return returns current spectrum of light source at intersaction point.
-    Spectrum* contributionOf(PointLight* lightSource, HitRecord* hitRecord, float t);
+    Spectrum* contributionOf(PointLight* lightSource, HitRecord* hitRecord);
 
   public:
     WhittedIntegrator(Scene*);

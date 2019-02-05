@@ -3,6 +3,8 @@
 #include "../intersectables/sphere.h"
 #include "../materials/blinn.h"
 #include "../materials/diffuse.h"
+#include "../integrators/debugIntegrator.h"
+#include "../integrators/pointLightIntegrator.h"
 
 BlinnTest::BlinnTest(int width, int height)
   : Scene(width, height) {}
@@ -25,4 +27,9 @@ void BlinnTest::buildIntersectables() {
   intersectableList->put(new Plane(diffuse, new Point3f(0.0, -1.0, 0.0), 1));
   intersectableList->put(new Plane(diffuse, new Point3f(0.0, 0.0, 1.0), 1));
   this->intersectableList = intersectableList;
+}
+
+void BlinnTest::buildIntegrator() {
+  this->integrator = new DebugIntegrator(this);
+  // this->integrator = new PointLightIntegrator(this);
 }

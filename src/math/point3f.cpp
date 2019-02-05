@@ -83,6 +83,14 @@ Point3f* Point3f::scaleAdd(float scale, Point3f* base, Point3f* other) {
   return this;
 }
 
+Point3f* Point3f::scaleAdd(float scale, Point3f* other) {
+  x = scale * x + other->x;
+  y = scale * y + other->y;
+  z = scale * z + other->z;
+
+  return this;
+}
+
 Point3f* Point3f::invReflected(Point3f* normal) {
   float cosThetaI = normal->dot(this);
 

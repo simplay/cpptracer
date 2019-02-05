@@ -3,12 +3,10 @@
 #include "whittedIntegrator.h"
 #include "../materials/material.h"
 
-
-bool WhittedIntegrator::isOccluded(Point3f* hitPosition, Point3f* lightDir, float t, float eps) {
+bool WhittedIntegrator::isOccluded(Point3f* hitPosition, Point3f* lightDir, float eps) {
   Ray* shadowRay = new Ray(
     hitPosition,
-    lightDir,
-    t
+    lightDir
   );
   HitRecord* shadowHit = scene->intersectableList->intersect(shadowRay);
   if (!shadowHit->isValid()) {
@@ -20,7 +18,7 @@ bool WhittedIntegrator::isOccluded(Point3f* hitPosition, Point3f* lightDir, floa
   return shadowHit->material->castsShadows() && dist_shad_hit_view_hit2->dot() < eps;
 }
 
-Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* hitRecord, float t) {
+Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* hitRecord) {
   HitRecord* lightHit = lightSource->sample();
   Point3f* lightDir = new Point3f(lightHit->position);
   lightDir->sub(hitRecord->position);
@@ -28,7 +26,7 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
   float d2 = lightDir->dot();
   lightDir->normalize();
 
-  if (isOccluded(hitRecord->position, lightDir, t, d2)) {
+  if (isOccluded(hitRecord->position, lightDir, d2)) {
     // TODO: re-enable
     // return new Spectrum();
   }
@@ -78,7 +76,7 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
 
   Spectrum* contribution = new Spectrum();
   for(auto const& lightSource: *scene->lightList) {
-    Spectrum* currentContribution = contributionOf(lightSource, hitRecord, ray->t);
+    Spectrum* currentContribution = contributionOf(lightSource, hitRecord);
     contribution->add(currentContribution);
   }
 

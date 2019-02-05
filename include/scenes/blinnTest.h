@@ -7,6 +7,7 @@ class BlinnTest : public Scene {
     BlinnTest(int width, int height);
     void buildLights();
     void buildIntersectables();
+    void buildIntegrator();
     std::string filename() {
       return "blinn_test.bmp";
     }

@@ -49,6 +49,8 @@ class Point3f {
     // overwrite this by scale * base + other
     Point3f* scaleAdd(float scale, Point3f* base, Point3f* other);
 
+    Point3f* scaleAdd(float scale, Point3f* other);
+
     // reflect the inverse direction of this vector off from a given normal
     // reflected := v + 2 * dot(v, normal) * normal
     Point3f* invReflected(Point3f*);
