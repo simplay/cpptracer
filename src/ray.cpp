@@ -17,8 +17,7 @@ Ray::Ray(Point3f* origin, Point3f* direction, int depth):  direction(direction),
 }
 
 Point3f* Ray::pointAt(float t) {
-  Point3f* p = new Point3f(*direction);
-  p->scale(t);
-  p->add(origin);
-  return p;
+  Point3f* hit = new Point3f(direction);
+  hit->scaleAdd(t, origin);
+  return hit;
 }
