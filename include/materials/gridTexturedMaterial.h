@@ -8,11 +8,11 @@
 
 class GridTexturedMaterial : public Material {
   public:
-    float scale;
-    float thickness;
-    Point3f* shift;
     Spectrum* lineColor;
     Spectrum* tileColor;
+    float thickness;
+    Point3f* shift;
+    float scale;
     Diffuse* diffuse;
 
     GridTexturedMaterial(Spectrum* lineColor, Spectrum* tileColor, float thickness, Point3f* shift, float scale);

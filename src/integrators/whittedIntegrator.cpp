@@ -8,14 +8,15 @@ bool WhittedIntegrator::isOccluded(Point3f* hitPosition, Point3f* lightDir, floa
     hitPosition,
     lightDir
   );
+
   HitRecord* shadowHit = scene->intersectableList->intersect(shadowRay);
   if (!shadowHit->isValid()) {
-    return true;
+    return false;
   }
 
   Point3f* dist_shad_hit_view_hit2 = (new Point3f(shadowHit->position));
   dist_shad_hit_view_hit2->sub(hitPosition);
-  return shadowHit->material->castsShadows() && dist_shad_hit_view_hit2->dot() < eps;
+  return shadowHit->material->castsShadows() && (dist_shad_hit_view_hit2->dot() < eps);
 }
 
 Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* hitRecord) {
@@ -27,8 +28,7 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
   lightDir->normalize();
 
   if (isOccluded(hitRecord->position, lightDir, d2)) {
-    // TODO: re-enable
-    // return new Spectrum();
+    return new Spectrum();
   }
 
   Spectrum* brdfContribution = hitRecord->material->evaluateBrdf(hitRecord, hitRecord->wIn, lightDir);
@@ -58,7 +58,7 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
   if (!hitRecord->isValid()) {
     return new Spectrum();
   }
-  int MAX_DEPTH = 10;
+  int MAX_DEPTH = 5;
 
   Spectrum* reflection = new Spectrum();
   if(hitRecord->material->hasSpecularReflection() && ray->depth < MAX_DEPTH) {

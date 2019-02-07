@@ -56,5 +56,6 @@ void RefractiveTest::buildIntersectables() {
 }
 
 void RefractiveTest::buildIntegrator() {
+  // this->integrator = new DebugIntegrator(this);
   this->integrator = new WhittedIntegrator(this);
 }

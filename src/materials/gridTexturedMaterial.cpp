@@ -61,7 +61,7 @@ bool GridTexturedMaterial::hasSpecularRefraction() {
 }
 
 bool GridTexturedMaterial::castsShadows() {
-  return false;
+  return diffuse->castsShadows();
 }
 
 ShadingSample* GridTexturedMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
