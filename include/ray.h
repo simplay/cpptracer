@@ -13,8 +13,13 @@ class Ray {
     Point3f* direction;
     int depth;
 
+    // Image coordinates: used for debugging purposes
+    int i;
+    int j;
+
     Ray();
     Ray(Point3f* origin, Point3f* direction);
+    Ray(Point3f* origin, Point3f* direction, int i, int j);
     Ray(Point3f* origin, Point3f* direction, int depth);
 
     // Get point on ray at origin + direction * t

@@ -36,7 +36,6 @@ class HitRecord {
     bool isNull = false;
 
   public:
-    float epsilon = 0.000001;
     float t;
     Point3f* position;
     Point3f* normal;
@@ -44,18 +43,32 @@ class HitRecord {
     Point3f* wIn;
     Material* material;
     Intersectable* intersectable;
+    int i;
+    int j;
 
     // the null-hitrecord
     HitRecord();
 
     HitRecord(
-      float &t,
+      float t,
       Point3f* position,
       Point3f* normal,
       Point3f* tangent,
       Point3f* wIn,
       Material* material,
       Intersectable* intersectable
+    );
+
+    HitRecord(
+      float t,
+      Point3f* position,
+      Point3f* normal,
+      Point3f* tangent,
+      Point3f* wIn,
+      Material* material,
+      Intersectable* intersectable,
+      int i,
+      int j
     );
 
     HitRecord(

@@ -55,11 +55,12 @@ Sphere::Sphere(Material* material, Point3f* center, float radius)
  * smaller and positive t.
  */
 HitRecord* Sphere::intersect(Ray* ray) {
-  Point3f oc(ray->origin);
+  Point3f oc = new Point3f(ray->origin);
   oc.sub(center);
 
-  float a = ray->direction->dot();
-  float b = 2.0 * ray->direction->dot(&oc);
+  Point3f rd = new Point3f(ray->direction);
+  float a = rd.dot();
+  float b = 2.0 * rd.dot(&oc);
   float c = oc.dot() - radius * radius;
   float discriminant = b * b - 4 * a * c;
 
@@ -93,7 +94,9 @@ HitRecord* Sphere::intersect(Ray* ray) {
       NULL,
       wIn,
       material,
-      this
+      this,
+      ray->i,
+      ray->j
     );
   }
 }

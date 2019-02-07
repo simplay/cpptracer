@@ -5,6 +5,7 @@
 class BlinnTest : public Scene {
   public:
     BlinnTest(int width, int height);
+    void buildCamera();
     void buildLights();
     void buildIntersectables();
     void buildIntegrator();

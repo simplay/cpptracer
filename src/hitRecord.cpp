@@ -13,7 +13,7 @@ HitRecord::HitRecord(
 {};
 
 HitRecord::HitRecord(
-  float &t,
+  float t,
   Point3f* position,
   Point3f* normal,
   Point3f* tangent,
@@ -28,6 +28,28 @@ HitRecord::HitRecord(
   wIn(wIn),
   material(material),
   intersectable(intersectable)
+{}
+
+HitRecord::HitRecord(
+  float t,
+  Point3f* position,
+  Point3f* normal,
+  Point3f* tangent,
+  Point3f* wIn,
+  Material* material,
+  Intersectable *intersectable,
+  int i,
+  int j
+):
+  t(t),
+  position(position),
+  normal(normal),
+  tangent(tangent),
+  wIn(wIn),
+  material(material),
+  intersectable(intersectable),
+  i(i),
+  j(j)
 {}
 
 bool HitRecord::isValid() {

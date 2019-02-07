@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "vector4f.h"
 
 #ifndef POINT3_H
@@ -54,6 +55,10 @@ class Point3f {
     // reflect the inverse direction of this vector off from a given normal
     // reflected := v + 2 * dot(v, normal) * normal
     Point3f* invReflected(Point3f*);
+
+    void log() {
+      printf("(%f, %f, %f)\n", x, y, z);
+    }
 };
 
 #endif
