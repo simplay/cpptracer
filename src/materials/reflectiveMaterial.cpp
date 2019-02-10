@@ -5,11 +5,11 @@ ReflectiveMaterial::ReflectiveMaterial(): ks(new Spectrum(1, 1, 1)) {}
 ReflectiveMaterial::ReflectiveMaterial(Spectrum* ks): ks(ks) {}
 
 Spectrum* ReflectiveMaterial::evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn) {
-  return new Spectrum();
+  return new Spectrum(1);
 }
 
 Spectrum* ReflectiveMaterial::evaluateEmission(HitRecord*, Point3f*) {
-  return new Spectrum(1, 1, 1);
+  return new Spectrum();
 }
 
 bool ReflectiveMaterial::hasSpecularReflection() {
