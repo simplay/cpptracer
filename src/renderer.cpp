@@ -3,6 +3,7 @@
 #include <vector>
 #include "renderer.h"
 #include "renderTask.h"
+#include "samplers/sampler.h"
 #include "samplers/oneSampler.h"
 #include "ray.h"
 #include "spectrum.h"
@@ -16,7 +17,7 @@ Renderer::Renderer(Scene* scene): scene(scene) {}
 void Renderer::computeContribution(RenderTask* renderTask) {
   // for each image index value
   for (vector<int>::iterator idxValue = (*renderTask->indices).begin(); idxValue != (*renderTask->indices).end(); ++idxValue) {
-    OneSampler* os = new OneSampler();
+    Sampler* os = new OneSampler();
     auto samples = os->makeSample(1, 2);
 
     // for each sample index
