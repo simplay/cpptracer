@@ -1,4 +1,5 @@
 #include <math.h>
+#include <iostream>
 #include "refractiveMaterial.h"
 
 float RefractiveMaterial::fresnelFactor(HitRecord* hitRecord) {
@@ -126,5 +127,6 @@ ShadingSample* RefractiveMaterial::evaluateSpecularRefraction(HitRecord* hitReco
     true,
     r
   );
+
   return sample;
 }

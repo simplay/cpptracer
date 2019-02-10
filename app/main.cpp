@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
     int width = 400;
     int height = 400;
     int sceneNr = 1;
+    int spp = 1;
 
     if (argc == 2) {
       width = std::atoi(argv[1]);
@@ -39,11 +40,17 @@ int main(int argc, char *argv[]) {
       width = std::atoi(argv[1]);
       height = std::atoi(argv[2]);
       sceneNr = std::atoi(argv[3]);
+    } else if (argc == 5) {
+      width = std::atoi(argv[1]);
+      height = std::atoi(argv[2]);
+      sceneNr = std::atoi(argv[3]);
+      spp = std::atoi(argv[4]);
     }
 
     unsigned threadCount = thread::hardware_concurrency();
     cout << "Using " << threadCount << " threads" << endl;
     cout << "Rendering scene Nr " << sceneNr << endl;
+    cout << "Rendering " << spp << " sample(s) per pixel" << endl;
 
     Scene* scene;
     switch(sceneNr) {
@@ -71,7 +78,7 @@ int main(int argc, char *argv[]) {
     scene->setup();
 
     Renderer* renderer = new Renderer(scene);
-    renderer->render(threadCount);
+    renderer->render(threadCount, spp);
 
     return 0;
 }

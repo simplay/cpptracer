@@ -15,7 +15,7 @@ class Film {
     std::vector<int>* sampleCounts;
 
     Film(int width, int height);
-    void addSample(int x, int y, Spectrum* s);
+    void addSample(float x, float y, Spectrum* s);
     std::vector<Spectrum*>* normalMeasurements();
 };
 

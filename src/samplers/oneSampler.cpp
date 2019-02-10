@@ -3,12 +3,13 @@
 
 OneSampler::OneSampler() {}
 
-std::vector<std::vector<float>> OneSampler::makeSample(int, int d) {
-  std::vector<float> samples;
+std::vector<std::vector<float>*>* OneSampler::makeSample(int, int d) {
+  std::vector<std::vector<float>* >* result = new std::vector<std::vector<float>*>();
+  std::vector<float>* samples = new std::vector<float>();
   for (int k = 0; k < d; k++) {
-    samples.push_back(0.5);
+    samples->push_back(0.5);
   }
+  result->push_back(samples);
 
-  std::vector<std::vector<float>> result{samples};
   return result;
 }

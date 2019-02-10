@@ -74,7 +74,7 @@ class Camera {
   Matrix4f* transformation();
 
   // Creates primary rays
-  Ray* makeWorldspaceRay(int i, int j, std::vector<float>);
+  Ray* makeWorldspaceRay(int i, int j, std::vector<float>*);
 };
 
 #endif

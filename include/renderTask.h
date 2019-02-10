@@ -9,6 +9,7 @@ class RenderTask {
     int height;
     std::vector<int>* indices;
     Scene* scene;
-    RenderTask(int, int, std::vector<int>*, Scene*);
+    int spp;
+    RenderTask(int, int, std::vector<int>*, Scene*, int);
 };
 #endif

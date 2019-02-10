@@ -3,6 +3,7 @@
 #include "../camera.h"
 #include "../lights/pointLight.h"
 #include "../intersectables/intersectableList.h"
+#include "../samplers/sampler.h"
 
 class Integrator;
 
@@ -15,6 +16,8 @@ class Scene {
     std::vector<PointLight*>* lightList;
     IntersectableList* intersectableList;
     Integrator* integrator;
+    Sampler* sampler;
+
     Scene(int widht, int height);
     void setup();
     virtual std::string filename();
@@ -31,5 +34,6 @@ class Scene {
     virtual void buildLights() = 0;
     virtual void buildIntersectables() = 0;
     virtual void buildIntegrator();
+    virtual void buildSampler();
 };
 #endif

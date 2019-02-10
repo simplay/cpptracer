@@ -1,12 +1,12 @@
 #include <vector>
 #include "sampler.h"
 
-#ifndef ONE_SAMPLER_H
-#define ONE_SAMPLER_H
+#ifndef RANDOM_SAMPLER_H
+#define RANDOM_SAMPLER_H
 
-class OneSampler : public Sampler {
+class RandomSampler : public Sampler {
   public:
-    OneSampler();
+    RandomSampler();
     std::vector<std::vector<float>*>* makeSample(int, int);
 };
 

@@ -8,6 +8,7 @@
 #include "../materials/gridTexturedMaterial.h"
 #include "../integrators/whittedIntegrator.h"
 #include "../integrators/debugIntegrator.h"
+#include "../samplers/randomSampler.h"
 
 RefractiveTest::RefractiveTest(int width, int height)
   : Scene(width, height) {}
@@ -59,4 +60,8 @@ void RefractiveTest::buildIntersectables() {
 void RefractiveTest::buildIntegrator() {
   // this->integrator = new DebugIntegrator(this);
   this->integrator = new WhittedIntegrator(this);
+}
+
+void RefractiveTest::buildSampler() {
+  this->sampler = new RandomSampler();
 }

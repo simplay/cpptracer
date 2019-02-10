@@ -24,6 +24,13 @@ class Ray {
 
     // Get point on ray at origin + direction * t
     Point3f* pointAt(float t);
+
+    void log() {
+      origin->log();
+      direction->log();
+
+      printf("(%i, %i, %i)\n", i, j, depth);
+    }
 };
 
 #endif

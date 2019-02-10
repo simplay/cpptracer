@@ -3,6 +3,7 @@
 #include <iostream>
 #include "scene.h"
 #include "../integrators/pointLightIntegrator.h"
+#include "../samplers/oneSampler.h"
 
 Scene::Scene(int width, int height): width(width), height(height) {}
 
@@ -13,6 +14,7 @@ void Scene::setup() {
   buildIntersectables();
   buildLights();
   buildIntegrator();
+  buildSampler();
 }
 
 std::string Scene::filename() {
@@ -48,4 +50,8 @@ void Scene::buildIntersectables() {
 
 void Scene::buildIntegrator() {
   this->integrator = new PointLightIntegrator(this);
+}
+
+void Scene::buildSampler() {
+  this->sampler = new OneSampler();
 }

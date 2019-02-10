@@ -10,6 +10,6 @@ class Renderer {
   public:
     Scene* scene;
     Renderer(Scene* scene);
-    void render(int threadCount);
+    void render(int threadCount, int spp);
 };
 #endif

@@ -74,11 +74,14 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
 
   if (hitRecord->material->hasSpecularRefraction() && ray->depth < MAX_DEPTH) {
     ShadingSample* sample = hitRecord->material->evaluateSpecularRefraction(hitRecord);
+    if (sample->isValid) {
+
     refraction = new Spectrum(sample->brdf);
 
     Ray* refractedRay = new Ray(hitRecord->position, sample->w, ray->depth + 1);
     Spectrum* spec = integrate(refractedRay);
     refraction->mult(spec);
+    }
   }
 
   if (hitRecord->material->hasSpecularReflection() || hitRecord->material->hasSpecularRefraction()) {
