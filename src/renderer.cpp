@@ -3,7 +3,7 @@
 #include <vector>
 #include "renderer.h"
 #include "renderTask.h"
-#include "oneSampler.h"
+#include "samplers/oneSampler.h"
 #include "ray.h"
 #include "spectrum.h"
 #include "image.h"
