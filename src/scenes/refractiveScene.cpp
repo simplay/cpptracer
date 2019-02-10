@@ -4,6 +4,7 @@
 #include "../materials/reflectiveMaterial.h"
 #include "../materials/diffuse.h"
 #include "../materials/blinn.h"
+#include "../materials/refractiveMaterial.h"
 #include "../materials/gridTexturedMaterial.h"
 #include "../integrators/whittedIntegrator.h"
 #include "../integrators/debugIntegrator.h"
@@ -40,7 +41,7 @@ void RefractiveTest::buildLights() {
 void RefractiveTest::buildIntersectables() {
   IntersectableList* intersectableList = new IntersectableList();
 
-  Blinn* blinn = new Blinn(new Spectrum(1.0, 0.0, 0.0), new Spectrum(0.6), 50.0);
+  RefractiveMaterial* material = new RefractiveMaterial(1.3);
   GridTexturedMaterial* grid = new GridTexturedMaterial(
     new Spectrum(0.2f, 0.f, 0.f),
     new Spectrum(1.f, 1.f, 1.f),
@@ -49,7 +50,7 @@ void RefractiveTest::buildIntersectables() {
     0.125f
   );
 
-  intersectableList->put(new Sphere(blinn, new Point3f(0.0, 0.0, 0.0), 1.0));
+  intersectableList->put(new Sphere(material, new Point3f(0.0, 0.0, 0.0), 1.0));
   intersectableList->put(new Plane(grid, new Point3f(0.0, 0.0, 1.0f), 2.15));
 
   this->intersectableList = intersectableList;
