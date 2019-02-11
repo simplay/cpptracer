@@ -5,6 +5,8 @@
 #include "../materials/diffuse.h"
 #include "../materials/blinn.h"
 #include "../integrators/whittedIntegrator.h"
+#include "../samplers/randomSampler.h"
+#include "../samplers/oneSampler.h"
 
 ReflectionTest::ReflectionTest(int width, int height)
   : Scene(width, height) {}
@@ -35,4 +37,9 @@ void ReflectionTest::buildIntersectables() {
 
 void ReflectionTest::buildIntegrator() {
   this->integrator = new WhittedIntegrator(this);
+}
+
+void ReflectionTest::buildSampler() {
+  this->sampler = new RandomSampler();
+  // this->sampler = new OneSampler();
 }

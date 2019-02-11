@@ -8,6 +8,7 @@ class ReflectionTest : public Scene {
     void buildLights();
     void buildIntersectables();
     void buildIntegrator();
+    void buildSampler();
     std::string filename() {
       return "reflection_test.bmp";
     }

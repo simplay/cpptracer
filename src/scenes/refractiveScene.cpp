@@ -42,7 +42,7 @@ void RefractiveTest::buildLights() {
 void RefractiveTest::buildIntersectables() {
   IntersectableList* intersectableList = new IntersectableList();
 
-  RefractiveMaterial* material = new RefractiveMaterial(1.3);
+  RefractiveMaterial* material = new RefractiveMaterial(1.1);
   GridTexturedMaterial* grid = new GridTexturedMaterial(
     new Spectrum(0.2f, 0.f, 0.f),
     new Spectrum(1.f, 1.f, 1.f),

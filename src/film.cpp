@@ -32,7 +32,6 @@ void Film::addSample(float rowIdx, float colIdx, Spectrum* spectrum) {
   sampleCounts->at(access(roundedRowIdx, roundedColIdx))++;
   if (v) {
     v->add(spectrum);
-    v->clamp();
     measurements->at(access(roundedRowIdx, roundedColIdx)) = v;
   }
 }
