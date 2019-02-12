@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <thread>
 #include <vector>
+#include <chrono>
 #include <iostream>
 #include "renderer.h"
 #include "renderTask.h"
@@ -15,7 +16,7 @@ using namespace std;
 
 Renderer::Renderer(Scene* scene): scene(scene) {}
 
-void Renderer::computeContribution(RenderTask* renderTask) {
+void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* taskCounters) {
   // for each image index value
   for (vector<int>::iterator idxValue = (*renderTask->indices).begin(); idxValue != (*renderTask->indices).end(); ++idxValue) {
     auto samples = renderTask->scene->sampler->makeSample(renderTask->spp, 2);
@@ -34,7 +35,28 @@ void Renderer::computeContribution(RenderTask* renderTask) {
       // consider coordinates in between pixel locations
       // store in row-first order
       renderTask->scene->film->addSample(rowIdx + sample->at(0), colIdx + sample->at(1), raySpectrum);
+
+      taskCounters->at(id)++;
     }
+  }
+}
+
+void Renderer::updateProgress(vector<int>* taskCounters, int stepSize) {
+  while (isRunning) {
+    int sum_of_elems = 0;
+    for (auto& n : (*taskCounters)) {
+      sum_of_elems += n;
+    }
+
+    int tmpProgress = (sum_of_elems / stepSize) + 1;
+    int diff = tmpProgress - progress;
+    cout << "";
+    for (int k = 0; k < diff; k++) {
+      std::cout << "* ";
+    }
+    cout << flush;
+    progress = tmpProgress;
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
 }
 
@@ -43,6 +65,8 @@ void Renderer::computeContribution(RenderTask* renderTask) {
 void Renderer::render(int threadCount, int spp) {
   thread threads[threadCount];
   vector<vector<int>>* indexLists = new vector<vector<int>>(threadCount);
+  vector<int>* taskCounters = new vector<int>(threadCount);
+
   vector<int> indexValues;
 
   int height = scene->film->height;
@@ -65,18 +89,26 @@ void Renderer::render(int threadCount, int spp) {
   }
 
   // spawn threadCount threads:
-  for (int i = 0; i < threadCount; i++) {
+  for (int id = 0; id < threadCount; id++) {
     RenderTask* rt = new RenderTask(
-      width, height, &indexLists->at(i), scene, spp
+      width, height, &indexLists->at(id), scene, spp
     );
 
-    threads[i] = thread(&Renderer::computeContribution, this, rt);
+    threads[id] = thread(&Renderer::computeContribution, this, id, rt, taskCounters);
   }
+
+  int totalTasks = width * height * spp;
+  int stepSize = totalTasks / 20;
+
+  thread progress(&Renderer::updateProgress, this, taskCounters, stepSize);
 
   // wait until all threads have completed their task
   for (auto& threads : threads) {
     threads.join();
   }
+  isRunning = false;
+  progress.join();
+  cout << endl;
 
 
   // write computed contribution to image and save it
