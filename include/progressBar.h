@@ -8,13 +8,15 @@
 class ProgressBar {
   private:
     std::vector<int>* taskCounters;
+    int totalTasks;
+
     bool isRunning = true;
     int progress = 0;
+    int progressIntervals = 20;
     int stepSize;
-    int totalTasks;
-    int steps = 20;
-    void update();
     std::thread* progressThread;
+
+    void update();
 
   public:
     void start();

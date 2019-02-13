@@ -80,14 +80,14 @@ void Renderer::render(int threadCount, int spp) {
   }
 
   int totalTasks = width * height * spp;
-  ProgressBar* pb = new ProgressBar(taskCounters, totalTasks);
-  pb->start();
+  ProgressBar progressBar(taskCounters, totalTasks);
+  progressBar.start();
 
   // wait until all threads have completed their task
   for (auto& threads : threads) {
     threads.join();
   }
-  pb->stop();
+  progressBar.stop();
 
   // write computed contribution to image and save it
   Image img = Image(width, height, scene->film->normalMeasurements(), scene->filename());
