@@ -11,6 +11,7 @@
 #include "spectrum.h"
 #include "image.h"
 #include "integrators/pointLightIntegrator.h"
+#include "progressBar.h"
 
 using namespace std;
 
@@ -38,25 +39,6 @@ void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* 
 
       taskCounters->at(id)++;
     }
-  }
-}
-
-void Renderer::updateProgress(vector<int>* taskCounters, int stepSize) {
-  while (isRunning) {
-    int sum_of_elems = 0;
-    for (auto& n : (*taskCounters)) {
-      sum_of_elems += n;
-    }
-
-    int tmpProgress = (sum_of_elems / stepSize) + 1;
-    int diff = tmpProgress - progress;
-    cout << "";
-    for (int k = 0; k < diff; k++) {
-      std::cout << "* ";
-    }
-    cout << flush;
-    progress = tmpProgress;
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
 }
 
@@ -98,18 +80,14 @@ void Renderer::render(int threadCount, int spp) {
   }
 
   int totalTasks = width * height * spp;
-  int stepSize = totalTasks / 20;
-
-  thread progress(&Renderer::updateProgress, this, taskCounters, stepSize);
+  ProgressBar* pb = new ProgressBar(taskCounters, totalTasks);
+  pb->start();
 
   // wait until all threads have completed their task
   for (auto& threads : threads) {
     threads.join();
   }
-  isRunning = false;
-  progress.join();
-  cout << endl;
-
+  pb->stop();
 
   // write computed contribution to image and save it
   Image img = Image(width, height, scene->film->normalMeasurements(), scene->filename());

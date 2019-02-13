@@ -7,9 +7,6 @@
 class Renderer {
   private:
     void computeContribution(int, RenderTask*, std::vector<int>*);
-    void updateProgress(std::vector<int>*, int);
-    bool isRunning = true;
-    int progress = 0;
 
   public:
     Scene* scene;
