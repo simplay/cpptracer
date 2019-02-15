@@ -18,9 +18,9 @@ class Ray {
     int j;
 
     Ray();
-    Ray(Point3f* origin, Point3f* direction);
-    Ray(Point3f* origin, Point3f* direction, int i, int j);
-    Ray(Point3f* origin, Point3f* direction, int depth);
+    Ray(Point3f* origin, Point3f* direction, bool perturbate = true);
+    Ray(Point3f* origin, Point3f* direction, int i, int j, bool perturbate = true);
+    Ray(Point3f* origin, Point3f* direction, int depth, bool perturbate = true);
 
     // Get point on ray at origin + direction * t
     Point3f* pointAt(float t);

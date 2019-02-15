@@ -5,28 +5,34 @@
 Ray::Ray()
   : origin(new Point3f()), direction(new Point3f()), depth(0), i(-1), j(-1) {}
 
-Ray::Ray(Point3f* origin, Point3f* direction)
+Ray::Ray(Point3f* origin, Point3f* direction, bool perturbate)
   : origin(origin), direction(direction), depth(0), i(-1), j(-1) {
-  Point3f* o = new Point3f(direction);
-  o->scale(0.00001);
-  o->add(origin);
-  this->origin = o;
+    if (perturbate) {
+      Point3f* o = new Point3f(direction);
+      o->scale(0.00001);
+      o->add(origin);
+      this->origin = o;
+    }
 }
 
-Ray::Ray(Point3f* origin, Point3f* direction, int i, int j)
+Ray::Ray(Point3f* origin, Point3f* direction, int i, int j, bool perturbate)
   : origin(origin), direction(direction), depth(0), i(i), j(j) {
-    Point3f* o = new Point3f(direction);
-    o->scale(0.00001);
-    o->add(origin);
-    this->origin = o;
+    if (perturbate) {
+      Point3f* o = new Point3f(direction);
+      o->scale(0.00001);
+      o->add(origin);
+      this->origin = o;
+    }
 }
 
-Ray::Ray(Point3f* origin, Point3f* direction, int depth)
+Ray::Ray(Point3f* origin, Point3f* direction, int depth, bool perturbate)
   : origin(origin), direction(direction), depth(depth), i(-1), j(-1) {
-  Point3f* o = new Point3f(direction);
-  o->scale(0.00001);
-  o->add(origin);
-  this->origin = o;
+    if (perturbate) {
+      Point3f* o = new Point3f(direction);
+      o->scale(0.00001);
+      o->add(origin);
+      this->origin = o;
+    }
 }
 
 Point3f* Ray::pointAt(float t) {

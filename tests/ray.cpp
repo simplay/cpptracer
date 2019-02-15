@@ -17,7 +17,7 @@ TEST(Ray, new_ray_no_args) {
 TEST(Ray, new_ray_with_args) {
   Point3f* origin = new Point3f(1, 2, 3);
   Point3f* direction = new Point3f(1, 2, 3);
-  Ray* r = new Ray(origin, direction, 1.0);
+  Ray* r = new Ray(origin, direction);
 
   ASSERT_EQ(origin->x, r->origin->x);
   ASSERT_EQ(origin->y, r->origin->y);
@@ -31,7 +31,7 @@ TEST(Ray, new_ray_with_args) {
 TEST(Ray, pointAt) {
   Point3f* origin = new Point3f(0, 0, 0);
   Point3f* direction = new Point3f(1, 0, 0);
-  Ray* r = new Ray(origin, direction, 1.0);
+  Ray* r = new Ray(origin, direction);
 
   Point3f* p = r->pointAt(2);
 
