@@ -2,18 +2,6 @@
 #include <iostream>
 #include "ray.h"
 
-TEST(Ray, new_ray_no_args) {
-  Ray* r = new Ray();
-
-  ASSERT_EQ(0, r->origin->x);
-  ASSERT_EQ(0, r->origin->y);
-  ASSERT_EQ(0, r->origin->z);
-
-  ASSERT_EQ(0, r->direction->x);
-  ASSERT_EQ(0, r->direction->y);
-  ASSERT_EQ(0, r->direction->z);
-}
-
 TEST(Ray, new_ray_with_args) {
   Point3f* origin = new Point3f(1, 2, 3);
   Point3f* direction = new Point3f(1, 2, 3);

@@ -22,24 +22,27 @@ Camera::Camera(
   width(width),
   height(height)
 {
-  Point3f* from = new Point3f(eye);
-  Point3f* to = new Point3f(lookAt);
+  Point3f from(eye);
+  Point3f to(lookAt);
 
   // z-axis
-  Point3f* w = new Point3f(from);
-  w->sub(to);
-  w->normalize();
-  Vector4f* zc = new Vector4f(w->x, w->y, w->z, 0.0);
+  Point3f w(from);
+  w.sub(&to);
+  w.normalize();
+  Vector4f* zc = new Vector4f(w.x, w.y, w.z, 0.0);
 
   // # x-axis
-  Point3f* u = up->cross(w);
+  Point3f* u = up->cross(&w);
   u->normalize();
   Vector4f* xc = new Vector4f(u->x, u->y, u->z, 0.0);
 
   // # y-axis
-  Point3f* v = w->cross(u);
+  Point3f* v = w.cross(u);
   Vector4f* yc = new Vector4f(v->x, v->y, v->z, 0.0);
-  Vector4f* e = new Vector4f(from->x, from->y, from->z, 1.0);
+  delete v;
+  delete u;
+
+  Vector4f* e = new Vector4f(from.x, from.y, from.z, 1.0);
 
   matrix = new Matrix4f(xc, yc, zc, e, false);
 
@@ -76,10 +79,11 @@ Ray* Camera::makeWorldspaceRay(int i, int j, std::vector<float>* samples) {
   float w_ij = -1.0;
 
   Vector4f* v = new Vector4f(u_ij, v_ij, w_ij, 0);
-
   Vector4f* p_uvw = matrix->mult(v);
+  delete v;
+  Ray* ray = new Ray(new Point3f(eye), new Point3f(p_uvw), i, j);
 
-  return new Ray(
-    new Point3f(eye), new Point3f(p_uvw), i, j
-  );
+  delete p_uvw;
+
+  return ray;
 }

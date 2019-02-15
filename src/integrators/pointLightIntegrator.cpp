@@ -5,7 +5,7 @@
 
 bool PointLightIntegrator::isOccluded(Point3f* hitPosition, Point3f* lightDir, float eps) {
   Ray* shadowRay = new Ray(
-    hitPosition,
+    new Point3f(hitPosition),
     lightDir
   );
   HitRecord* shadowHit = scene->intersectableList->intersect(shadowRay);

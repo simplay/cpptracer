@@ -47,6 +47,7 @@ class HitRecord {
     int j;
 
     // the null-hitrecord
+    ~HitRecord();
     HitRecord();
 
     HitRecord(

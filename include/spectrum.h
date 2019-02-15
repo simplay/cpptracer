@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "math/point3f.h"
 
 #ifndef SPECTRUM_H
@@ -23,6 +24,9 @@ class Spectrum {
     void add(Spectrum*);
     void mult(Spectrum*);
     void clamp();
+    void log() {
+      printf("(%f, %f, %f)\n", r, g, b);
+    }
 };
 
 #endif

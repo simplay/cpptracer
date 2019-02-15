@@ -1,5 +1,12 @@
 #include "hitRecord.h"
 
+HitRecord::~HitRecord() {
+  delete position;
+  delete normal;
+  delete tangent;
+  delete wIn;
+}
+
 HitRecord::HitRecord() {
   isNull = true;
 }
@@ -9,6 +16,9 @@ HitRecord::HitRecord(
   Material* material
 ):
   position(position),
+  normal(new Point3f()),
+  tangent(new Point3f()),
+  wIn(new Point3f()),
   material(material)
 {};
 

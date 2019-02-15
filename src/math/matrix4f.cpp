@@ -1,3 +1,4 @@
+#include <iostream>
 #include "matrix4f.h"
 #include "vector4f.h"
 
@@ -22,15 +23,16 @@ Matrix4f::Matrix4f(Vector4f* v1, Vector4f* v2, Vector4f* v3, Vector4f* v4, bool 
 }
 
 Vector4f* Matrix4f::mult(Vector4f* other) {
-  Vector4f* v1 = new Vector4f(m00, m01, m02, m03);
-  Vector4f* v2 = new Vector4f(m10, m11, m12, m13);
-  Vector4f* v3 = new Vector4f(m20, m21, m22, m23);
-  Vector4f* v4 = new Vector4f(m30, m31, m32, m33);
+  Vector4f v1 (m00, m01, m02, m03);
+  Vector4f v2 (m10, m11, m12, m13);
+  Vector4f v3 (m20, m21, m22, m23);
+  Vector4f v4 (m30, m31, m32, m33);
 
-  return new Vector4f(
-    v1->dot(other),
-    v2->dot(other),
-    v3->dot(other),
-    v4->dot(other)
+  Vector4f* v = new Vector4f(
+    v1.dot(other),
+    v2.dot(other),
+    v3.dot(other),
+    v4.dot(other)
   );
+  return v;
 }

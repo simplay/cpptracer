@@ -72,7 +72,6 @@ ShadingSample* RefractiveMaterial::evaluateSpecularReflection(HitRecord* hitReco
   float r = fresnelFactor(hitRecord);
 
   Spectrum* brdf = new Spectrum(r);
-
   ShadingSample* sample = new ShadingSample(
     brdf,
     new Spectrum(),
@@ -89,7 +88,6 @@ ShadingSample* RefractiveMaterial::evaluateSpecularRefraction(HitRecord* hitReco
   wIn.normalize();
 
   Point3f normal(hitRecord->normal);
-
 
   // enters material
   float n1 = 1.0;

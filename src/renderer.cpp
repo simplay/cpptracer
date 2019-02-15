@@ -38,6 +38,10 @@ void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* 
       renderTask->scene->film->addSample(rowIdx + sample->at(0), colIdx + sample->at(1), raySpectrum);
 
       taskCounters->at(id)++;
+      delete ray->origin;
+      delete ray->direction;
+      delete ray;
+      delete raySpectrum;
     }
   }
 }

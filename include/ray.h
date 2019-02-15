@@ -17,7 +17,7 @@ class Ray {
     int i;
     int j;
 
-    Ray();
+    ~Ray();
     Ray(Point3f* origin, Point3f* direction, bool perturbate = true);
     Ray(Point3f* origin, Point3f* direction, int i, int j, bool perturbate = true);
     Ray(Point3f* origin, Point3f* direction, int depth, bool perturbate = true);
