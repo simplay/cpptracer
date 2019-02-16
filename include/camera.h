@@ -37,6 +37,7 @@
 // boundaries and is defined by the vertical field-of-view and the aspect
 // ratio.
 class Camera {
+  // used to transform a point in camera coordinates to world coordinates
   Matrix4f* matrix;
 
   // origin of camera's viewing direction
@@ -70,7 +71,6 @@ class Camera {
 
   Camera(Point3f* eye, Point3f* lookAt, Point3f* up, float fov, float aspectRatio, float width, float height);
 
-  // used to transform a point in camera coordinates to world coordinates
   Matrix4f* transformation();
 
   // Creates primary rays

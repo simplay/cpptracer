@@ -26,6 +26,7 @@ class ShadingSample {
      */
     float p;
 
+    ~ShadingSample();
     ShadingSample(Spectrum*, Spectrum*, Point3f*, bool, float);
     ShadingSample();
 
