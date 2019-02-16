@@ -25,7 +25,11 @@ HitRecord* IntersectableList::intersect(Ray* ray) {
       delete hitRecord;
       hitRecord = new HitRecord(currentHitRecord);
     }
-    delete currentHitRecord;
+
+    // only delete the current hitRecord if there is more than one intersectable in the scene
+    if (container->size() > 1) {
+      delete currentHitRecord;
+    }
   }
 
   return hitRecord;

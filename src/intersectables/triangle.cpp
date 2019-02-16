@@ -68,7 +68,7 @@ HitRecord* Triangle::intersect(Ray* ray) {
     t,
     intersectionPosition,
     normal,
-    NULL,
+    new Point3f(),
     wIn,
     material,
     this
