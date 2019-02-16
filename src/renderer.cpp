@@ -42,7 +42,10 @@ void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* 
       delete ray->direction;
       delete ray;
       delete raySpectrum;
+      delete sample;
     }
+
+    delete samples;
   }
 }
 
