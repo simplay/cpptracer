@@ -7,14 +7,36 @@ HitRecord::~HitRecord() {
   delete wIn;
 }
 
-HitRecord::HitRecord() {
+HitRecord::HitRecord()
+  :
+    t(0),
+    position(new Point3f()),
+    normal(new Point3f()),
+    tangent(new Point3f()),
+    wIn(new Point3f())
+{
   isNull = true;
+}
+
+HitRecord::HitRecord(HitRecord* hitRecord)
+  :
+    t(hitRecord->t),
+    position(new Point3f(hitRecord->position)),
+    normal(new Point3f(hitRecord->normal)),
+    tangent(new Point3f(hitRecord->tangent)),
+    wIn(new Point3f(hitRecord->wIn)),
+    material(hitRecord->material),
+    i(hitRecord->i),
+    j(hitRecord->j)
+{
+  this->isNull = !hitRecord->isValid();
 }
 
 HitRecord::HitRecord(
   Point3f* position,
   Material* material
 ):
+  t(0),
   position(position),
   normal(new Point3f()),
   tangent(new Point3f()),

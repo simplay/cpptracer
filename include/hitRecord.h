@@ -1,3 +1,4 @@
+#include <iostream>
 #include "math/point3f.h"
 
 // forward declaration:
@@ -50,6 +51,8 @@ class HitRecord {
     ~HitRecord();
     HitRecord();
 
+    HitRecord(HitRecord*);
+
     HitRecord(
       float t,
       Point3f* position,
@@ -80,6 +83,14 @@ class HitRecord {
     // HitRecord objects are marked as invalid return true
     // Used to avoid null-checks
     bool isValid();
+
+    void log() {
+      std::cout << t << std::endl;
+      position->log();
+      normal->log();
+      tangent->log();
+      wIn->log();
+    }
 };
 
 #endif

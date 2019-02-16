@@ -12,8 +12,9 @@ HitRecord* IntersectableList::intersect(Ray* ray) {
 
   HitRecord* hitRecord = new HitRecord();
   for(auto const& intersectable: *container) {
-    auto currentHitRecord = intersectable->intersect(ray);
+    HitRecord* currentHitRecord = intersectable->intersect(ray);
     if (!currentHitRecord->isValid()) {
+      delete currentHitRecord;
       continue;
     }
 
@@ -21,9 +22,12 @@ HitRecord* IntersectableList::intersect(Ray* ray) {
     float currentT = currentHitRecord->t;
     if (currentT < minT && currentT > eps) {
       minT = currentT;
-      hitRecord = currentHitRecord;
+      delete hitRecord;
+      hitRecord = new HitRecord(currentHitRecord);
     }
+    delete currentHitRecord;
   }
+
   return hitRecord;
 }
 void IntersectableList::put(Intersectable* intersectable) {

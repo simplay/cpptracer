@@ -91,7 +91,7 @@ HitRecord* Sphere::intersect(Ray* ray) {
       t,
       hitPosition,
       hitNormal,
-      NULL,
+      new Point3f(),
       wIn,
       material,
       this,
