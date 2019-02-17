@@ -6,6 +6,7 @@
 #include "exampleConfig.h"
 #include <iostream>
 #include <thread>
+#include <fstream>
 #include "renderer.h"
 #include "cameraTest.h"
 #include "blinnTest.h"
@@ -15,6 +16,37 @@
 #include "refractiveScene.h"
 
 using namespace std;
+
+struct MeshData {
+  string type;
+  float x;
+  float y;
+  float z;
+};
+
+vector<MeshData> readInput(const char* filename) {
+  vector<MeshData> mesh;
+  ifstream file(filename);
+  string line;
+  while (getline(file, line)) {
+    MeshData it;
+    switch(line.c_str()[0]) {
+      case 'v':
+        sscanf(line.c_str(), "v %f %f %f", &it.x, &it.y, &it.z);
+        it.type = "v";
+        mesh.push_back(it);
+        break;
+      case 'f':
+        sscanf(line.c_str(), "f %f %f %f", &it.x, &it.y, &it.z);
+        it.type = "f";
+        mesh.push_back(it);
+        break;
+      default:
+        std::cout << "Unknown obj type: " << line << std::endl;
+    }
+  }
+  return mesh;
+}
 
 int main(int argc, char *argv[]) {
     cout << "C++ Raytracer v"
@@ -76,6 +108,9 @@ int main(int argc, char *argv[]) {
         scene = new CameraTest(width, height);
     };
     scene->setup();
+
+    vector<MeshData> mesh = readInput("../meshes/teapot.obj");
+    std::cout << "Nr. of lines extracted: " << mesh.size() << std::endl;
 
     Renderer renderer(scene);
     renderer.render(threadCount, spp);
