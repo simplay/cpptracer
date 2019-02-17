@@ -47,6 +47,7 @@ void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* 
 
     delete samples;
   }
+  delete renderTask;
 }
 
 // Spawns a given number of threads that render the given scene in parallel.

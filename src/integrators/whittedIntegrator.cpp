@@ -47,10 +47,11 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
   Point3f oppositeLightDir(lightDir);
   oppositeLightDir.negate();
 
-  Spectrum lightEmission(lightHit->material->evaluateEmission(lightHit, &oppositeLightDir));
+  Spectrum* lightEmission = lightHit->material->evaluateEmission(lightHit, &oppositeLightDir);
   delete lightHit;
 
-  contribution->mult(&lightEmission);
+  contribution->mult(lightEmission);
+  delete lightEmission;
 
   float angle = hitRecord->normal->dot(&lightDir);
   float cosTheta = 0 > angle ? 0 : angle;
