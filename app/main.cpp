@@ -6,7 +6,6 @@
 #include "exampleConfig.h"
 #include <iostream>
 #include <thread>
-#include <fstream>
 #include "renderer.h"
 #include "cameraTest.h"
 #include "blinnTest.h"
@@ -15,36 +14,56 @@
 #include "reflectionTest.h"
 #include "refractiveScene.h"
 
+
+#include <fstream>
+
+
 using namespace std;
 
 struct MeshData {
-  string type;
-  float x;
-  float y;
-  float z;
+  vector<Point3f> vertices;
+  vector<Point3f> normals;
+  vector<Point3f> faces;
 };
 
-vector<MeshData> readInput(const char* filename) {
-  vector<MeshData> mesh;
+MeshData readInput(const char* filename) {
+  MeshData mesh;
   ifstream file(filename);
   string line;
+
+  vector<Point3f> vertices;
+  vector<Point3f> normals;
+  vector<Point3f> faces;
+
+  MeshData it;
   while (getline(file, line)) {
-    MeshData it;
+    float x, y, z;
+		float u, v, w;
+    string token = line.c_str();
+    // std::cout << token[0] << std::endl;
     switch(line.c_str()[0]) {
       case 'v':
-        sscanf(line.c_str(), "v %f %f %f", &it.x, &it.y, &it.z);
-        it.type = "v";
-        mesh.push_back(it);
-        break;
+				if (token[1] == 'n') {
+					sscanf(line.c_str(), "n %f %f %f", &x, &y, &z);
+					normals.push_back(new Point3f(x, y, z));
+				} else {
+					sscanf(line.c_str(), "v %f %f %f", &x, &y, &z);
+					vertices.push_back(new Point3f(x, y, z));
+				}
+				break;
       case 'f':
-        sscanf(line.c_str(), "f %f %f %f", &it.x, &it.y, &it.z);
-        it.type = "f";
-        mesh.push_back(it);
+        sscanf(line.c_str(), "f %f//%f %f//%f %f//%f", &x, &u, &y, &v, &z, &w);
+				auto face = new Point3f(x, y, z);
+				face->log();
+        faces.push_back(face);
         break;
-      default:
-        std::cout << "Unknown obj type: " << line << std::endl;
     }
   }
+
+  mesh.vertices = vertices;
+  mesh.normals = normals;
+  mesh.faces = faces;
+
   return mesh;
 }
 
@@ -109,8 +128,10 @@ int main(int argc, char *argv[]) {
     };
     scene->setup();
 
-    vector<MeshData> mesh = readInput("../meshes/teapot.obj");
-    std::cout << "Nr. of lines extracted: " << mesh.size() << std::endl;
+    MeshData mesh = readInput("../meshes/teapot.obj");
+    std::cout << "Nr. of vertices extracted: " << mesh.vertices.size() << std::endl;
+    std::cout << "Nr. of normals extracted: " << mesh.normals.size() << std::endl;
+    std::cout << "Nr. of faces extracted: " << mesh.faces.size() << std::endl;
 
     Renderer renderer(scene);
     renderer.render(threadCount, spp);
