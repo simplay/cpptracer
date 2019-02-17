@@ -31,7 +31,6 @@ MeshData ObjReader::read() {
       case 'f':
         sscanf(line.c_str(), "f %f//%f %f//%f %f//%f", &x, &u, &y, &v, &z, &w);
         auto face = new Point3f(x, y, z);
-        face->log();
         faces.push_back(face);
         break;
     }
