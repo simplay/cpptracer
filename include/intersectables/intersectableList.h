@@ -6,6 +6,7 @@
 class IntersectableList : public Intersectable {
   private:
     std::vector<Intersectable*>* container;
+    const float EPSILON = 0.00001;
 
   public:
     IntersectableList();

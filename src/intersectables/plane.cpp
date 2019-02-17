@@ -26,12 +26,10 @@ Plane::Plane(Material* material, Point3f* normal, float distance)
  *
  */
 HitRecord* Plane::intersect(Ray* ray) {
-  float epsilon = 0.000001;
-
   // incident angle: angle between the ray direction and the plane normal
   auto cosTheta = normal->dot(ray->direction);
 
-  if (std::abs(cosTheta) <= epsilon) {
+  if (std::abs(cosTheta) <= EPSILON) {
     return new HitRecord();
   }
 

@@ -7,11 +7,9 @@ IntersectableList::IntersectableList() {
 }
 
 HitRecord* IntersectableList::intersect(Ray* ray) {
-  float eps = 0.00001;
   float minT = std::numeric_limits<float>::max();
-
-  HitRecord* hitRecord = new HitRecord();
-  for(auto const& intersectable: *container) {
+  auto hitRecord = new HitRecord();
+  for (auto const& intersectable: *container) {
     HitRecord* currentHitRecord = intersectable->intersect(ray);
     if (!currentHitRecord->isValid()) {
       delete currentHitRecord;
@@ -20,7 +18,7 @@ HitRecord* IntersectableList::intersect(Ray* ray) {
 
     // find closest hitRecord
     float currentT = currentHitRecord->t;
-    if (currentT < minT && currentT > eps) {
+    if (currentT < minT && currentT > EPSILON) {
       minT = currentT;
       delete hitRecord;
       hitRecord = new HitRecord(currentHitRecord);

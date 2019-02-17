@@ -12,6 +12,8 @@ class Material;
 // distance is along the direction that the normal points (meaning that the
 // sign of distance matters)
 class Plane : public Intersectable {
+  const float EPSILON = 0.000001;
+
   public:
     Material* material;
 
