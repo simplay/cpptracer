@@ -77,8 +77,8 @@ int main(int argc, char *argv[]) {
     };
     scene->setup();
 
-    Renderer* renderer = new Renderer(scene);
-    renderer->render(threadCount, spp);
+    Renderer renderer(scene);
+    renderer.render(threadCount, spp);
 
     return 0;
 }

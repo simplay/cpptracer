@@ -11,6 +11,7 @@ bool WhittedIntegrator::isOccluded(Point3f* hitPosition, Point3f* lightDir, floa
 
   HitRecord* shadowHit = scene->intersectableList->intersect(&shadowRay);
   if (!shadowHit->isValid()) {
+    delete shadowRay.origin;
     delete shadowHit;
     return false;
   }
@@ -19,6 +20,7 @@ bool WhittedIntegrator::isOccluded(Point3f* hitPosition, Point3f* lightDir, floa
   dist_shad_hit_view_hit2.sub(hitPosition);
   bool hasShadowHit = shadowHit->material->castsShadows() && (dist_shad_hit_view_hit2.dot() < eps);
   delete shadowHit;
+  delete shadowRay.origin;
 
   return hasShadowHit;
 }
@@ -84,6 +86,7 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
       Ray reflectedRay(new Point3f(hitRecord->position), sample->w, ray->depth + 1);
       Spectrum* spec = integrate(&reflectedRay);
       reflection.mult(spec);
+      delete reflectedRay.origin;
       delete spec;
     }
     delete sample;
@@ -98,6 +101,7 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
       Spectrum* spec = integrate(&refractedRay);
       refraction.mult(spec);
 
+      delete refractedRay.origin;
       delete sample;
       delete spec;
     }
