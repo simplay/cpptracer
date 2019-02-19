@@ -28,6 +28,8 @@ HitRecord* Triangle::intersect(Ray* ray) {
   Point3f* ao = new Point3f(a);
   ao->sub(ray->origin);
 
+  // Interpret a triangle with an infinite plane with constraints (given by
+  // alpha and beta)
   Matrix3f m(
     ab->x, ac->x, ray->direction->x,
     ab->y, ac->y, ray->direction->y,

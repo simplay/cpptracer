@@ -14,6 +14,7 @@ MeshTriangle::MeshTriangle(
     na(na), nb(nb), nc(nc) {}
 
 
+// weighted average of provided vertex normals
 Point3f* MeshTriangle::computeNormal(float alpha, float beta) {
   Point3f nx(na);
   nx.scale(1.0 - alpha - beta);
