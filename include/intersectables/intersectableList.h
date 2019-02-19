@@ -10,7 +10,7 @@ class IntersectableList : public Intersectable {
 
   public:
     IntersectableList();
-    virtual HitRecord* intersect(Ray*);
+    HitRecord* intersect(Ray*);
     void put(Intersectable*);
 };
 #endif

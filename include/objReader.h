@@ -7,9 +7,9 @@
 #define OBJ_READER_H
 
 struct MeshData {
-  std::vector<Point3f> vertices;
-  std::vector<Point3f> normals;
-  std::vector<Point3f> faces;
+  std::vector<Point3f*> vertices;
+  std::vector<Point3f*> normals;
+  std::vector<Point3f*> faces;
   void log() {
     std::cout << "Vertices extracted: " << vertices.size() << std::endl;
     std::cout << "Normals extracted: " << normals.size() << std::endl;

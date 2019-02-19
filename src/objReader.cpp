@@ -9,9 +9,9 @@ MeshData ObjReader::read() {
   std::ifstream file(filepath);
   std::string line;
 
-  std::vector<Point3f> vertices;
-  std::vector<Point3f> normals;
-  std::vector<Point3f> faces;
+  std::vector<Point3f*> vertices;
+  std::vector<Point3f*> normals;
+  std::vector<Point3f*> faces;
 
   MeshData it;
   while (getline(file, line)) {

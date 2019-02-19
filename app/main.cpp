@@ -13,7 +13,6 @@
 #include "triangleTest.h"
 #include "reflectionTest.h"
 #include "refractiveScene.h"
-#include "objReader.h"
 
 using namespace std;
 
@@ -77,9 +76,6 @@ int main(int argc, char *argv[]) {
         scene = new CameraTest(width, height);
     };
     scene->setup();
-
-    MeshData mesh = ObjReader("../meshes/teapot.obj").read();
-    mesh.log();
 
     Renderer renderer(scene);
     renderer.render(threadCount, spp);
