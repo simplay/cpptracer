@@ -42,6 +42,7 @@ HitRecord* Triangle::intersect(Ray* ray) {
 
   delete ao;
 
+  // matrix vector multiplication: A * params = y
   Point3f* params = invM->mult(&y);
   delete invM;
 
