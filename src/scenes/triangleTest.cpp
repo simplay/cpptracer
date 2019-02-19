@@ -1,5 +1,6 @@
 #include "triangleTest.h"
 #include "../intersectables/triangle.h"
+#include "../intersectables/meshTriangle.h"
 #include "../materials/diffuse.h"
 #include "../integrators/debugIntegrator.h"
 

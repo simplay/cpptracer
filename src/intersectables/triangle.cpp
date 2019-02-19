@@ -5,7 +5,7 @@
 Triangle::Triangle(Material* material, Point3f* a, Point3f* b, Point3f* c)
   : material(material), a(a), b(b), c(c) {}
 
-Point3f* Triangle::computeNormal() {
+Point3f* Triangle::computeNormal(float, float) {
   Point3f ba(b);
   ba.sub(a);
 
@@ -64,7 +64,6 @@ HitRecord* Triangle::intersect(Ray* ray) {
   }
 
   float t = params->z;
-  delete params;
 
   Point3f* intersectionPosition = new Point3f(ray->direction);
   intersectionPosition->scale(t);
@@ -74,7 +73,8 @@ HitRecord* Triangle::intersect(Ray* ray) {
   wIn->negate();
   wIn->normalize();
 
-  auto normal = computeNormal();
+  auto normal = computeNormal(params->x, params->y);
+  delete params;
   return new HitRecord(
     t,
     intersectionPosition,

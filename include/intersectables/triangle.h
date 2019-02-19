@@ -20,7 +20,7 @@ class Triangle : public Intersectable {
     Point3f* b;
     Point3f* c;
 
-    virtual Point3f* computeNormal();
+    virtual Point3f* computeNormal(float alpha, float beta);
 
     Triangle(Material*, Point3f*, Point3f*, Point3f*);
     // plane-ray intersection ray: p(t) = orig + t * dir
@@ -29,7 +29,7 @@ class Triangle : public Intersectable {
     // f(p) = dot(n, (p - a)) intersection:
     // f(p(t)) = 0. Solve for t.  Plug t_i into
     // p(t_i) will give intersection point
-    virtual HitRecord* intersect(Ray* ray);
+    HitRecord* intersect(Ray* ray);
 };
 
 #endif
