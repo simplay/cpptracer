@@ -24,7 +24,6 @@ MeshData ObjReader::read() {
         if (token[1] == 'n') {
           sscanf(line.c_str(), "vn %f %f %f", &x, &y, &z);
           auto n = new Point3f(x, y, z);
-          n->log();
           normals.push_back(n);
         } else {
           sscanf(line.c_str(), "v %f %f %f", &x, &y, &z);
