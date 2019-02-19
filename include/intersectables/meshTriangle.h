@@ -8,6 +8,7 @@
 // sign of distance matters)
 class MeshTriangle : public Triangle {
   public:
+    int faceIdx;
 
     // vertex normals
     Point3f* na;
@@ -15,7 +16,19 @@ class MeshTriangle : public Triangle {
     Point3f* nc;
 
     Point3f* computeNormal(float alpha, float beta);
-    MeshTriangle(Material*, Point3f*, Point3f*, Point3f*, Point3f*, Point3f*, Point3f*);
+    MeshTriangle(Material*, int faceIdx, Point3f*, Point3f*, Point3f*, Point3f*, Point3f*, Point3f*);
+
+    void log() {
+      std::cout << "face-index: " << faceIdx << std::endl;
+      std::cout << "vertices: " <<  std::endl;
+      a->log();
+      b->log();
+      c->log();
+      std::cout << "normals: " << std::endl;
+      na->log();
+      nb->log();
+      nc->log();
+    }
 };
 
 #endif

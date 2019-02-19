@@ -3,6 +3,7 @@
 
 MeshTriangle::MeshTriangle(
   Material* material,
+  int faceIdx,
   Point3f* a,
   Point3f* b,
   Point3f* c,
@@ -11,6 +12,7 @@ MeshTriangle::MeshTriangle(
   Point3f* nc
 )
   : Triangle(material, a, b, c),
+    faceIdx(faceIdx),
     na(na), nb(nb), nc(nc) {}
 
 

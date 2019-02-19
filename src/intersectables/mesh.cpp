@@ -8,22 +8,25 @@ Mesh::Mesh(Material* material)
     MeshData mesh = ObjReader("../meshes/teapot.obj").read();
     mesh.log();
 
+    int faceIdx = 0;
     for (auto face : mesh.faces) {
-      auto vx = mesh.vertices.at(face->x);
-      auto vy = mesh.vertices.at(face->y);
-      auto vz = mesh.vertices.at(face->z);
+      auto vx = mesh.vertices.at(face->x - 1);
+      auto vy = mesh.vertices.at(face->y - 1);
+      auto vz = mesh.vertices.at(face->z - 1);
 
-      auto nx = mesh.normals.at(face->x);
-      auto ny = mesh.normals.at(face->y);
-      auto nz = mesh.normals.at(face->z);
+      auto nx = mesh.normals.at(face->x - 1);
+      auto ny = mesh.normals.at(face->y - 1);
+      auto nz = mesh.normals.at(face->z - 1);
 
-      this->put(
-        new MeshTriangle(
-          material,
-          vx, vy, vz,
-          nx, ny, nz
-        )
+      auto mesh = new MeshTriangle(
+        material,
+        faceIdx,
+        vx, vy, vz,
+        nx, ny, nz
       );
+      mesh->log();
+      this->put(mesh);
+      faceIdx++;
     }
 }
 
