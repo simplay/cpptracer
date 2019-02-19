@@ -12,6 +12,7 @@ MeshData ObjReader::read() {
   std::vector<Point3f*> vertices;
   std::vector<Point3f*> normals;
   std::vector<Point3f*> faces;
+  std::vector<Point3f*> normalFaces;
 
   MeshData it;
   while (getline(file, line)) {
@@ -22,16 +23,22 @@ MeshData ObjReader::read() {
       case 'v':
         if (token[1] == 'n') {
           sscanf(line.c_str(), "vn %f %f %f", &x, &y, &z);
-          normals.push_back(new Point3f(x, y, z));
+          auto n = new Point3f(x, y, z);
+          n->log();
+          normals.push_back(n);
         } else {
           sscanf(line.c_str(), "v %f %f %f", &x, &y, &z);
-          vertices.push_back(new Point3f(x, y, z));
+          auto v = new Point3f(x, y, z);
+          vertices.push_back(v);
         }
         break;
       case 'f':
         sscanf(line.c_str(), "f %f//%f %f//%f %f//%f", &x, &u, &y, &v, &z, &w);
         auto face = new Point3f(x, y, z);
+        auto normalFace = new Point3f(u, v, w);
+
         faces.push_back(face);
+        normalFaces.push_back(normalFace);
         break;
     }
   }
@@ -39,6 +46,7 @@ MeshData ObjReader::read() {
   mesh.vertices = vertices;
   mesh.normals = normals;
   mesh.faces = faces;
+  mesh.normalFaces = normalFaces;
 
   return mesh;
 }

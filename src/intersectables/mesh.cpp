@@ -14,18 +14,22 @@ Mesh::Mesh(Material* material)
       auto vy = mesh.vertices.at(face->y - 1);
       auto vz = mesh.vertices.at(face->z - 1);
 
-      auto nx = mesh.normals.at(face->x - 1);
-      auto ny = mesh.normals.at(face->y - 1);
-      auto nz = mesh.normals.at(face->z - 1);
+      // auto nx = mesh.normals.at(face->x - 1);
+      // auto ny = mesh.normals.at(face->y - 1);
+      // auto nz = mesh.normals.at(face->z - 1);
 
-      auto mesh = new MeshTriangle(
+      auto nf = mesh.normalFaces.at(faceIdx);
+      auto nx = mesh.normals.at(nf->x - 1);
+      auto ny = mesh.normals.at(nf->y - 1);
+      auto nz = mesh.normals.at(nf->z - 1);
+
+      auto triangle = new MeshTriangle(
         material,
         faceIdx,
         vx, vy, vz,
         nx, ny, nz
       );
-      mesh->log();
-      this->put(mesh);
+      this->put(triangle);
       faceIdx++;
     }
 }

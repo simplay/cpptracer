@@ -77,7 +77,8 @@ HitRecord* Triangle::intersect(Ray* ray) {
 
   auto normal = computeNormal(params->x, params->y);
   delete params;
-  return new HitRecord(
+
+  auto hit = new HitRecord(
     t,
     intersectionPosition,
     normal,
@@ -86,4 +87,5 @@ HitRecord* Triangle::intersect(Ray* ray) {
     material,
     this
   );
+  return hit;
 }
