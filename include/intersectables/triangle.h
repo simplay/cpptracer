@@ -16,13 +16,11 @@ class Triangle : public Intersectable {
     Material* material;
 
     // normal of the plane
-    Point3f* normal;
-
-    // normal of the plane
     Point3f* a;
     Point3f* b;
     Point3f* c;
 
+    virtual Point3f* computeNormal();
 
     Triangle(Material*, Point3f*, Point3f*, Point3f*);
     // plane-ray intersection ray: p(t) = orig + t * dir
