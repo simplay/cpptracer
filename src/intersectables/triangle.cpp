@@ -49,18 +49,19 @@ HitRecord* Triangle::intersect(Ray* ray) {
   delete invM;
 
   // Perform conservative inside-outside check
-  if (params->x < 0 || params->x > 1) {
+  if (params->x <= 0 || params->x >= 1) {
     delete params;
     return new HitRecord();
   }
 
-  if (params->y < 0 || params->y > 1) {
+  if (params->y <= 0 || params->y >= 1) {
     delete params;
     return new HitRecord();
   }
 
   // note that: alpha + beta + gamma = 1
-  if (params->x + params->y > 1) {
+  auto sum = params->x + params->y;
+  if (sum >= 1.0 || sum <= 0.0) {
     delete params;
     return new HitRecord();
   }
@@ -72,10 +73,12 @@ HitRecord* Triangle::intersect(Ray* ray) {
   intersectionPosition->add(ray->origin);
 
   Point3f* wIn = new Point3f(ray->direction);
-  wIn->negate();
   wIn->normalize();
+  wIn->negate();
 
   auto normal = computeNormal(params->x, params->y);
+
+  // normal->log();
   delete params;
 
   auto hit = new HitRecord(
