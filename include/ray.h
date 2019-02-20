@@ -8,6 +8,9 @@
  * Float valued point with 3 coordinates.
  */
 class Ray {
+  private:
+    float EPSILON = 0.00001;
+
   public:
     Point3f* origin;
     Point3f* direction;
