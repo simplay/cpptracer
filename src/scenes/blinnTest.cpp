@@ -10,7 +10,7 @@ BlinnTest::BlinnTest(int width, int height)
   : Scene(width, height) {}
 
 void BlinnTest::buildCamera() {
-  Point3f* eye = new Point3f(0.0, 0.0, 15.0);
+  Point3f* eye = new Point3f(0.0, 0.0, 3.0);
   Point3f* lookAt = new Point3f(0.0, 0.0, 0.0);
   Point3f* up = new Point3f(0.0, 1.0, 0.0);
   float fov = 60.0;

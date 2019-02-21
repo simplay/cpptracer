@@ -18,7 +18,7 @@ HitRecord* IntersectableList::intersect(Ray* ray) {
 
     // find closest hitRecord
     float currentT = currentHitRecord->t;
-    if (currentT < minT && currentT > EPSILON) {
+    if (currentT < minT && currentT > 0.0) {
       minT = currentT;
       delete hitRecord;
       hitRecord = new HitRecord(currentHitRecord);
