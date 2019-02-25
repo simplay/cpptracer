@@ -1,6 +1,7 @@
 #include "mesh.h"
 #include "objReader.h"
 #include "meshTriangle.h"
+#include "triangle.h"
 
 Mesh::Mesh(Material* material)
   : material(material) {
@@ -10,25 +11,38 @@ Mesh::Mesh(Material* material)
 
     int faceIdx = 0;
     for (auto face : mesh.faces) {
-      auto vx = mesh.vertices.at(face->x - 1);
-      auto vy = mesh.vertices.at(face->y - 1);
-      auto vz = mesh.vertices.at(face->z - 1);
+      int idX = face->x;
+      int idY = face->y;
+      int idZ = face->z;
+
+      auto vx = mesh.vertices.at(idX - 1);
+      auto vy = mesh.vertices.at(idY - 1);
+      auto vz = mesh.vertices.at(idZ - 1);
 
       // auto nx = mesh.normals.at(face->x - 1);
       // auto ny = mesh.normals.at(face->y - 1);
       // auto nz = mesh.normals.at(face->z - 1);
 
       auto nf = mesh.normalFaces.at(faceIdx);
-      auto nx = mesh.normals.at(nf->x - 1);
-      auto ny = mesh.normals.at(nf->y - 1);
-      auto nz = mesh.normals.at(nf->z - 1);
+      int idNx = nf->x;
+      int idNy = nf->y;
+      int idNz = nf->z;
+
+      auto nx = mesh.normals.at(idNx - 1);
+      auto ny = mesh.normals.at(idNy - 1);
+      auto nz = mesh.normals.at(idNz - 1);
 
       auto triangle = new MeshTriangle(
-        material,
         faceIdx,
+        material,
         vx, vy, vz,
         nx, ny, nz
       );
+      // auto triangle = new Triangle(
+      //     faceIdx,
+      //     material,
+      //     vx, vy, vz
+      //     );
       this->put(triangle);
       faceIdx++;
     }

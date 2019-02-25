@@ -18,6 +18,7 @@ void TriangleTest::buildIntersectables() {
   IntersectableList* intersectableList = new IntersectableList();
   intersectableList->put(
     new Triangle(
+      1,
       material,
       new Point3f(0.0, 0.0, 0.0),
       new Point3f(1.0, 0.0, 0.0),

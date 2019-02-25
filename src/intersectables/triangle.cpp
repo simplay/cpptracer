@@ -2,8 +2,8 @@
 #include "triangle.h"
 #include "matrix3f.h"
 
-Triangle::Triangle(Material* material, Point3f* a, Point3f* b, Point3f* c)
-  : material(material), a(a), b(b), c(c) {}
+Triangle::Triangle(int faceId, Material* material, Point3f* a, Point3f* b, Point3f* c)
+  : faceId(faceId), material(material), a(a), b(b), c(c) {}
 
 Point3f* Triangle::computeNormal(float, float) {
   Point3f ba(b);
@@ -67,6 +67,7 @@ HitRecord* Triangle::intersect(Ray* ray) {
   }
 
   float t = params->z;
+  // std::cout << t << std::endl;
 
   Point3f* intersectionPosition = new Point3f(ray->direction);
   intersectionPosition->scale(t);

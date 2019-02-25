@@ -2,8 +2,8 @@
 #include "../math/point3f.h"
 
 MeshTriangle::MeshTriangle(
+  int faceId,
   Material* material,
-  int faceIdx,
   Point3f* a,
   Point3f* b,
   Point3f* c,
@@ -11,8 +11,7 @@ MeshTriangle::MeshTriangle(
   Point3f* nb,
   Point3f* nc
 )
-  : Triangle(material, a, b, c),
-    faceIdx(faceIdx),
+  : Triangle(faceId, material, a, b, c),
     na(na), nb(nb), nc(nc) {}
 
 
