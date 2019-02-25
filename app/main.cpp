@@ -13,6 +13,7 @@
 #include "triangleTest.h"
 #include "reflectionTest.h"
 #include "refractiveScene.h"
+#include "meshTest.h"
 
 using namespace std;
 
@@ -71,6 +72,9 @@ int main(int argc, char *argv[]) {
         break;
       case 6:
         scene = new RefractiveTest(width, height);
+        break;
+      case 7:
+        scene = new MeshTest(width, height);
         break;
       default:
         scene = new CameraTest(width, height);

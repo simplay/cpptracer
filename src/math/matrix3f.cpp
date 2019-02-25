@@ -35,13 +35,14 @@ void Matrix3f::scale(float f) {
 }
 
 Matrix3f* Matrix3f::inv() {
-  // adjugate matrix
+  // adjugate matrix: see http://mathworld.wolfram.com/MatrixInverse.html
   Matrix3f* mat = new Matrix3f(
-      m11 * m22 - m12 * m21, m02 * m21 - m01 * m22, m01 * m12 - m02 * m11,
-      m12 * m20 - m10 * m22, m00 * m22 - m02 * m20, m02 * m10 - m00 * m12,
-      m10 * m21 - m11 * m20, m01 * m20 - m00 * m21, m00 * m11 - m01 * m10
+    m11 * m22 - m12 * m21, m02 * m21 - m01 * m22, m01 * m12 - m02 * m11,
+    m12 * m20 - m10 * m22, m00 * m22 - m02 * m20, m02 * m10 - m00 * m12,
+    m10 * m21 - m11 * m20, m01 * m20 - m00 * m21, m00 * m11 - m01 * m10
   );
-  mat->scale(det());
+
+  mat->scale(1.0 / det());
 
   return mat;
 }

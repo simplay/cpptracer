@@ -2,8 +2,21 @@
 #include "triangle.h"
 #include "matrix3f.h"
 
-Triangle::Triangle(Material* material, Point3f* a, Point3f* b, Point3f* c)
-  : material(material), a(a), b(b), c(c) {}
+Triangle::Triangle(int faceId, Material* material, Point3f* a, Point3f* b, Point3f* c)
+  : faceId(faceId), material(material), a(a), b(b), c(c) {}
+
+Point3f* Triangle::computeNormal(float, float) {
+  Point3f ba(b);
+  ba.sub(a);
+
+  Point3f ca(c);
+  ca.sub(a);
+
+  auto normal = ba.cross(&ca);
+  normal->normalize();
+
+  return normal;
+}
 
 HitRecord* Triangle::intersect(Ray* ray) {
   Point3f* ab = new Point3f(a);
@@ -15,6 +28,8 @@ HitRecord* Triangle::intersect(Ray* ray) {
   Point3f* ao = new Point3f(a);
   ao->sub(ray->origin);
 
+  // Interpret a triangle with an infinite plane with constraints (given by
+  // alpha and beta)
   Matrix3f m(
     ab->x, ac->x, ray->direction->x,
     ab->y, ac->y, ray->direction->y,
@@ -25,46 +40,49 @@ HitRecord* Triangle::intersect(Ray* ray) {
   delete ac;
 
   Matrix3f* invM = m.inv();
-  Point3f b(ao->x, ao->y, ao->z);
+  Point3f y(ao->x, ao->y, ao->z);
 
   delete ao;
 
-  Point3f* params = invM->mult(&b);
+  // matrix vector multiplication: A * params = y
+  Point3f* params = invM->mult(&y);
+  delete invM;
 
   // Perform conservative inside-outside check
-  if (params->x < 0 || params->x > 1) {
+  if (params->x <= 0 || params->x >= 1) {
+    delete params;
     return new HitRecord();
   }
 
-  if (params->y < 0 || params->y > 1) {
+  if (params->y <= 0 || params->y >= 1) {
+    delete params;
     return new HitRecord();
   }
 
   // note that: alpha + beta + gamma = 1
-  if (params->x + params->y > 1) {
+  auto sum = params->x + params->y;
+  if (sum >= 1.0 || sum <= 0.0) {
+    delete params;
     return new HitRecord();
   }
 
   float t = params->z;
+  // std::cout << t << std::endl;
+
   Point3f* intersectionPosition = new Point3f(ray->direction);
   intersectionPosition->scale(t);
   intersectionPosition->add(ray->origin);
 
   Point3f* wIn = new Point3f(ray->direction);
-  wIn->negate();
   wIn->normalize();
+  wIn->negate();
 
-  // outward pointing normal
-  Point3f ba(b);
-  ba.sub(a);
+  auto normal = computeNormal(params->x, params->y);
 
-  Point3f ca(c);
-  ca.sub(a);
+  // normal->log();
+  delete params;
 
-  normal = (&ba)->cross(&ca);
-  normal->normalize();
-
-  return new HitRecord(
+  auto hit = new HitRecord(
     t,
     intersectionPosition,
     normal,
@@ -73,4 +91,5 @@ HitRecord* Triangle::intersect(Ray* ray) {
     material,
     this
   );
+  return hit;
 }

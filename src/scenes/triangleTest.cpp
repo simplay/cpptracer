@@ -1,5 +1,6 @@
 #include "triangleTest.h"
 #include "../intersectables/triangle.h"
+#include "../intersectables/meshTriangle.h"
 #include "../materials/diffuse.h"
 #include "../integrators/debugIntegrator.h"
 
@@ -17,6 +18,7 @@ void TriangleTest::buildIntersectables() {
   IntersectableList* intersectableList = new IntersectableList();
   intersectableList->put(
     new Triangle(
+      1,
       material,
       new Point3f(0.0, 0.0, 0.0),
       new Point3f(1.0, 0.0, 0.0),

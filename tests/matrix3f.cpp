@@ -46,6 +46,54 @@ TEST(Matrix3f, inv) {
   ASSERT_EQ(0, m->m22);
 }
 
+// Data was produced via octave
+//
+// m =
+//
+// 0.01022   0.13142  -0.21362
+// -0.05683  -0.05683   0.42147
+// 0.00000   0.45682  -1.00000
+//
+// octave:2> inverse(m)
+// ans =
+//
+// 41.0024  -10.2215  -13.0657
+// 17.1683    3.0884   -2.3658
+// 7.8429    1.4109   -2.0808
+TEST(Matrix3f, inv2) {
+
+  Matrix3f* mat = new Matrix3f(
+    0.01022, 0.13142, -0.21362,
+    -0.05683, -0.05683, 0.42147,
+    0.00000, 0.45682, -1.00000);
+
+  Matrix3f* m = mat->inv();
+  // std::cout << m->m00 << std::endl;
+  // std::cout << m->m01 << std::endl;
+  // std::cout << m->m02 << std::endl;
+  //
+  // std::cout << m->m10 << std::endl;
+  // std::cout << m->m11 << std::endl;
+  // std::cout << m->m12 << std::endl;
+  //
+  // std::cout << m->m20 << std::endl;
+  // std::cout << m->m21 << std::endl;
+  // std::cout << m->m22 << std::endl;
+
+  float eps = 1e-2;
+  ASSERT_NEAR(41.0024, m->m00, eps);
+  ASSERT_NEAR(-10.2215, m->m01, eps);
+  ASSERT_NEAR(-13.0657, m->m02, eps);
+
+  ASSERT_NEAR(17.1683, m->m10, eps);
+  ASSERT_NEAR(3.0884, m->m11, eps);
+  ASSERT_NEAR(-2.3658, m->m12, eps);
+
+  ASSERT_NEAR(7.8429, m->m20, eps);
+  ASSERT_NEAR(1.4109, m->m21, eps);
+  ASSERT_NEAR(-2.0808, m->m22, eps);
+}
+
 TEST(Matrix3f, scale) {
   Matrix3f* mat = new Matrix3f(
     1, 2, 3,
