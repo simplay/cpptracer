@@ -13,7 +13,7 @@ MeshTest::MeshTest(int width, int height)
   : Scene(width, height) {}
 
   void MeshTest::buildCamera() {
-    Point3f* eye = new Point3f(0.0, 0.0, 5.0);
+    Point3f* eye = new Point3f(1.0, 4.0, 6.0);
     Point3f* lookAt = new Point3f(0.0, 0.0, 0.0);
     Point3f* up = new Point3f(0.0, 1.0, 0.0);
     float fov = 60.0;

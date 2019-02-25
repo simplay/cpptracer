@@ -83,13 +83,6 @@ MeshData ObjReader::read() {
     }
   }
 
-  // move to origin
-  Point3f p(minX, minY, minZ);
-  p.log();
-  for (auto v : vertices) {
-    v->sub(&p);
-  }
-
   mesh.vertices = vertices;
   mesh.normals = normals;
   mesh.faces = faces;
