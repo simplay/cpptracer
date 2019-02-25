@@ -64,17 +64,14 @@ MeshData ObjReader::read() {
 
         float u, v, w;
         if (occurrences == 3) {
-          // std::cout << "1" << std::endl;
           sscanf(line.c_str(), "f %f//%f %f//%f %f//%f", &x, &u, &y, &v, &z, &w);
           auto face = new Point3f(x, y, z);
           auto normalFace = new Point3f(u, v, w);
           faces.push_back(face);
           normalFaces.push_back(normalFace);
         } else if (slashCount == 9) {
-          // std::cout << "2" << std::endl;
           // also defines texture coordiantes - yet not supported
         } else {
-          // std::cout << "3" << std::endl;
           sscanf(line.c_str(), "f %f %f %f", &x, &y, &z);
           auto face = new Point3f(x, y, z);
           faces.push_back(face);

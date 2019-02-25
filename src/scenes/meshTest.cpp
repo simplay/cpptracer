@@ -37,20 +37,20 @@ void MeshTest::buildIntersectables() {
   IntersectableList* intersectableList = new IntersectableList();
   Material* material = new Diffuse(new Spectrum(1.0));
   GridTexturedMaterial* grid = new GridTexturedMaterial(
-      new Spectrum(0.2f, 0.f, 0.f),
-      new Spectrum(1.f, 1.f, 1.f),
-      0.01f,
-      new Point3f(0.f, 0.f, 0.f),
-      0.125f
-      );
-  Mesh* mesh = new Mesh(material);
+    new Spectrum(0.2f, 0.f, 0.f),
+    new Spectrum(1.f, 1.f, 1.f),
+    0.01f,
+    new Point3f(0.f, 0.f, 0.f),
+    0.125f
+  );
+
+  Mesh* mesh = new Mesh(material, "../meshes/teapot.obj");
   intersectableList->put(mesh);
   intersectableList->put(new Plane(grid, new Point3f(0.0, 0.0, 1.0f), 2.15));
   this->intersectableList = intersectableList;
 }
 
 void MeshTest::buildIntegrator() {
-  // this->integrator = new DebugIntegrator(this);
   this->integrator = new WhittedIntegrator(this);
 }
 
