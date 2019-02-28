@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "point3f.h"
 
 #ifndef MATRIX3F_H
@@ -19,6 +20,11 @@ class Matrix3f {
     float det();
     void scale(float);
     Matrix3f* inv();
+
+    void log() {
+      printf("%f, %f, %f\n%f, %f, %f\n%f, %f, %f\n",
+          m00, m01, m02, m10, m11, m12, m20, m21, m22);
+    }
 };
 
 #endif

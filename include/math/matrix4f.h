@@ -22,7 +22,9 @@ class Matrix4f {
   );
 
   Vector4f* mult(Vector4f* other);
+  void scale(float f);
 
+  Matrix4f* inv();
   float det();
 
   void log() {
