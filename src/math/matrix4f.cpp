@@ -49,3 +49,21 @@ Vector4f* Matrix4f::mult(Vector4f* other) {
   );
   return v;
 }
+
+// computed via recursive definition of a determinant
+float Matrix4f::det() {
+  float r10 = m00 * m11 * m22 * m33 + m00 * m12 * m23 * m31 + m00 * m13 * m21 * m32;
+  float r11 = m00 * m13 * m22 * m31 + m00 * m12 * m21 * m33 + m00 * m11 * m23 * m32;
+
+  float r21 = m01 * m10 * m22 * m33 + m02 * m10 * m23 * m31 + m03 * m10 * m21 * m32;
+  float r22 = m03 * m10 * m22 * m31 + m02 * m10 * m21 * m33 + m01 * m10 * m23 * m32;
+
+  float r31 = m01 * m12 * m20 * m33 + m02 * m13 * m20 * m31 + m03 * m11 * m20 * m32;
+  float r32 = m03 * m12 * m20 * m31 + m02 * m11 * m20 * m33 + m01 * m13 * m20 * m32;
+
+  float r41 = m01 * m12 * m23 * m30 + m02 * m13 * m21 * m30 + m03 * m11 * m22 * m30;
+  float r42 = m03 * m12 * m21 * m30 + m02 * m11 * m23 * m30 + m01 * m13 * m22 * m30;
+
+  return r10 - r11 - r21 + r22 + r31 - r32 - r41 + r42;
+}
+

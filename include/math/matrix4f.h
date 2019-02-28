@@ -23,6 +23,8 @@ class Matrix4f {
 
   Vector4f* mult(Vector4f* other);
 
+  float det();
+
   void log() {
     printf("%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n",
         m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
