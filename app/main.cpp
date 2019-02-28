@@ -14,6 +14,7 @@
 #include "reflectionTest.h"
 #include "refractiveScene.h"
 #include "meshTest.h"
+#include "cubeTest.h"
 
 using namespace std;
 
@@ -75,6 +76,9 @@ int main(int argc, char *argv[]) {
         break;
       case 7:
         scene = new MeshTest(width, height);
+        break;
+      case 8:
+        scene = new CubeTest(width, height);
         break;
       default:
         scene = new CameraTest(width, height);

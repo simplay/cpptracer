@@ -17,8 +17,8 @@ Film::Film(int width, int height): width(width), height(height) {
 
 // store spectrum in row-first order
 void Film::addSample(float rowIdx, float colIdx, Spectrum* spectrum) {
-  int roundedRowIdx = std::round(rowIdx);
-  int roundedColIdx = std::round(colIdx);
+  int roundedRowIdx = roundl(rowIdx);
+  int roundedColIdx = roundl(colIdx);
 
   if (roundedColIdx >= width) {
     return;
