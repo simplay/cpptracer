@@ -9,5 +9,3 @@ Rectangle::Rectangle(Material* material, Point3f* normal, float distance)
 HitRecord* Rectangle::intersect(Ray* ray) {
   return new HitRecord();
 }
-
-
