@@ -44,3 +44,19 @@ Point3f* Ray::pointAt(float t) {
   hit->scaleAdd(t, origin);
   return hit;
 }
+
+Ray* Ray::transform(Matrix4f* invT) {
+  Vector4f orig(origin, 1);
+  auto transRayOrig = invT->mult(&orig);
+
+  Vector4f dir(direction, 0);
+  auto transRayDir = invT->mult(&dir);
+
+  Ray* transRay = new Ray(
+    new Point3f(transRayOrig), new Point3f(transRayDir)
+  );
+  delete transRayOrig;
+  delete transRayDir;
+
+  return transRay;
+}
