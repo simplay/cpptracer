@@ -1,10 +1,22 @@
 #include "../math/vector4f.h"
 #include "instance.h"
 
+Instance::Instance(Intersectable* intersectable)
+  : intersectable(intersectable), transformation(Matrix4f().eye()) {
+    this->invTransformation = Matrix4f().eye();
+    this->invTrasnposedTransformation = Matrix4f().eye();
+}
+
 Instance::Instance(Intersectable* intersectable, Matrix4f* transformation)
   : intersectable(intersectable), transformation(transformation) {
-    // TODO: compute inverse transformation here
-    this->invTransformation = transformation;
+    this->invTransformation = transformation->inv();
+    this->invTrasnposedTransformation = invTransformation->transposed();
+}
+
+Instance::~Instance() {
+  delete transformation;
+  delete invTransformation;
+  delete invTrasnposedTransformation;
 }
 
 HitRecord* Instance::intersect(Ray* ray) {
@@ -25,6 +37,38 @@ HitRecord* Instance::intersect(Ray* ray) {
   auto hit = intersectable->intersect(transRay);
   delete transRay;
 
-  // TODO transform hit back using transformation
-  return hit;
+  // transform back
+  Vector4f backHitPos(hit->position, 1);
+  auto hitPos = transformation->mult(&backHitPos);
+  auto hit3fPos = hitPos->toPoint3f();
+  delete hitPos;
+
+  Vector4f backHitNormal(hit->normal, 0);
+  auto hitNormal = invTrasnposedTransformation->mult(&backHitNormal);
+  auto hit3fNormal = hitNormal->toPoint3f();
+  hit3fNormal->normalize();
+  delete hitNormal;
+
+  Vector4f backHitTangent(hit->tangent, 0);
+  auto hitTangent = invTrasnposedTransformation->mult(&backHitTangent);
+  auto hit3fTangent = hitTangent->toPoint3f();
+  hit3fTangent->normalize();
+  delete hitTangent;
+
+  Vector4f backWIn(hit->wIn, 0);
+  auto hitWIn = transformation->mult(&backWIn);
+  auto hit3fWIn = hitWIn->toPoint3f();
+  hit3fWIn->normalize();
+
+  HitRecord* finalHit = new HitRecord(
+    hit->t, // TODO: transform too
+    hit3fPos,
+    hit3fNormal,
+    hit3fTangent,
+    hit3fWIn,
+    0,
+    0
+  );
+
+  return finalHit;
 }

@@ -26,18 +26,18 @@ void TriangleTest::buildIntersectables() {
     new Point3f(0.0, 1.0, 0.0)
   );
 
-  Matrix4f* mat = new Matrix4f(
-    1, 0, 0, 0,
-    0, 1, 0, 0,
+  Matrix4f* transform = new Matrix4f(
+    1, 0, 0, 1.2,
+    0, 0.8, 0, -1.2,
     0, 0, 1, 0,
     0, 0, 0, 1
   );
 
-  auto instance = new Instance(tri, mat);
+  auto instance = new Instance(tri);
+  auto transformedInstance = new Instance(tri, transform);
 
-  intersectableList->put(
-      instance
-  );
+  intersectableList->put(instance);
+  intersectableList->put(transformedInstance);
   this->intersectableList = intersectableList;
 }
 
