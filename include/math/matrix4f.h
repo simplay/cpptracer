@@ -21,11 +21,23 @@ class Matrix4f {
     float m30, float m31, float m32, float m33
   );
 
+  static Matrix4f* eye() {
+    Matrix4f* eye = new Matrix4f(
+      1, 0, 0, 0,
+      0, 1, 0, 0,
+      0, 0, 1, 0,
+      0, 0, 0, 1
+    );
+    return eye;
+  }
+
   Vector4f* mult(Vector4f* other);
   void scale(float f);
 
   Matrix4f* inv();
   float det();
+
+  Matrix4f* transposed();
 
   void log() {
     printf("%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n",

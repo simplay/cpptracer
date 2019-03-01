@@ -13,3 +13,7 @@ Vector4f::Vector4f(Point3f* p, float w)
 float Vector4f::dot(Vector4f* other) {
   return x * other->x + y * other->y + z * other->z + w * other->w;
 }
+
+Point3f* Vector4f::toPoint3f() {
+  return new Point3f(x, y, z);
+}

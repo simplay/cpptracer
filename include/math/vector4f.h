@@ -20,6 +20,8 @@ class Vector4f {
     void log() {
       printf("(%f, %f, %f, %f)\n", x, y, z, w);
     }
+
+    Point3f* toPoint3f();
 };
 
 #endif

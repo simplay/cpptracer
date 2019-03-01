@@ -90,6 +90,15 @@ float Matrix4f::det() {
   return r10 - r11 - r21 + r22 + r31 - r32 - r41 + r42;
 }
 
+Matrix4f* Matrix4f::transposed() {
+  return new Matrix4f(
+      m00, m10, m20, m30,
+      m01, m11, m21, m31,
+      m02, m12, m22, m32,
+      m03, m13, m23, m33
+  );
+}
+
 Matrix4f* Matrix4f::inv() {
   Matrix3f a00(
     m11, m12, m13,
