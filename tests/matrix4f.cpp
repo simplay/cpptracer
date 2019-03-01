@@ -113,3 +113,30 @@ TEST(Matrix4f, scale) {
   ASSERT_EQ(7.5, mat->m32);
   ASSERT_EQ(8, mat->m33);
 }
+
+TEST(Matrix4f, transposed) {
+  Matrix4f* m = new Matrix4f(
+    1, 2, 3, 4,
+    5, 6, 7, 8,
+    9, 10, 11, 12,
+    13, 14, 15, 16
+  );
+
+  auto mat = m->transposed();
+  ASSERT_EQ(1, mat->m00);
+  ASSERT_EQ(5, mat->m01);
+  ASSERT_EQ(9, mat->m02);
+  ASSERT_EQ(13, mat->m03);
+  ASSERT_EQ(2, mat->m10);
+  ASSERT_EQ(6, mat->m11);
+  ASSERT_EQ(10, mat->m12);
+  ASSERT_EQ(14, mat->m13);
+  ASSERT_EQ(3, mat->m20);
+  ASSERT_EQ(7, mat->m21);
+  ASSERT_EQ(11, mat->m22);
+  ASSERT_EQ(15, mat->m23);
+  ASSERT_EQ(4, mat->m30);
+  ASSERT_EQ(8, mat->m31);
+  ASSERT_EQ(12, mat->m32);
+  ASSERT_EQ(16, mat->m33);
+}
