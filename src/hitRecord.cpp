@@ -87,3 +87,40 @@ HitRecord::HitRecord(
 bool HitRecord::isValid() {
   return !isNull;
 }
+
+HitRecord* HitRecord::transform(Matrix4f* T, Matrix4f* invTranposedT) {
+  // transform back
+  Vector4f backHitPos(position, 1);
+  auto hitPos = T->mult(&backHitPos);
+  auto hit3fPos = hitPos->toPoint3f();
+  delete hitPos;
+
+  Vector4f backHitNormal(normal, 0);
+  auto hitNormal = invTranposedT->mult(&backHitNormal);
+  auto hit3fNormal = hitNormal->toPoint3f();
+  hit3fNormal->normalize();
+  delete hitNormal;
+
+  Vector4f backHitTangent(tangent, 0);
+  auto hitTangent = invTranposedT->mult(&backHitTangent);
+  auto hit3fTangent = hitTangent->toPoint3f();
+  hit3fTangent->normalize();
+  delete hitTangent;
+
+  Vector4f backWIn(wIn, 0);
+  auto hitWIn = T->mult(&backWIn);
+  auto hit3fWIn = hitWIn->toPoint3f();
+  hit3fWIn->normalize();
+
+  HitRecord* finalHit = new HitRecord(
+    t, // TODO: transform too
+    hit3fPos,
+    hit3fNormal,
+    hit3fTangent,
+    hit3fWIn,
+    0,
+    0
+  );
+
+  return finalHit;
+}

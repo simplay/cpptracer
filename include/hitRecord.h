@@ -1,4 +1,5 @@
 #include <iostream>
+#include "math/matrix4f.h"
 #include "math/point3f.h"
 
 // forward declaration:
@@ -83,6 +84,8 @@ class HitRecord {
     // HitRecord objects are marked as invalid return true
     // Used to avoid null-checks
     bool isValid();
+
+    HitRecord* transform(Matrix4f*, Matrix4f*);
 
     void log() {
       std::cout << t << std::endl;

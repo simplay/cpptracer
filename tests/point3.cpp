@@ -114,10 +114,6 @@ TEST(Point3f, reflected) {
   // r = (1, 2, 4) - (0, 0, 8) = (1, 2, -4)
   // invReflected = -reflected
 
-  std::cout << r->x << std::endl;
-  std::cout << r->y << std::endl;
-  std::cout << r->z << std::endl;
-
   ASSERT_EQ(-1, r->x);
   ASSERT_EQ(-2, r->y);
   ASSERT_EQ(4, r->z);

@@ -1,4 +1,5 @@
 #include <string>
+#include "math/matrix4f.h"
 #include "math/point3f.h"
 
 #ifndef RAY_H
@@ -27,6 +28,8 @@ class Ray {
 
     // Get point on ray at origin + direction * t
     Point3f* pointAt(float t);
+
+    Ray* transform(Matrix4f*);
 
     void log() {
       origin->log();

@@ -1,8 +1,10 @@
 #include "triangleTest.h"
 #include "../intersectables/triangle.h"
 #include "../intersectables/meshTriangle.h"
+#include "../intersectables/instance.h"
 #include "../materials/diffuse.h"
 #include "../integrators/debugIntegrator.h"
+#include "../math/matrix4f.h"
 
 TriangleTest::TriangleTest(int width, int height)
   : Scene(width, height) {}
@@ -16,15 +18,26 @@ void TriangleTest::buildLights() {
 void TriangleTest::buildIntersectables() {
   Material* material = new Diffuse(new Spectrum(1.0));
   IntersectableList* intersectableList = new IntersectableList();
-  intersectableList->put(
-    new Triangle(
-      1,
-      material,
-      new Point3f(0.0, 0.0, 0.0),
-      new Point3f(1.0, 0.0, 0.0),
-      new Point3f(0.0, 1.0, 0.0)
-    )
+  auto tri = new Triangle(
+    1,
+    material,
+    new Point3f(0.0, 0.0, 0.0),
+    new Point3f(1.0, 0.0, 0.0),
+    new Point3f(0.0, 1.0, 0.0)
   );
+
+  Matrix4f* transform = new Matrix4f(
+    1, 0, 0, 1.2,
+    0, 0.8, 0, -1.2,
+    0, 0, 1, 0,
+    0, 0, 0, 1
+  );
+
+  auto instance = new Instance(tri);
+  auto transformedInstance = new Instance(tri, transform);
+
+  intersectableList->put(instance);
+  intersectableList->put(transformedInstance);
   this->intersectableList = intersectableList;
 }
 
