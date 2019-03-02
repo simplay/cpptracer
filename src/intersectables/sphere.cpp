@@ -78,14 +78,12 @@ HitRecord* Sphere::intersect(Ray* ray) {
       }
     }
 
-    Point3f* hitPosition = ray->pointAt(t);
-    Point3f* hitNormal = new Point3f(hitPosition);
+    auto hitPosition = ray->pointAt(t);
+    auto hitNormal = new Point3f(hitPosition);
     hitNormal->sub(center);
     hitNormal->scale(1.0 / radius);
 
-    Point3f* wIn = new Point3f(ray->direction);
-    wIn->negate();
-    wIn->normalize();
+    auto wIn = Point3f().incidentDirection(ray->direction);
 
     return new HitRecord(
       t,

@@ -67,19 +67,11 @@ HitRecord* Triangle::intersect(Ray* ray) {
   }
 
   float t = params->z;
-  // std::cout << t << std::endl;
 
-  Point3f* intersectionPosition = new Point3f(ray->direction);
-  intersectionPosition->scale(t);
-  intersectionPosition->add(ray->origin);
-
-  Point3f* wIn = new Point3f(ray->direction);
-  wIn->normalize();
-  wIn->negate();
-
+  auto intersectionPosition = ray->pointAt(t);
+  auto wIn = Point3f().incidentDirection(ray->direction);
   auto normal = computeNormal(params->x, params->y);
 
-  // normal->log();
   delete params;
 
   auto hit = new HitRecord(
