@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iostream>
 #include "scene.h"
-#include "../integrators/pointLightIntegrator.h"
+#include "../integrators/whittedIntegrator.h"
 #include "../samplers/oneSampler.h"
 
 Scene::Scene(int width, int height): width(width), height(height) {}
@@ -49,7 +49,7 @@ void Scene::buildIntersectables() {
 }
 
 void Scene::buildIntegrator() {
-  this->integrator = new PointLightIntegrator(this);
+  this->integrator = new WhittedIntegrator(this);
 }
 
 void Scene::buildSampler() {

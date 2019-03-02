@@ -4,7 +4,7 @@
 #include "../materials/blinn.h"
 #include "../materials/diffuse.h"
 #include "../integrators/debugIntegrator.h"
-#include "../integrators/pointLightIntegrator.h"
+#include "../integrators/whittedIntegrator.h"
 
 BlinnTest::BlinnTest(int width, int height)
   : Scene(width, height) {}
@@ -45,5 +45,5 @@ void BlinnTest::buildIntersectables() {
 
 void BlinnTest::buildIntegrator() {
   // this->integrator = new DebugIntegrator(this);
-  this->integrator = new PointLightIntegrator(this);
+  this->integrator = new WhittedIntegrator(this);
 }
