@@ -40,21 +40,18 @@ HitRecord* Plane::intersect(Ray* ray) {
   }
 
   auto intersectionPosition = ray->pointAt(t);
+  auto wIn = Point3f().incidentDirection(ray->direction);
 
-  Point3f* wIn = new Point3f(ray->direction);
-  wIn->negate();
-  wIn->normalize();
-
-  Point3f* hitNormal = new Point3f(normal);
-  Point3f* tangent = Point3f(1, 0, 0).cross(hitNormal);
+  auto hitNormal = new Point3f(normal);
+  auto tangent = Point3f(1, 0, 0).cross(hitNormal);
 
   return new HitRecord(
-      t,
-      intersectionPosition,
-      hitNormal,
-      tangent,
-      wIn,
-      material,
-      this
+    t,
+    intersectionPosition,
+    hitNormal,
+    tangent,
+    wIn,
+    material,
+    this
   );
 }
