@@ -10,7 +10,7 @@
 #include "ray.h"
 #include "spectrum.h"
 #include "image.h"
-#include "integrators/pointLightIntegrator.h"
+#include "integrators/integrator.h"
 #include "progressBar.h"
 
 using namespace std;

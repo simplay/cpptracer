@@ -6,7 +6,6 @@
 #include "../materials/diffuse.h"
 #include "../materials/gridTexturedMaterial.h"
 #include "../integrators/debugIntegrator.h"
-#include "../integrators/pointLightIntegrator.h"
 #include "../integrators/whittedIntegrator.h"
 
 MeshTest::MeshTest(int width, int height)
