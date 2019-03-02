@@ -10,41 +10,38 @@ class Intersectable;
 #ifndef HIT_RECORD_H
 #define HIT_RECORD_H
 
-// Stores information about a ray-surface intersection. This information
-// is typically used for shading.
-//
-// position: Point3f
-//   position where the ray hit the surface
-//
-// normal: Point3f
-//   normal at hit pos
-//
-// tangent: Point3f
-//   tangent at hit position
-//
-// w: Point3f
-//   Direction towards origin of ray that hit surface.
-//   By convention it points away from the surface,
-//   that is, in the direction opposite to the incident ray.
-//
-// t: Float
-//   parameter of the ray at the hit point
-//
-// material: Material
-//   The material at the hit point.
+// Stores information about a ray-surface intersection. This information is
+// typically used for shading.
 class HitRecord {
   private:
+
     // by default, a HitRecord is valid
     bool isNull = false;
 
   public:
+    // ray parameter that resulted in a hit with a surface of an intersectable
     float t;
+
+    // position where the ray hit the surface
     Point3f* position;
+
+    // normal at hit position
     Point3f* normal;
+
+    // tangent at hit position
     Point3f* tangent;
+
+    // Direction towards origin of ray that hit surface. By convention it
+    // points away from the surface, that is, in the direction opposite to the
+    // incident ray.
     Point3f* wIn;
+
+    // The material at the hit point.
     Material* material;
+
     Intersectable* intersectable;
+
+    // indices of ray that caused the intersection
     int i;
     int j;
 
@@ -81,8 +78,8 @@ class HitRecord {
       Material* material
     );
 
-    // HitRecord objects are marked as invalid return true
-    // Used to avoid null-checks
+    // HitRecord objects are marked as invalid return true Used to avoid
+    // null-checks
     bool isValid();
 
     HitRecord* transform(Matrix4f*, Matrix4f*);
