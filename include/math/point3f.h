@@ -18,6 +18,13 @@ class Point3f {
     Point3f(Point3f*);
     Point3f(Vector4f*);
 
+    static Point3f* incidentDirection(Point3f* v) {
+      Point3f* wIn = new Point3f(v);
+      wIn->negate();
+      wIn->normalize();
+      return wIn;
+    }
+
     // scale components of this point equally.
     void scale(float factor);
 
