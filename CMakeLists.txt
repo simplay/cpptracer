@@ -39,6 +39,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pthread")
 SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 SET(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 
+# For disabling test in benchmark library.
+set(BENCHMARK_ENABLE_TESTING CACHE BOOL OFF)
+
 message(STATUS "Building with the following extra flags: ${CMAKE_CXX_FLAGS}")
 
 # --------------------------------------------------------------------------------
@@ -55,8 +58,6 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/include/samplers
   ${PROJECT_SOURCE_DIR}/include/scenes
   ${PROJECT_SOURCE_DIR}/include/math
-  ${PROJECT_SOURCE_DIR}/tests
-  ${PROJECT_SOURCE_DIR}/external/googletest
   ${PROJECT_SOURCE_DIR}/external/googletest/include
 )
 
@@ -70,7 +71,10 @@ file(GLOB SAMPLERS_SOURCES "src/samplers/*.cpp")
 file(GLOB SCENE_SOURCES "src/scenes/*.cpp")
 file(GLOB MATH_SOURCES "src/math/*.cpp")
 file(GLOB TESTFILES "tests/*.cpp")
-set(TEST_MAIN unit_tests.x)  # Default name for test executable (change if you wish).
+file(GLOB BENCHMARKFILES "benchmarks/*.cpp")
+
+set(TEST_MAIN unit_tests.x)
+set(BENCHMARK_MAIN benchmarks.x)
 
 # --------------------------------------------------------------------------------
 #                            Build! (Change as needed)
@@ -92,11 +96,13 @@ target_link_libraries(main.x engine)  # Link the executable to the 'engine'.
 # Add a make target 'gtest', that runs the tests (and builds all dependencies).
 # The setup of Google Test is done at the very end of this file.
 add_executable(${TEST_MAIN} ${TESTFILES})
-add_dependencies(${TEST_MAIN} googletest engine)
-target_link_libraries(${TEST_MAIN} googletest engine pthread)
-add_custom_target(gtest
-    COMMAND "${PROJECT_BINARY_DIR}/${TEST_MAIN}"
-    DEPENDS engine ${TEST_MAIN})
+add_dependencies(${TEST_MAIN} gtest benchmark engine)
+target_link_libraries(${TEST_MAIN} gtest engine pthread)
+
+
+add_executable(${BENCHMARK_MAIN} ${BENCHMARKFILES})
+add_dependencies(${BENCHMARK_MAIN} benchmark engine)
+target_link_libraries(${BENCHMARK_MAIN} benchmark engine pthread)
 
 
 # Add a standard make target 'test' that runs the tests under CTest (only as an alt. to gtest).
@@ -136,14 +142,9 @@ add_custom_target( git_update
     COMMAND git submodule init
     COMMAND git submodule update
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} )
-add_library( googletest
-    ${PROJECT_SOURCE_DIR}/external/googletest/src/gtest-all.cc
-    ${PROJECT_SOURCE_DIR}/external/googletest/src/gtest_main.cc )
-add_dependencies(googletest git_update)
-set_source_files_properties(${PROJECT_SOURCE_DIR}/external/googletest/src/gtest-all.cc  PROPERTIES GENERATED 1)
-set_source_files_properties(${PROJECT_SOURCE_DIR}/external/googletest/src/gtest_main.cc PROPERTIES GENERATED 1)
 
-
+add_subdirectory(external/googletest)
+add_subdirectory(external/googlebenchmark)
 
 # --------------------------------------------------------------------------------
 #                            Misc (no change needed).
