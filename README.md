@@ -6,28 +6,43 @@
 
 ![alt tag](https://github.com/simplay/cpptracer/blob/master/examples/blinn.bmp)
 
-Boilerplate taken from: https://github.com/bsamseth/cpp-project
+## Dependencies
+
++ `cmake >= 3.1.3`
++ `gcc`
+
+## Setup
+
+1. Clone this repository: `$ git@github.com:simplay/cpptracer.git`
+2. Fetch and update all external dependencies: `$ git submodule update --init --recursive`
 
 ## Building
 
-Build by making a build directory (i.e. `build/`), run `cmake` in that dir, and then use `make` to build the desired target.
-
-Example:
+Build by making a build directory (i.e. `build/`), run `cmake` in that dir, and then use `make` to build the desired target:
 
 ``` bash
 $ mkdir build && cd build
 $ cmake .. -DCMAKE_BUILD_TYPE=[Debug | Coverage | Release]
 $ make
-$ ./main.x
-$ make gtest     # Makes and runs the tests.
-$ make coverage  # Generate a coverage report.
-$ make doc       # Generate html documentation.
 ```
 
 ## Usage
 
 Inside `build/`, execute `./main.x WIDTH HEIGHT SCENE_NR`
 
-## Sources
+## Running the tests
 
-+ https://github.com/ssloy/tinykaboom/wiki
+Inside `build/`, execute `./unit_tests.x`
+
+## Contributing
+
+1. Fork this repository
+2. Create your feature branch `git checkout -b my-new-feature`
+3. Commit your changes `git commit -am "Add some feature"`
+4. Push to the branch `git push origin my-new-feature`
+5. Create new Pull Request (in your forked repository)
+
+## References
+
++ Boilerplate taken from: https://github.com/bsamseth/cpp-project
++ Explosion Rendering was inspired by the work of: https://github.com/ssloy/tinykaboom/wiki
