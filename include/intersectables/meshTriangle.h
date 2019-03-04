@@ -13,7 +13,7 @@ class MeshTriangle : public Triangle {
     Point3f* nb;
     Point3f* nc;
 
-    Point3f* computeNormal(float alpha, float beta);
+    Point3f* computeNormal(float alpha, float beta) const;
     MeshTriangle(int, Material*, Point3f*, Point3f*, Point3f*, Point3f*, Point3f*, Point3f*);
 
     void log() {

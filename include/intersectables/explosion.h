@@ -16,17 +16,17 @@ class Explosion : public Intersectable {
 
     Explosion(Material*, Point3f*, float);
 
-    virtual HitRecord* intersect(Ray* ray);
-    float signed_distance(Point3f* p);
-    float fractal_brownian_motion(Point3f* x);
-    Point3f rotate(Point3f* v);
-    float noise(Point3f* x);
+    virtual HitRecord* intersect(Ray* ray) const;
+    float signed_distance(Point3f* p) const;
+    float fractal_brownian_motion(Point3f* x) const;
+    Point3f rotate(Point3f* v) const;
+    float noise(Point3f* x) const;
 
-    template <typename T> inline T lerp(const T &v0, const T &v1, float t) {
+    template <typename T> inline T lerp(const T &v0, const T &v1, float t) const {
       return v0 + (v1-v0)*std::max(0.f, std::min(1.f, t));
     }
 
-    float hash(const float n) {
+    float hash(const float n) const {
       float x = sin(n) * 43758.5453f;
       return x - floor(x);
     }

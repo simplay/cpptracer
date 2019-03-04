@@ -6,7 +6,7 @@ Explosion::Explosion(Material* material, Point3f* center, float radius)
   : material(material), center(center), radius(radius)
 {}
 
-HitRecord* Explosion::intersect(Ray* ray) {
+HitRecord* Explosion::intersect(Ray* ray) const {
   Point3f* orig = new Point3f(ray->origin);
   Point3f* dir = new Point3f(ray->direction);
   if (orig->dot() - pow(orig->dot(dir), 2) > pow(radius, 2)) {
@@ -66,7 +66,7 @@ HitRecord* Explosion::intersect(Ray* ray) {
   return new HitRecord();
 }
 
-float Explosion::signed_distance(Point3f* p) { // this function defines the implicit surface we render
+float Explosion::signed_distance(Point3f* p) const { // this function defines the implicit surface we render
   Point3f q(p);
   q.scale(3.4);
   float noise_amplitude = 1.0;
@@ -74,7 +74,7 @@ float Explosion::signed_distance(Point3f* p) { // this function defines the impl
   return p->norm() - (radius + displacement);
 }
 
-Point3f Explosion::rotate(Point3f* v) {
+Point3f Explosion::rotate(Point3f* v) const {
   Point3f p(
     Point3f(0.00,  0.80,  0.60).dot(v),
     Point3f(-0.80,  0.36, -0.48).dot(v),
@@ -83,7 +83,7 @@ Point3f Explosion::rotate(Point3f* v) {
   return p;
 }
 
-float Explosion::noise(Point3f* x) {
+float Explosion::noise(Point3f* x) const {
   Point3f* p = new Point3f(floor(x->x), floor(x->y), floor(x->z));
   Point3f* f = new Point3f(x->x - p->x, x->y - p->y, x->z - p->z);
 
@@ -111,7 +111,7 @@ float Explosion::noise(Point3f* x) {
         lerp(hash(n + 170.f), hash(n + 171.f), f->x), f->y), f->z);
 }
 
-float Explosion::fractal_brownian_motion(Point3f* x) {
+float Explosion::fractal_brownian_motion(Point3f* x) const {
     Point3f p = rotate(x);
     float f = 0;
     f += 0.5000 * noise(&p); p.scale(2.32);

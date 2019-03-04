@@ -39,7 +39,7 @@ class HitRecord {
     // The material at the hit point.
     Material* material;
 
-    Intersectable* intersectable;
+    const Intersectable* intersectable;
 
     // indices of ray that caused the intersection
     int i;
@@ -58,7 +58,7 @@ class HitRecord {
       Point3f* tangent,
       Point3f* wIn,
       Material* material,
-      Intersectable* intersectable
+      const Intersectable* intersectable
     );
 
     HitRecord(
@@ -68,7 +68,7 @@ class HitRecord {
       Point3f* tangent,
       Point3f* wIn,
       Material* material,
-      Intersectable* intersectable,
+      const Intersectable* intersectable,
       int i,
       int j
     );

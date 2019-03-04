@@ -12,7 +12,7 @@ class PointLight : public LightGeometry {
     Material* material;
 
     PointLight(Point3f*, Spectrum*);
-    virtual HitRecord* sample();
-    virtual HitRecord* intersect(Ray*);
+    virtual HitRecord* sample() const;
+    virtual HitRecord* intersect(Ray*) const;
 };
 #endif

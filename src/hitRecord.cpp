@@ -51,7 +51,7 @@ HitRecord::HitRecord(
   Point3f* tangent,
   Point3f* wIn,
   Material* material,
-  Intersectable *intersectable
+  const Intersectable *intersectable
 ):
   t(t),
   position(position),
@@ -69,7 +69,7 @@ HitRecord::HitRecord(
   Point3f* tangent,
   Point3f* wIn,
   Material* material,
-  Intersectable *intersectable,
+  const Intersectable *intersectable,
   int i,
   int j
 ):

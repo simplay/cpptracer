@@ -6,6 +6,6 @@
 
 class LightGeometry : public Intersectable {
   public:
-    virtual HitRecord* sample() = 0;
+    virtual HitRecord* sample() const = 0;
 };
 #endif
