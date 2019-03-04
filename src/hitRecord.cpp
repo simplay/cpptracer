@@ -101,11 +101,14 @@ HitRecord* HitRecord::transform(Matrix4f* T, Matrix4f* invTranposedT) {
   hit3fNormal->normalize();
   delete hitNormal;
 
-  Vector4f backHitTangent(tangent, 0);
-  auto hitTangent = invTranposedT->mult(&backHitTangent);
-  auto hit3fTangent = hitTangent->toPoint3f();
-  hit3fTangent->normalize();
-  delete hitTangent;
+  Point3f* hit3fTangent = NULL;
+  if (tangent) {
+    Vector4f backHitTangent(tangent, 0);
+    auto hitTangent = invTranposedT->mult(&backHitTangent);
+    hit3fTangent = hitTangent->toPoint3f();
+    hit3fTangent->normalize();
+    delete hitTangent;
+  }
 
   Vector4f backWIn(wIn, 0);
   auto hitWIn = T->mult(&backWIn);
@@ -113,11 +116,13 @@ HitRecord* HitRecord::transform(Matrix4f* T, Matrix4f* invTranposedT) {
   hit3fWIn->normalize();
 
   HitRecord* finalHit = new HitRecord(
-    t, // TODO: transform too
+    t,
     hit3fPos,
     hit3fNormal,
     hit3fTangent,
     hit3fWIn,
+    material,
+    intersectable,
     0,
     0
   );

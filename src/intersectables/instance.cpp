@@ -24,6 +24,9 @@ HitRecord* Instance::intersect(Ray* ray) {
 
   auto hit = intersectable->intersect(transRay);
   delete transRay;
+  if (!hit->isValid()) {
+    return hit;
+  }
 
   auto finalHit = hit->transform(transformation, invTrasnposedTransformation);
   delete hit;
