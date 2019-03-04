@@ -25,7 +25,7 @@ Plane::Plane(Material* material, Point3f* normal, float distance)
  * t = dot(a - o, n) / dot(d, n) and a = (0, 0, D)
  *
  */
-HitRecord* Plane::intersect(Ray* ray) {
+HitRecord* Plane::intersect(Ray* ray) const {
   // incident angle: angle between the ray direction and the plane normal
   auto cosTheta = normal->dot(ray->direction);
 

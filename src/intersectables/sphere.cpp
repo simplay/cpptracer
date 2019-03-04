@@ -54,7 +54,7 @@ Sphere::Sphere(Material* material, Point3f* center, float radius)
  * For computing the hitRecord of the intersection, we are interested in the
  * smaller and positive t.
  */
-HitRecord* Sphere::intersect(Ray* ray) {
+HitRecord* Sphere::intersect(Ray* ray) const {
   Point3f oc(ray->origin);
   oc.sub(center);
 

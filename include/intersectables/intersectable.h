@@ -5,6 +5,6 @@
 #define INTERSECTABLE_H
 class Intersectable {
   public:
-    virtual HitRecord* intersect(Ray*) = 0;
+    virtual HitRecord* intersect(Ray*) const = 0;
 };
 #endif

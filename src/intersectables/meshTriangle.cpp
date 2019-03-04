@@ -16,7 +16,7 @@ MeshTriangle::MeshTriangle(
 
 
 // weighted average of provided vertex normals
-Point3f* MeshTriangle::computeNormal(float alpha, float beta) {
+Point3f* MeshTriangle::computeNormal(float alpha, float beta) const {
   auto alphabeta = alpha + beta;
   Point3f nx(na);
   nx.scale(1.0 - alphabeta);

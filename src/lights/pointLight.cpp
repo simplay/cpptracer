@@ -6,13 +6,13 @@ PointLight::PointLight(Point3f* position, Spectrum* emission)
   : position(position), material((Material *) new PointLightMaterial(emission))
 {}
 
-HitRecord* PointLight::sample() {
+HitRecord* PointLight::sample() const {
   return new HitRecord(
       new Point3f(position),
       material
   );
 }
 
-HitRecord* PointLight::intersect(Ray*) {
+HitRecord* PointLight::intersect(Ray*) const {
   return new HitRecord();
 }

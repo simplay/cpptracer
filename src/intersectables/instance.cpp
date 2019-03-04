@@ -19,7 +19,7 @@ Instance::~Instance() {
   delete invTrasnposedTransformation;
 }
 
-HitRecord* Instance::intersect(Ray* ray) {
+HitRecord* Instance::intersect(Ray* ray) const {
   auto transRay = ray->transform(invTransformation);
 
   auto hit = intersectable->intersect(transRay);

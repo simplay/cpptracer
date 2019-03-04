@@ -1,3 +1,4 @@
+#include <memory>
 #include <iostream>
 #include "triangle.h"
 #include "matrix3f.h"
@@ -5,7 +6,7 @@
 Triangle::Triangle(int faceId, Material* material, Point3f* a, Point3f* b, Point3f* c)
   : faceId(faceId), material(material), a(a), b(b), c(c) {}
 
-Point3f* Triangle::computeNormal(float, float) {
+Point3f* Triangle::computeNormal(float, float) const {
   Point3f ba(b);
   ba.sub(a);
 
@@ -18,51 +19,41 @@ Point3f* Triangle::computeNormal(float, float) {
   return normal;
 }
 
-HitRecord* Triangle::intersect(Ray* ray) {
-  Point3f* ab = new Point3f(a);
-  ab->sub(b);
+HitRecord* Triangle::intersect(Ray* ray) const {
+  Point3f ab = Point3f(a);
+  ab.sub(b);
 
-  Point3f* ac = new Point3f(a);
-  ac->sub(c);
+  Point3f ac = Point3f(a);
+  ac.sub(c);
 
-  Point3f* ao = new Point3f(a);
-  ao->sub(ray->origin);
+  Point3f ao = Point3f(a);
+  ao.sub(ray->origin);
 
   // Interpret a triangle with an infinite plane with constraints (given by
   // alpha and beta)
   Matrix3f m(
-    ab->x, ac->x, ray->direction->x,
-    ab->y, ac->y, ray->direction->y,
-    ab->z, ac->z, ray->direction->z
+    ab.x, ac.x, ray->direction->x,
+    ab.y, ac.y, ray->direction->y,
+    ab.z, ac.z, ray->direction->z
   );
 
-  delete ab;
-  delete ac;
-
-  Matrix3f* invM = m.inv();
-  Point3f y(ao->x, ao->y, ao->z);
-
-  delete ao;
+  auto invM = std::unique_ptr<Matrix3f>(m.inv());
 
   // matrix vector multiplication: A * params = y
-  Point3f* params = invM->mult(&y);
-  delete invM;
+  auto params = std::unique_ptr<Point3f>(invM->mult(&ao));
 
   // Perform conservative inside-outside check
   if (params->x <= 0 || params->x >= 1) {
-    delete params;
     return new HitRecord();
   }
 
   if (params->y <= 0 || params->y >= 1) {
-    delete params;
     return new HitRecord();
   }
 
   // note that: alpha + beta + gamma = 1
   auto sum = params->x + params->y;
   if (sum >= 1.0 || sum <= 0.0) {
-    delete params;
     return new HitRecord();
   }
 
@@ -71,8 +62,6 @@ HitRecord* Triangle::intersect(Ray* ray) {
   auto intersectionPosition = ray->pointAt(t);
   auto wIn = Point3f().incidentDirection(ray->direction);
   auto normal = computeNormal(params->x, params->y);
-
-  delete params;
 
   auto hit = new HitRecord(
     t,

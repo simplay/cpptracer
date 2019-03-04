@@ -15,6 +15,6 @@ class Sphere : public Intersectable {
 
     Sphere(Material*, Point3f*, float);
 
-    virtual HitRecord* intersect(Ray* ray);
+    virtual HitRecord* intersect(Ray* ray) const;
 };
 #endif

@@ -44,7 +44,7 @@ class Instance : public Intersectable {
     Instance(Intersectable*, Matrix4f*);
     ~Instance();
 
-    HitRecord* intersect(Ray* ray);
+    HitRecord* intersect(Ray* ray) const;
 };
 
 #endif
