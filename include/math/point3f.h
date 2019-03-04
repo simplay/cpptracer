@@ -29,24 +29,24 @@ class Point3f {
     void scale(float factor);
 
     // Modifies the components of this point.
-    void sub(Point3f* other);
+    void sub(const Point3f* other);
 
     // Modifies the components of this point.
-    void add(Point3f* other);
+    void add(const Point3f* other);
 
     void negate();
 
     void abs();
 
     // compute the cross product between this and another point.
-    Point3f* cross(Point3f* other);
+    Point3f* cross(const Point3f* other);
 
     /**
      * @return l2-dot product of this point's coordinates.
      */
     float dot();
 
-    float dot(Point3f* other);
+    float dot(const Point3f* other);
 
     float norm();
 

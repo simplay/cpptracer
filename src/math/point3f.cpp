@@ -26,13 +26,13 @@ void Point3f::scale(float factor) {
   z *= factor;
 }
 
-void Point3f::add(Point3f* other) {
+void Point3f::add(const Point3f* other) {
   x += other->x;
   y += other->y;
   z += other->z;
 }
 
-void Point3f::sub(Point3f* other) {
+void Point3f::sub(const Point3f* other) {
   x -= other->x;
   y -= other->y;
   z -= other->z;
@@ -50,7 +50,7 @@ void Point3f::abs() {
   z = std::abs(z);
 }
 
-Point3f* Point3f::cross(Point3f* other) {
+Point3f* Point3f::cross(const Point3f* other) {
   float cx = this->y * other->z - this->z * other->y;
   float cy = this->z * other->x - this->x * other->z;
   float cz = this->x * other->y - this->y * other->x;
@@ -71,7 +71,7 @@ float Point3f::dot() {
   return x * x + y * y + z * z;
 }
 
-float Point3f::dot(Point3f* other) {
+float Point3f::dot(const Point3f* other) {
   return x * other->x + y * other->y + z * other->z;
 }
 

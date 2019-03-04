@@ -10,10 +10,10 @@ class Material;
 class Sphere : public Intersectable {
   public:
     Material* material;
-    Point3f* center;
-    float radius;
+    const Point3f center;
+    const float radius;
 
-    Sphere(Material*, Point3f*, float);
+    Sphere(Material*, Point3f, float);
 
     virtual HitRecord* intersect(Ray* ray) const;
 };
