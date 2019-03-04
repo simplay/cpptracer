@@ -2,11 +2,13 @@
 #include "../intersectables/plane.h"
 #include "../intersectables/sphere.h"
 #include "../intersectables/mesh.h"
+#include "../intersectables/instance.h"
 #include "../materials/blinn.h"
 #include "../materials/diffuse.h"
 #include "../materials/gridTexturedMaterial.h"
 #include "../integrators/debugIntegrator.h"
 #include "../integrators/whittedIntegrator.h"
+#include "../samplers/randomSampler.h"
 
 MeshTest::MeshTest(int width, int height)
   : Scene(width, height) {}
@@ -34,7 +36,8 @@ void MeshTest::buildLights() {
 
 void MeshTest::buildIntersectables() {
   IntersectableList* intersectableList = new IntersectableList();
-  Material* material = new Diffuse(new Spectrum(1.0));
+  Blinn* material = new Blinn(new Spectrum(0.5, 0.5, 0.0), new Spectrum(0.6), 50.0);
+
   GridTexturedMaterial* grid = new GridTexturedMaterial(
     new Spectrum(0.2f, 0.f, 0.f),
     new Spectrum(1.f, 1.f, 1.f),
@@ -43,8 +46,16 @@ void MeshTest::buildIntersectables() {
     0.125f
   );
 
+  Matrix4f* transform = new Matrix4f(
+    1, 0, 0, 1,
+    0, 0, -1, -1,
+    0, 1, 0, 0,
+    0, 0, 0, 1
+  );
+
   Mesh* mesh = new Mesh(material, "../meshes/teapot.obj");
-  intersectableList->put(mesh);
+  Instance* instance = new Instance(mesh, transform);
+  intersectableList->put(instance);
   intersectableList->put(new Plane(grid, new Point3f(0.0, 0.0, 1.0f), 2.15));
   this->intersectableList = intersectableList;
 }
@@ -53,3 +64,6 @@ void MeshTest::buildIntegrator() {
   this->integrator = new WhittedIntegrator(this);
 }
 
+void MeshTest::buildSampler() {
+  this->sampler = new RandomSampler();
+}
