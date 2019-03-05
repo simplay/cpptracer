@@ -78,7 +78,7 @@ static void BM_PlaneIntersect(benchmark::State& state) {
   Diffuse material = Diffuse(new Spectrum(1.0));
   auto plane = Plane(
     &material,
-    new Point3f(0.0, 0.0, 0.0),
+    Point3f(0.0, 0.0, 0.0),
     1
   );
 

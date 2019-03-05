@@ -18,12 +18,12 @@ class Plane : public Intersectable {
     Material* material;
 
     // normal of the plane
-    Point3f* normal;
+    const Point3f normal;
 
     // distance to origin measured along normal direction
-    float distance;
+    const float distance;
 
-    Plane(Material*, Point3f*, float);
+    Plane(Material*, Point3f, float);
     // plane-ray intersection ray: p(t) = orig + t * dir
     //
     // Implicit plane:

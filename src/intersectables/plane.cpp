@@ -2,7 +2,7 @@
 #include <cmath>
 #include "plane.h"
 
-Plane::Plane(Material* material, Point3f* normal, float distance)
+Plane::Plane(Material* material, Point3f normal, float distance)
   : material(material), normal(normal), distance(distance)
 {}
 
@@ -27,14 +27,14 @@ Plane::Plane(Material* material, Point3f* normal, float distance)
  */
 HitRecord* Plane::intersect(Ray* ray) const {
   // incident angle: angle between the ray direction and the plane normal
-  auto cosTheta = normal->dot(ray->direction);
+  auto cosTheta = ray->direction->dot(&normal);
 
   if (std::abs(cosTheta) <= EPSILON) {
     return new HitRecord();
   }
 
   // assumption: point is zero and then we shift by distance
-  float t = -(normal->dot(ray->origin) + distance) / cosTheta;
+  float t = -(ray->origin->dot(&normal) + distance) / cosTheta;
   if (t < 0) {
     return new HitRecord();
   }
