@@ -57,7 +57,7 @@ Point3f* Point3f::cross(const Point3f* other) {
   return new Point3f(cx, cy, cz);
 }
 
-float Point3f::norm() {
+float Point3f::norm() const {
   return sqrt(this->dot());
 }
 
@@ -67,11 +67,11 @@ void Point3f::normalize() {
   this->scale(1.0 / scale);
 }
 
-float Point3f::dot() {
+float Point3f::dot() const {
   return x * x + y * y + z * z;
 }
 
-float Point3f::dot(const Point3f* other) {
+float Point3f::dot(const Point3f* other) const {
   return x * other->x + y * other->y + z * other->z;
 }
 

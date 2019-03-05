@@ -44,11 +44,11 @@ class Point3f {
     /**
      * @return l2-dot product of this point's coordinates.
      */
-    float dot();
+    float dot() const;
 
-    float dot(const Point3f* other);
+    float dot(const Point3f* other) const;
 
-    float norm();
+    float norm() const;
 
     // Make length of this vector equal 1 (in l2 norm's sense) but preserve its
     // direction.
