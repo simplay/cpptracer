@@ -4,7 +4,7 @@
 
 ProgressBar::ProgressBar(std::vector<int>* taskCounters, int totalTasks)
   : taskCounters(taskCounters), totalTasks(totalTasks) {
-    this->stepSize = totalTasks / progressIntervals;
+    this->stepSize = std::max(totalTasks / progressIntervals, 1);
   }
 
 void ProgressBar::update() {
