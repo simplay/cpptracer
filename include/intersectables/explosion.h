@@ -11,10 +11,10 @@ class Material;
 class Explosion : public Intersectable {
   public:
     Material* material;
-    Point3f* center;
-    float radius;
+    const Point3f center;
+    const float radius;
 
-    Explosion(Material*, Point3f*, float);
+    Explosion(Material*, const Point3f, float);
 
     virtual HitRecord* intersect(Ray* ray) const;
     float signed_distance(Point3f* p) const;
