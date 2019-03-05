@@ -52,7 +52,7 @@ void RefractiveTest::buildIntersectables() {
   );
 
   intersectableList->put(new Sphere(material, new Point3f(0.0, 0.0, 0.0), 1.0));
-  intersectableList->put(new Plane(grid, new Point3f(0.0, 0.0, 1.0f), 2.15));
+  intersectableList->put(new Plane(grid, Point3f(0.0, 0.0, 1.0f), 2.15));
 
   this->intersectableList = intersectableList;
 }

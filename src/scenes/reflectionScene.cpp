@@ -28,10 +28,10 @@ void ReflectionTest::buildIntersectables() {
   intersectableList->put(new Sphere(blinn, new Point3f(0.0, -0.4, 0.0), 0.5));
   intersectableList->put(new Sphere(blinn2, new Point3f(0.8, 0.5, 0), 0.35));
 
-  intersectableList->put(new Plane(diffuse, new Point3f(-1.0, 0.0, 0.0), 1));
-  intersectableList->put(new Plane(mirror, new Point3f(0.0, 1.0, 0.0), 1));
-  intersectableList->put(new Plane(mirror, new Point3f(0.0, -1.0, 0.0), 1));
-  intersectableList->put(new Plane(diffuse, new Point3f(0.0, 0.0, 1.0), 1));
+  intersectableList->put(new Plane(diffuse, Point3f(-1.0, 0.0, 0.0), 1));
+  intersectableList->put(new Plane(mirror, Point3f(0.0, 1.0, 0.0), 1));
+  intersectableList->put(new Plane(mirror, Point3f(0.0, -1.0, 0.0), 1));
+  intersectableList->put(new Plane(diffuse, Point3f(0.0, 0.0, 1.0), 1));
   this->intersectableList = intersectableList;
 }
 

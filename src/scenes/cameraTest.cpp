@@ -14,10 +14,10 @@ void CameraTest::buildLights() {
 void CameraTest::buildIntersectables() {
   Material* material = new Diffuse(new Spectrum(1.0));
   IntersectableList* intersectableList = new IntersectableList();
-  intersectableList->put(new Plane(material, new Point3f(1.0, 0.0, 0.0), 1));
-  intersectableList->put(new Plane(material, new Point3f(-1.0, 0.0, 0.0), 1));
-  intersectableList->put(new Plane(material, new Point3f(0.0, 1.0, 0.0), 1));
-  intersectableList->put(new Plane(material, new Point3f(0.0, -1.0, 0.0), 1));
-  intersectableList->put(new Plane(material, new Point3f(0.0, 0.0, 1.0), 1));
+  intersectableList->put(new Plane(material, Point3f(1.0, 0.0, 0.0), 1));
+  intersectableList->put(new Plane(material, Point3f(-1.0, 0.0, 0.0), 1));
+  intersectableList->put(new Plane(material, Point3f(0.0, 1.0, 0.0), 1));
+  intersectableList->put(new Plane(material, Point3f(0.0, -1.0, 0.0), 1));
+  intersectableList->put(new Plane(material, Point3f(0.0, 0.0, 1.0), 1));
   this->intersectableList = intersectableList;
 }

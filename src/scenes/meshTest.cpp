@@ -56,7 +56,7 @@ void MeshTest::buildIntersectables() {
   Mesh* mesh = new Mesh(material, "../meshes/teapot.obj");
   Instance* instance = new Instance(mesh, transform);
   intersectableList->put(instance);
-  intersectableList->put(new Plane(grid, new Point3f(0.0, 0.0, 1.0f), 2.15));
+  intersectableList->put(new Plane(grid, Point3f(0.0, 0.0, 1.0f), 2.15));
   this->intersectableList = intersectableList;
 }
 

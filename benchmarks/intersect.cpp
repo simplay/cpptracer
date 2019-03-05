@@ -2,6 +2,7 @@
 #include <benchmark/benchmark.h>
 #include "point3f.h"
 #include "../intersectables/explosion.h"
+#include "../intersectables/plane.h"
 #include "../intersectables/sphere.h"
 #include "../intersectables/triangle.h"
 #include "../materials/diffuse.h"
@@ -72,5 +73,22 @@ static void BM_ExplosionIntersect(benchmark::State& state) {
   }
 }
 BENCHMARK(BM_ExplosionIntersect);
+
+static void BM_PlaneIntersect(benchmark::State& state) {
+  Diffuse material = Diffuse(new Spectrum(1.0));
+  auto plane = Plane(
+    &material,
+    Point3f(0.0, 0.0, 0.0),
+    1
+  );
+
+  auto rays = MakeRays();
+  for (auto _ : state) {
+    for (auto& r : rays) {
+      std::unique_ptr<HitRecord>(plane.intersect(&r));
+    }
+  }
+}
+BENCHMARK(BM_PlaneIntersect);
 
 }
