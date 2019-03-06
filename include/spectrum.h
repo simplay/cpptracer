@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "math/point3f.h"
+#include "math/vector3f.h"
 
 #ifndef SPECTRUM_H
 #define SPECTRUM_H
@@ -18,7 +18,7 @@ class Spectrum {
     Spectrum(float, float, float);
     Spectrum(float);
     Spectrum(Spectrum*);
-    Spectrum(Point3f*);
+    Spectrum(Vector3f*);
 
     void scale(float);
     void add(Spectrum*);

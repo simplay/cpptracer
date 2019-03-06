@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include "camera.h"
-#include "math/point3f.h"
+#include "math/vector3f.h"
 
 TEST(Camera, camera_matrix) {
   int width = 1000;
   int height = 1000;
 
-  Point3f eye(0.0, 0.0, 3.0);
-  Point3f lookAt(0.0, 0.0, 0.0);
-  Point3f up(0.0, 1.0, 0.0);
+  Vector3f eye(0.0, 0.0, 3.0);
+  Vector3f lookAt(0.0, 0.0, 0.0);
+  Vector3f up(0.0, 1.0, 0.0);
   float fov = 60.0;
   float aspectRatio = (float)width / height;
 

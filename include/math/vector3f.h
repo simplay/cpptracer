@@ -1,25 +1,25 @@
 #include <stdio.h>
 #include "vector4f.h"
 
-#ifndef POINT3_H
-#define POINT3_H
+#ifndef VECTOR3F_H
+#define VECTOR3F_H
 
 /**
  * Float valued point with 3 coordinates.
  */
-class Point3f {
+class Vector3f {
 	public:
     float x;
     float y;
     float z;
 
-    Point3f();
-    Point3f(float, float, float);
-    Point3f(Point3f*);
-    Point3f(Vector4f*);
+    Vector3f();
+    Vector3f(float, float, float);
+    Vector3f(Vector3f*);
+    Vector3f(Vector4f*);
 
-    static Point3f* incidentDirection(Point3f* v) {
-      Point3f* wIn = new Point3f(v);
+    static Vector3f* incidentDirection(Vector3f* v) {
+      Vector3f* wIn = new Vector3f(v);
       wIn->negate();
       wIn->normalize();
       return wIn;
@@ -29,24 +29,24 @@ class Point3f {
     void scale(float factor);
 
     // Modifies the components of this point.
-    void sub(const Point3f* other);
+    void sub(const Vector3f* other);
 
     // Modifies the components of this point.
-    void add(const Point3f* other);
+    void add(const Vector3f* other);
 
     void negate();
 
     void abs();
 
     // compute the cross product between this and another point.
-    Point3f* cross(const Point3f* other);
+    Vector3f* cross(const Vector3f* other);
 
     /**
      * @return l2-dot product of this point's coordinates.
      */
     float dot() const;
 
-    float dot(const Point3f* other) const;
+    float dot(const Vector3f* other) const;
 
     float norm() const;
 
@@ -55,13 +55,13 @@ class Point3f {
     void normalize();
 
     // overwrite this by scale * base + other
-    Point3f* scaleAdd(float scale, Point3f* base, Point3f* other);
+    Vector3f* scaleAdd(float scale, Vector3f* base, Vector3f* other);
 
-    Point3f* scaleAdd(float scale, Point3f* other);
+    Vector3f* scaleAdd(float scale, Vector3f* other);
 
     // reflect the inverse direction of this vector off from a given normal
     // reflected := v + 2 * dot(v, normal) * normal
-    Point3f* invReflected(Point3f*);
+    Vector3f* invReflected(Vector3f*);
 
     void log() {
       printf("(%f, %f, %f)\n", x, y, z);

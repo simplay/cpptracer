@@ -1,6 +1,6 @@
 #include <algorithm>
 #include "material.h"
-#include "../math/point3f.h"
+#include "../math/vector3f.h"
 #include "../spectrum.h"
 #include "../hitRecord.h"
 
@@ -14,8 +14,8 @@ class ReflectiveMaterial : public Material {
     ReflectiveMaterial();
     ReflectiveMaterial(Spectrum*);
 
-    virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn);
-    virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Point3f* wOut);
+    virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn);
+    virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut);
 
     virtual bool hasSpecularReflection();
     virtual bool hasSpecularRefraction();

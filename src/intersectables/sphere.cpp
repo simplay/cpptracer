@@ -2,7 +2,7 @@
 #include <cmath>
 #include "sphere.h"
 
-Sphere::Sphere(Material* material, Point3f center, float radius)
+Sphere::Sphere(Material* material, Vector3f center, float radius)
   : material(material), center(center), radius(radius)
 {}
 
@@ -55,10 +55,10 @@ Sphere::Sphere(Material* material, Point3f center, float radius)
  * smaller and positive t.
  */
 HitRecord* Sphere::intersect(Ray* ray) const {
-  Point3f oc(ray->origin);
+  Vector3f oc(ray->origin);
   oc.sub(&center);
 
-  Point3f rd(ray->direction);
+  Vector3f rd(ray->direction);
   float a = rd.dot();
   float b = 2.0 * rd.dot(&oc);
   float c = oc.dot() - radius * radius;
@@ -79,17 +79,17 @@ HitRecord* Sphere::intersect(Ray* ray) const {
     }
 
     auto hitPosition = ray->pointAt(t);
-    auto hitNormal = new Point3f(hitPosition);
+    auto hitNormal = new Vector3f(hitPosition);
     hitNormal->sub(&center);
     hitNormal->scale(1.0 / radius);
 
-    auto wIn = Point3f().incidentDirection(ray->direction);
+    auto wIn = Vector3f().incidentDirection(ray->direction);
 
     return new HitRecord(
       t,
       hitPosition,
       hitNormal,
-      new Point3f(),
+      new Vector3f(),
       wIn,
       material,
       this,

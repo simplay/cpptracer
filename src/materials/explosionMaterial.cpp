@@ -5,13 +5,13 @@ ExplosionMaterial::ExplosionMaterial(Spectrum* diffuseContribution, Spectrum* sp
   : diffuseContribution(diffuseContribution), specularContribution(specularContribution), shinynessPower(shinynessPower){
   }
 
-Spectrum* ExplosionMaterial::evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn) {
+Spectrum* ExplosionMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
   Spectrum* contribution = new Spectrum();
   Spectrum* diffuse  = new Spectrum();
   Spectrum* specular = new Spectrum(specularContribution);
   Spectrum* ambient  = new Spectrum(diffuseContribution);
 
-  Point3f* halfwayVector = new Point3f(wIn);
+  Vector3f* halfwayVector = new Vector3f(wIn);
   halfwayVector->add(wOut);
   halfwayVector->normalize();
 
@@ -43,7 +43,7 @@ Spectrum* ExplosionMaterial::evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, P
   return contribution;
 }
 
-Spectrum* ExplosionMaterial::evaluateEmission(HitRecord*, Point3f*) {
+Spectrum* ExplosionMaterial::evaluateEmission(HitRecord*, Vector3f*) {
   return new Spectrum();
 }
 

@@ -11,10 +11,10 @@ MeshData ObjReader::read() {
   std::ifstream file(filepath);
   std::string line;
 
-  std::vector<Point3f*> vertices;
-  std::vector<Point3f*> normals;
-  std::vector<Point3f*> faces;
-  std::vector<Point3f*> normalFaces;
+  std::vector<Vector3f*> vertices;
+  std::vector<Vector3f*> normals;
+  std::vector<Vector3f*> faces;
+  std::vector<Vector3f*> normalFaces;
 
   MeshData it;
   float minX = std::numeric_limits<float>::max();
@@ -30,7 +30,7 @@ MeshData ObjReader::read() {
       case 'v':
         if (token[1] == 'n') {
           sscanf(line.c_str(), "vn %f %f %f", &x, &y, &z);
-          auto n = new Point3f(x, y, z);
+          auto n = new Vector3f(x, y, z);
           n->normalize();
           normals.push_back(n);
         } else {
@@ -47,7 +47,7 @@ MeshData ObjReader::read() {
             minZ = z;
           }
 
-          auto v = new Point3f(x, y, z);
+          auto v = new Vector3f(x, y, z);
           vertices.push_back(v);
         }
         break;
@@ -65,15 +65,15 @@ MeshData ObjReader::read() {
         float u, v, w;
         if (occurrences == 3) {
           sscanf(line.c_str(), "f %f//%f %f//%f %f//%f", &x, &u, &y, &v, &z, &w);
-          auto face = new Point3f(x, y, z);
-          auto normalFace = new Point3f(u, v, w);
+          auto face = new Vector3f(x, y, z);
+          auto normalFace = new Vector3f(u, v, w);
           faces.push_back(face);
           normalFaces.push_back(normalFace);
         } else if (slashCount == 9) {
           // also defines texture coordiantes - yet not supported
         } else {
           sscanf(line.c_str(), "f %f %f %f", &x, &y, &z);
-          auto face = new Point3f(x, y, z);
+          auto face = new Vector3f(x, y, z);
           faces.push_back(face);
         }
         break;

@@ -1,5 +1,5 @@
 #include "intersectable.h"
-#include "../math/point3f.h"
+#include "../math/vector3f.h"
 #include "../hitRecord.h"
 #include "../ray.h"
 
@@ -10,10 +10,10 @@ class Material;
 class Sphere : public Intersectable {
   public:
     Material* material;
-    const Point3f center;
+    const Vector3f center;
     const float radius;
 
-    Sphere(Material*, Point3f, float);
+    Sphere(Material*, Vector3f, float);
 
     virtual HitRecord* intersect(Ray* ray) const;
 };

@@ -13,8 +13,8 @@ ReflectionTest::ReflectionTest(int width, int height)
 
 void ReflectionTest::buildLights() {
   std::vector<PointLight*>* lightList = new std::vector<PointLight*>;
-  lightList->push_back(new PointLight(new Point3f(0.5, 0.5, -0.0), new Spectrum(1.0)));
-  lightList->push_back(new PointLight(new Point3f(-0.75, 0.75, 3.0), new Spectrum(1.0, 1.0, 10.0)));
+  lightList->push_back(new PointLight(new Vector3f(0.5, 0.5, -0.0), new Spectrum(1.0)));
+  lightList->push_back(new PointLight(new Vector3f(-0.75, 0.75, 3.0), new Spectrum(1.0, 1.0, 10.0)));
   this->lightList = lightList;
 }
 
@@ -25,13 +25,13 @@ void ReflectionTest::buildIntersectables() {
   Blinn* blinn = new Blinn(new Spectrum(1.0, 0.0, 0.0), new Spectrum(0.6), 50.0);
   Blinn* blinn2 = new Blinn(new Spectrum(0.0, 1.0, 0.0), new Spectrum(0.6), 50.0);
   Material* diffuse = new Diffuse(new Spectrum(0.0, 0.5, 0.5));
-  intersectableList->put(new Sphere(blinn, new Point3f(0.0, -0.4, 0.0), 0.5));
-  intersectableList->put(new Sphere(blinn2, new Point3f(0.8, 0.5, 0), 0.35));
+  intersectableList->put(new Sphere(blinn, new Vector3f(0.0, -0.4, 0.0), 0.5));
+  intersectableList->put(new Sphere(blinn2, new Vector3f(0.8, 0.5, 0), 0.35));
 
-  intersectableList->put(new Plane(diffuse, Point3f(-1.0, 0.0, 0.0), 1));
-  intersectableList->put(new Plane(mirror, Point3f(0.0, 1.0, 0.0), 1));
-  intersectableList->put(new Plane(mirror, Point3f(0.0, -1.0, 0.0), 1));
-  intersectableList->put(new Plane(diffuse, Point3f(0.0, 0.0, 1.0), 1));
+  intersectableList->put(new Plane(diffuse, Vector3f(-1.0, 0.0, 0.0), 1));
+  intersectableList->put(new Plane(mirror, Vector3f(0.0, 1.0, 0.0), 1));
+  intersectableList->put(new Plane(mirror, Vector3f(0.0, -1.0, 0.0), 1));
+  intersectableList->put(new Plane(diffuse, Vector3f(0.0, 0.0, 1.0), 1));
   this->intersectableList = intersectableList;
 }
 

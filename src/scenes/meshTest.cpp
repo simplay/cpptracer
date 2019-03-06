@@ -14,9 +14,9 @@ MeshTest::MeshTest(int width, int height)
   : Scene(width, height) {}
 
   void MeshTest::buildCamera() {
-    Point3f* eye = new Point3f(1.0, 4.0, 6.0);
-    Point3f* lookAt = new Point3f(0.0, 0.0, 0.0);
-    Point3f* up = new Point3f(0.0, 1.0, 0.0);
+    Vector3f* eye = new Vector3f(1.0, 4.0, 6.0);
+    Vector3f* lookAt = new Vector3f(0.0, 0.0, 0.0);
+    Vector3f* up = new Vector3f(0.0, 1.0, 0.0);
     float fov = 60.0;
 
     float aspectRatio = (float)width / height;
@@ -29,8 +29,8 @@ MeshTest::MeshTest(int width, int height)
 
 void MeshTest::buildLights() {
   std::vector<PointLight*>* lightList = new std::vector<PointLight*>;
-  lightList->push_back(new PointLight(new Point3f(0.5, 1.5, 2), new Spectrum(10.0)));
-  lightList->push_back(new PointLight(new Point3f(-0.75, 0.75, 2.0), new Spectrum(7.0)));
+  lightList->push_back(new PointLight(new Vector3f(0.5, 1.5, 2), new Spectrum(10.0)));
+  lightList->push_back(new PointLight(new Vector3f(-0.75, 0.75, 2.0), new Spectrum(7.0)));
   this->lightList = lightList;
 }
 
@@ -42,7 +42,7 @@ void MeshTest::buildIntersectables() {
     new Spectrum(0.2f, 0.f, 0.f),
     new Spectrum(1.f, 1.f, 1.f),
     0.01f,
-    new Point3f(0.f, 0.f, 0.f),
+    new Vector3f(0.f, 0.f, 0.f),
     0.125f
   );
 
@@ -56,7 +56,7 @@ void MeshTest::buildIntersectables() {
   Mesh* mesh = new Mesh(material, "../meshes/teapot.obj");
   Instance* instance = new Instance(mesh, transform);
   intersectableList->put(instance);
-  intersectableList->put(new Plane(grid, Point3f(0.0, 0.0, 1.0f), 2.15));
+  intersectableList->put(new Plane(grid, Vector3f(0.0, 0.0, 1.0f), 2.15));
   this->intersectableList = intersectableList;
 }
 

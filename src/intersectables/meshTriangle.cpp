@@ -1,36 +1,36 @@
 #include "meshTriangle.h"
-#include "../math/point3f.h"
+#include "../math/vector3f.h"
 
 MeshTriangle::MeshTriangle(
   int faceId,
   Material* material,
-  Point3f* a,
-  Point3f* b,
-  Point3f* c,
-  Point3f* na,
-  Point3f* nb,
-  Point3f* nc
+  Vector3f* a,
+  Vector3f* b,
+  Vector3f* c,
+  Vector3f* na,
+  Vector3f* nb,
+  Vector3f* nc
 )
   : Triangle(faceId, material, a, b, c),
     na(na), nb(nb), nc(nc) {}
 
 
 // weighted average of provided vertex normals
-Point3f* MeshTriangle::computeNormal(float alpha, float beta) const {
+Vector3f* MeshTriangle::computeNormal(float alpha, float beta) const {
   auto alphabeta = alpha + beta;
-  Point3f nx(na);
+  Vector3f nx(na);
   nx.scale(1.0 - alphabeta);
 
-  Point3f ny(nb);
+  Vector3f ny(nb);
   ny.scale(alpha);
 
-  Point3f nz(nc);
+  Vector3f nz(nc);
   nz.scale(beta);
 
   nx.add(&ny);
   nx.add(&nz);
 
-  auto n = new Point3f(&nx);
+  auto n = new Vector3f(&nx);
   n->normalize();
   return n;
 }

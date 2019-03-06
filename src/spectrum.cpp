@@ -17,7 +17,7 @@ Spectrum::Spectrum(Spectrum* s) {
   b = s->b;
 }
 
-Spectrum::Spectrum(Point3f* s) {
+Spectrum::Spectrum(Vector3f* s) {
   r = s->x;
   g = s->y;
   b = s->z;

@@ -5,13 +5,13 @@ Blinn::Blinn(Spectrum* diffuseContribution, Spectrum* specularContribution, floa
   : diffuseContribution(diffuseContribution), specularContribution(specularContribution), shinynessPower(shinynessPower){
 }
 
-Spectrum* Blinn::evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn) {
+Spectrum* Blinn::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
   Spectrum* contribution = new Spectrum();
   Spectrum* diffuse  = new Spectrum(diffuseContribution);
   Spectrum* specular = new Spectrum(specularContribution);
   Spectrum* ambient  = new Spectrum(diffuseContribution);
 
-  Point3f* halfwayVector = new Point3f(wIn);
+  Vector3f* halfwayVector = new Vector3f(wIn);
   halfwayVector->add(wOut);
   halfwayVector->normalize();
 
@@ -25,7 +25,7 @@ Spectrum* Blinn::evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn)
   return contribution;
 }
 
-Spectrum* Blinn::evaluateEmission(HitRecord*, Point3f*) {
+Spectrum* Blinn::evaluateEmission(HitRecord*, Vector3f*) {
   return new Spectrum();
 }
 

@@ -2,13 +2,13 @@
 #include "pointLightMaterial.h"
 #include "../materials/material.h"
 
-PointLight::PointLight(Point3f* position, Spectrum* emission)
+PointLight::PointLight(Vector3f* position, Spectrum* emission)
   : position(position), material((Material *) new PointLightMaterial(emission))
 {}
 
 HitRecord* PointLight::sample() const {
   return new HitRecord(
-      new Point3f(position),
+      new Vector3f(position),
       material
   );
 }

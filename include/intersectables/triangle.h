@@ -1,5 +1,5 @@
 #include "intersectable.h"
-#include "../math/point3f.h"
+#include "../math/vector3f.h"
 #include "../hitRecord.h"
 #include "../ray.h"
 
@@ -17,13 +17,13 @@ class Triangle : public Intersectable {
     Material* material;
 
     // normal of the plane
-    Point3f* a;
-    Point3f* b;
-    Point3f* c;
+    Vector3f* a;
+    Vector3f* b;
+    Vector3f* c;
 
-    virtual Point3f* computeNormal(float alpha, float beta) const;
+    virtual Vector3f* computeNormal(float alpha, float beta) const;
 
-    Triangle(int, Material*, Point3f*, Point3f*, Point3f*);
+    Triangle(int, Material*, Vector3f*, Vector3f*, Vector3f*);
     // plane-ray intersection ray: p(t) = orig + t * dir
     //
     // Implicit plane:

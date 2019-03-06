@@ -1,5 +1,5 @@
 #include "diffuse.h"
-#include "../math/point3f.h"
+#include "../math/vector3f.h"
 #include "../spectrum.h"
 #include "../hitRecord.h"
 
@@ -11,13 +11,13 @@ class GridTexturedMaterial : public Material {
     Spectrum* lineColor;
     Spectrum* tileColor;
     float thickness;
-    Point3f* shift;
+    Vector3f* shift;
     float scale;
     Diffuse* diffuse;
 
-    GridTexturedMaterial(Spectrum* lineColor, Spectrum* tileColor, float thickness, Point3f* shift, float scale);
-    virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn);
-    virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Point3f* wOut);
+    GridTexturedMaterial(Spectrum* lineColor, Spectrum* tileColor, float thickness, Vector3f* shift, float scale);
+    virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn);
+    virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut);
 
     virtual bool hasSpecularReflection();
     virtual bool hasSpecularRefraction();

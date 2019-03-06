@@ -1,16 +1,16 @@
 #include <string>
 #include <vector>
-#include "point3f.h"
+#include "vector3f.h"
 #include <iostream>
 
 #ifndef OBJ_READER_H
 #define OBJ_READER_H
 
 struct MeshData {
-  std::vector<Point3f*> vertices;
-  std::vector<Point3f*> normals;
-  std::vector<Point3f*> faces;
-  std::vector<Point3f*> normalFaces;
+  std::vector<Vector3f*> vertices;
+  std::vector<Vector3f*> normals;
+  std::vector<Vector3f*> faces;
+  std::vector<Vector3f*> normalFaces;
   void log() {
     std::cout << "Vertices extracted: " << vertices.size() << std::endl;
     std::cout << "Normals extracted: " << normals.size() << std::endl;

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include "vector4f.h"
-#include "point3f.h"
+#include "vector3f.h"
 
 TEST(Vector4f, with_no_args) {
   auto v = new Vector4f();
@@ -20,7 +20,7 @@ TEST(Vector4f, with_floats) {
 }
 
 TEST(Vector4f, create_with_point3f_and_float) {
-  auto v = new Vector4f(new Point3f(1, 2, 3), 4);
+  auto v = new Vector4f(new Vector3f(1, 2, 3), 4);
   ASSERT_EQ(1, v->x);
   ASSERT_EQ(2, v->y);
   ASSERT_EQ(3, v->z);
@@ -35,9 +35,9 @@ TEST(Vector4f, dot) {
   ASSERT_EQ(200, p->dot(q));
 }
 
-TEST(Vector4f, toPoint3f) {
-  auto v = new Vector4f(new Point3f(1, 2, 3), 4);
-  auto p = v->toPoint3f();
+TEST(Vector4f, toVector3f) {
+  auto v = new Vector4f(new Vector3f(1, 2, 3), 4);
+  auto p = v->toVector3f();
   ASSERT_EQ(1, p->x);
   ASSERT_EQ(2, p->y);
   ASSERT_EQ(3, p->z);

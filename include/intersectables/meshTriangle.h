@@ -9,12 +9,12 @@
 class MeshTriangle : public Triangle {
   public:
     // vertex normals
-    Point3f* na;
-    Point3f* nb;
-    Point3f* nc;
+    Vector3f* na;
+    Vector3f* nb;
+    Vector3f* nc;
 
-    Point3f* computeNormal(float alpha, float beta) const;
-    MeshTriangle(int, Material*, Point3f*, Point3f*, Point3f*, Point3f*, Point3f*, Point3f*);
+    Vector3f* computeNormal(float alpha, float beta) const;
+    MeshTriangle(int, Material*, Vector3f*, Vector3f*, Vector3f*, Vector3f*, Vector3f*, Vector3f*);
 
     void log() {
       std::cout << "face-index: " << faceId << std::endl;

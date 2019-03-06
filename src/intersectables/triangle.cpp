@@ -3,14 +3,14 @@
 #include "triangle.h"
 #include "matrix3f.h"
 
-Triangle::Triangle(int faceId, Material* material, Point3f* a, Point3f* b, Point3f* c)
+Triangle::Triangle(int faceId, Material* material, Vector3f* a, Vector3f* b, Vector3f* c)
   : faceId(faceId), material(material), a(a), b(b), c(c) {}
 
-Point3f* Triangle::computeNormal(float, float) const {
-  Point3f ba(b);
+Vector3f* Triangle::computeNormal(float, float) const {
+  Vector3f ba(b);
   ba.sub(a);
 
-  Point3f ca(c);
+  Vector3f ca(c);
   ca.sub(a);
 
   auto normal = ba.cross(&ca);
@@ -20,13 +20,13 @@ Point3f* Triangle::computeNormal(float, float) const {
 }
 
 HitRecord* Triangle::intersect(Ray* ray) const {
-  Point3f ab = Point3f(a);
+  Vector3f ab = Vector3f(a);
   ab.sub(b);
 
-  Point3f ac = Point3f(a);
+  Vector3f ac = Vector3f(a);
   ac.sub(c);
 
-  Point3f ao = Point3f(a);
+  Vector3f ao = Vector3f(a);
   ao.sub(ray->origin);
 
   // Interpret a triangle with an infinite plane with constraints (given by
@@ -40,7 +40,7 @@ HitRecord* Triangle::intersect(Ray* ray) const {
   auto invM = std::unique_ptr<Matrix3f>(m.inv());
 
   // matrix vector multiplication: A * params = y
-  auto params = std::unique_ptr<Point3f>(invM->mult(&ao));
+  auto params = std::unique_ptr<Vector3f>(invM->mult(&ao));
 
   // Perform conservative inside-outside check
   if (params->x <= 0 || params->x >= 1) {
@@ -60,14 +60,14 @@ HitRecord* Triangle::intersect(Ray* ray) const {
   float t = params->z;
 
   auto intersectionPosition = ray->pointAt(t);
-  auto wIn = Point3f().incidentDirection(ray->direction);
+  auto wIn = Vector3f().incidentDirection(ray->direction);
   auto normal = computeNormal(params->x, params->y);
 
   auto hit = new HitRecord(
     t,
     intersectionPosition,
     normal,
-    new Point3f(),
+    new Vector3f(),
     wIn,
     material,
     this

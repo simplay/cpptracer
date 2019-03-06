@@ -1,6 +1,6 @@
 #include <string>
 #include "math/matrix4f.h"
-#include "math/point3f.h"
+#include "math/vector3f.h"
 
 #ifndef RAY_H
 #define RAY_H
@@ -13,8 +13,8 @@ class Ray {
     float EPSILON = 0.00001;
 
   public:
-    Point3f* origin;
-    Point3f* direction;
+    Vector3f* origin;
+    Vector3f* direction;
     int depth;
 
     // Image coordinates: used for debugging purposes
@@ -22,12 +22,12 @@ class Ray {
     int j;
 
     ~Ray();
-    Ray(Point3f* origin, Point3f* direction, bool perturbate = true);
-    Ray(Point3f* origin, Point3f* direction, int i, int j, bool perturbate = true);
-    Ray(Point3f* origin, Point3f* direction, int depth, bool perturbate = true);
+    Ray(Vector3f* origin, Vector3f* direction, bool perturbate = true);
+    Ray(Vector3f* origin, Vector3f* direction, int i, int j, bool perturbate = true);
+    Ray(Vector3f* origin, Vector3f* direction, int depth, bool perturbate = true);
 
     // Get point on ray at origin + direction * t
-    Point3f* pointAt(float t);
+    Vector3f* pointAt(float t);
 
     Ray* transform(Matrix4f*);
 

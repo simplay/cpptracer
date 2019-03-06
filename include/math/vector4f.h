@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-class Point3f;
+class Vector3f;
 
 #ifndef VECTOR4F_H
 #define VECTOR4F_H
@@ -14,14 +14,14 @@ class Vector4f {
 
     Vector4f();
     Vector4f(float, float, float, float);
-    Vector4f(Point3f*, float);
+    Vector4f(Vector3f*, float);
 
     float dot(Vector4f* other);
     void log() {
       printf("(%f, %f, %f, %f)\n", x, y, z, w);
     }
 
-    Point3f* toPoint3f();
+    Vector3f* toVector3f();
 };
 
 #endif

@@ -3,8 +3,8 @@
 #include "ray.h"
 
 TEST(Ray, new_ray_with_args) {
-  Point3f* origin = new Point3f(1, 2, 3);
-  Point3f* direction = new Point3f(1, 2, 3);
+  Vector3f* origin = new Vector3f(1, 2, 3);
+  Vector3f* direction = new Vector3f(1, 2, 3);
   Ray* r = new Ray(origin, direction, false);
 
   ASSERT_EQ(origin->x, r->origin->x);
@@ -17,11 +17,11 @@ TEST(Ray, new_ray_with_args) {
 }
 
 TEST(Ray, pointAt) {
-  Point3f* origin = new Point3f(0, 0, 0);
-  Point3f* direction = new Point3f(1, 0, 0);
+  Vector3f* origin = new Vector3f(0, 0, 0);
+  Vector3f* direction = new Vector3f(1, 0, 0);
   Ray* r = new Ray(origin, direction, false);
 
-  Point3f* p = r->pointAt(2);
+  Vector3f* p = r->pointAt(2);
 
   ASSERT_EQ(2, p->x);
   ASSERT_EQ(0, p->y);

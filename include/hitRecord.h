@@ -1,6 +1,6 @@
 #include <iostream>
 #include "math/matrix4f.h"
-#include "math/point3f.h"
+#include "math/vector3f.h"
 
 // forward declaration:
 // See https://stackoverflow.com/questions/4757565/what-are-forward-declarations-in-c
@@ -23,18 +23,18 @@ class HitRecord {
     float t;
 
     // position where the ray hit the surface
-    Point3f* position;
+    Vector3f* position;
 
     // normal at hit position
-    Point3f* normal;
+    Vector3f* normal;
 
     // tangent at hit position
-    Point3f* tangent;
+    Vector3f* tangent;
 
     // Direction towards origin of ray that hit surface. By convention it
     // points away from the surface, that is, in the direction opposite to the
     // incident ray.
-    Point3f* wIn;
+    Vector3f* wIn;
 
     // The material at the hit point.
     Material* material;
@@ -53,20 +53,20 @@ class HitRecord {
 
     HitRecord(
       float t,
-      Point3f* position,
-      Point3f* normal,
-      Point3f* tangent,
-      Point3f* wIn,
+      Vector3f* position,
+      Vector3f* normal,
+      Vector3f* tangent,
+      Vector3f* wIn,
       Material* material,
       const Intersectable* intersectable
     );
 
     HitRecord(
       float t,
-      Point3f* position,
-      Point3f* normal,
-      Point3f* tangent,
-      Point3f* wIn,
+      Vector3f* position,
+      Vector3f* normal,
+      Vector3f* tangent,
+      Vector3f* wIn,
       Material* material,
       const Intersectable* intersectable,
       int i,
@@ -74,7 +74,7 @@ class HitRecord {
     );
 
     HitRecord(
-      Point3f* position,
+      Vector3f* position,
       Material* material
     );
 

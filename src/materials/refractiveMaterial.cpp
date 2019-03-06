@@ -3,11 +3,11 @@
 #include "refractiveMaterial.h"
 
 float RefractiveMaterial::fresnelFactor(HitRecord* hitRecord) {
-  Point3f wIn(hitRecord->wIn);
+  Vector3f wIn(hitRecord->wIn);
   wIn.negate();
   wIn.normalize();
 
-  Point3f normal(hitRecord->normal);
+  Vector3f normal(hitRecord->normal);
 
   // enters material
   float n1 = 1;
@@ -47,11 +47,11 @@ RefractiveMaterial::RefractiveMaterial(float refractionIndex)
 RefractiveMaterial::RefractiveMaterial(float refractionIndex, Spectrum* ks)
   : refractionIndex(refractionIndex), ks(ks) {}
 
-Spectrum* RefractiveMaterial::evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn) {
+Spectrum* RefractiveMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
   return new Spectrum();
 }
 
-Spectrum* RefractiveMaterial::evaluateEmission(HitRecord*, Point3f*) {
+Spectrum* RefractiveMaterial::evaluateEmission(HitRecord*, Vector3f*) {
   return new Spectrum();
 }
 
@@ -83,11 +83,11 @@ ShadingSample* RefractiveMaterial::evaluateSpecularReflection(HitRecord* hitReco
 }
 
 ShadingSample* RefractiveMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) {
-  Point3f wIn(hitRecord->wIn);
+  Vector3f wIn(hitRecord->wIn);
   wIn.negate();
   wIn.normalize();
 
-  Point3f normal(hitRecord->normal);
+  Vector3f normal(hitRecord->normal);
 
   // enters material
   float n1 = 1.0;
@@ -107,10 +107,10 @@ ShadingSample* RefractiveMaterial::evaluateSpecularRefraction(HitRecord* hitReco
     return new ShadingSample();
   }
 
-  Point3f* refractedDir = new Point3f(wIn);
+  Vector3f* refractedDir = new Vector3f(wIn);
   refractedDir->scale(phaseVelocity);
 
-  Point3f scaledNormal(normal);
+  Vector3f scaledNormal(normal);
   scaledNormal.scale(phaseVelocity * cosThetaI - sqrt(1.0 - sin2ThetaT));
   refractedDir->add(&scaledNormal);
 

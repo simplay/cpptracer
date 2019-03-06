@@ -3,9 +3,9 @@
 #include "whittedIntegrator.h"
 #include "../materials/material.h"
 
-bool WhittedIntegrator::isOccluded(Point3f* hitPosition, Point3f* lightDir, float eps) {
+bool WhittedIntegrator::isOccluded(Vector3f* hitPosition, Vector3f* lightDir, float eps) {
   Ray shadowRay(
-    new Point3f(hitPosition),
+    new Vector3f(hitPosition),
     lightDir
   );
 
@@ -16,7 +16,7 @@ bool WhittedIntegrator::isOccluded(Point3f* hitPosition, Point3f* lightDir, floa
     return false;
   }
 
-  Point3f dist_shad_hit_view_hit2(shadowHit->position);
+  Vector3f dist_shad_hit_view_hit2(shadowHit->position);
   dist_shad_hit_view_hit2.sub(hitPosition);
   bool hasShadowHit = shadowHit->material->castsShadows() && (dist_shad_hit_view_hit2.dot() < eps);
   delete shadowHit;
@@ -27,7 +27,7 @@ bool WhittedIntegrator::isOccluded(Point3f* hitPosition, Point3f* lightDir, floa
 
 Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* hitRecord) {
   HitRecord* lightHit = lightSource->sample();
-  Point3f lightDir(lightHit->position);
+  Vector3f lightDir(lightHit->position);
   lightDir.sub(hitRecord->position);
 
   float d2 = lightDir.dot();
@@ -44,7 +44,7 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
   Spectrum* contribution = new Spectrum(brdfContribution);
   delete brdfContribution;
 
-  Point3f oppositeLightDir(lightDir);
+  Vector3f oppositeLightDir(lightDir);
   oppositeLightDir.negate();
 
   Spectrum* lightEmission = lightHit->material->evaluateEmission(lightHit, &oppositeLightDir);
@@ -84,7 +84,7 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
     ShadingSample* sample = hitRecord->material->evaluateSpecularReflection(hitRecord);
     if (sample->isValid) {
       reflection.add(sample->brdf);
-      Ray reflectedRay(new Point3f(hitRecord->position), sample->w, ray->depth + 1);
+      Ray reflectedRay(new Vector3f(hitRecord->position), sample->w, ray->depth + 1);
       Spectrum* spec = integrate(&reflectedRay);
       reflection.mult(spec);
       delete reflectedRay.origin;
@@ -98,7 +98,7 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
     if (sample->isValid) {
       refraction.add(sample->brdf);
 
-      Ray refractedRay(new Point3f(hitRecord->position), sample->w, ray->depth + 1);
+      Ray refractedRay(new Vector3f(hitRecord->position), sample->w, ray->depth + 1);
       Spectrum* spec = integrate(&refractedRay);
       refraction.mult(spec);
 

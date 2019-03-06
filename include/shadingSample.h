@@ -1,5 +1,5 @@
 #include "spectrum.h"
-#include "math/point3f.h"
+#include "math/vector3f.h"
 
 #ifndef SHADING_SAMPLE_H
 #define SHADING_SAMPLE_H
@@ -11,7 +11,7 @@ class ShadingSample {
     Spectrum* emission;
 
     // sample direction
-    Point3f* w;
+    Vector3f* w;
 
     /**
      * Tells the integrator whether this is a specular sample. In this case, a
@@ -27,7 +27,7 @@ class ShadingSample {
     float p;
 
     ~ShadingSample();
-    ShadingSample(Spectrum*, Spectrum*, Point3f*, bool, float);
+    ShadingSample(Spectrum*, Spectrum*, Vector3f*, bool, float);
     ShadingSample();
 
 };

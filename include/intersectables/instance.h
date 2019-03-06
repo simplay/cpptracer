@@ -1,6 +1,6 @@
 #include "intersectable.h"
 #include "../math/matrix4f.h"
-#include "../math/point3f.h"
+#include "../math/vector3f.h"
 #include "../hitRecord.h"
 #include "../ray.h"
 

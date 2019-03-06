@@ -1,6 +1,6 @@
 #include <vector>
 #include "math/matrix4f.h"
-#include "math/point3f.h"
+#include "math/vector3f.h"
 #include "ray.h"
 
 #ifndef CAMERA_H
@@ -41,14 +41,14 @@ class Camera {
   Matrix4f* matrix;
 
   // origin of camera's viewing direction
-  Point3f* eye;
+  Vector3f* eye;
 
   // the point in the scene we are looking at
-  Point3f* lookAt;
+  Vector3f* lookAt;
 
   // reference vector that define the upwards direction. Notice, that according
   // to our coordinate-system, upwards means having a positive y value.
-  Point3f* up;
+  Vector3f* up;
 
   // vertical field of view, an angle
   float fov;
@@ -69,7 +69,7 @@ class Camera {
 
   public:
 
-  Camera(Point3f* eye, Point3f* lookAt, Point3f* up, float fov, float aspectRatio, float width, float height);
+  Camera(Vector3f* eye, Vector3f* lookAt, Vector3f* up, float fov, float aspectRatio, float width, float height);
 
   Matrix4f* transformation();
 

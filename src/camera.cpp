@@ -2,13 +2,13 @@
 #include <iostream>
 #include "camera.h"
 #include "ray.h"
-#include "math/point3f.h"
+#include "math/vector3f.h"
 #include "math/vector4f.h"
 
 Camera::Camera(
-  Point3f* eye,
-  Point3f* lookAt,
-  Point3f* up,
+  Vector3f* eye,
+  Vector3f* lookAt,
+  Vector3f* up,
   float fov,
   float aspectRatio,
   float width,
@@ -22,22 +22,22 @@ Camera::Camera(
   width(width),
   height(height)
 {
-  Point3f from(eye);
-  Point3f to(lookAt);
+  Vector3f from(eye);
+  Vector3f to(lookAt);
 
   // z-axis
-  Point3f w(from);
+  Vector3f w(from);
   w.sub(&to);
   w.normalize();
   Vector4f* zc = new Vector4f(w.x, w.y, w.z, 0.0);
 
   // # x-axis
-  Point3f* u = up->cross(&w);
+  Vector3f* u = up->cross(&w);
   u->normalize();
   Vector4f* xc = new Vector4f(u->x, u->y, u->z, 0.0);
 
   // # y-axis
-  Point3f* v = w.cross(u);
+  Vector3f* v = w.cross(u);
   Vector4f* yc = new Vector4f(v->x, v->y, v->z, 0.0);
   delete v;
   delete u;
@@ -81,7 +81,7 @@ Ray* Camera::makeWorldspaceRay(int i, int j, std::vector<float>* samples) {
   Vector4f* v = new Vector4f(u_ij, v_ij, w_ij, 0);
   Vector4f* p_uvw = matrix->mult(v);
   delete v;
-  Ray* ray = new Ray(new Point3f(eye), new Point3f(p_uvw), i, j);
+  Ray* ray = new Ray(new Vector3f(eye), new Vector3f(p_uvw), i, j);
 
   delete p_uvw;
 

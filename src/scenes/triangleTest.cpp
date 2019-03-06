@@ -11,7 +11,7 @@ TriangleTest::TriangleTest(int width, int height)
 
 void TriangleTest::buildLights() {
   std::vector<PointLight*>* lightList = new std::vector<PointLight*>;
-  lightList->push_back(new PointLight(new Point3f(0.0, 0.0, 3.0), new Spectrum(10.0)));
+  lightList->push_back(new PointLight(new Vector3f(0.0, 0.0, 3.0), new Spectrum(10.0)));
   this->lightList = lightList;
 }
 
@@ -21,9 +21,9 @@ void TriangleTest::buildIntersectables() {
   auto tri = new Triangle(
     1,
     material,
-    new Point3f(0.0, 0.0, 0.0),
-    new Point3f(1.0, 0.0, 0.0),
-    new Point3f(0.0, 1.0, 0.0)
+    new Vector3f(0.0, 0.0, 0.0),
+    new Vector3f(1.0, 0.0, 0.0),
+    new Vector3f(0.0, 1.0, 0.0)
   );
 
   Matrix4f* transform = new Matrix4f(

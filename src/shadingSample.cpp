@@ -9,7 +9,7 @@ ShadingSample::~ShadingSample() {
 ShadingSample::ShadingSample(
     Spectrum* brdf,
     Spectrum* emission,
-    Point3f* w,
+    Vector3f* w,
     bool isSpecular,
     float p
 ):

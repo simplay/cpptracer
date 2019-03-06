@@ -2,7 +2,7 @@
 #include <cmath>
 #include "plane.h"
 
-Plane::Plane(Material* material, Point3f normal, float distance)
+Plane::Plane(Material* material, Vector3f normal, float distance)
   : material(material), normal(normal), distance(distance)
 {}
 
@@ -40,10 +40,10 @@ HitRecord* Plane::intersect(Ray* ray) const {
   }
 
   auto intersectionPosition = ray->pointAt(t);
-  auto wIn = Point3f().incidentDirection(ray->direction);
+  auto wIn = Vector3f().incidentDirection(ray->direction);
 
-  auto hitNormal = new Point3f(normal);
-  auto tangent = Point3f(1, 0, 0).cross(hitNormal);
+  auto hitNormal = new Vector3f(normal);
+  auto tangent = Vector3f(1, 0, 0).cross(hitNormal);
 
   return new HitRecord(
     t,

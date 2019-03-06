@@ -1,5 +1,5 @@
 #include "intersectable.h"
-#include "../math/point3f.h"
+#include "../math/vector3f.h"
 #include "../hitRecord.h"
 #include "../ray.h"
 
@@ -18,12 +18,12 @@ class Plane : public Intersectable {
     Material* material;
 
     // normal of the plane
-    const Point3f normal;
+    const Vector3f normal;
 
     // distance to origin measured along normal direction
     const float distance;
 
-    Plane(Material*, Point3f, float);
+    Plane(Material*, Vector3f, float);
     // plane-ray intersection ray: p(t) = orig + t * dir
     //
     // Implicit plane:

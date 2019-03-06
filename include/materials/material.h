@@ -1,4 +1,4 @@
-#include "../math/point3f.h"
+#include "../math/vector3f.h"
 #include "../spectrum.h"
 #include "../hitRecord.h"
 #include "../shadingSample.h"
@@ -25,7 +25,7 @@ class Material {
      *  surface
      * @return BRDF value
      */
-    virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn) = 0;
+    virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) = 0;
 
     /**
      * Evaluate emission for outgoing direction. This method is typically
@@ -37,7 +37,7 @@ class Material {
      *  surface
      * @return emission value
      */
-    virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Point3f* wOut) = 0;
+    virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut) = 0;
 
     /**
      * Return whether material has perfect specular reflection.

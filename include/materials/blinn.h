@@ -9,8 +9,8 @@ class Blinn : public Material {
     float shinynessPower;
 
     Blinn(Spectrum*, Spectrum*, float);
-    virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Point3f* wOut, Point3f* wIn);
-    virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Point3f* wOut);
+    virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn);
+    virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut);
 
     virtual bool hasSpecularReflection();
     virtual bool hasSpecularRefraction();
