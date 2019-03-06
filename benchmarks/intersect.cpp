@@ -6,6 +6,7 @@
 #include "../intersectables/sphere.h"
 #include "../intersectables/triangle.h"
 #include "../materials/diffuse.h"
+#include "../lights/pointLight.h"
 
 namespace {
 
@@ -90,5 +91,20 @@ static void BM_PlaneIntersect(benchmark::State& state) {
   }
 }
 BENCHMARK(BM_PlaneIntersect);
+
+static void BM_PointLightIntersect(benchmark::State& state) {
+  auto light = PointLight(
+    new Vector3f(0.0, 0.0, 0.0),
+    new Spectrum(1.0)
+  );
+
+  auto rays = MakeRays();
+  for (auto _ : state) {
+    for (auto& r : rays) {
+      std::unique_ptr<HitRecord>(light.intersect(&r));
+    }
+  }
+}
+BENCHMARK(BM_PointLightIntersect);
 
 }
