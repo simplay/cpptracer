@@ -15,7 +15,8 @@
 
 using namespace std;
 
-Renderer::Renderer(Scene* scene): scene(scene) {}
+Renderer::Renderer(Scene* scene): scene(scene), printProgress(true) {}
+Renderer::Renderer(Scene* scene, bool printProgress): scene(scene), printProgress(printProgress) {}
 
 void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* taskCounters) {
   // for each image index value
@@ -89,13 +90,17 @@ void Renderer::render(int threadCount, int spp) {
 
   int totalTasks = width * height * spp;
   ProgressBar progressBar(taskCounters, totalTasks);
-  progressBar.start();
+  if (printProgress) {
+    progressBar.start();
+  }
 
   // wait until all threads have completed their task
   for (auto& threads : threads) {
     threads.join();
   }
-  progressBar.stop();
+  if (printProgress) {
+    progressBar.stop();
+  }
 
   // write computed contribution to image and save it
   Image img = Image(width, height, scene->film->normalMeasurements(), scene->filename());
