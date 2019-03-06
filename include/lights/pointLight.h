@@ -8,10 +8,10 @@ class Material;
 
 class PointLight : public LightGeometry {
   public:
-    Vector3f* position;
+    const Vector3f position;
     Material* material;
 
-    PointLight(Vector3f*, Spectrum*);
+    PointLight(Vector3f, Spectrum*);
     virtual HitRecord* sample() const;
     virtual HitRecord* intersect(Ray*) const;
 };

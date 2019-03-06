@@ -94,7 +94,7 @@ BENCHMARK(BM_PlaneIntersect);
 
 static void BM_PointLightIntersect(benchmark::State& state) {
   auto light = PointLight(
-    new Vector3f(0.0, 0.0, 0.0),
+    Vector3f(0.0, 0.0, 0.0),
     new Spectrum(1.0)
   );
 

@@ -30,12 +30,12 @@ void RefractiveTest::buildCamera() {
 
 void RefractiveTest::buildLights() {
   std::vector<PointLight*>* lightList = new std::vector<PointLight*>;
-  Vector3f* lightPos = new Vector3f(0.0, 0.0, 3.0);
-  lightPos->add(new Vector3f(-1.f, 0.f, 0.f));
+  Vector3f lightPos(0.0, 0.0, 3.0);
+  lightPos.add(new Vector3f(-1.f, 0.f, 0.f));
   lightList->push_back(new PointLight(lightPos, new Spectrum(14.f, 14.f, 14.f)));
-  lightPos->add(new Vector3f(2.f, 0.f, 0.f));
+  lightPos.add(new Vector3f(2.f, 0.f, 0.f));
   lightList->push_back(new PointLight(lightPos, new Spectrum(14.f, 14.f, 14.f)));
-  lightList->push_back(new PointLight(new Vector3f(0.7f, 0.7f, 0.7f), new Spectrum(14.f, 14.f, 14.f)));
+  lightList->push_back(new PointLight(Vector3f(0.7f, 0.7f, 0.7f), new Spectrum(14.f, 14.f, 14.f)));
   this->lightList = lightList;
 }
 

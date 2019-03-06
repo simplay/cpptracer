@@ -2,7 +2,7 @@
 #include "pointLightMaterial.h"
 #include "../materials/material.h"
 
-PointLight::PointLight(Vector3f* position, Spectrum* emission)
+PointLight::PointLight(Vector3f position, Spectrum* emission)
   : position(position), material((Material *) new PointLightMaterial(emission))
 {}
 

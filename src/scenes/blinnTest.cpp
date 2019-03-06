@@ -25,8 +25,8 @@ void BlinnTest::buildCamera() {
 
 void BlinnTest::buildLights() {
   std::vector<PointLight*>* lightList = new std::vector<PointLight*>;
-  lightList->push_back(new PointLight(new Vector3f(0.5, 0.5, 2.0), new Spectrum(1.0)));
-  lightList->push_back(new PointLight(new Vector3f(-0.75, 0.75, 2.0), new Spectrum(1.0, 0.0, 10.0)));
+  lightList->push_back(new PointLight(Vector3f(0.5, 0.5, 2.0), new Spectrum(1.0)));
+  lightList->push_back(new PointLight(Vector3f(-0.75, 0.75, 2.0), new Spectrum(1.0, 0.0, 10.0)));
   this->lightList = lightList;
 }
 
