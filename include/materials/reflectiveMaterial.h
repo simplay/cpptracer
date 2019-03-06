@@ -8,9 +8,10 @@
 #define REFLECTIVE_MATERIAL_H
 
 class ReflectiveMaterial : public Material {
-  public:
+  private:
     Spectrum* ks;
 
+  public:
     ReflectiveMaterial();
     ReflectiveMaterial(Spectrum*);
 
@@ -20,6 +21,7 @@ class ReflectiveMaterial : public Material {
     virtual bool hasSpecularReflection();
     virtual bool hasSpecularRefraction();
     virtual bool castsShadows();
+
     virtual ShadingSample* evaluateSpecularReflection(HitRecord* hitRecord);
     virtual ShadingSample* evaluateSpecularRefraction(HitRecord* hitRecord);
 };

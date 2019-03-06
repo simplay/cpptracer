@@ -12,7 +12,7 @@ class Material;
 // distance is along the direction that the normal points (meaning that the
 // sign of distance matters)
 class Triangle : public Intersectable {
-  public:
+  protected:
     int faceId;
     Material* material;
 
@@ -22,6 +22,8 @@ class Triangle : public Intersectable {
     Vector3f* c;
 
     virtual Vector3f* computeNormal(float alpha, float beta) const;
+
+  public:
 
     Triangle(int, Material*, Vector3f*, Vector3f*, Vector3f*);
     // plane-ray intersection ray: p(t) = orig + t * dir

@@ -3,11 +3,12 @@
 #ifndef BLINN_H
 #define BLINN_H
 class Blinn : public Material {
-  public:
+  private:
     Spectrum* diffuseContribution;
     Spectrum* specularContribution;
     float shinynessPower;
 
+  public:
     Blinn(Spectrum*, Spectrum*, float);
     virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn);
     virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut);

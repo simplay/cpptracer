@@ -12,10 +12,11 @@ class RefractiveMaterial : public Material {
     // based on Schlick's approximation:
     // See https://en.wikipedia.org/wiki/Schlick%27s_approximation
     float fresnelFactor(HitRecord*);
-  public:
+
     float refractionIndex;
     Spectrum* ks;
 
+  public:
     RefractiveMaterial(float);
     RefractiveMaterial(float, Spectrum*);
 
@@ -25,6 +26,7 @@ class RefractiveMaterial : public Material {
     virtual bool hasSpecularReflection();
     virtual bool hasSpecularRefraction();
     virtual bool castsShadows();
+
     virtual ShadingSample* evaluateSpecularReflection(HitRecord* hitRecord);
     virtual ShadingSample* evaluateSpecularRefraction(HitRecord* hitRecord);
 };

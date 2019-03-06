@@ -7,9 +7,10 @@
 #define POINT_LIGHT_MATERIAL_H
 
 class PointLightMaterial {
-  public:
+  private:
     Spectrum* emission;
 
+  public:
     PointLightMaterial(Spectrum*);
     virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn);
     virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut);

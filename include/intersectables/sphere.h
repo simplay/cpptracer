@@ -8,13 +8,13 @@ class Material;
 #ifndef SPHERE_H
 #define SPHERE_H
 class Sphere : public Intersectable {
-  public:
+  private:
     Material* material;
     const Vector3f center;
     const float radius;
 
+  public:
     Sphere(Material*, Vector3f, float);
-
     virtual HitRecord* intersect(Ray* ray) const;
 };
 #endif

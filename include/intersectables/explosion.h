@@ -9,14 +9,11 @@ class Material;
 #ifndef EXPLOSION_H
 #define EXPLOSION_H
 class Explosion : public Intersectable {
-  public:
+  private:
     Material* material;
     const Vector3f center;
     const float radius;
 
-    Explosion(Material*, const Vector3f, float);
-
-    virtual HitRecord* intersect(Ray* ray) const;
     float signed_distance(const Vector3f& p) const;
     float fractal_brownian_motion(const Vector3f& x) const;
     Vector3f rotate(const Vector3f& v) const;
@@ -30,5 +27,9 @@ class Explosion : public Intersectable {
       float x = sin(n) * 43758.5453f;
       return x - floor(x);
     }
+
+  public:
+    Explosion(Material*, const Vector3f, float);
+    virtual HitRecord* intersect(Ray* ray) const;
 };
 #endif

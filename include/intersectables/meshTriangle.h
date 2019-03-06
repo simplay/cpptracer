@@ -7,13 +7,15 @@
 // distance is along the direction that the normal points (meaning that the
 // sign of distance matters)
 class MeshTriangle : public Triangle {
-  public:
+  protected:
     // vertex normals
     Vector3f* na;
     Vector3f* nb;
     Vector3f* nc;
 
     Vector3f* computeNormal(float alpha, float beta) const;
+
+  public:
     MeshTriangle(int, Material*, Vector3f*, Vector3f*, Vector3f*, Vector3f*, Vector3f*, Vector3f*);
 
     void log() {

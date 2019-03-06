@@ -6,7 +6,6 @@
 
 class Matrix3f {
   public:
-
     float m00, m01, m02;
     float m10, m11, m12;
     float m20, m21, m22;

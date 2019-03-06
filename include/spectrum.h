@@ -8,7 +8,6 @@
  * Float valued point with 3 coordinates.
  */
 class Spectrum {
-
   public:
     float r;
     float g;

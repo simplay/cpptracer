@@ -12,9 +12,9 @@ class Material;
 // distance is along the direction that the normal points (meaning that the
 // sign of distance matters)
 class Plane : public Intersectable {
-  const float EPSILON = 0.000001;
+  protected:
+    const float EPSILON = 0.000001;
 
-  public:
     Material* material;
 
     // normal of the plane
@@ -23,6 +23,7 @@ class Plane : public Intersectable {
     // distance to origin measured along normal direction
     const float distance;
 
+  public:
     Plane(Material*, Vector3f, float);
     // plane-ray intersection ray: p(t) = orig + t * dir
     //
