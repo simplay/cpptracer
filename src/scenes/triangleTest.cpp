@@ -21,9 +21,9 @@ void TriangleTest::buildIntersectables() {
   auto tri = new Triangle(
     1,
     material,
-    new Vector3f(0.0, 0.0, 0.0),
-    new Vector3f(1.0, 0.0, 0.0),
-    new Vector3f(0.0, 1.0, 0.0)
+    Vector3f(0.0, 0.0, 0.0),
+    Vector3f(1.0, 0.0, 0.0),
+    Vector3f(0.0, 1.0, 0.0)
   );
 
   Matrix4f* transform = new Matrix4f(

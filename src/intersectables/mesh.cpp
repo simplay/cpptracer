@@ -11,9 +11,9 @@ Mesh::Mesh(Material* material, std::string filepath)
 
     int faceIdx = 0;
     for (auto face : mesh.faces) {
-      int idX = face->x;
-      int idY = face->y;
-      int idZ = face->z;
+      int idX = face.x;
+      int idY = face.y;
+      int idZ = face.z;
 
       auto vx = mesh.vertices.at(idX - 1);
       auto vy = mesh.vertices.at(idY - 1);
@@ -21,9 +21,9 @@ Mesh::Mesh(Material* material, std::string filepath)
 
       if (mesh.normals.size() > 0) {
         auto nf = mesh.normalFaces.at(faceIdx);
-        int idNx = nf->x;
-        int idNy = nf->y;
-        int idNz = nf->z;
+        int idNx = nf.x;
+        int idNy = nf.y;
+        int idNz = nf.z;
 
         auto nx = mesh.normals.at(idNx - 1);
         auto ny = mesh.normals.at(idNy - 1);

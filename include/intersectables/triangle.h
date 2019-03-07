@@ -17,15 +17,15 @@ class Triangle : public Intersectable {
     Material* material;
 
     // normal of the plane
-    Vector3f* a;
-    Vector3f* b;
-    Vector3f* c;
+    const Vector3f a;
+    const Vector3f b;
+    const Vector3f c;
 
     virtual Vector3f* computeNormal(float alpha, float beta) const;
 
   public:
 
-    Triangle(int, Material*, Vector3f*, Vector3f*, Vector3f*);
+    Triangle(int, Material*, const Vector3f&, const Vector3f&, const Vector3f&);
     // plane-ray intersection ray: p(t) = orig + t * dir
     //
     // Implicit plane:
@@ -36,9 +36,9 @@ class Triangle : public Intersectable {
     virtual void log() const {
       std::cout << "face-index: " << faceId << std::endl;
       std::cout << "vertices: " <<  std::endl;
-      a->log();
-      b->log();
-      c->log();
+      a.log();
+      b.log();
+      c.log();
     }
 };
 

@@ -3,15 +3,15 @@
 #include "triangle.h"
 #include "matrix3f.h"
 
-Triangle::Triangle(int faceId, Material* material, Vector3f* a, Vector3f* b, Vector3f* c)
+Triangle::Triangle(int faceId, Material* material, const Vector3f& a, const Vector3f& b, const Vector3f& c)
   : faceId(faceId), material(material), a(a), b(b), c(c) {}
 
 Vector3f* Triangle::computeNormal(float, float) const {
   Vector3f ba(b);
-  ba.sub(a);
+  ba.sub(&a);
 
   Vector3f ca(c);
-  ca.sub(a);
+  ca.sub(&a);
 
   auto normal = ba.cross(&ca);
   normal->normalize();
@@ -21,10 +21,10 @@ Vector3f* Triangle::computeNormal(float, float) const {
 
 HitRecord* Triangle::intersect(Ray* ray) const {
   Vector3f ab = Vector3f(a);
-  ab.sub(b);
+  ab.sub(&b);
 
   Vector3f ac = Vector3f(a);
-  ac.sub(c);
+  ac.sub(&c);
 
   Vector3f ao = Vector3f(a);
   ao.sub(ray->origin);

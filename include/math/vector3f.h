@@ -63,7 +63,7 @@ class Vector3f {
     // reflected := v + 2 * dot(v, normal) * normal
     Vector3f* invReflected(Vector3f*);
 
-    void log() {
+    void log() const {
       printf("(%f, %f, %f)\n", x, y, z);
     }
 };

@@ -4,12 +4,12 @@
 MeshTriangle::MeshTriangle(
   int faceId,
   Material* material,
-  Vector3f* a,
-  Vector3f* b,
-  Vector3f* c,
-  Vector3f* na,
-  Vector3f* nb,
-  Vector3f* nc
+  const Vector3f& a,
+  const Vector3f& b,
+  const Vector3f& c,
+  const Vector3f& na,
+  const Vector3f& nb,
+  const Vector3f& nc
 )
   : Triangle(faceId, material, a, b, c),
     na(na), nb(nb), nc(nc) {}
