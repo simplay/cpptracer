@@ -5,6 +5,7 @@
 #include "../intersectables/plane.h"
 #include "../intersectables/sphere.h"
 #include "../intersectables/triangle.h"
+#include "../intersectables/meshTriangle.h"
 #include "../materials/diffuse.h"
 #include "../lights/pointLight.h"
 
@@ -106,5 +107,27 @@ static void BM_PointLightIntersect(benchmark::State& state) {
   }
 }
 BENCHMARK(BM_PointLightIntersect);
+
+static void BM_MeshTriangleTntersect(benchmark::State& state) {
+  Diffuse material = Diffuse(new Spectrum(1.0));
+  auto meshTriangle = MeshTriangle(
+    1,
+    &material,
+    new Vector3f(0.0, 0.0, 0.0),
+    new Vector3f(1.0, 0.0, 0.0),
+    new Vector3f(0.0, 1.0, 0.0),
+    new Vector3f(1.0, 0.0, 0.0),
+    new Vector3f(0.0, 1.0, 0.0),
+    new Vector3f(0.0, 0.0, 1.0)
+  );
+
+  auto rays = MakeRays();
+  for (auto _ : state) {
+    for (auto& r : rays) {
+      std::unique_ptr<HitRecord>(meshTriangle.intersect(&r));
+    }
+  }
+}
+BENCHMARK(BM_MeshTriangleTntersect);
 
 }
