@@ -24,7 +24,7 @@ class Plane : public Intersectable {
     const float distance;
 
   public:
-    Plane(Material*, Vector3f, float);
+    Plane(Material*, const Vector3f&, float);
     // plane-ray intersection ray: p(t) = orig + t * dir
     //
     // Implicit plane:

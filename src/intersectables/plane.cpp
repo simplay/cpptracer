@@ -2,7 +2,7 @@
 #include <cmath>
 #include "plane.h"
 
-Plane::Plane(Material* material, Vector3f normal, float distance)
+Plane::Plane(Material* material, const Vector3f& normal, float distance)
   : material(material), normal(normal), distance(distance)
 {}
 

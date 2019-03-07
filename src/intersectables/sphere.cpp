@@ -2,7 +2,7 @@
 #include <cmath>
 #include "sphere.h"
 
-Sphere::Sphere(Material* material, Vector3f center, float radius)
+Sphere::Sphere(Material* material, const Vector3f& center, float radius)
   : material(material), center(center), radius(radius)
 {}
 

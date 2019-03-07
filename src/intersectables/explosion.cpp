@@ -2,7 +2,7 @@
 #include <cmath>
 #include "explosion.h"
 
-Explosion::Explosion(Material* material, const Vector3f center, float radius)
+Explosion::Explosion(Material* material, const Vector3f& center, float radius)
   : material(material), center(center), radius(radius)
 {}
 

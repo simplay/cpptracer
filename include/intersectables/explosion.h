@@ -29,7 +29,7 @@ class Explosion : public Intersectable {
     }
 
   public:
-    Explosion(Material*, const Vector3f, float);
+    Explosion(Material*, const Vector3f&, float);
     virtual HitRecord* intersect(Ray* ray) const;
 };
 #endif
