@@ -1,5 +1,5 @@
-#include "../math/vector4f.h"
-#include "instance.h"
+#include "math/vector4f.h"
+#include "intersectables/instance.h"
 
 Instance::Instance(Intersectable* intersectable)
   : intersectable(intersectable), transformation(Matrix4f().eye()) {

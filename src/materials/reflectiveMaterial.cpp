@@ -1,5 +1,5 @@
 #include <math.h>
-#include "reflectiveMaterial.h"
+#include "materials/reflectiveMaterial.h"
 
 ReflectiveMaterial::ReflectiveMaterial(): ks(new Spectrum(1, 1, 1)) {}
 ReflectiveMaterial::ReflectiveMaterial(Spectrum* ks): ks(ks) {}

@@ -1,6 +1,6 @@
-#include "cameraTest.h"
-#include "../intersectables/plane.h"
-#include "../materials/diffuse.h"
+#include "scenes/cameraTest.h"
+#include "intersectables/plane.h"
+#include "materials/diffuse.h"
 
 CameraTest::CameraTest(int width, int height)
   : Scene(width, height) {}

@@ -1,4 +1,4 @@
-#include "pointLightMaterial.h"
+#include "materials/pointLightMaterial.h"
 
 PointLightMaterial::PointLightMaterial(Spectrum* emission): emission(emission) {}
 

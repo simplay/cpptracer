@@ -1,9 +1,9 @@
-#include "explosionTest.h"
-#include "../intersectables/plane.h"
-#include "../intersectables/sphere.h"
-#include "../intersectables/explosion.h"
-#include "../materials/explosionMaterial.h"
-#include "../materials/diffuse.h"
+#include "scenes/explosionTest.h"
+#include "intersectables/plane.h"
+#include "intersectables/sphere.h"
+#include "intersectables/explosion.h"
+#include "materials/explosionMaterial.h"
+#include "materials/diffuse.h"
 
 ExplosionTest::ExplosionTest(int width, int height)
   : Scene(width, height) {}

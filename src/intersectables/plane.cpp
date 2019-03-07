@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include "plane.h"
+#include "intersectables/plane.h"
 
 Plane::Plane(Material* material, const Vector3f& normal, float distance)
   : material(material), normal(normal), distance(distance)

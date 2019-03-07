@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include "explosion.h"
+#include "intersectables/explosion.h"
 
 Explosion::Explosion(Material* material, const Vector3f& center, float radius)
   : material(material), center(center), radius(radius)

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
-#include "whittedIntegrator.h"
-#include "../materials/material.h"
+#include "integrators/whittedIntegrator.h"
+#include "materials/material.h"
 
 bool WhittedIntegrator::isOccluded(Vector3f* hitPosition, Vector3f* lightDir, float eps) {
   Ray shadowRay(

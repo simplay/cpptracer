@@ -1,10 +1,10 @@
-#include "triangleTest.h"
-#include "../intersectables/triangle.h"
-#include "../intersectables/meshTriangle.h"
-#include "../intersectables/instance.h"
-#include "../materials/diffuse.h"
-#include "../integrators/debugIntegrator.h"
-#include "../math/matrix4f.h"
+#include "scenes/triangleTest.h"
+#include "intersectables/triangle.h"
+#include "intersectables/meshTriangle.h"
+#include "intersectables/instance.h"
+#include "materials/diffuse.h"
+#include "integrators/debugIntegrator.h"
+#include "math/matrix4f.h"
 
 TriangleTest::TriangleTest(int width, int height)
   : Scene(width, height) {}

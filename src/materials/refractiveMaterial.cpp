@@ -1,6 +1,6 @@
 #include <math.h>
 #include <iostream>
-#include "refractiveMaterial.h"
+#include "materials/refractiveMaterial.h"
 
 float RefractiveMaterial::fresnelFactor(HitRecord* hitRecord) {
   Vector3f wIn(hitRecord->wIn);

@@ -1,4 +1,4 @@
-#include "matrix3f.h"
+#include "math/matrix3f.h"
 
 Matrix3f::Matrix3f()
   : m00(0), m01(0), m02(0),

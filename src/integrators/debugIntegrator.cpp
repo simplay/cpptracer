@@ -1,5 +1,5 @@
 #include <iostream>
-#include <debugIntegrator.h>
+#include <integrators/debugIntegrator.h>
 
 DebugIntegrator::DebugIntegrator(Scene* scene): scene(scene), showBinary(false) {}
 DebugIntegrator::DebugIntegrator(Scene* scene, bool showBinary): scene(scene), showBinary(showBinary) {}

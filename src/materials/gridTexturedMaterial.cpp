@@ -1,6 +1,6 @@
 #include <cmath>
 #include <iostream>
-#include "gridTexturedMaterial.h"
+#include "materials/gridTexturedMaterial.h"
 
 GridTexturedMaterial::GridTexturedMaterial(
   Spectrum* lineColor,

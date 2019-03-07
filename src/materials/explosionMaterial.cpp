@@ -1,5 +1,5 @@
 #include <math.h>
-#include "explosionMaterial.h"
+#include "materials/explosionMaterial.h"
 
 ExplosionMaterial::ExplosionMaterial(Spectrum* diffuseContribution, Spectrum* specularContribution, float shinynessPower)
   : diffuseContribution(diffuseContribution), specularContribution(specularContribution), shinynessPower(shinynessPower){

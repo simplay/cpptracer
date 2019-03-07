@@ -1,10 +1,10 @@
-#include "blinnTest.h"
-#include "../intersectables/plane.h"
-#include "../intersectables/sphere.h"
-#include "../materials/blinn.h"
-#include "../materials/diffuse.h"
-#include "../integrators/debugIntegrator.h"
-#include "../integrators/whittedIntegrator.h"
+#include "scenes/blinnTest.h"
+#include "intersectables/plane.h"
+#include "intersectables/sphere.h"
+#include "materials/blinn.h"
+#include "materials/diffuse.h"
+#include "integrators/debugIntegrator.h"
+#include "integrators/whittedIntegrator.h"
 
 BlinnTest::BlinnTest(int width, int height)
   : Scene(width, height) {}

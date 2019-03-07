@@ -1,7 +1,7 @@
 #include <cmath>
 #include <iostream>
-#include "vector3f.h"
-#include "vector4f.h"
+#include "math/vector3f.h"
+#include "math/vector4f.h"
 
 Vector3f::Vector3f() : x(0), y(0), z(0) {}
 

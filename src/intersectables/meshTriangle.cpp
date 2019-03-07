@@ -1,5 +1,5 @@
-#include "meshTriangle.h"
-#include "../math/vector3f.h"
+#include "intersectables/meshTriangle.h"
+#include "math/vector3f.h"
 
 MeshTriangle::MeshTriangle(
   int faceId,

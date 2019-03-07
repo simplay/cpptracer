@@ -1,7 +1,7 @@
 #include <iostream>
-#include "matrix4f.h"
-#include "matrix3f.h"
-#include "vector4f.h"
+#include "math/matrix4f.h"
+#include "math/matrix3f.h"
+#include "math/vector4f.h"
 
 Matrix4f::Matrix4f():
   m00(0), m01(0), m02(0), m03(0),

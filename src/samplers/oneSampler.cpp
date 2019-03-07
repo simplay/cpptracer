@@ -1,5 +1,5 @@
 #include <vector>
-#include "oneSampler.h"
+#include "samplers/oneSampler.h"
 
 OneSampler::OneSampler() {}
 

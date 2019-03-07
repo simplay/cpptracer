@@ -1,7 +1,7 @@
-#include "mesh.h"
+#include "intersectables/mesh.h"
 #include "objReader.h"
-#include "meshTriangle.h"
-#include "triangle.h"
+#include "intersectables/meshTriangle.h"
+#include "intersectables/triangle.h"
 
 Mesh::Mesh(Material* material, std::string filepath)
   : material(material) {

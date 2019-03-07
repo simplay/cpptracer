@@ -1,12 +1,12 @@
-#include "reflectionTest.h"
-#include "../intersectables/plane.h"
-#include "../intersectables/sphere.h"
-#include "../materials/reflectiveMaterial.h"
-#include "../materials/diffuse.h"
-#include "../materials/blinn.h"
-#include "../integrators/whittedIntegrator.h"
-#include "../samplers/randomSampler.h"
-#include "../samplers/oneSampler.h"
+#include "scenes/reflectionTest.h"
+#include "intersectables/plane.h"
+#include "intersectables/sphere.h"
+#include "materials/reflectiveMaterial.h"
+#include "materials/diffuse.h"
+#include "materials/blinn.h"
+#include "integrators/whittedIntegrator.h"
+#include "samplers/randomSampler.h"
+#include "samplers/oneSampler.h"
 
 ReflectionTest::ReflectionTest(int width, int height)
   : Scene(width, height) {}

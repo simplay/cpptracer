@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include "sphere.h"
+#include "intersectables/sphere.h"
 
 Sphere::Sphere(Material* material, const Vector3f& center, float radius)
   : material(material), center(center), radius(radius)

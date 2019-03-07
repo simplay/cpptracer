@@ -1,5 +1,5 @@
 #include <math.h>
-#include "blinn.h"
+#include "materials/blinn.h"
 
 Blinn::Blinn(Spectrum* diffuseContribution, Spectrum* specularContribution, float shinynessPower)
   : diffuseContribution(diffuseContribution), specularContribution(specularContribution), shinynessPower(shinynessPower){

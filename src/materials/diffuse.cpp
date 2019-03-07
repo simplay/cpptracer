@@ -1,5 +1,5 @@
 #include <math.h>
-#include "diffuse.h"
+#include "materials/diffuse.h"
 
 Diffuse::Diffuse(Spectrum* emission): emission(emission) {
   emission->scale(1.0 / M_PI);

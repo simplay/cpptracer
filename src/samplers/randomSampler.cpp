@@ -1,6 +1,6 @@
 #include <random>
 #include <vector>
-#include "randomSampler.h"
+#include "samplers/randomSampler.h"
 
 RandomSampler::RandomSampler() {}
 

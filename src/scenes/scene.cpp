@@ -1,9 +1,9 @@
 #include <vector>
 #include <iostream>
 #include <iostream>
-#include "scene.h"
-#include "../integrators/whittedIntegrator.h"
-#include "../samplers/oneSampler.h"
+#include "scenes/scene.h"
+#include "integrators/whittedIntegrator.h"
+#include "samplers/oneSampler.h"
 
 Scene::Scene(int width, int height): width(width), height(height) {}
 

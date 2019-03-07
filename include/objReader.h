@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-#include "vector3f.h"
+#include "math/vector3f.h"
 #include <iostream>
 
 #ifndef OBJ_READER_H
