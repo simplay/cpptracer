@@ -2,7 +2,7 @@
 #include <cmath>
 #include "rectangle.h"
 
-Rectangle::Rectangle(Material* material, Point3f* normal, float distance)
+Rectangle::Rectangle(Material* material, Vector3f normal, float distance)
   : Plane(material, normal, distance)
 {}
 

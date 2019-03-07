@@ -1,6 +1,6 @@
 #include "intersectable.h"
 #include "plane.h"
-#include "../math/point3f.h"
+#include "../math/vector3f.h"
 #include "../hitRecord.h"
 #include "../ray.h"
 
@@ -9,7 +9,7 @@
 
 class Rectangle : public Plane {
   public:
-    Rectangle(Material*, Point3f*, float);
+    Rectangle(Material*, Vector3f, float);
     HitRecord* intersect(Ray*);
 };
 
