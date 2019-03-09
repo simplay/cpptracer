@@ -1,5 +1,6 @@
-#include <math.h>
 #include <iostream>
+#include <math.h>
+#include <memory>
 #include "camera.h"
 #include "ray.h"
 #include "math/vector3f.h"
@@ -78,12 +79,9 @@ Ray* Camera::makeWorldspaceRay(int i, int j, std::vector<float>* samples) {
   float v_ij = bottom + (top - bottom) * (j + s2) / height;
   float w_ij = -1.0;
 
-  Vector4f* v = new Vector4f(u_ij, v_ij, w_ij, 0);
-  Vector4f* p_uvw = matrix->mult(v);
-  delete v;
-  Ray* ray = new Ray(new Vector3f(eye), new Vector3f(p_uvw), i, j);
-
-  delete p_uvw;
+  Vector4f v = Vector4f(u_ij, v_ij, w_ij, 0);
+  auto p_uvw = std::unique_ptr<Vector4f>(matrix->mult(&v));
+  Ray* ray = new Ray(new Vector3f(eye), new Vector3f(p_uvw.get()), i, j);
 
   return ray;
 }
