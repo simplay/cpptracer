@@ -54,9 +54,12 @@ class Vector3f {
     // direction.
     void normalize();
 
-    // overwrite this by scale * base + other
+    // Overwrites this vector's components by a first scaled and then shifted
+    // vector. In other words, it overwrites this vector by scale * base +
+    // other
     Vector3f* scaleAdd(float scale, Vector3f* base, Vector3f* other);
 
+    // First scales this vector's component and then adds another vector to it.
     Vector3f* scaleAdd(float scale, Vector3f* other);
 
     // reflect the inverse direction of this vector off from a given normal

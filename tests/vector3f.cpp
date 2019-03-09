@@ -56,6 +56,15 @@ TEST(Vector3f, normalize) {
   Vector3f p = Vector3f(10, 20, 30);
   p.normalize();
   ASSERT_EQ(1, p.dot());
+
+  Vector3f* q = new Vector3f(1, -1, 1);
+  // 0.57735  -0.57735   0.57735
+  q->normalize();
+
+  float eps = 1e-6;
+  ASSERT_NEAR(0.57735, q->x, eps);
+  ASSERT_NEAR(-0.57735, q->y, eps);
+  ASSERT_NEAR(0.57735, q->z, eps);
 }
 
 TEST(Vector3f, normalize_zero) {
@@ -93,6 +102,15 @@ TEST(Vector3f, negate) {
   ASSERT_EQ(-3, p->z);
 }
 
+TEST(Vector3f, abs) {
+  Vector3f* p = new Vector3f(-1, -2, 3);
+  p->abs();
+
+  ASSERT_EQ(1, p->x);
+  ASSERT_EQ(2, p->y);
+  ASSERT_EQ(3, p->z);
+}
+
 TEST(Vector3f, cross) {
   Vector3f* p = new Vector3f(2, 3, 4);
   Vector3f* q = new Vector3f(5, 6, 7);
@@ -101,6 +119,13 @@ TEST(Vector3f, cross) {
   ASSERT_EQ(-3, u->x);
   ASSERT_EQ(6, u->y);
   ASSERT_EQ(-3, u->z);
+}
+
+
+TEST(Vector3f, norm) {
+  Vector3f* p = new Vector3f(1, -1, 1);
+  float eps = 1e-4;
+  ASSERT_NEAR(1.7321, p->norm(), eps);
 }
 
 TEST(Vector3f, reflected) {
@@ -117,4 +142,29 @@ TEST(Vector3f, reflected) {
   ASSERT_EQ(-1, r->x);
   ASSERT_EQ(-2, r->y);
   ASSERT_EQ(4, r->z);
+}
+
+TEST(Vector3f, scaleAdd) {
+  Vector3f* v = new Vector3f();
+  Vector3f* base = new Vector3f(2, 3, 4);
+  Vector3f* other = new Vector3f(1, 2, -3);
+  float scale = 2.5;
+
+  v->scaleAdd(scale, base, other);
+
+  ASSERT_EQ(6, v->x);
+  ASSERT_EQ(9.5, v->y);
+  ASSERT_EQ(7, v->z);
+}
+
+TEST(Vector3f, scaleAddWithoutBase) {
+  Vector3f* v = new Vector3f(2, 3, 4);
+  Vector3f* other = new Vector3f(1, 2, -3);
+  float scale = 2.5;
+
+  v->scaleAdd(scale, other);
+
+  ASSERT_EQ(6, v->x);
+  ASSERT_EQ(9.5, v->y);
+  ASSERT_EQ(7, v->z);
 }
