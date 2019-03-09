@@ -4,9 +4,9 @@
 #define BLINN_H
 class Blinn : public Material {
   private:
-    Spectrum* diffuseContribution;
-    Spectrum* specularContribution;
-    float shinynessPower;
+    const Spectrum diffuseContribution;
+    const Spectrum specularContribution;
+    const float shinynessPower;
 
   public:
     Blinn(Spectrum*, Spectrum*, float);

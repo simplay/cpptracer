@@ -8,10 +8,10 @@
 
 class Diffuse : public Material {
   private:
-    Spectrum* emission;
+    Spectrum emission;
 
   public:
-    Diffuse(Spectrum*);
+    Diffuse(const Spectrum*);
     virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn);
     virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut);
 

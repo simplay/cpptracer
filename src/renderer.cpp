@@ -36,7 +36,7 @@ void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* 
 
       // consider coordinates in between pixel locations
       // store in row-first order
-      renderTask->scene->film->addSample(rowIdx + sample->at(0), colIdx + sample->at(1), raySpectrum);
+      renderTask->scene->film->addSample(rowIdx + sample->at(0), colIdx + sample->at(1), *raySpectrum);
 
       taskCounters->at(id)++;
       delete ray->origin;

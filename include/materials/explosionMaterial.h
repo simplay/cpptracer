@@ -9,18 +9,16 @@
 
 class ExplosionMaterial : public Material {
   private:
-    Spectrum* diffuseContribution;
-    Spectrum* specularContribution;
+    const Spectrum diffuseContribution;
+    const Spectrum specularContribution;
     float shinynessPower;
 
-    Spectrum* lerp(Spectrum* v0, Spectrum* v1, float t) {
-      Spectrum s0(*v0);
-      Spectrum s1(*v1);
-      s1.add(&s0);
+    Spectrum lerp(Spectrum s0, Spectrum s1, float t) const {
+      s1.add(s0);
       float scale = std::max(0.f, std::min(1.f, t));
       s1.scale(scale);
-      s0.add(&s1);
-      return new Spectrum(s0.r, s0.g, s0.b);
+      s0.add(s1);
+      return s0;
     }
 
   public:

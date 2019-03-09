@@ -9,9 +9,9 @@ class Image {
   public:
     int width;
     int height;
-    std::vector<Spectrum*>* values;
+    const std::vector<Spectrum> values;
     std::string filename;
-    Image(int width, int height, std::vector<Spectrum*>* values, std::string);
+    Image(int width, int height, const std::vector<Spectrum>& values, std::string);
     void print();
 };
 

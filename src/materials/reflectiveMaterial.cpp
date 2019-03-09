@@ -1,8 +1,9 @@
 #include <math.h>
 #include "materials/reflectiveMaterial.h"
 
-ReflectiveMaterial::ReflectiveMaterial(): ks(new Spectrum(1, 1, 1)) {}
-ReflectiveMaterial::ReflectiveMaterial(Spectrum* ks): ks(ks) {}
+ReflectiveMaterial::ReflectiveMaterial(): ks(1, 1, 1) {}
+// TODO(panmari): Change constructor to expect a const ref. This is currently a memory leak.
+ReflectiveMaterial::ReflectiveMaterial(Spectrum* ks): ks(*ks) {}
 
 Spectrum* ReflectiveMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
   return new Spectrum(1);

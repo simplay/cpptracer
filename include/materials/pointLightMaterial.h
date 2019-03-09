@@ -8,7 +8,7 @@
 
 class PointLightMaterial {
   private:
-    Spectrum* emission;
+    const Spectrum emission;
 
   public:
     PointLightMaterial(Spectrum*);

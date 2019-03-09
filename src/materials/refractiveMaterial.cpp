@@ -2,7 +2,7 @@
 #include <iostream>
 #include "materials/refractiveMaterial.h"
 
-float RefractiveMaterial::fresnelFactor(HitRecord* hitRecord) {
+float RefractiveMaterial::fresnelFactor(HitRecord* hitRecord) const {
   Vector3f wIn(hitRecord->wIn);
   wIn.negate();
   wIn.normalize();
@@ -42,10 +42,10 @@ float RefractiveMaterial::fresnelFactor(HitRecord* hitRecord) {
 }
 
 RefractiveMaterial::RefractiveMaterial(float refractionIndex)
-  : refractionIndex(refractionIndex), ks(new Spectrum(1)) {}
+  : refractionIndex(refractionIndex), ks(1) {}
 
 RefractiveMaterial::RefractiveMaterial(float refractionIndex, Spectrum* ks)
-  : refractionIndex(refractionIndex), ks(ks) {}
+  : refractionIndex(refractionIndex), ks(*ks) {}
 
 Spectrum* RefractiveMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
   return new Spectrum();

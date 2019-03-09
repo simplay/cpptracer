@@ -1,8 +1,9 @@
 #include <math.h>
 #include "materials/diffuse.h"
 
-Diffuse::Diffuse(Spectrum* emission): emission(emission) {
-  emission->scale(1.0 / M_PI);
+// TODO(panmari): Change constructor to expect a const ref. This is currently a memory leak.
+Diffuse::Diffuse(const Spectrum* emission): emission(*emission) {
+  this->emission.scale(1.0 / M_PI);
 }
 
 Spectrum* Diffuse::evaluateBrdf(HitRecord* , Vector3f* , Vector3f* ) {

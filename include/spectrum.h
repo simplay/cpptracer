@@ -16,12 +16,11 @@ class Spectrum {
     Spectrum();
     Spectrum(float, float, float);
     Spectrum(float);
-    Spectrum(Spectrum*);
-    Spectrum(Vector3f*);
+    Spectrum(const Vector3f&);
 
     void scale(float);
-    void add(Spectrum*);
-    void mult(Spectrum*);
+    void add(const Spectrum&);
+    void mult(const Spectrum&);
     void clamp();
     void log() {
       printf("(%f, %f, %f)\n", r, g, b);

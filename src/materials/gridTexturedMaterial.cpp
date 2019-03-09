@@ -2,28 +2,29 @@
 #include <iostream>
 #include "materials/gridTexturedMaterial.h"
 
+// TODO(panmari): Change constructor to only allow const ref. Currently, this is a memory leak.
 GridTexturedMaterial::GridTexturedMaterial(
   Spectrum* lineColor,
   Spectrum* tileColor,
   float thickness,
   Vector3f* shift,
   float scale
-): lineColor(lineColor),
-  tileColor(tileColor),
+): lineColor(*lineColor),
+  tileColor(*tileColor),
   thickness(thickness),
   shift(shift),
   scale(scale),
-  diffuse(new Diffuse(new Spectrum(1)))
+  diffuse(new Spectrum(1))
 {
 }
 
 Spectrum* GridTexturedMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
-  Spectrum* diffuseBRDF = diffuse->evaluateBrdf(hitRecord, wOut, wIn);
+  Spectrum* diffuseBRDF = diffuse.evaluateBrdf(hitRecord, wOut, wIn);
 
   Vector3f* hitPoint = new Vector3f(hitRecord->position);
 
   Vector3f* shifted = new Vector3f(hitRecord->position);
-  shifted->add(shift);
+  shifted->add(&shift);
 
   hitPoint->scale(1.0 / scale);
   shifted->scale(1.0 / scale);
@@ -49,25 +50,25 @@ Spectrum* GridTexturedMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOu
 }
 
 Spectrum* GridTexturedMaterial::evaluateEmission(HitRecord* hitRecord, Vector3f* wIn) {
-  return diffuse->evaluateEmission(hitRecord, wIn);
+  return diffuse.evaluateEmission(hitRecord, wIn);
 }
 
 bool GridTexturedMaterial::hasSpecularReflection() {
-  return diffuse->hasSpecularReflection();
+  return diffuse.hasSpecularReflection();
 }
 
 bool GridTexturedMaterial::hasSpecularRefraction() {
-  return diffuse->hasSpecularRefraction();
+  return diffuse.hasSpecularRefraction();
 }
 
 bool GridTexturedMaterial::castsShadows() {
-  return diffuse->castsShadows();
+  return diffuse.castsShadows();
 }
 
 ShadingSample* GridTexturedMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
-  return diffuse->evaluateSpecularReflection(hitRecord);
+  return diffuse.evaluateSpecularReflection(hitRecord);
 }
 
 ShadingSample* GridTexturedMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) {
-  return diffuse->evaluateSpecularRefraction(hitRecord);
+  return diffuse.evaluateSpecularRefraction(hitRecord);
 }
