@@ -6,10 +6,10 @@ namespace {
   const float EPS = 1e-4;
 
 TEST(Spectrum, new_without_arguments) {
-  auto s = new Spectrum();
-  ASSERT_NEAR(0, s->r, EPS);
-  ASSERT_NEAR(0, s->g, EPS);
-  ASSERT_NEAR(0, s->b, EPS);
+  Spectrum s = Spectrum();
+  ASSERT_NEAR(0, s.r, EPS);
+  ASSERT_NEAR(0, s.g, EPS);
+  ASSERT_NEAR(0, s.b, EPS);
 }
 
 TEST(Spectrum, new_with_floats) {
