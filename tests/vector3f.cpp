@@ -168,3 +168,8 @@ TEST(Vector3f, scaleAddWithoutBase) {
   ASSERT_EQ(9.5, v->y);
   ASSERT_EQ(7, v->z);
 }
+
+TEST(Vector3f, log) {
+  Vector3f* v = new Vector3f(2, 3, 4);
+  v->log();
+}
