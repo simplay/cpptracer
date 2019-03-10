@@ -1,22 +1,23 @@
 #include <math.h>
 #include "materials/blinn.h"
 
+// TODO(panmari): Change constructor to expect a const ref. This is currently a memory leak.
 Blinn::Blinn(Spectrum* diffuseContribution, Spectrum* specularContribution, float shinynessPower)
-  : diffuseContribution(diffuseContribution), specularContribution(specularContribution), shinynessPower(shinynessPower){
+  : diffuseContribution(*diffuseContribution), specularContribution(*specularContribution), shinynessPower(shinynessPower){
 }
 
 Spectrum* Blinn::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
   Spectrum* contribution = new Spectrum();
-  Spectrum* diffuse  = new Spectrum(diffuseContribution);
-  Spectrum* specular = new Spectrum(specularContribution);
-  Spectrum* ambient  = new Spectrum(diffuseContribution);
+  Spectrum diffuse  = diffuseContribution;
+  Spectrum specular = specularContribution;
+  const Spectrum& ambient  = diffuseContribution;
 
-  Vector3f* halfwayVector = new Vector3f(wIn);
-  halfwayVector->add(wOut);
-  halfwayVector->normalize();
+  Vector3f halfwayVector = *wIn;
+  halfwayVector.add(wOut);
+  halfwayVector.normalize();
 
-  diffuse->scale(wIn->dot(hitRecord->normal));
-  specular->scale(pow(halfwayVector->dot(hitRecord->normal), shinynessPower));
+  diffuse.scale(wIn->dot(hitRecord->normal));
+  specular.scale(pow(halfwayVector.dot(hitRecord->normal), shinynessPower));
 
   contribution->add(diffuse);
   contribution->add(specular);

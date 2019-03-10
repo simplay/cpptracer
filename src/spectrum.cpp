@@ -11,16 +11,10 @@ Spectrum::Spectrum(float r, float g, float b)
 Spectrum::Spectrum(float v)
   : r(v), g(v), b(v) {}
 
-Spectrum::Spectrum(Spectrum* s) {
-  r = s->r;
-  g = s->g;
-  b = s->b;
-}
-
-Spectrum::Spectrum(Vector3f* s) {
-  r = s->x;
-  g = s->y;
-  b = s->z;
+Spectrum::Spectrum(const Vector3f& v) {
+  r = v.x;
+  g = v.y;
+  b = v.z;
 }
 
 void Spectrum::scale(float factor) {
@@ -29,16 +23,16 @@ void Spectrum::scale(float factor) {
   b *= factor;
 }
 
-void Spectrum::add(Spectrum* other) {
-  r += other->r;
-  g += other->g;
-  b += other->b;
+void Spectrum::add(const Spectrum& other) {
+  r += other.r;
+  g += other.g;
+  b += other.b;
 }
 
-void Spectrum::mult(Spectrum* other) {
-  r *= other->r;
-  g *= other->g;
-  b *= other->b;
+void Spectrum::mult(const Spectrum& other) {
+  r *= other.r;
+  g *= other.g;
+  b *= other.b;
 }
 
 void Spectrum::clamp() {

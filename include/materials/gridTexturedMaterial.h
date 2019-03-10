@@ -8,12 +8,12 @@
 
 class GridTexturedMaterial : public Material {
   private:
-    Spectrum* lineColor;
-    Spectrum* tileColor;
-    float thickness;
-    Vector3f* shift;
-    float scale;
-    Diffuse* diffuse;
+    const Spectrum lineColor;
+    const Spectrum tileColor;
+    const float thickness;
+    const Vector3f shift;
+    const float scale;
+    Diffuse diffuse;
 
   public:
     GridTexturedMaterial(Spectrum* lineColor, Spectrum* tileColor, float thickness, Vector3f* shift, float scale);

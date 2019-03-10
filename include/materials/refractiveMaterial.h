@@ -11,10 +11,10 @@ class RefractiveMaterial : public Material {
   private:
     // based on Schlick's approximation:
     // See https://en.wikipedia.org/wiki/Schlick%27s_approximation
-    float fresnelFactor(HitRecord*);
+    float fresnelFactor(HitRecord*) const;
 
-    float refractionIndex;
-    Spectrum* ks;
+    const float refractionIndex;
+    const Spectrum ks;
 
   public:
     RefractiveMaterial(float);

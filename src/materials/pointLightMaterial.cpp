@@ -1,6 +1,7 @@
 #include "materials/pointLightMaterial.h"
 
-PointLightMaterial::PointLightMaterial(Spectrum* emission): emission(emission) {}
+// TODO(panmari): Change constructor to only allow const ref. Currently, this is a memory leak.
+PointLightMaterial::PointLightMaterial(Spectrum* emission): emission(*emission) {}
 
 Spectrum* PointLightMaterial::evaluateBrdf(HitRecord* , Vector3f* , Vector3f* ) {
   return new Spectrum();

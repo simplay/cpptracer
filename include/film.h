@@ -11,12 +11,13 @@ class Film {
   public:
     int width;
     int height;
-    std::vector<Spectrum*>* measurements;
-    std::vector<int>* sampleCounts;
+    std::vector<Spectrum> measurements;
+    std::vector<int> sampleCounts;
 
     Film(int width, int height);
-    void addSample(float x, float y, Spectrum* s);
-    std::vector<Spectrum*>* normalMeasurements();
+    void addSample(float x, float y, const Spectrum& s);
+    // Returns a copy of measurements normalized by sample counts.
+    std::vector<Spectrum> normalMeasurements();
 };
 
 #endif

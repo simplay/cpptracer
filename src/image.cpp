@@ -4,7 +4,7 @@
 #include <iostream>
 #include "image.h"
 
-Image::Image(int width, int height, std::vector<Spectrum*>* values, std::string filename)
+Image::Image(int width, int height, const std::vector<Spectrum>& values, std::string filename)
   : width(width), height(height), values(values), filename(filename) {}
 
 void Image::print() {
@@ -27,11 +27,11 @@ void Image::print() {
       x = colIdx;
       y = rowIdx;
 
-      Spectrum* s = values->at(colIdx + rowIdx * width);
+      const Spectrum& s = values.at(colIdx + rowIdx * width);
 
-      r = s->r * 255;
-      g = s->g * 255;
-      b = s->b * 255;
+      r = s.r * 255;
+      g = s.g * 255;
+      b = s.b * 255;
 
       if (r > 255) {
         r = 255;

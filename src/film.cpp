@@ -1,22 +1,17 @@
-#include <iostream>
 #include <math.h>
+#include <iostream>
+
 #include "film.h"
 #include "spectrum.h"
 
-Film::Film(int width, int height): width(width), height(height) {
-  measurements = new std::vector<Spectrum*>(width * height);
-  sampleCounts = new std::vector<int>(width * height);
-
-  for (int colIdx = 0; colIdx < width; colIdx++) {
-    for (int rowIdx = 0; rowIdx < height; rowIdx++) {
-      measurements->at(access(rowIdx, colIdx)) = new Spectrum();
-      sampleCounts->at(access(rowIdx, colIdx)) = 0;
-    }
-  }
-}
+Film::Film(int width, int height)
+    : width(width),
+      height(height),
+      measurements(width * height),
+      sampleCounts(width * height) {}
 
 // store spectrum in row-first order
-void Film::addSample(float rowIdx, float colIdx, Spectrum* spectrum) {
+void Film::addSample(float rowIdx, float colIdx, const Spectrum& spectrum) {
   int roundedRowIdx = std::round(rowIdx);
   int roundedColIdx = std::round(colIdx);
 
@@ -28,29 +23,24 @@ void Film::addSample(float rowIdx, float colIdx, Spectrum* spectrum) {
     return;
   }
 
-  auto v = measurements->at(access(roundedRowIdx, roundedColIdx));
-  sampleCounts->at(access(roundedRowIdx, roundedColIdx))++;
-  if (v) {
-    v->add(spectrum);
-    measurements->at(access(roundedRowIdx, roundedColIdx)) = v;
-  }
+  measurements.at(access(roundedRowIdx, roundedColIdx)).add(spectrum);
+  sampleCounts.at(access(roundedRowIdx, roundedColIdx))++;
 }
 
 // access values in row-first order
-int Film::access(int rowIdx, int colIdx) {
-  return colIdx + rowIdx * width;
-}
+int Film::access(int rowIdx, int colIdx) { return colIdx + rowIdx * width; }
 
-std::vector<Spectrum*>* Film::normalMeasurements() {
+std::vector<Spectrum> Film::normalMeasurements() {
+  auto normed = measurements;
   for (int colIdx = 0; colIdx < width; colIdx++) {
     for (int rowIdx = 0; rowIdx < height; rowIdx++) {
-      int f = sampleCounts->at(access(rowIdx, colIdx));
-      Spectrum* s = measurements->at(access(rowIdx, colIdx));
-      if (f > 0) {
-        s->scale(1.0 / f);
+      int c = sampleCounts.at(access(rowIdx, colIdx));
+      if (c == 0) {
+        continue;
       }
+      normed.at(access(rowIdx, colIdx)).scale(1.0 / c);
     }
   }
 
-  return measurements;
+  return normed;
 }

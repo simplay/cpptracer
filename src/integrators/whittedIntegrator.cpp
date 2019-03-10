@@ -1,5 +1,6 @@
-#include <iostream>
 #include <algorithm>
+#include <iostream>
+#include <memory>
 #include "integrators/whittedIntegrator.h"
 #include "materials/material.h"
 
@@ -38,11 +39,10 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
     return new Spectrum();
   }
 
-  Spectrum* brdfContribution = hitRecord->material->evaluateBrdf(hitRecord, hitRecord->wIn, &lightDir);
+  auto brdfContribution = std::unique_ptr<Spectrum>(hitRecord->material->evaluateBrdf(hitRecord, hitRecord->wIn, &lightDir));
 
   // shading: brdf * emission * dot(normal,light_dir) * geom_term
-  Spectrum* contribution = new Spectrum(brdfContribution);
-  delete brdfContribution;
+  Spectrum contribution = *brdfContribution;
 
   Vector3f oppositeLightDir(lightDir);
   oppositeLightDir.negate();
@@ -50,17 +50,17 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
   Spectrum* lightEmission = lightHit->material->evaluateEmission(lightHit, &oppositeLightDir);
   delete lightHit;
 
-  contribution->mult(lightEmission);
+  contribution.mult(*lightEmission);
   delete lightEmission;
 
   float angle = hitRecord->normal->dot(&lightDir);
   float cosTheta = 0 > angle ? 0 : angle;
-  contribution->scale(cosTheta);
+  contribution.scale(cosTheta);
 
   // find a better scaling approach
-  contribution->scale(1.0 / d2);
+  contribution.scale(1.0 / d2);
 
-  return contribution;
+  return new Spectrum(contribution);
 }
 
 WhittedIntegrator::WhittedIntegrator(Scene* scene): scene(scene) {}
@@ -83,10 +83,10 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
   if (hitRecord->material->hasSpecularReflection() && ray->depth < MAX_DEPTH) {
     ShadingSample* sample = hitRecord->material->evaluateSpecularReflection(hitRecord);
     if (sample->isValid) {
-      reflection.add(sample->brdf);
+      reflection.add(*sample->brdf);
       Ray reflectedRay(new Vector3f(hitRecord->position), sample->w, ray->depth + 1);
       Spectrum* spec = integrate(&reflectedRay);
-      reflection.mult(spec);
+      reflection.mult(*spec);
       delete reflectedRay.origin;
       delete spec;
     }
@@ -96,11 +96,11 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
   if (hitRecord->material->hasSpecularRefraction() && ray->depth < MAX_DEPTH) {
     ShadingSample* sample = hitRecord->material->evaluateSpecularRefraction(hitRecord);
     if (sample->isValid) {
-      refraction.add(sample->brdf);
+      refraction.add(*sample->brdf);
 
       Ray refractedRay(new Vector3f(hitRecord->position), sample->w, ray->depth + 1);
       Spectrum* spec = integrate(&refractedRay);
-      refraction.mult(spec);
+      refraction.mult(*spec);
 
       delete refractedRay.origin;
       delete sample;
@@ -110,8 +110,8 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
 
   if (hitRecord->material->hasSpecularReflection() || hitRecord->material->hasSpecularRefraction()) {
     Spectrum* total = new Spectrum();
-    total->add(&reflection);
-    total->add(&refraction);
+    total->add(reflection);
+    total->add(refraction);
 
     return total;
   }
@@ -119,7 +119,7 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
   Spectrum* contribution = new Spectrum();
   for (auto const& lightSource: *scene->lightList) {
     Spectrum* currentContribution = contributionOf(lightSource, hitRecord);
-    contribution->add(currentContribution);
+    contribution->add(*currentContribution);
     delete currentContribution;
   }
   delete hitRecord;

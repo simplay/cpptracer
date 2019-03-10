@@ -9,7 +9,7 @@
 
 class ReflectiveMaterial : public Material {
   private:
-    Spectrum* ks;
+    const Spectrum ks;
 
   public:
     ReflectiveMaterial();
