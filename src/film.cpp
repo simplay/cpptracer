@@ -1,15 +1,14 @@
-#include <iostream>
 #include <math.h>
+#include <iostream>
+
 #include "film.h"
 #include "spectrum.h"
 
-Film::Film(int width, int height): width(width), height(height), measurements(width * height), sampleCounts(width * height) {
-  // for (int colIdx = 0; colIdx < width; colIdx++) {
-  //   for (int rowIdx = 0; rowIdx < height; rowIdx++) {
-  //     sampleCounts->at(access(rowIdx, colIdx)) = 0;
-  //   }
-  // }
-}
+Film::Film(int width, int height)
+    : width(width),
+      height(height),
+      measurements(width * height),
+      sampleCounts(width * height) {}
 
 // store spectrum in row-first order
 void Film::addSample(float rowIdx, float colIdx, const Spectrum& spectrum) {
@@ -29,9 +28,7 @@ void Film::addSample(float rowIdx, float colIdx, const Spectrum& spectrum) {
 }
 
 // access values in row-first order
-int Film::access(int rowIdx, int colIdx) {
-  return colIdx + rowIdx * width;
-}
+int Film::access(int rowIdx, int colIdx) { return colIdx + rowIdx * width; }
 
 std::vector<Spectrum> Film::normalMeasurements() {
   auto normed = measurements;
