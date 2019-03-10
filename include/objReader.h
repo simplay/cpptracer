@@ -1,7 +1,7 @@
+#include <iostream>
 #include <string>
 #include <vector>
 #include "math/vector3f.h"
-#include <iostream>
 
 #ifndef OBJ_READER_H
 #define OBJ_READER_H
@@ -20,12 +20,12 @@ struct MeshData {
 };
 
 class ObjReader {
-  private:
-    const char* filepath;
-    MeshData mesh;
+ private:
+  const char* filepath;
+  MeshData mesh;
 
-  public:
-    ObjReader(const char* filepath);
-    MeshData read();
+ public:
+  ObjReader(const char* filepath);
+  MeshData read();
 };
 #endif

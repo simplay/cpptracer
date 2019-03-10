@@ -1,10 +1,9 @@
+#include "objReader.h"
 #include <algorithm>
 #include <fstream>
 #include <limits>
-#include "objReader.h"
 
-ObjReader::ObjReader(const char* filepath)
-  : filepath(filepath) {}
+ObjReader::ObjReader(const char* filepath) : filepath(filepath) {}
 
 MeshData ObjReader::read() {
   MeshData mesh;
@@ -26,7 +25,7 @@ MeshData ObjReader::read() {
     float z = 0;
 
     std::string token = line.c_str();
-    switch(line.c_str()[0]) {
+    switch (line.c_str()[0]) {
       case 'v':
         if (token[1] == 'n') {
           sscanf(line.c_str(), "vn %f %f %f", &x, &y, &z);
@@ -56,15 +55,16 @@ MeshData ObjReader::read() {
         int occurrences = 0;
         std::string::size_type pos = 0;
         std::string target = "//";
-        while ((pos = line.find(target, pos )) != std::string::npos) {
-          ++ occurrences;
+        while ((pos = line.find(target, pos)) != std::string::npos) {
+          ++occurrences;
           pos += target.length();
         }
         size_t slashCount = std::count(line.begin(), line.end(), '/');
 
         float u, v, w;
         if (occurrences == 3) {
-          sscanf(line.c_str(), "f %f//%f %f//%f %f//%f", &x, &u, &y, &v, &z, &w);
+          sscanf(line.c_str(), "f %f//%f %f//%f %f//%f", &x, &u, &y, &v, &z,
+                 &w);
           auto face = Vector3f(x, y, z);
           auto normalFace = Vector3f(u, v, w);
           faces.push_back(face);

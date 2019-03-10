@@ -1,6 +1,6 @@
+#include "math/vector3f.h"
 #include <gtest/gtest.h>
 #include <iostream>
-#include "math/vector3f.h"
 #include "math/vector4f.h"
 
 TEST(Vector3f, create_with_arguments) {
@@ -120,7 +120,6 @@ TEST(Vector3f, cross) {
   ASSERT_EQ(6, u->y);
   ASSERT_EQ(-3, u->z);
 }
-
 
 TEST(Vector3f, norm) {
   Vector3f* p = new Vector3f(1, -1, 1);

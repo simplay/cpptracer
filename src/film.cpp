@@ -1,7 +1,8 @@
+#include "film.h"
+
 #include <math.h>
 #include <iostream>
 
-#include "film.h"
 #include "spectrum.h"
 
 Film::Film(int width, int height)

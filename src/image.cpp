@@ -1,11 +1,12 @@
-#include <cmath>
+#include "image.h"
 #include <stdio.h>
 #include <string.h>
+#include <cmath>
 #include <iostream>
-#include "image.h"
 
-Image::Image(int width, int height, const std::vector<Spectrum>& values, std::string filename)
-  : width(width), height(height), values(values), filename(filename) {}
+Image::Image(int width, int height, const std::vector<Spectrum>& values,
+             std::string filename)
+    : width(width), height(height), values(values), filename(filename) {}
 
 void Image::print() {
   std::cout << "Printing " << width << " x " << height << " image" << std::endl;
@@ -16,10 +17,10 @@ void Image::print() {
   int g;
   int b;
 
-  FILE *f;
+  FILE* f;
   int filesize = 54 + 3 * width * height;
 
-  unsigned char* img = (unsigned char *)malloc(3 * width * height);
+  unsigned char* img = (unsigned char*)malloc(3 * width * height);
   memset(img, 0, 3 * width * height);
 
   for (int colIdx = 0; colIdx < width; colIdx++) {
@@ -49,8 +50,10 @@ void Image::print() {
     }
   }
 
-  unsigned char bmpfileheader[14] = {'B', 'M', 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0};
-  unsigned char bmpinfoheader[40] = {40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 24, 0};
+  unsigned char bmpfileheader[14] = {'B', 'M', 0, 0,  0, 0, 0,
+                                     0,   0,   0, 54, 0, 0, 0};
+  unsigned char bmpinfoheader[40] = {40, 0, 0, 0, 0, 0, 0,  0,
+                                     0,  0, 0, 0, 1, 0, 24, 0};
   unsigned char bmppad[3] = {0, 0, 0};
 
   bmpfileheader[2] = (unsigned char)(filesize);

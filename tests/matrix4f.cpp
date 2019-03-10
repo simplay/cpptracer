@@ -1,15 +1,11 @@
+#include "math/matrix4f.h"
 #include <gtest/gtest.h>
 #include <iostream>
-#include "math/matrix4f.h"
 #include "math/vector4f.h"
 
 TEST(Matrix4f, new_with_floats) {
-  Matrix4f* mat = new Matrix4f(
-    1, 2, 3, 4,
-    5, 6, 7, 8,
-    9, 10, 11, 12,
-    13, 14, 15, 16
-  );
+  Matrix4f* mat =
+      new Matrix4f(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
   ASSERT_EQ(1, mat->m00);
   ASSERT_EQ(2, mat->m01);
   ASSERT_EQ(3, mat->m02);
@@ -45,22 +41,14 @@ TEST(Matrix4f, mult) {
 }
 
 TEST(Matrix4f, det) {
-  Matrix4f* mat = new Matrix4f(
-    3, 2, -1, 4,
-    2, 1, 5, 7,
-    0, 5, 2, -6,
-    -1, 2, 1, 0
-  );
+  Matrix4f* mat =
+      new Matrix4f(3, 2, -1, 4, 2, 1, 5, 7, 0, 5, 2, -6, -1, 2, 1, 0);
   ASSERT_EQ(-418, mat->det());
 }
 
 TEST(Matrix4f, inv) {
-  Matrix4f* mat = new Matrix4f(
-    3, 2, -1, 4,
-    2, 1, 5, 7,
-    0, 5, 2, -6,
-    -1, 2, 1, 0
-  );
+  Matrix4f* mat =
+      new Matrix4f(3, 2, -1, 4, 2, 1, 5, 7, 0, 5, 2, -6, -1, 2, 1, 0);
 
   auto m = mat->inv();
 
@@ -88,12 +76,8 @@ TEST(Matrix4f, inv) {
 }
 
 TEST(Matrix4f, scale) {
-  Matrix4f* mat = new Matrix4f(
-    1, 2, 3, 4,
-    5, 6, 7, 8,
-    9, 10, 11, 12,
-    13, 14, 15, 16
-  );
+  Matrix4f* mat =
+      new Matrix4f(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 
   mat->scale(0.5);
   ASSERT_EQ(0.5, mat->m00);
@@ -115,12 +99,8 @@ TEST(Matrix4f, scale) {
 }
 
 TEST(Matrix4f, transposed) {
-  Matrix4f* m = new Matrix4f(
-    1, 2, 3, 4,
-    5, 6, 7, 8,
-    9, 10, 11, 12,
-    13, 14, 15, 16
-  );
+  Matrix4f* m =
+      new Matrix4f(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 
   auto mat = m->transposed();
   ASSERT_EQ(1, mat->m00);

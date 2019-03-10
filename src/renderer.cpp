@@ -1,42 +1,50 @@
+#include "renderer.h"
+
 #include <algorithm>
-#include <thread>
-#include <vector>
 #include <chrono>
 #include <iostream>
-#include "renderer.h"
-#include "renderTask.h"
-#include "samplers/sampler.h"
-#include "samplers/oneSampler.h"
-#include "ray.h"
-#include "spectrum.h"
+#include <thread>
+#include <vector>
+
 #include "image.h"
 #include "integrators/integrator.h"
 #include "progressBar.h"
+#include "ray.h"
+#include "renderTask.h"
+#include "samplers/oneSampler.h"
+#include "samplers/sampler.h"
+#include "spectrum.h"
 
 using namespace std;
 
-Renderer::Renderer(Scene* scene): scene(scene), printProgress(true) {}
-Renderer::Renderer(Scene* scene, bool printProgress): scene(scene), printProgress(printProgress) {}
+Renderer::Renderer(Scene* scene) : scene(scene), printProgress(true) {}
+Renderer::Renderer(Scene* scene, bool printProgress)
+    : scene(scene), printProgress(printProgress) {}
 
-void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* taskCounters) {
+void Renderer::computeContribution(int id, RenderTask* renderTask,
+                                   vector<int>* taskCounters) {
   // for each image index value
-  for (vector<int>::iterator idxValue = (*renderTask->indices).begin(); idxValue != (*renderTask->indices).end(); ++idxValue) {
+  for (vector<int>::iterator idxValue = (*renderTask->indices).begin();
+       idxValue != (*renderTask->indices).end(); ++idxValue) {
     auto samples = renderTask->scene->sampler->makeSample(renderTask->spp, 2);
 
     // for each sample index
     for (unsigned sampleIdx = 0; sampleIdx < samples->size(); sampleIdx++) {
       auto sample = samples->at(sampleIdx);
 
-      // compute 2D image lookup coordinates (rowIdx, colIdx) from 1D index value *idxValue
+      // compute 2D image lookup coordinates (rowIdx, colIdx) from 1D index
+      // value *idxValue
       int rowIdx = *idxValue / renderTask->width;
       int colIdx = *idxValue % renderTask->width;
 
-      Ray* ray = renderTask->scene->camera->makeWorldspaceRay(rowIdx, colIdx, sample);
+      Ray* ray =
+          renderTask->scene->camera->makeWorldspaceRay(rowIdx, colIdx, sample);
       Spectrum* raySpectrum = renderTask->scene->integrator->integrate(ray);
 
       // consider coordinates in between pixel locations
       // store in row-first order
-      renderTask->scene->film->addSample(rowIdx + sample->at(0), colIdx + sample->at(1), *raySpectrum);
+      renderTask->scene->film->addSample(rowIdx + sample->at(0),
+                                         colIdx + sample->at(1), *raySpectrum);
 
       taskCounters->at(id)++;
       delete ray->origin;
@@ -69,23 +77,25 @@ void Renderer::render(int threadCount, int spp) {
     indexValues.push_back(index);
   }
 
-  // Permutate image coordiantes so that every thread receives random image locations.
+  // Permutate image coordiantes so that every thread receives random image
+  // locations.
   random_shuffle(indexValues.begin(), indexValues.end());
 
   // Equally assign each indexList random 1D image indices.
   int counter = 0;
-  for (vector<int>::iterator it=indexValues.begin(); it != indexValues.end(); ++it) {
+  for (vector<int>::iterator it = indexValues.begin(); it != indexValues.end();
+       ++it) {
     indexLists->at(counter % threadCount).push_back(*it);
     counter++;
   }
 
   // spawn threadCount threads:
   for (int id = 0; id < threadCount; id++) {
-    RenderTask* rt = new RenderTask(
-      width, height, &indexLists->at(id), scene, spp
-    );
+    RenderTask* rt =
+        new RenderTask(width, height, &indexLists->at(id), scene, spp);
 
-    threads[id] = thread(&Renderer::computeContribution, this, id, rt, taskCounters);
+    threads[id] =
+        thread(&Renderer::computeContribution, this, id, rt, taskCounters);
   }
 
   int totalTasks = width * height * spp;
@@ -103,6 +113,7 @@ void Renderer::render(int threadCount, int spp) {
   }
 
   // write computed contribution to image and save it
-  Image img = Image(width, height, scene->film->normalMeasurements(), scene->filename());
+  Image img = Image(width, height, scene->film->normalMeasurements(),
+                    scene->filename());
   img.print();
 }
