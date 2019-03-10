@@ -1,17 +1,17 @@
 #include <gtest/gtest.h>
-#include "renderer.h"
-#include "cameraTest.h"
 #include "blinnTest.h"
+#include "cameraTest.h"
 #include "explosionTest.h"
-#include "triangleTest.h"
+#include "meshTest.h"
 #include "reflectionTest.h"
 #include "refractiveScene.h"
-#include "meshTest.h"
+#include "renderer.h"
+#include "triangleTest.h"
 
 namespace {
-  const int WIDTH = 40;
-  const int HEIGHT = 40;
-  const int SPP = 1;
+const int WIDTH = 40;
+const int HEIGHT = 40;
+const int SPP = 1;
 
 TEST(Renderer, CameraTest) {
   auto scene = new CameraTest(WIDTH, HEIGHT);
@@ -60,4 +60,4 @@ TEST(Renderer, MeshTest) {
   Renderer renderer(scene, false);
   renderer.render(1, SPP);
 }
-}
+}  // namespace

@@ -1,10 +1,11 @@
-#include <memory>
-#include <iostream>
 #include "intersectables/triangle.h"
+#include <iostream>
+#include <memory>
 #include "math/matrix3f.h"
 
-Triangle::Triangle(int faceId, Material* material, const Vector3f& a, const Vector3f& b, const Vector3f& c)
-  : faceId(faceId), material(material), a(a), b(b), c(c) {}
+Triangle::Triangle(int faceId, Material* material, const Vector3f& a, const Vector3f& b,
+                   const Vector3f& c)
+    : faceId(faceId), material(material), a(a), b(b), c(c) {}
 
 Vector3f* Triangle::computeNormal(float, float) const {
   Vector3f ba(b);
@@ -31,11 +32,8 @@ HitRecord* Triangle::intersect(Ray* ray) const {
 
   // Interpret a triangle with an infinite plane with constraints (given by
   // alpha and beta)
-  Matrix3f m(
-    ab.x, ac.x, ray->direction->x,
-    ab.y, ac.y, ray->direction->y,
-    ab.z, ac.z, ray->direction->z
-  );
+  Matrix3f m(ab.x, ac.x, ray->direction->x, ab.y, ac.y, ray->direction->y, ab.z, ac.z,
+             ray->direction->z);
 
   auto invM = std::unique_ptr<Matrix3f>(m.inv());
 
@@ -63,14 +61,6 @@ HitRecord* Triangle::intersect(Ray* ray) const {
   auto wIn = Vector3f().incidentDirection(ray->direction);
   auto normal = computeNormal(params->x, params->y);
 
-  auto hit = new HitRecord(
-    t,
-    intersectionPosition,
-    normal,
-    new Vector3f(),
-    wIn,
-    material,
-    this
-  );
+  auto hit = new HitRecord(t, intersectionPosition, normal, new Vector3f(), wIn, material, this);
   return hit;
 }

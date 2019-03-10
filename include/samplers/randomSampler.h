@@ -5,9 +5,9 @@
 #define RANDOM_SAMPLER_H
 
 class RandomSampler : public Sampler {
-  public:
-    RandomSampler();
-    std::vector<std::vector<float>*>* makeSample(int, int);
+ public:
+  RandomSampler();
+  std::vector<std::vector<float>*>* makeSample(int, int);
 };
 
 #endif

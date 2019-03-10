@@ -1,11 +1,11 @@
+#include "progressBar.h"
 #include <chrono>
 #include <iostream>
-#include "progressBar.h"
 
 ProgressBar::ProgressBar(std::vector<int>* taskCounters, int totalTasks)
-  : taskCounters(taskCounters), totalTasks(totalTasks) {
-    this->stepSize = std::max(totalTasks / progressIntervals, 1);
-  }
+    : taskCounters(taskCounters), totalTasks(totalTasks) {
+  this->stepSize = std::max(totalTasks / progressIntervals, 1);
+}
 
 void ProgressBar::update() {
   while (isRunning) {
@@ -26,9 +26,7 @@ void ProgressBar::update() {
   }
 }
 
-void ProgressBar::start() {
-  this->progressThread = new std::thread(&ProgressBar::update, this);
-}
+void ProgressBar::start() { this->progressThread = new std::thread(&ProgressBar::update, this); }
 
 void ProgressBar::stop() {
   isRunning = false;

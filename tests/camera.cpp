@@ -1,6 +1,6 @@
+#include "camera.h"
 #include <gtest/gtest.h>
 #include <iostream>
-#include "camera.h"
 #include "math/vector3f.h"
 
 TEST(Camera, camera_matrix) {
@@ -13,9 +13,7 @@ TEST(Camera, camera_matrix) {
   float fov = 60.0;
   float aspectRatio = (float)width / height;
 
-  Camera camera(
-    &eye, &lookAt, &up, fov, aspectRatio, width, height
-  );
+  Camera camera(&eye, &lookAt, &up, fov, aspectRatio, width, height);
 
   ASSERT_EQ(1, camera.transformation()->m00);
   ASSERT_EQ(0, camera.transformation()->m01);

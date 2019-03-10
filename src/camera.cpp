@@ -1,28 +1,20 @@
-#include <iostream>
-#include <math.h>
-#include <memory>
 #include "camera.h"
-#include "ray.h"
+#include <math.h>
+#include <iostream>
+#include <memory>
 #include "math/vector3f.h"
 #include "math/vector4f.h"
+#include "ray.h"
 
-Camera::Camera(
-  Vector3f* eye,
-  Vector3f* lookAt,
-  Vector3f* up,
-  float fov,
-  float aspectRatio,
-  float width,
-  float height
-) :
-  eye(eye),
-  lookAt(lookAt),
-  up(up),
-  fov(fov),
-  aspectRatio(aspectRatio),
-  width(width),
-  height(height)
-{
+Camera::Camera(Vector3f* eye, Vector3f* lookAt, Vector3f* up, float fov, float aspectRatio,
+               float width, float height)
+    : eye(eye),
+      lookAt(lookAt),
+      up(up),
+      fov(fov),
+      aspectRatio(aspectRatio),
+      width(width),
+      height(height) {
   Vector3f from(eye);
   Vector3f to(lookAt);
 
@@ -55,9 +47,7 @@ Camera::Camera(
   left = -right;
 }
 
-Matrix4f* Camera::transformation() {
-  return this->matrix;
-}
+Matrix4f* Camera::transformation() { return this->matrix; }
 
 /**
  * Given a ray in image space, make a ray in world space according to the

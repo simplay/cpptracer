@@ -1,26 +1,27 @@
+#include "renderer.h"
 #include <algorithm>
-#include <thread>
-#include <vector>
 #include <chrono>
 #include <iostream>
-#include "renderer.h"
-#include "renderTask.h"
-#include "samplers/sampler.h"
-#include "samplers/oneSampler.h"
-#include "ray.h"
-#include "spectrum.h"
+#include <thread>
+#include <vector>
 #include "image.h"
 #include "integrators/integrator.h"
 #include "progressBar.h"
+#include "ray.h"
+#include "renderTask.h"
+#include "samplers/oneSampler.h"
+#include "samplers/sampler.h"
+#include "spectrum.h"
 
 using namespace std;
 
-Renderer::Renderer(Scene* scene): scene(scene), printProgress(true) {}
-Renderer::Renderer(Scene* scene, bool printProgress): scene(scene), printProgress(printProgress) {}
+Renderer::Renderer(Scene* scene) : scene(scene), printProgress(true) {}
+Renderer::Renderer(Scene* scene, bool printProgress) : scene(scene), printProgress(printProgress) {}
 
 void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* taskCounters) {
   // for each image index value
-  for (vector<int>::iterator idxValue = (*renderTask->indices).begin(); idxValue != (*renderTask->indices).end(); ++idxValue) {
+  for (vector<int>::iterator idxValue = (*renderTask->indices).begin();
+       idxValue != (*renderTask->indices).end(); ++idxValue) {
     auto samples = renderTask->scene->sampler->makeSample(renderTask->spp, 2);
 
     // for each sample index
@@ -36,7 +37,8 @@ void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* 
 
       // consider coordinates in between pixel locations
       // store in row-first order
-      renderTask->scene->film->addSample(rowIdx + sample->at(0), colIdx + sample->at(1), *raySpectrum);
+      renderTask->scene->film->addSample(rowIdx + sample->at(0), colIdx + sample->at(1),
+                                         *raySpectrum);
 
       taskCounters->at(id)++;
       delete ray->origin;
@@ -74,16 +76,14 @@ void Renderer::render(int threadCount, int spp) {
 
   // Equally assign each indexList random 1D image indices.
   int counter = 0;
-  for (vector<int>::iterator it=indexValues.begin(); it != indexValues.end(); ++it) {
+  for (vector<int>::iterator it = indexValues.begin(); it != indexValues.end(); ++it) {
     indexLists->at(counter % threadCount).push_back(*it);
     counter++;
   }
 
   // spawn threadCount threads:
   for (int id = 0; id < threadCount; id++) {
-    RenderTask* rt = new RenderTask(
-      width, height, &indexLists->at(id), scene, spp
-    );
+    RenderTask* rt = new RenderTask(width, height, &indexLists->at(id), scene, spp);
 
     threads[id] = thread(&Renderer::computeContribution, this, id, rt, taskCounters);
   }

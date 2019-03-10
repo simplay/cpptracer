@@ -1,14 +1,10 @@
+#include "math/matrix3f.h"
 #include <gtest/gtest.h>
 #include <iostream>
-#include "math/matrix3f.h"
 #include "math/vector3f.h"
 
 TEST(Matrix3f, mult) {
-  Matrix3f mat(
-    1, 2, 3,
-    4, 5, 6,
-    7, 8, 9
-  );
+  Matrix3f mat(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
   Vector3f v(1, 10, 100);
   Vector3f r = mat.mult(&v);
@@ -18,21 +14,13 @@ TEST(Matrix3f, mult) {
 }
 
 TEST(Matrix3f, det) {
-  Matrix3f mat = Matrix3f(
-    6, 1, 1,
-    4, -2, 5,
-    2, 8, 7
-  );
+  Matrix3f mat = Matrix3f(6, 1, 1, 4, -2, 5, 2, 8, 7);
 
   ASSERT_EQ(-306, mat.det());
 }
 
 TEST(Matrix3f, inv) {
-  Matrix3f mat(
-    -24, 18, 5,
-    20, -15, -4,
-    -5, 4, 1
-  );
+  Matrix3f mat(-24, 18, 5, 20, -15, -4, -5, 4, 1);
 
   auto m = mat.inv();
 
@@ -66,12 +54,7 @@ TEST(Matrix3f, inv) {
 // 17.1683    3.0884   -2.3658
 // 7.8429    1.4109   -2.0808
 TEST(Matrix3f, inv2) {
-
-  Matrix3f mat(
-    0.01022, 0.13142, -0.21362,
-    -0.05683, -0.05683, 0.42147,
-    0.00000, 0.45682, -1.00000
-  );
+  Matrix3f mat(0.01022, 0.13142, -0.21362, -0.05683, -0.05683, 0.42147, 0.00000, 0.45682, -1.00000);
 
   auto m = mat.inv();
 
@@ -92,11 +75,7 @@ TEST(Matrix3f, inv2) {
 }
 
 TEST(Matrix3f, scale) {
-  Matrix3f mat(
-    1, 2, 3,
-    4, 5, 6,
-    7, 8, 9
-  );
+  Matrix3f mat(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
   mat.scale(10);
 

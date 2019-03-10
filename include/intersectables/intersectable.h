@@ -4,7 +4,7 @@
 #ifndef INTERSECTABLE_H
 #define INTERSECTABLE_H
 class Intersectable {
-  public:
-    virtual HitRecord* intersect(Ray*) const = 0;
+ public:
+  virtual HitRecord* intersect(Ray*) const = 0;
 };
 #endif

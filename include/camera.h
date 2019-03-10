@@ -37,44 +37,45 @@
 // boundaries and is defined by the vertical field-of-view and the aspect
 // ratio.
 class Camera {
-  private:
-    // used to transform a point in camera coordinates to world coordinates
-    Matrix4f* matrix;
+ private:
+  // used to transform a point in camera coordinates to world coordinates
+  Matrix4f* matrix;
 
-    // origin of camera's viewing direction
-    Vector3f* eye;
+  // origin of camera's viewing direction
+  Vector3f* eye;
 
-    // the point in the scene we are looking at
-    Vector3f* lookAt;
+  // the point in the scene we are looking at
+  Vector3f* lookAt;
 
-    // reference vector that define the upwards direction. Notice, that according
-    // to our coordinate-system, upwards means having a positive y value.
-    Vector3f* up;
+  // reference vector that define the upwards direction. Notice, that according
+  // to our coordinate-system, upwards means having a positive y value.
+  Vector3f* up;
 
-    // vertical field of view, an angle
-    float fov;
+  // vertical field of view, an angle
+  float fov;
 
-    // fraction between width and height of the image.
-    float aspectRatio;
+  // fraction between width and height of the image.
+  float aspectRatio;
 
-    float width;
-    float height;
+  float width;
+  float height;
 
-    // top = -bottom = tan(fov / 2) (basic trigonometry fact - see figure above)
-    double top;
-    double bottom;
+  // top = -bottom = tan(fov / 2) (basic trigonometry fact - see figure above)
+  double top;
+  double bottom;
 
-    // right = -left = aspectRatio * top
-    double right;
-    double left;
+  // right = -left = aspectRatio * top
+  double right;
+  double left;
 
-  public:
-    Camera(Vector3f* eye, Vector3f* lookAt, Vector3f* up, float fov, float aspectRatio, float width, float height);
+ public:
+  Camera(Vector3f* eye, Vector3f* lookAt, Vector3f* up, float fov, float aspectRatio, float width,
+         float height);
 
-    Matrix4f* transformation();
+  Matrix4f* transformation();
 
-    // Creates primary rays
-    Ray* makeWorldspaceRay(int i, int j, std::vector<float>*);
+  // Creates primary rays
+  Ray* makeWorldspaceRay(int i, int j, std::vector<float>*);
 };
 
 #endif

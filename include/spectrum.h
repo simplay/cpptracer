@@ -8,23 +8,21 @@
  * Float valued point with 3 coordinates.
  */
 class Spectrum {
-  public:
-    float r;
-    float g;
-    float b;
+ public:
+  float r;
+  float g;
+  float b;
 
-    Spectrum();
-    Spectrum(float, float, float);
-    Spectrum(float);
-    Spectrum(const Vector3f&);
+  Spectrum();
+  Spectrum(float, float, float);
+  Spectrum(float);
+  Spectrum(const Vector3f&);
 
-    void scale(float);
-    void add(const Spectrum&);
-    void mult(const Spectrum&);
-    void clamp();
-    void log() {
-      printf("(%f, %f, %f)\n", r, g, b);
-    }
+  void scale(float);
+  void add(const Spectrum&);
+  void mult(const Spectrum&);
+  void clamp();
+  void log() { printf("(%f, %f, %f)\n", r, g, b); }
 };
 
 #endif

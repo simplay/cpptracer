@@ -7,13 +7,13 @@ class Material;
 #define POINT_LIGHT_H
 
 class PointLight : public LightGeometry {
-  private:
-    const Vector3f position;
-    Material* material;
+ private:
+  const Vector3f position;
+  Material* material;
 
-  public:
-    PointLight(Vector3f, Spectrum*);
-    virtual HitRecord* sample() const;
-    virtual HitRecord* intersect(Ray*) const;
+ public:
+  PointLight(Vector3f, Spectrum*);
+  virtual HitRecord* sample() const;
+  virtual HitRecord* intersect(Ray*) const;
 };
 #endif

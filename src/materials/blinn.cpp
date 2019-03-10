@@ -1,16 +1,17 @@
-#include <math.h>
 #include "materials/blinn.h"
+#include <math.h>
 
 // TODO(panmari): Change constructor to expect a const ref. This is currently a memory leak.
 Blinn::Blinn(Spectrum* diffuseContribution, Spectrum* specularContribution, float shinynessPower)
-  : diffuseContribution(*diffuseContribution), specularContribution(*specularContribution), shinynessPower(shinynessPower){
-}
+    : diffuseContribution(*diffuseContribution),
+      specularContribution(*specularContribution),
+      shinynessPower(shinynessPower) {}
 
 Spectrum* Blinn::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
   Spectrum* contribution = new Spectrum();
-  Spectrum diffuse  = diffuseContribution;
+  Spectrum diffuse = diffuseContribution;
   Spectrum specular = specularContribution;
-  const Spectrum& ambient  = diffuseContribution;
+  const Spectrum& ambient = diffuseContribution;
 
   Vector3f halfwayVector = *wIn;
   halfwayVector.add(wOut);
@@ -26,21 +27,13 @@ Spectrum* Blinn::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wI
   return contribution;
 }
 
-Spectrum* Blinn::evaluateEmission(HitRecord*, Vector3f*) {
-  return new Spectrum();
-}
+Spectrum* Blinn::evaluateEmission(HitRecord*, Vector3f*) { return new Spectrum(); }
 
-bool Blinn::hasSpecularReflection() {
-  return false;
-}
+bool Blinn::hasSpecularReflection() { return false; }
 
-bool Blinn::hasSpecularRefraction() {
-  return false;
-}
+bool Blinn::hasSpecularRefraction() { return false; }
 
-bool Blinn::castsShadows() {
-  return true;
-}
+bool Blinn::castsShadows() { return true; }
 
 ShadingSample* Blinn::evaluateSpecularReflection(HitRecord* hitRecord) {
   return new ShadingSample();

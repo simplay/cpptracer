@@ -1,6 +1,6 @@
+#include "ray.h"
 #include <gtest/gtest.h>
 #include <iostream>
-#include "ray.h"
 
 TEST(Ray, new_ray_with_args) {
   Vector3f* origin = new Vector3f(1, 2, 3);

@@ -4,11 +4,11 @@
 #ifndef MESH_H
 #define MESH_H
 class Mesh : public IntersectableList {
-  private:
-    Material* material;
-    std::string filepath;
+ private:
+  Material* material;
+  std::string filepath;
 
-  public:
-    Mesh(Material*, std::string);
+ public:
+  Mesh(Material*, std::string);
 };
 #endif

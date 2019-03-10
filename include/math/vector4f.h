@@ -6,22 +6,20 @@ class Vector3f;
 #define VECTOR4F_H
 
 class Vector4f {
-  public:
-    float x;
-    float y;
-    float z;
-    float w;
+ public:
+  float x;
+  float y;
+  float z;
+  float w;
 
-    Vector4f();
-    Vector4f(float, float, float, float);
-    Vector4f(Vector3f*, float);
+  Vector4f();
+  Vector4f(float, float, float, float);
+  Vector4f(Vector3f*, float);
 
-    float dot(Vector4f* other);
-    void log() {
-      printf("(%f, %f, %f, %f)\n", x, y, z, w);
-    }
+  float dot(Vector4f* other);
+  void log() { printf("(%f, %f, %f, %f)\n", x, y, z, w); }
 
-    Vector3f* toVector3f();
+  Vector3f* toVector3f();
 };
 
 #endif

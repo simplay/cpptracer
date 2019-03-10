@@ -1,14 +1,11 @@
+#include "integrators/whittedIntegrator.h"
 #include <algorithm>
 #include <iostream>
 #include <memory>
-#include "integrators/whittedIntegrator.h"
 #include "materials/material.h"
 
 bool WhittedIntegrator::isOccluded(Vector3f* hitPosition, Vector3f* lightDir, float eps) {
-  Ray shadowRay(
-    new Vector3f(hitPosition),
-    lightDir
-  );
+  Ray shadowRay(new Vector3f(hitPosition), lightDir);
 
   HitRecord* shadowHit = scene->intersectableList->intersect(&shadowRay);
   if (!shadowHit->isValid()) {
@@ -39,7 +36,8 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
     return new Spectrum();
   }
 
-  auto brdfContribution = std::unique_ptr<Spectrum>(hitRecord->material->evaluateBrdf(hitRecord, hitRecord->wIn, &lightDir));
+  auto brdfContribution = std::unique_ptr<Spectrum>(
+      hitRecord->material->evaluateBrdf(hitRecord, hitRecord->wIn, &lightDir));
 
   // shading: brdf * emission * dot(normal,light_dir) * geom_term
   Spectrum contribution = *brdfContribution;
@@ -63,7 +61,7 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
   return new Spectrum(contribution);
 }
 
-WhittedIntegrator::WhittedIntegrator(Scene* scene): scene(scene) {}
+WhittedIntegrator::WhittedIntegrator(Scene* scene) : scene(scene) {}
 
 Spectrum* WhittedIntegrator::integrate(Ray* ray) {
   int MAX_DEPTH = 5;
@@ -108,7 +106,8 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
     }
   }
 
-  if (hitRecord->material->hasSpecularReflection() || hitRecord->material->hasSpecularRefraction()) {
+  if (hitRecord->material->hasSpecularReflection() ||
+      hitRecord->material->hasSpecularRefraction()) {
     Spectrum* total = new Spectrum();
     total->add(reflection);
     total->add(refraction);
@@ -117,7 +116,7 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
   }
 
   Spectrum* contribution = new Spectrum();
-  for (auto const& lightSource: *scene->lightList) {
+  for (auto const& lightSource : *scene->lightList) {
     Spectrum* currentContribution = contributionOf(lightSource, hitRecord);
     contribution->add(*currentContribution);
     delete currentContribution;
@@ -126,4 +125,3 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
 
   return contribution;
 }
-

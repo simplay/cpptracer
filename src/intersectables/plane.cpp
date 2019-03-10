@@ -1,10 +1,9 @@
-#include <iostream>
-#include <cmath>
 #include "intersectables/plane.h"
+#include <cmath>
+#include <iostream>
 
 Plane::Plane(Material* material, const Vector3f& normal, float distance)
-  : material(material), normal(normal), distance(distance)
-{}
+    : material(material), normal(normal), distance(distance) {}
 
 /**
  * The distance D between a point p and a plane can be computed by:
@@ -45,13 +44,5 @@ HitRecord* Plane::intersect(Ray* ray) const {
   auto hitNormal = new Vector3f(normal);
   auto tangent = Vector3f(1, 0, 0).cross(hitNormal);
 
-  return new HitRecord(
-    t,
-    intersectionPosition,
-    hitNormal,
-    tangent,
-    wIn,
-    material,
-    this
-  );
+  return new HitRecord(t, intersectionPosition, hitNormal, tangent, wIn, material, this);
 }

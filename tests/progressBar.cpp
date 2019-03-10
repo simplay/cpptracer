@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include "progressBar.h"
+#include <gtest/gtest.h>
 
 #include <vector>
 
