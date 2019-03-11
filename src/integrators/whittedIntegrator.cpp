@@ -7,7 +7,7 @@
 bool WhittedIntegrator::isOccluded(Vector3f* hitPosition, Vector3f* lightDir, float eps) {
   Ray shadowRay(new Vector3f(*hitPosition), lightDir);
 
-  HitRecord* shadowHit = scene->intersectableList->intersect(&shadowRay);
+  HitRecord* shadowHit = scene->intersectableList->intersect(shadowRay);
   if (!shadowHit->isValid()) {
     delete shadowRay.origin;
     delete shadowHit;
@@ -63,13 +63,13 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
 
 WhittedIntegrator::WhittedIntegrator(Scene* scene) : scene(scene) {}
 
-Spectrum* WhittedIntegrator::integrate(Ray* ray) {
+Spectrum* WhittedIntegrator::integrate(const Ray& ray) {
   int MAX_DEPTH = 5;
 
   HitRecord* hitRecord = scene->intersectableList->intersect(ray);
   if (!hitRecord->isValid()) {
     // only delete hitRecord for deepest hit record
-    if (ray->depth == MAX_DEPTH) {
+    if (ray.depth == MAX_DEPTH) {
       delete hitRecord;
     }
     return new Spectrum();
@@ -78,12 +78,12 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
   Spectrum reflection;
   Spectrum refraction;
 
-  if (hitRecord->material->hasSpecularReflection() && ray->depth < MAX_DEPTH) {
+  if (hitRecord->material->hasSpecularReflection() && ray.depth < MAX_DEPTH) {
     ShadingSample* sample = hitRecord->material->evaluateSpecularReflection(hitRecord);
     if (sample->isValid) {
       reflection.add(*sample->brdf);
-      Ray reflectedRay(new Vector3f(*hitRecord->position), sample->w, ray->depth + 1);
-      Spectrum* spec = integrate(&reflectedRay);
+      Ray reflectedRay(new Vector3f(*hitRecord->position), sample->w, ray.depth + 1);
+      Spectrum* spec = integrate(reflectedRay);
       reflection.mult(*spec);
       delete reflectedRay.origin;
       delete spec;
@@ -91,13 +91,13 @@ Spectrum* WhittedIntegrator::integrate(Ray* ray) {
     delete sample;
   }
 
-  if (hitRecord->material->hasSpecularRefraction() && ray->depth < MAX_DEPTH) {
+  if (hitRecord->material->hasSpecularRefraction() && ray.depth < MAX_DEPTH) {
     ShadingSample* sample = hitRecord->material->evaluateSpecularRefraction(hitRecord);
     if (sample->isValid) {
       refraction.add(*sample->brdf);
 
-      Ray refractedRay(new Vector3f(*hitRecord->position), sample->w, ray->depth + 1);
-      Spectrum* spec = integrate(&refractedRay);
+      const Ray refractedRay(new Vector3f(*hitRecord->position), sample->w, ray.depth + 1);
+      Spectrum* spec = integrate(refractedRay);
       refraction.mult(*spec);
 
       delete refractedRay.origin;

@@ -61,7 +61,7 @@ Matrix4f* Camera::transformation() { return this->matrix; }
  * @param random sample that the camera can use to generate a ray float array.
  * @return the ray in world coordinates
  */
-Ray* Camera::makeWorldspaceRay(int i, int j, std::vector<float>* samples) {
+Ray Camera::makeWorldspaceRay(int i, int j, std::vector<float>* samples) const {
   float s1 = samples->at(0);
   float s2 = samples->at(1);
 
@@ -71,7 +71,6 @@ Ray* Camera::makeWorldspaceRay(int i, int j, std::vector<float>* samples) {
 
   Vector4f v = Vector4f(u_ij, v_ij, w_ij, 0);
   auto p_uvw = std::unique_ptr<Vector4f>(matrix->mult(&v));
-  Ray* ray = new Ray(new Vector3f(*eye), new Vector3f(*p_uvw.get()), i, j);
 
-  return ray;
+  return Ray(new Vector3f(*eye), new Vector3f(*p_uvw.get()), i, j);
 }

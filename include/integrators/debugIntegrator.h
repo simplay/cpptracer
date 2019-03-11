@@ -13,6 +13,6 @@ class DebugIntegrator : public Integrator {
  public:
   DebugIntegrator(Scene*);
   DebugIntegrator(Scene*, bool showBinary);
-  Spectrum* integrate(Ray*);
+  Spectrum* integrate(const Ray&);
 };
 #endif

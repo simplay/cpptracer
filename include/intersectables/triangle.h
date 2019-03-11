@@ -31,7 +31,7 @@ class Triangle : public Intersectable {
   // f(p) = dot(n, (p - a)) intersection:
   // f(p(t)) = 0. Solve for t.  Plug t_i into
   // p(t_i) will give intersection point
-  HitRecord* intersect(Ray* ray) const;
+  HitRecord* intersect(const Ray& ray) const;
   virtual void log() const {
     std::cout << "face-index: " << faceId << std::endl;
     std::cout << "vertices: " << std::endl;

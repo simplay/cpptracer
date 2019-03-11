@@ -53,11 +53,11 @@ Sphere::Sphere(Material* material, const Vector3f& center, float radius)
  * For computing the hitRecord of the intersection, we are interested in the
  * smaller and positive t.
  */
-HitRecord* Sphere::intersect(Ray* ray) const {
-  Vector3f oc(*ray->origin);
+HitRecord* Sphere::intersect(const Ray& ray) const {
+  Vector3f oc(*ray.origin);
   oc.sub(center);
 
-  Vector3f rd(*ray->direction);
+  Vector3f rd(*ray.direction);
   float a = rd.dot();
   float b = 2.0 * rd.dot(oc);
   float c = oc.dot() - radius * radius;
@@ -77,14 +77,14 @@ HitRecord* Sphere::intersect(Ray* ray) const {
       }
     }
 
-    auto hitPosition = ray->pointAt(t);
+    auto hitPosition = ray.pointAt(t);
     auto hitNormal = new Vector3f(*hitPosition);
     hitNormal->sub(center);
     hitNormal->scale(1.0 / radius);
 
-    auto wIn = Vector3f().incidentDirection(*ray->direction);
+    auto wIn = Vector3f().incidentDirection(*ray.direction);
 
-    return new HitRecord(t, hitPosition, hitNormal, new Vector3f(), wIn, material, this, ray->i,
-                         ray->j);
+    return new HitRecord(t, hitPosition, hitNormal, new Vector3f(), wIn, material, this, ray.i,
+                         ray.j);
   }
 }

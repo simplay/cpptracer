@@ -32,7 +32,7 @@ void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* 
       int rowIdx = *idxValue / renderTask->width;
       int colIdx = *idxValue % renderTask->width;
 
-      Ray* ray = renderTask->scene->camera->makeWorldspaceRay(rowIdx, colIdx, sample);
+      const Ray ray = renderTask->scene->camera->makeWorldspaceRay(rowIdx, colIdx, sample);
       Spectrum* raySpectrum = renderTask->scene->integrator->integrate(ray);
 
       // consider coordinates in between pixel locations
@@ -41,9 +41,8 @@ void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* 
                                          *raySpectrum);
 
       taskCounters->at(id)++;
-      delete ray->origin;
-      delete ray->direction;
-      delete ray;
+      delete ray.origin;
+      delete ray.direction;
       delete raySpectrum;
       delete sample;
     }

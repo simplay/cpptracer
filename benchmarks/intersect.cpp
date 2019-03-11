@@ -29,7 +29,7 @@ static void BM_TriangleIntersect(benchmark::State& state) {
 
   for (auto _ : state) {
     for (auto& r : rays) {
-      std::unique_ptr<HitRecord>(triangle.intersect(&r));
+      std::unique_ptr<HitRecord>(triangle.intersect(r));
     }
   }
 }
@@ -43,7 +43,7 @@ static void BM_SphereIntersect(benchmark::State& state) {
 
   for (auto _ : state) {
     for (auto& r : rays) {
-      std::unique_ptr<HitRecord>(sphere.intersect(&r));
+      std::unique_ptr<HitRecord>(sphere.intersect(r));
     }
   }
 }
@@ -57,7 +57,7 @@ static void BM_ExplosionIntersect(benchmark::State& state) {
 
   for (auto _ : state) {
     for (auto& r : rays) {
-      std::unique_ptr<HitRecord>(explosion.intersect(&r));
+      std::unique_ptr<HitRecord>(explosion.intersect(r));
     }
   }
 }
@@ -70,7 +70,7 @@ static void BM_PlaneIntersect(benchmark::State& state) {
   auto rays = MakeRays();
   for (auto _ : state) {
     for (auto& r : rays) {
-      std::unique_ptr<HitRecord>(plane.intersect(&r));
+      std::unique_ptr<HitRecord>(plane.intersect(r));
     }
   }
 }
@@ -82,7 +82,7 @@ static void BM_PointLightIntersect(benchmark::State& state) {
   auto rays = MakeRays();
   for (auto _ : state) {
     for (auto& r : rays) {
-      std::unique_ptr<HitRecord>(light.intersect(&r));
+      std::unique_ptr<HitRecord>(light.intersect(r));
     }
   }
 }
@@ -90,15 +90,14 @@ BENCHMARK(BM_PointLightIntersect);
 
 static void BM_MeshTriangleTntersect(benchmark::State& state) {
   Diffuse material = Diffuse(new Spectrum(1.0));
-  auto meshTriangle =
-      MeshTriangle(1, &material, Vector3f(0.0, 0.0, 0.0), Vector3f(1.0, 0.0, 0.0),
-                   Vector3f(0.0, 1.0, 0.0), Vector3f(1.0, 0.0, 0.0),
-                   Vector3f(0.0, 1.0, 0.0), Vector3f(0.0, 0.0, 1.0));
+  auto meshTriangle = MeshTriangle(1, &material, Vector3f(0.0, 0.0, 0.0), Vector3f(1.0, 0.0, 0.0),
+                                   Vector3f(0.0, 1.0, 0.0), Vector3f(1.0, 0.0, 0.0),
+                                   Vector3f(0.0, 1.0, 0.0), Vector3f(0.0, 0.0, 1.0));
 
   auto rays = MakeRays();
   for (auto _ : state) {
     for (auto& r : rays) {
-      std::unique_ptr<HitRecord>(meshTriangle.intersect(&r));
+      std::unique_ptr<HitRecord>(meshTriangle.intersect(r));
     }
   }
 }

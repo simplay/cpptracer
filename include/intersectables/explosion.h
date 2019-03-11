@@ -31,6 +31,6 @@ class Explosion : public Intersectable {
 
  public:
   Explosion(Material*, const Vector3f&, float);
-  virtual HitRecord* intersect(Ray* ray) const;
+  virtual HitRecord* intersect(const Ray& ray) const;
 };
 #endif

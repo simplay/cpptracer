@@ -9,7 +9,7 @@ class IntersectableList : public Intersectable {
 
  public:
   IntersectableList();
-  HitRecord* intersect(Ray*) const;
+  HitRecord* intersect(const Ray&) const;
   void put(Intersectable*);
 };
 #endif

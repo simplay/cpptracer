@@ -5,9 +5,9 @@
 Explosion::Explosion(Material* material, const Vector3f& center, float radius)
     : material(material), center(center), radius(radius) {}
 
-HitRecord* Explosion::intersect(Ray* ray) const {
-  const Vector3f& orig = *ray->origin;
-  const Vector3f& dir = *ray->direction;
+HitRecord* Explosion::intersect(const Ray& ray) const {
+  const Vector3f& orig = *ray.origin;
+  const Vector3f& dir = *ray.direction;
   if (orig.dot() - pow(orig.dot(dir), 2) > pow(radius, 2)) {
     return new HitRecord();
   }
@@ -39,10 +39,10 @@ HitRecord* Explosion::intersect(Ray* ray) const {
 
     if (d < 0) {
       // compute parameter t, given a intersction point with a ray
-      float t = (hitPos.x - ray->origin->x) / ray->direction->x;
+      float t = (hitPos.x - ray.origin->x) / ray.direction->x;
       Vector3f* norm = new Vector3f(nx, ny, nz);
       norm->normalize();
-      Vector3f* wIn = new Vector3f(*ray->direction);
+      Vector3f* wIn = new Vector3f(*ray.direction);
       wIn->negate();
       wIn->normalize();
       return new HitRecord(t, new Vector3f(hitPos), norm, new Vector3f(), wIn, material, this);

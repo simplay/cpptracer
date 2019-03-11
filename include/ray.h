@@ -27,9 +27,9 @@ class Ray {
   Ray(Vector3f* origin, Vector3f* direction, int depth, bool perturbate = true);
 
   // Get point on ray at origin + direction * t
-  Vector3f* pointAt(float t);
+  Vector3f* pointAt(float t) const;
 
-  Ray* transform(Matrix4f*);
+  Ray* transform(Matrix4f*) const;
 
   void log() {
     origin->log();
