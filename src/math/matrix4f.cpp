@@ -85,7 +85,7 @@ Vector4f* Matrix4f::mult(Vector4f* other) {
   Vector4f v3(m20, m21, m22, m23);
   Vector4f v4(m30, m31, m32, m33);
 
-  Vector4f* v = new Vector4f(v1.dot(other), v2.dot(other), v3.dot(other), v4.dot(other));
+  Vector4f* v = new Vector4f(v1.dot(*other), v2.dot(*other), v3.dot(*other), v4.dot(*other));
   return v;
 }
 

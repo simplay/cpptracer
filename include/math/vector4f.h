@@ -14,9 +14,9 @@ class Vector4f {
 
   Vector4f();
   Vector4f(float, float, float, float);
-  Vector4f(Vector3f*, float);
+  Vector4f(const Vector3f&, float);
 
-  float dot(Vector4f* other);
+  float dot(const Vector4f& other);
   void log() { printf("(%f, %f, %f, %f)\n", x, y, z, w); }
 
   Vector3f* toVector3f();
