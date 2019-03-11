@@ -1,9 +1,9 @@
-#include <gtest/gtest.h>
 #include "spectrum.h"
+#include <gtest/gtest.h>
 #include "math/vector3f.h"
 
 namespace {
-  const float EPS = 1e-4;
+const float EPS = 1e-4;
 
 TEST(Spectrum, new_without_arguments) {
   Spectrum s = Spectrum();
@@ -76,4 +76,4 @@ TEST(Spectrum, clamp) {
   ASSERT_NEAR(0.6, s.b, EPS);
 }
 
-}
+}  // namespace

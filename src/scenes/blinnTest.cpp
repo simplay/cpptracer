@@ -1,13 +1,12 @@
 #include "scenes/blinnTest.h"
+#include "integrators/debugIntegrator.h"
+#include "integrators/whittedIntegrator.h"
 #include "intersectables/plane.h"
 #include "intersectables/sphere.h"
 #include "materials/blinn.h"
 #include "materials/diffuse.h"
-#include "integrators/debugIntegrator.h"
-#include "integrators/whittedIntegrator.h"
 
-BlinnTest::BlinnTest(int width, int height)
-  : Scene(width, height) {}
+BlinnTest::BlinnTest(int width, int height) : Scene(width, height) {}
 
 void BlinnTest::buildCamera() {
   Vector3f* eye = new Vector3f(0.0, 0.0, 3.0);
@@ -17,9 +16,7 @@ void BlinnTest::buildCamera() {
 
   float aspectRatio = (float)width / height;
 
-  Camera* camera = new Camera(
-    eye, lookAt, up, fov, aspectRatio, width, height
-  );
+  Camera* camera = new Camera(eye, lookAt, up, fov, aspectRatio, width, height);
   this->camera = camera;
 }
 

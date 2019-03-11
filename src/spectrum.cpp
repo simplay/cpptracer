@@ -1,15 +1,12 @@
+#include "spectrum.h"
 #include <algorithm>
 #include <cmath>
-#include "spectrum.h"
 
-Spectrum::Spectrum()
-  : r(0), g(0), b(0) {}
+Spectrum::Spectrum() : r(0), g(0), b(0) {}
 
-Spectrum::Spectrum(float r, float g, float b)
-  : r(r), g(g), b(b) {}
+Spectrum::Spectrum(float r, float g, float b) : r(r), g(g), b(b) {}
 
-Spectrum::Spectrum(float v)
-  : r(v), g(v), b(v) {}
+Spectrum::Spectrum(float v) : r(v), g(v), b(v) {}
 
 Spectrum::Spectrum(const Vector3f& v) {
   r = v.x;

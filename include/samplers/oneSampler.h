@@ -5,9 +5,9 @@
 #define ONE_SAMPLER_H
 
 class OneSampler : public Sampler {
-  public:
-    OneSampler();
-    std::vector<std::vector<float>*>* makeSample(int, int);
+ public:
+  OneSampler();
+  std::vector<std::vector<float>*>* makeSample(int, int);
 };
 
 #endif

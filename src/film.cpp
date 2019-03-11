@@ -5,10 +5,7 @@
 #include "spectrum.h"
 
 Film::Film(int width, int height)
-    : width(width),
-      height(height),
-      measurements(width * height),
-      sampleCounts(width * height) {}
+    : width(width), height(height), measurements(width * height), sampleCounts(width * height) {}
 
 // store spectrum in row-first order
 void Film::addSample(float rowIdx, float colIdx, const Spectrum& spectrum) {

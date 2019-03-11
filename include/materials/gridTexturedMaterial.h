@@ -1,31 +1,32 @@
-#include "diffuse.h"
+#include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../spectrum.h"
-#include "../hitRecord.h"
+#include "diffuse.h"
 
 #ifndef GRID_TEXTURED_MATERIAL_H
 #define GRID_TEXTURED_MATERIAL_H
 
 class GridTexturedMaterial : public Material {
-  private:
-    const Spectrum lineColor;
-    const Spectrum tileColor;
-    const float thickness;
-    const Vector3f shift;
-    const float scale;
-    Diffuse diffuse;
+ private:
+  const Spectrum lineColor;
+  const Spectrum tileColor;
+  const float thickness;
+  const Vector3f shift;
+  const float scale;
+  Diffuse diffuse;
 
-  public:
-    GridTexturedMaterial(Spectrum* lineColor, Spectrum* tileColor, float thickness, Vector3f* shift, float scale);
+ public:
+  GridTexturedMaterial(Spectrum* lineColor, Spectrum* tileColor, float thickness, Vector3f* shift,
+                       float scale);
 
-    virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn);
-    virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut);
+  virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn);
+  virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut);
 
-    virtual bool hasSpecularReflection();
-    virtual bool hasSpecularRefraction();
-    virtual bool castsShadows();
+  virtual bool hasSpecularReflection();
+  virtual bool hasSpecularRefraction();
+  virtual bool castsShadows();
 
-    virtual ShadingSample* evaluateSpecularReflection(HitRecord* hitRecord);
-    virtual ShadingSample* evaluateSpecularRefraction(HitRecord* hitRecord);
+  virtual ShadingSample* evaluateSpecularReflection(HitRecord* hitRecord);
+  virtual ShadingSample* evaluateSpecularRefraction(HitRecord* hitRecord);
 };
 #endif

@@ -1,10 +1,9 @@
-#include <iostream>
-#include <cmath>
 #include "intersectables/sphere.h"
+#include <cmath>
+#include <iostream>
 
 Sphere::Sphere(Material* material, const Vector3f& center, float radius)
-  : material(material), center(center), radius(radius)
-{}
+    : material(material), center(center), radius(radius) {}
 
 /**
  * Details how to compute the ray-sphere intersection:
@@ -85,16 +84,7 @@ HitRecord* Sphere::intersect(Ray* ray) const {
 
     auto wIn = Vector3f().incidentDirection(ray->direction);
 
-    return new HitRecord(
-      t,
-      hitPosition,
-      hitNormal,
-      new Vector3f(),
-      wIn,
-      material,
-      this,
-      ray->i,
-      ray->j
-    );
+    return new HitRecord(t, hitPosition, hitNormal, new Vector3f(), wIn, material, this, ray->i,
+                         ray->j);
   }
 }

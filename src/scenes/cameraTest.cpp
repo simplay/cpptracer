@@ -2,8 +2,7 @@
 #include "intersectables/plane.h"
 #include "materials/diffuse.h"
 
-CameraTest::CameraTest(int width, int height)
-  : Scene(width, height) {}
+CameraTest::CameraTest(int width, int height) : Scene(width, height) {}
 
 void CameraTest::buildLights() {
   std::vector<PointLight*>* lightList = new std::vector<PointLight*>;

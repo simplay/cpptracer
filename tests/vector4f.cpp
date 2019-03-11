@@ -1,6 +1,6 @@
+#include "vector4f.h"
 #include <gtest/gtest.h>
 #include <iostream>
-#include "vector4f.h"
 #include "vector3f.h"
 
 TEST(Vector4f, with_no_args) {

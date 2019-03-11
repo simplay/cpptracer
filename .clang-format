@@ -1,0 +1,10 @@
+---
+Language:        Cpp
+BasedOnStyle:  Google
+PointerAlignment: Left
+AlignEscapedNewlinesLeft: false
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortIfStatementsOnASingleLine: false
+AlignTrailingComments: true
+ColumnLimit: 100
+...

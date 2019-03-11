@@ -1,15 +1,17 @@
-#include <math.h>
 #include "materials/explosionMaterial.h"
+#include <math.h>
 
 // TODO(panmari): Change constructor to only allow const ref. Currently, this is a memory leak.
-ExplosionMaterial::ExplosionMaterial(Spectrum* diffuseContribution, Spectrum* specularContribution, float shinynessPower)
-  : diffuseContribution(*diffuseContribution), specularContribution(*specularContribution), shinynessPower(shinynessPower){
-  }
+ExplosionMaterial::ExplosionMaterial(Spectrum* diffuseContribution, Spectrum* specularContribution,
+                                     float shinynessPower)
+    : diffuseContribution(*diffuseContribution),
+      specularContribution(*specularContribution),
+      shinynessPower(shinynessPower) {}
 
 Spectrum* ExplosionMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
-  Spectrum diffuse  = Spectrum();
+  Spectrum diffuse = Spectrum();
   Spectrum specular = specularContribution;
-  Spectrum ambient  = diffuseContribution;
+  Spectrum ambient = diffuseContribution;
 
   Vector3f halfwayVector = *wIn;
   halfwayVector.add(wOut);
@@ -18,11 +20,11 @@ Spectrum* ExplosionMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, 
   specular.scale(pow(halfwayVector.dot(hitRecord->normal), shinynessPower));
 
   float d = hitRecord->t;
-  const Spectrum   yellow(1.7, 1.3, 1.0);
-  const Spectrum   orange(1.0, 0.6, 0.0);
-  const Spectrum      red(1.0, 0.0, 0.0);
+  const Spectrum yellow(1.7, 1.3, 1.0);
+  const Spectrum orange(1.0, 0.6, 0.0);
+  const Spectrum red(1.0, 0.0, 0.0);
   const Spectrum darkgray(0.2, 0.2, 0.2);
-  const Spectrum     gray(0.4, 0.4, 0.4);
+  const Spectrum gray(0.4, 0.4, 0.4);
 
   float x = std::max(0.f, std::min(1.f, d));
   if (x < 0.25f) {
@@ -44,21 +46,13 @@ Spectrum* ExplosionMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, 
   return contribution;
 }
 
-Spectrum* ExplosionMaterial::evaluateEmission(HitRecord*, Vector3f*) {
-  return new Spectrum();
-}
+Spectrum* ExplosionMaterial::evaluateEmission(HitRecord*, Vector3f*) { return new Spectrum(); }
 
-bool ExplosionMaterial::hasSpecularReflection() {
-  return false;
-}
+bool ExplosionMaterial::hasSpecularReflection() { return false; }
 
-bool ExplosionMaterial::hasSpecularRefraction() {
-  return false;
-}
+bool ExplosionMaterial::hasSpecularRefraction() { return false; }
 
-bool ExplosionMaterial::castsShadows() {
-  return true;
-}
+bool ExplosionMaterial::castsShadows() { return true; }
 
 ShadingSample* ExplosionMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
   return new ShadingSample();

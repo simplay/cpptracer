@@ -1,12 +1,11 @@
+#include "math/vector3f.h"
 #include <cmath>
 #include <iostream>
-#include "math/vector3f.h"
 #include "math/vector4f.h"
 
 Vector3f::Vector3f() : x(0), y(0), z(0) {}
 
-Vector3f::Vector3f(float x, float y, float z)
-  : x(x), y(y), z(z) {}
+Vector3f::Vector3f(float x, float y, float z) : x(x), y(y), z(z) {}
 
 Vector3f::Vector3f(Vector3f* other) {
   x = other->x;
@@ -57,19 +56,16 @@ Vector3f* Vector3f::cross(const Vector3f* other) {
   return new Vector3f(cx, cy, cz);
 }
 
-float Vector3f::norm() const {
-  return sqrt(this->dot());
-}
+float Vector3f::norm() const { return sqrt(this->dot()); }
 
 void Vector3f::normalize() {
   float scale = norm();
-  if (scale == 0) return;
+  if (scale == 0)
+    return;
   this->scale(1.0 / scale);
 }
 
-float Vector3f::dot() const {
-  return x * x + y * y + z * z;
-}
+float Vector3f::dot() const { return x * x + y * y + z * z; }
 
 float Vector3f::dot(const Vector3f* other) const {
   return x * other->x + y * other->y + z * other->z;

@@ -1,16 +1,16 @@
-#include "math/vector4f.h"
 #include "intersectables/instance.h"
+#include "math/vector4f.h"
 
 Instance::Instance(Intersectable* intersectable)
-  : intersectable(intersectable), transformation(Matrix4f().eye()) {
-    this->invTransformation = Matrix4f().eye();
-    this->invTrasnposedTransformation = Matrix4f().eye();
+    : intersectable(intersectable), transformation(Matrix4f().eye()) {
+  this->invTransformation = Matrix4f().eye();
+  this->invTrasnposedTransformation = Matrix4f().eye();
 }
 
 Instance::Instance(Intersectable* intersectable, Matrix4f* transformation)
-  : intersectable(intersectable), transformation(transformation) {
-    this->invTransformation = transformation->inv();
-    this->invTrasnposedTransformation = invTransformation->transposed();
+    : intersectable(intersectable), transformation(transformation) {
+  this->invTransformation = transformation->inv();
+  this->invTrasnposedTransformation = invTransformation->transposed();
 }
 
 Instance::~Instance() {

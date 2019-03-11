@@ -1,8 +1,9 @@
-#include <iostream>
 #include <integrators/debugIntegrator.h>
+#include <iostream>
 
-DebugIntegrator::DebugIntegrator(Scene* scene): scene(scene), showBinary(false) {}
-DebugIntegrator::DebugIntegrator(Scene* scene, bool showBinary): scene(scene), showBinary(showBinary) {}
+DebugIntegrator::DebugIntegrator(Scene* scene) : scene(scene), showBinary(false) {}
+DebugIntegrator::DebugIntegrator(Scene* scene, bool showBinary)
+    : scene(scene), showBinary(showBinary) {}
 
 Spectrum* DebugIntegrator::integrate(Ray* ray) {
   HitRecord* hitRecord = scene->intersectableList->intersect(ray);

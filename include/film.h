@@ -6,18 +6,18 @@
 
 // Boxfilter-film
 class Film {
-    int access(int, int);
+  int access(int, int);
 
-  public:
-    int width;
-    int height;
-    std::vector<Spectrum> measurements;
-    std::vector<int> sampleCounts;
+ public:
+  int width;
+  int height;
+  std::vector<Spectrum> measurements;
+  std::vector<int> sampleCounts;
 
-    Film(int width, int height);
-    void addSample(float x, float y, const Spectrum& s);
-    // Returns a copy of measurements normalized by sample counts.
-    std::vector<Spectrum> normalMeasurements();
+  Film(int width, int height);
+  void addSample(float x, float y, const Spectrum& s);
+  // Returns a copy of measurements normalized by sample counts.
+  std::vector<Spectrum> normalMeasurements();
 };
 
 #endif

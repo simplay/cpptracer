@@ -5,43 +5,34 @@
 #define MATRIX4F_H
 
 class Matrix4f {
-  public:
-    float m00, m01, m02, m03;
-    float m10, m11, m12, m13;
-    float m20, m21, m22, m23;
-    float m30, m31, m32, m33;
+ public:
+  float m00, m01, m02, m03;
+  float m10, m11, m12, m13;
+  float m20, m21, m22, m23;
+  float m30, m31, m32, m33;
 
-    Matrix4f();
-    Matrix4f(Vector4f* v1, Vector4f* v2, Vector4f* v3, Vector4f* v4, bool rowWise);
-    Matrix4f(
-      float m00, float m01, float m02, float m03,
-      float m10, float m11, float m12, float m13,
-      float m20, float m21, float m22, float m23,
-      float m30, float m31, float m32, float m33
-    );
+  Matrix4f();
+  Matrix4f(Vector4f* v1, Vector4f* v2, Vector4f* v3, Vector4f* v4, bool rowWise);
+  Matrix4f(float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13,
+           float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33);
 
-    static Matrix4f* eye() {
-      Matrix4f* eye = new Matrix4f(
-        1, 0, 0, 0,
-        0, 1, 0, 0,
-        0, 0, 1, 0,
-        0, 0, 0, 1
-      );
-      return eye;
-    }
+  static Matrix4f* eye() {
+    Matrix4f* eye = new Matrix4f(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    return eye;
+  }
 
-    Vector4f* mult(Vector4f* other);
-    void scale(float f);
+  Vector4f* mult(Vector4f* other);
+  void scale(float f);
 
-    Matrix4f* inv();
-    float det();
+  Matrix4f* inv();
+  float det();
 
-    Matrix4f* transposed();
+  Matrix4f* transposed();
 
-    void log() {
-      printf("%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n",
-          m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
-    }
+  void log() {
+    printf("%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n", m00, m01, m02, m03,
+           m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+  }
 };
 
 #endif

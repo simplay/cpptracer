@@ -1,11 +1,11 @@
-#include <cmath>
+#include "image.h"
 #include <stdio.h>
 #include <string.h>
+#include <cmath>
 #include <iostream>
-#include "image.h"
 
 Image::Image(int width, int height, const std::vector<Spectrum>& values, std::string filename)
-  : width(width), height(height), values(values), filename(filename) {}
+    : width(width), height(height), values(values), filename(filename) {}
 
 void Image::print() {
   std::cout << "Printing " << width << " x " << height << " image" << std::endl;
@@ -16,10 +16,10 @@ void Image::print() {
   int g;
   int b;
 
-  FILE *f;
+  FILE* f;
   int filesize = 54 + 3 * width * height;
 
-  unsigned char* img = (unsigned char *)malloc(3 * width * height);
+  unsigned char* img = (unsigned char*)malloc(3 * width * height);
   memset(img, 0, 3 * width * height);
 
   for (int colIdx = 0; colIdx < width; colIdx++) {

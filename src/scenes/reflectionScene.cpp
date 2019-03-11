@@ -1,15 +1,14 @@
-#include "scenes/reflectionTest.h"
+#include "integrators/whittedIntegrator.h"
 #include "intersectables/plane.h"
 #include "intersectables/sphere.h"
-#include "materials/reflectiveMaterial.h"
-#include "materials/diffuse.h"
 #include "materials/blinn.h"
-#include "integrators/whittedIntegrator.h"
-#include "samplers/randomSampler.h"
+#include "materials/diffuse.h"
+#include "materials/reflectiveMaterial.h"
 #include "samplers/oneSampler.h"
+#include "samplers/randomSampler.h"
+#include "scenes/reflectionTest.h"
 
-ReflectionTest::ReflectionTest(int width, int height)
-  : Scene(width, height) {}
+ReflectionTest::ReflectionTest(int width, int height) : Scene(width, height) {}
 
 void ReflectionTest::buildLights() {
   std::vector<PointLight*>* lightList = new std::vector<PointLight*>;
@@ -35,9 +34,7 @@ void ReflectionTest::buildIntersectables() {
   this->intersectableList = intersectableList;
 }
 
-void ReflectionTest::buildIntegrator() {
-  this->integrator = new WhittedIntegrator(this);
-}
+void ReflectionTest::buildIntegrator() { this->integrator = new WhittedIntegrator(this); }
 
 void ReflectionTest::buildSampler() {
   this->sampler = new RandomSampler();

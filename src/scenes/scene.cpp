@@ -1,11 +1,10 @@
-#include <vector>
-#include <iostream>
-#include <iostream>
 #include "scenes/scene.h"
+#include <iostream>
+#include <vector>
 #include "integrators/whittedIntegrator.h"
 #include "samplers/oneSampler.h"
 
-Scene::Scene(int width, int height): width(width), height(height) {}
+Scene::Scene(int width, int height) : width(width), height(height) {}
 
 // TODO how to call this in the constructor
 void Scene::setup() {
@@ -17,9 +16,7 @@ void Scene::setup() {
   buildSampler();
 }
 
-std::string Scene::filename() {
-  return "image.bmp";
-}
+std::string Scene::filename() { return "image.bmp"; }
 
 void Scene::buildFilm() {
   Film* film = new Film(width, height);
@@ -34,24 +31,16 @@ void Scene::buildCamera() {
 
   float aspectRatio = (float)width / height;
 
-  Camera* camera = new Camera(
-    eye, lookAt, up, fov, aspectRatio, width, height
-  );
+  Camera* camera = new Camera(eye, lookAt, up, fov, aspectRatio, width, height);
   this->camera = camera;
 }
 
-void Scene::buildLights() {
-  std::cout << "Scene#buildLights not implemented yet." << std::endl;
-}
+void Scene::buildLights() { std::cout << "Scene#buildLights not implemented yet." << std::endl; }
 
 void Scene::buildIntersectables() {
   std::cout << "Scene#buildIntersectables not implemented yet." << std::endl;
 }
 
-void Scene::buildIntegrator() {
-  this->integrator = new WhittedIntegrator(this);
-}
+void Scene::buildIntegrator() { this->integrator = new WhittedIntegrator(this); }
 
-void Scene::buildSampler() {
-  this->sampler = new OneSampler();
-}
+void Scene::buildSampler() { this->sampler = new OneSampler(); }

@@ -6,20 +6,8 @@ ShadingSample::~ShadingSample() {
   delete w;
 }
 
-ShadingSample::ShadingSample(
-    Spectrum* brdf,
-    Spectrum* emission,
-    Vector3f* w,
-    bool isSpecular,
-    float p
-):
-  brdf(brdf),
-  emission(emission),
-  w(w),
-  isSpecular(isSpecular),
-  isValid(true),
-  p(p)
-{}
+ShadingSample::ShadingSample(Spectrum* brdf, Spectrum* emission, Vector3f* w, bool isSpecular,
+                             float p)
+    : brdf(brdf), emission(emission), w(w), isSpecular(isSpecular), isValid(true), p(p) {}
 
-ShadingSample::ShadingSample()
-  : isValid(false) {}
+ShadingSample::ShadingSample() : isValid(false) {}

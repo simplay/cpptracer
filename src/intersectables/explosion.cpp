@@ -1,10 +1,9 @@
-#include <iostream>
-#include <cmath>
 #include "intersectables/explosion.h"
+#include <cmath>
+#include <iostream>
 
 Explosion::Explosion(Material* material, const Vector3f& center, float radius)
-  : material(material), center(center), radius(radius)
-{}
+    : material(material), center(center), radius(radius) {}
 
 HitRecord* Explosion::intersect(Ray* ray) const {
   const Vector3f& orig = *ray->origin;
@@ -46,21 +45,14 @@ HitRecord* Explosion::intersect(Ray* ray) const {
       Vector3f* wIn = new Vector3f(ray->direction);
       wIn->negate();
       wIn->normalize();
-      return new HitRecord (
-        t,
-        new Vector3f(hitPos),
-        norm,
-        new Vector3f(),
-        wIn,
-        material,
-        this
-      );
+      return new HitRecord(t, new Vector3f(hitPos), norm, new Vector3f(), wIn, material, this);
     }
   }
   return new HitRecord();
 }
 
-float Explosion::signed_distance(const Vector3f& p) const { // this function defines the implicit surface we render
+float Explosion::signed_distance(
+    const Vector3f& p) const {  // this function defines the implicit surface we render
   Vector3f q(p);
   q.scale(3.4);
   float noise_amplitude = 1.0;
@@ -69,11 +61,8 @@ float Explosion::signed_distance(const Vector3f& p) const { // this function def
 }
 
 Vector3f Explosion::rotate(const Vector3f& v) const {
-  Vector3f p(
-    Vector3f(0.00,  0.80,  0.60).dot(&v),
-    Vector3f(-0.80,  0.36, -0.48).dot(&v),
-    Vector3f(-0.60, -0.48,  0.64).dot(&v)
-  );
+  Vector3f p(Vector3f(0.00, 0.80, 0.60).dot(&v), Vector3f(-0.80, 0.36, -0.48).dot(&v),
+             Vector3f(-0.60, -0.48, 0.64).dot(&v));
   return p;
 }
 
@@ -92,20 +81,22 @@ float Explosion::noise(const Vector3f& x) const {
 
   Vector3f tmp(1.f, 57.f, 113.f);
   float n = p.dot(&tmp);
-  return lerp(lerp(
-        lerp(hash(n +  0.f), hash(n +  1.f), f5.x),
-        lerp(hash(n + 57.f), hash(n + 58.f), f5.x), f5.y),
-      lerp(
-        lerp(hash(n + 113.f), hash(n + 114.f), f5.x),
-        lerp(hash(n + 170.f), hash(n + 171.f), f5.x), f5.y), f5.z);
+  return lerp(lerp(lerp(hash(n + 0.f), hash(n + 1.f), f5.x),
+                   lerp(hash(n + 57.f), hash(n + 58.f), f5.x), f5.y),
+              lerp(lerp(hash(n + 113.f), hash(n + 114.f), f5.x),
+                   lerp(hash(n + 170.f), hash(n + 171.f), f5.x), f5.y),
+              f5.z);
 }
 
 float Explosion::fractal_brownian_motion(const Vector3f& x) const {
-    Vector3f p = rotate(x);
-    float f = 0;
-    f += 0.5000 * noise(p); p.scale(2.32);
-    f += 0.2500 * noise(p); p.scale(3.03);
-    f += 0.1250 * noise(p); p.scale(2.61);
-    f += 0.0625 * noise(p);
-    return f / 0.9375;
+  Vector3f p = rotate(x);
+  float f = 0;
+  f += 0.5000 * noise(p);
+  p.scale(2.32);
+  f += 0.2500 * noise(p);
+  p.scale(3.03);
+  f += 0.1250 * noise(p);
+  p.scale(2.61);
+  f += 0.0625 * noise(p);
+  return f / 0.9375;
 }

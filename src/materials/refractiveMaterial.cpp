@@ -1,6 +1,6 @@
+#include "materials/refractiveMaterial.h"
 #include <math.h>
 #include <iostream>
-#include "materials/refractiveMaterial.h"
 
 float RefractiveMaterial::fresnelFactor(HitRecord* hitRecord) const {
   Vector3f wIn(hitRecord->wIn);
@@ -42,43 +42,29 @@ float RefractiveMaterial::fresnelFactor(HitRecord* hitRecord) const {
 }
 
 RefractiveMaterial::RefractiveMaterial(float refractionIndex)
-  : refractionIndex(refractionIndex), ks(1) {}
+    : refractionIndex(refractionIndex), ks(1) {}
 
 RefractiveMaterial::RefractiveMaterial(float refractionIndex, Spectrum* ks)
-  : refractionIndex(refractionIndex), ks(*ks) {}
+    : refractionIndex(refractionIndex), ks(*ks) {}
 
 Spectrum* RefractiveMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
   return new Spectrum();
 }
 
-Spectrum* RefractiveMaterial::evaluateEmission(HitRecord*, Vector3f*) {
-  return new Spectrum();
-}
+Spectrum* RefractiveMaterial::evaluateEmission(HitRecord*, Vector3f*) { return new Spectrum(); }
 
-bool RefractiveMaterial::hasSpecularReflection() {
-  return true;
-}
+bool RefractiveMaterial::hasSpecularReflection() { return true; }
 
-bool RefractiveMaterial::hasSpecularRefraction() {
-  return true;
-}
+bool RefractiveMaterial::hasSpecularRefraction() { return true; }
 
-bool RefractiveMaterial::castsShadows() {
-  return false;
-}
+bool RefractiveMaterial::castsShadows() { return false; }
 
 ShadingSample* RefractiveMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
   auto reflectedDir = hitRecord->wIn->invReflected(hitRecord->normal);
   float r = fresnelFactor(hitRecord);
 
   Spectrum* brdf = new Spectrum(r);
-  ShadingSample* sample = new ShadingSample(
-    brdf,
-    new Spectrum(),
-    reflectedDir,
-    true,
-    r
-  );
+  ShadingSample* sample = new ShadingSample(brdf, new Spectrum(), reflectedDir, true, r);
   return sample;
 }
 
@@ -118,13 +104,7 @@ ShadingSample* RefractiveMaterial::evaluateSpecularRefraction(HitRecord* hitReco
   float r = fresnelFactor(hitRecord);
   brdf->scale(1.0 - r);
 
-  ShadingSample* sample = new ShadingSample(
-    brdf,
-    new Spectrum(),
-    refractedDir,
-    true,
-    r
-  );
+  ShadingSample* sample = new ShadingSample(brdf, new Spectrum(), refractedDir, true, r);
 
   return sample;
 }
