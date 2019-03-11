@@ -39,13 +39,13 @@ Ray::Ray(Vector3f* origin, Vector3f* direction, int depth, bool perturbate)
   }
 }
 
-Vector3f* Ray::pointAt(float t) {
+Vector3f* Ray::pointAt(float t) const {
   Vector3f* hit = new Vector3f(*direction);
   hit->scaleAdd(t, *origin);
   return hit;
 }
 
-Ray* Ray::transform(Matrix4f* invT) {
+Ray* Ray::transform(Matrix4f* invT) const {
   Vector4f orig(*origin, 1);
   auto transRayOrig = invT->mult(&orig);
 

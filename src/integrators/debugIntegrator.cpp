@@ -5,7 +5,7 @@ DebugIntegrator::DebugIntegrator(Scene* scene) : scene(scene), showBinary(false)
 DebugIntegrator::DebugIntegrator(Scene* scene, bool showBinary)
     : scene(scene), showBinary(showBinary) {}
 
-Spectrum* DebugIntegrator::integrate(Ray* ray) {
+Spectrum* DebugIntegrator::integrate(const Ray& ray) {
   HitRecord* hitRecord = scene->intersectableList->intersect(ray);
   if (!hitRecord->isValid()) {
     return new Spectrum();

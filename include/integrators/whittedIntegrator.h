@@ -27,6 +27,6 @@ class WhittedIntegrator : public Integrator {
 
  public:
   WhittedIntegrator(Scene*);
-  Spectrum* integrate(Ray*);
+  Spectrum* integrate(const Ray&);
 };
 #endif

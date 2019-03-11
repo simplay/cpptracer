@@ -6,6 +6,6 @@
 #define INTEGRATOR_H
 class Integrator {
  public:
-  virtual Spectrum* integrate(Ray*) = 0;
+  virtual Spectrum* integrate(const Ray&) = 0;
 };
 #endif

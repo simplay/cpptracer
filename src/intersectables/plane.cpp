@@ -24,22 +24,22 @@ Plane::Plane(Material* material, const Vector3f& normal, float distance)
  * t = dot(a - o, n) / dot(d, n) and a = (0, 0, D)
  *
  */
-HitRecord* Plane::intersect(Ray* ray) const {
+HitRecord* Plane::intersect(const Ray& ray) const {
   // incident angle: angle between the ray direction and the plane normal
-  auto cosTheta = ray->direction->dot(normal);
+  auto cosTheta = ray.direction->dot(normal);
 
   if (std::abs(cosTheta) <= EPSILON) {
     return new HitRecord();
   }
 
   // assumption: point is zero and then we shift by distance
-  float t = -(ray->origin->dot(normal) + distance) / cosTheta;
+  float t = -(ray.origin->dot(normal) + distance) / cosTheta;
   if (t < 0) {
     return new HitRecord();
   }
 
-  auto intersectionPosition = ray->pointAt(t);
-  auto wIn = Vector3f().incidentDirection(*ray->direction);
+  auto intersectionPosition = ray.pointAt(t);
+  auto wIn = Vector3f().incidentDirection(*ray.direction);
 
   auto hitNormal = new Vector3f(normal);
   auto tangent = Vector3f(1, 0, 0).cross(*hitNormal);

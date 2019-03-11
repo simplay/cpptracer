@@ -14,6 +14,6 @@ class PointLight : public LightGeometry {
  public:
   PointLight(Vector3f, Spectrum*);
   virtual HitRecord* sample() const;
-  virtual HitRecord* intersect(Ray*) const;
+  virtual HitRecord* intersect(const Ray&) const;
 };
 #endif

@@ -4,7 +4,7 @@
 
 IntersectableList::IntersectableList() { container = new std::vector<Intersectable*>; }
 
-HitRecord* IntersectableList::intersect(Ray* ray) const {
+HitRecord* IntersectableList::intersect(const Ray& ray) const {
   float minT = std::numeric_limits<float>::max();
   auto hitRecord = new HitRecord();
   for (auto const& intersectable : *container) {

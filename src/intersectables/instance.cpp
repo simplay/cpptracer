@@ -1,4 +1,6 @@
 #include "intersectables/instance.h"
+
+#include <memory>
 #include "math/vector4f.h"
 
 Instance::Instance(Intersectable* intersectable)
@@ -19,11 +21,10 @@ Instance::~Instance() {
   delete invTrasnposedTransformation;
 }
 
-HitRecord* Instance::intersect(Ray* ray) const {
-  auto transRay = ray->transform(invTransformation);
+HitRecord* Instance::intersect(const Ray& ray) const {
+  auto transRay = std::unique_ptr<Ray>(ray.transform(invTransformation));
 
-  auto hit = intersectable->intersect(transRay);
-  delete transRay;
+  auto hit = intersectable->intersect(*transRay);
   if (!hit->isValid()) {
     return hit;
   }
