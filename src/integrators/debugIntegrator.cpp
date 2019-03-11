@@ -15,10 +15,10 @@ Spectrum* DebugIntegrator::integrate(Ray* ray) {
     if (showBinary) {
       return new Spectrum(0, 1, 0);
     } else {
-      Vector3f* n = new Vector3f(hitRecord->normal);
-      n->scale(0.5);
-      n->add(new Vector3f(1, 1, 1));
-      n->normalize();
+      auto n = Vector3f(*hitRecord->normal);
+      n.scale(0.5);
+      n.add(Vector3f(1, 1, 1));
+      n.normalize();
 
       // Uncomment this in case we want to dumb the normals
       // std::cout << "(" << hitRecord->i << ", " << hitRecord->j << ") => ";

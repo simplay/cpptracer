@@ -18,10 +18,10 @@ Vector3f* MeshTriangle::computeNormal(float alpha, float beta) const {
   Vector3f nz(nc);
   nz.scale(beta);
 
-  nx.add(&ny);
-  nx.add(&nz);
+  nx.add(ny);
+  nx.add(nz);
 
-  auto n = new Vector3f(&nx);
+  auto n = new Vector3f(nx);
   n->normalize();
   return n;
 }

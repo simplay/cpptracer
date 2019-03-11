@@ -15,10 +15,10 @@ class Vector3f {
 
   Vector3f();
   Vector3f(float, float, float);
-  Vector3f(Vector3f*);
-  Vector3f(Vector4f*);
+  Vector3f(const Vector3f&);
+  Vector3f(const Vector4f&);
 
-  static Vector3f* incidentDirection(Vector3f* v) {
+  static Vector3f* incidentDirection(const Vector3f& v) {
     Vector3f* wIn = new Vector3f(v);
     wIn->negate();
     wIn->normalize();
@@ -29,24 +29,24 @@ class Vector3f {
   void scale(float factor);
 
   // Modifies the components of this point.
-  void sub(const Vector3f* other);
+  void sub(const Vector3f& other);
 
   // Modifies the components of this point.
-  void add(const Vector3f* other);
+  void add(const Vector3f& other);
 
   void negate();
 
   void abs();
 
   // compute the cross product between this and another point.
-  Vector3f* cross(const Vector3f* other);
+  Vector3f* cross(const Vector3f& other);
 
   /**
    * @return l2-dot product of this point's coordinates.
    */
   float dot() const;
 
-  float dot(const Vector3f* other) const;
+  float dot(const Vector3f& other) const;
 
   float norm() const;
 
@@ -57,14 +57,14 @@ class Vector3f {
   // Overwrites this vector's components by a first scaled and then shifted
   // vector. In other words, it overwrites this vector by scale * base +
   // other
-  Vector3f* scaleAdd(float scale, Vector3f* base, Vector3f* other);
+  Vector3f* scaleAdd(float scale, const Vector3f& base, const Vector3f& other);
 
   // First scales this vector's component and then adds another vector to it.
-  Vector3f* scaleAdd(float scale, Vector3f* other);
+  Vector3f* scaleAdd(float scale, const Vector3f& other);
 
   // reflect the inverse direction of this vector off from a given normal
   // reflected := v + 2 * dot(v, normal) * normal
-  Vector3f* invReflected(Vector3f*);
+  Vector3f* invReflected(const Vector3f&);
 
   void log() const { printf("(%f, %f, %f)\n", x, y, z); }
 };

@@ -14,10 +14,10 @@ Spectrum* ExplosionMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, 
   Spectrum ambient = diffuseContribution;
 
   Vector3f halfwayVector = *wIn;
-  halfwayVector.add(wOut);
+  halfwayVector.add(*wOut);
   halfwayVector.normalize();
 
-  specular.scale(pow(halfwayVector.dot(hitRecord->normal), shinynessPower));
+  specular.scale(pow(halfwayVector.dot(*hitRecord->normal), shinynessPower));
 
   float d = hitRecord->t;
   const Spectrum yellow(1.7, 1.3, 1.0);
@@ -36,7 +36,7 @@ Spectrum* ExplosionMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, 
   } else {
     diffuse = lerp(orange, yellow, x * 4.f - 3.f);
   }
-  diffuse.scale(wIn->dot(hitRecord->normal));
+  diffuse.scale(wIn->dot(*hitRecord->normal));
 
   Spectrum* contribution = new Spectrum();
   contribution->add(diffuse);
@@ -54,10 +54,10 @@ bool ExplosionMaterial::hasSpecularRefraction() { return false; }
 
 bool ExplosionMaterial::castsShadows() { return true; }
 
-ShadingSample* ExplosionMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
+ShadingSample* ExplosionMaterial::evaluateSpecularReflection(HitRecord*) {
   return new ShadingSample();
 }
 
-ShadingSample* ExplosionMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) {
+ShadingSample* ExplosionMaterial::evaluateSpecularRefraction(HitRecord*) {
   return new ShadingSample();
 }

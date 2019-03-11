@@ -24,8 +24,8 @@ void ReflectionTest::buildIntersectables() {
   Blinn* blinn = new Blinn(new Spectrum(1.0, 0.0, 0.0), new Spectrum(0.6), 50.0);
   Blinn* blinn2 = new Blinn(new Spectrum(0.0, 1.0, 0.0), new Spectrum(0.6), 50.0);
   Material* diffuse = new Diffuse(new Spectrum(0.0, 0.5, 0.5));
-  intersectableList->put(new Sphere(blinn, new Vector3f(0.0, -0.4, 0.0), 0.5));
-  intersectableList->put(new Sphere(blinn2, new Vector3f(0.8, 0.5, 0), 0.35));
+  intersectableList->put(new Sphere(blinn, Vector3f(0.0, -0.4, 0.0), 0.5));
+  intersectableList->put(new Sphere(blinn2, Vector3f(0.8, 0.5, 0), 0.35));
 
   intersectableList->put(new Plane(diffuse, Vector3f(-1.0, 0.0, 0.0), 1));
   intersectableList->put(new Plane(mirror, Vector3f(0.0, 1.0, 0.0), 1));

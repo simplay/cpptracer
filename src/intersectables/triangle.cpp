@@ -9,12 +9,12 @@ Triangle::Triangle(int faceId, Material* material, const Vector3f& a, const Vect
 
 Vector3f* Triangle::computeNormal(float, float) const {
   Vector3f ba(b);
-  ba.sub(&a);
+  ba.sub(a);
 
   Vector3f ca(c);
-  ca.sub(&a);
+  ca.sub(a);
 
-  auto normal = ba.cross(&ca);
+  auto normal = ba.cross(ca);
   normal->normalize();
 
   return normal;
@@ -22,13 +22,13 @@ Vector3f* Triangle::computeNormal(float, float) const {
 
 HitRecord* Triangle::intersect(Ray* ray) const {
   Vector3f ab = Vector3f(a);
-  ab.sub(&b);
+  ab.sub(b);
 
   Vector3f ac = Vector3f(a);
-  ac.sub(&c);
+  ac.sub(c);
 
   Vector3f ao = Vector3f(a);
-  ao.sub(ray->origin);
+  ao.sub(*ray->origin);
 
   // Interpret a triangle with an infinite plane with constraints (given by
   // alpha and beta)
@@ -58,7 +58,7 @@ HitRecord* Triangle::intersect(Ray* ray) const {
   float t = params->z;
 
   auto intersectionPosition = ray->pointAt(t);
-  auto wIn = Vector3f().incidentDirection(ray->direction);
+  auto wIn = Vector3f().incidentDirection(*ray->direction);
   auto normal = computeNormal(params->x, params->y);
 
   auto hit = new HitRecord(t, intersectionPosition, normal, new Vector3f(), wIn, material, this);

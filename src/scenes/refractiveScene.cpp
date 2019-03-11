@@ -27,9 +27,9 @@ void RefractiveTest::buildCamera() {
 void RefractiveTest::buildLights() {
   std::vector<PointLight*>* lightList = new std::vector<PointLight*>;
   Vector3f lightPos(0.0, 0.0, 3.0);
-  lightPos.add(new Vector3f(-1.f, 0.f, 0.f));
+  lightPos.add(Vector3f(-1.f, 0.f, 0.f));
   lightList->push_back(new PointLight(lightPos, new Spectrum(14.f, 14.f, 14.f)));
-  lightPos.add(new Vector3f(2.f, 0.f, 0.f));
+  lightPos.add(Vector3f(2.f, 0.f, 0.f));
   lightList->push_back(new PointLight(lightPos, new Spectrum(14.f, 14.f, 14.f)));
   lightList->push_back(new PointLight(Vector3f(0.7f, 0.7f, 0.7f), new Spectrum(14.f, 14.f, 14.f)));
   this->lightList = lightList;
@@ -43,7 +43,7 @@ void RefractiveTest::buildIntersectables() {
       new GridTexturedMaterial(new Spectrum(0.2f, 0.f, 0.f), new Spectrum(1.f, 1.f, 1.f), 0.01f,
                                new Vector3f(0.f, 0.f, 0.f), 0.125f);
 
-  intersectableList->put(new Sphere(material, new Vector3f(0.0, 0.0, 0.0), 1.0));
+  intersectableList->put(new Sphere(material, Vector3f(0.0, 0.0, 0.0), 1.0));
   intersectableList->put(new Plane(grid, Vector3f(0.0, 0.0, 1.0f), 2.15));
 
   this->intersectableList = intersectableList;

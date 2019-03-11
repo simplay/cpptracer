@@ -20,7 +20,7 @@ TEST(Vector4f, with_floats) {
 }
 
 TEST(Vector4f, create_with_point3f_and_float) {
-  auto v = Vector4f(new Vector3f(1, 2, 3), 4);
+  auto v = Vector4f(Vector3f(1, 2, 3), 4);
   ASSERT_EQ(1, v.x);
   ASSERT_EQ(2, v.y);
   ASSERT_EQ(3, v.z);

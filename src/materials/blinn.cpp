@@ -14,11 +14,11 @@ Spectrum* Blinn::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wI
   const Spectrum& ambient = diffuseContribution;
 
   Vector3f halfwayVector = *wIn;
-  halfwayVector.add(wOut);
+  halfwayVector.add(*wOut);
   halfwayVector.normalize();
 
-  diffuse.scale(wIn->dot(hitRecord->normal));
-  specular.scale(pow(halfwayVector.dot(hitRecord->normal), shinynessPower));
+  diffuse.scale(wIn->dot(*hitRecord->normal));
+  specular.scale(pow(halfwayVector.dot(*hitRecord->normal), shinynessPower));
 
   contribution->add(diffuse);
   contribution->add(specular);
@@ -35,10 +35,10 @@ bool Blinn::hasSpecularRefraction() { return false; }
 
 bool Blinn::castsShadows() { return true; }
 
-ShadingSample* Blinn::evaluateSpecularReflection(HitRecord* hitRecord) {
+ShadingSample* Blinn::evaluateSpecularReflection(HitRecord*) {
   return new ShadingSample();
 }
 
-ShadingSample* Blinn::evaluateSpecularRefraction(HitRecord* hitRecord) {
+ShadingSample* Blinn::evaluateSpecularRefraction(HitRecord*) {
   return new ShadingSample();
 }
