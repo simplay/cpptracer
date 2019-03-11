@@ -12,16 +12,15 @@ class Matrix4f {
   float m30, m31, m32, m33;
 
   Matrix4f();
-  Matrix4f(Vector4f* v1, Vector4f* v2, Vector4f* v3, Vector4f* v4, bool rowWise);
+  Matrix4f(const Vector4f& v1, const Vector4f& v2, const Vector4f& v3, const Vector4f& v4, bool rowWise);
   Matrix4f(float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13,
            float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33);
 
   static Matrix4f* eye() {
-    Matrix4f* eye = new Matrix4f(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-    return eye;
+    return new Matrix4f(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
   }
 
-  Vector4f* mult(Vector4f* other);
+  Vector4f* mult(const Vector4f& other);
   void scale(float f);
 
   Matrix4f* inv();

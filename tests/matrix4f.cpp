@@ -30,10 +30,10 @@ TEST(Matrix4f, mult) {
   Vector4f r3(1, 1, 1, 0);
   Vector4f r4(1, 1, 1, 1);
 
-  Matrix4f mat(&r1, &r2, &r3, &r4, true);
+  Matrix4f mat(r1, r2, r3, r4, true);
   Vector4f v(1, 2, 3, 4);
 
-  auto r = mat.mult(&v);
+  auto r = mat.mult(v);
   ASSERT_EQ(1, r->x);
   ASSERT_EQ(3, r->y);
   ASSERT_EQ(6, r->z);

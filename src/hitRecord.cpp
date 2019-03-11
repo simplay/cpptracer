@@ -64,12 +64,12 @@ bool HitRecord::isValid() { return !isNull; }
 HitRecord* HitRecord::transform(Matrix4f* T, Matrix4f* invTranposedT) {
   // transform back
   Vector4f backHitPos(*position, 1);
-  auto hitPos = T->mult(&backHitPos);
+  auto hitPos = T->mult(backHitPos);
   auto hit3fPos = hitPos->toVector3f();
   delete hitPos;
 
   Vector4f backHitNormal(*normal, 0);
-  auto hitNormal = invTranposedT->mult(&backHitNormal);
+  auto hitNormal = invTranposedT->mult(backHitNormal);
   auto hit3fNormal = hitNormal->toVector3f();
   hit3fNormal->normalize();
   delete hitNormal;
@@ -77,14 +77,14 @@ HitRecord* HitRecord::transform(Matrix4f* T, Matrix4f* invTranposedT) {
   Vector3f* hit3fTangent = NULL;
   if (tangent) {
     Vector4f backHitTangent(*tangent, 0);
-    auto hitTangent = invTranposedT->mult(&backHitTangent);
+    auto hitTangent = invTranposedT->mult(backHitTangent);
     hit3fTangent = hitTangent->toVector3f();
     hit3fTangent->normalize();
     delete hitTangent;
   }
 
   Vector4f backWIn(*wIn, 0);
-  auto hitWIn = T->mult(&backWIn);
+  auto hitWIn = T->mult(backWIn);
   auto hit3fWIn = hitWIn->toVector3f();
   hit3fWIn->normalize();
 
