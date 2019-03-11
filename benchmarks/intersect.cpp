@@ -22,8 +22,8 @@ std::vector<Ray> MakeRays() {
 
 static void BM_TriangleIntersect(benchmark::State& state) {
   Diffuse material = Diffuse(new Spectrum(1.0));
-  auto triangle = Triangle(1, &material, new Vector3f(0.0, 0.0, 0.0), new Vector3f(1.0, 0.0, 0.0),
-                           new Vector3f(0.0, 1.0, 0.0));
+  auto triangle = Triangle(1, &material, Vector3f(0.0, 0.0, 0.0), Vector3f(1.0, 0.0, 0.0),
+                           Vector3f(0.0, 1.0, 0.0));
 
   auto rays = MakeRays();
 
@@ -91,9 +91,9 @@ BENCHMARK(BM_PointLightIntersect);
 static void BM_MeshTriangleTntersect(benchmark::State& state) {
   Diffuse material = Diffuse(new Spectrum(1.0));
   auto meshTriangle =
-      MeshTriangle(1, &material, new Vector3f(0.0, 0.0, 0.0), new Vector3f(1.0, 0.0, 0.0),
-                   new Vector3f(0.0, 1.0, 0.0), new Vector3f(1.0, 0.0, 0.0),
-                   new Vector3f(0.0, 1.0, 0.0), new Vector3f(0.0, 0.0, 1.0));
+      MeshTriangle(1, &material, Vector3f(0.0, 0.0, 0.0), Vector3f(1.0, 0.0, 0.0),
+                   Vector3f(0.0, 1.0, 0.0), Vector3f(1.0, 0.0, 0.0),
+                   Vector3f(0.0, 1.0, 0.0), Vector3f(0.0, 0.0, 1.0));
 
   auto rays = MakeRays();
   for (auto _ : state) {

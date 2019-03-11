@@ -19,7 +19,7 @@ void ExplosionTest::buildIntersectables() {
   ExplosionMaterial* material =
       new ExplosionMaterial(new Spectrum(1.0, 0.0, 0.0), new Spectrum(0.6), 50.0);
   Material* diffuse = new Diffuse(new Spectrum(0.0, 0.5, 0.5));
-  intersectableList->put(new Explosion(material, new Vector3f(0.0, 0.0, 0.0), 1.0));
+  intersectableList->put(new Explosion(material, Vector3f(0.0, 0.0, 0.0), 1.0));
   intersectableList->put(new Plane(diffuse, Vector3f(1.0, 0.0, 0.0), 1));
   intersectableList->put(new Plane(diffuse, Vector3f(-1.0, 0.0, 0.0), 1));
   intersectableList->put(new Plane(diffuse, Vector3f(0.0, 1.0, 0.0), 1));

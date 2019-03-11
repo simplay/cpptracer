@@ -15,22 +15,22 @@ Camera::Camera(Vector3f* eye, Vector3f* lookAt, Vector3f* up, float fov, float a
       aspectRatio(aspectRatio),
       width(width),
       height(height) {
-  Vector3f from(eye);
-  Vector3f to(lookAt);
+  Vector3f from(*eye);
+  Vector3f to(*lookAt);
 
   // z-axis
   Vector3f w(from);
-  w.sub(&to);
+  w.sub(to);
   w.normalize();
   Vector4f* zc = new Vector4f(w.x, w.y, w.z, 0.0);
 
   // # x-axis
-  Vector3f* u = up->cross(&w);
+  Vector3f* u = up->cross(w);
   u->normalize();
   Vector4f* xc = new Vector4f(u->x, u->y, u->z, 0.0);
 
   // # y-axis
-  Vector3f* v = w.cross(u);
+  Vector3f* v = w.cross(*u);
   Vector4f* yc = new Vector4f(v->x, v->y, v->z, 0.0);
   delete v;
   delete u;
@@ -71,7 +71,7 @@ Ray* Camera::makeWorldspaceRay(int i, int j, std::vector<float>* samples) {
 
   Vector4f v = Vector4f(u_ij, v_ij, w_ij, 0);
   auto p_uvw = std::unique_ptr<Vector4f>(matrix->mult(&v));
-  Ray* ray = new Ray(new Vector3f(eye), new Vector3f(p_uvw.get()), i, j);
+  Ray* ray = new Ray(new Vector3f(*eye), new Vector3f(*p_uvw.get()), i, j);
 
   return ray;
 }

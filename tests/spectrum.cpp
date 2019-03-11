@@ -35,7 +35,7 @@ TEST(Spectrum, new_from_other) {
 }
 
 TEST(Spectrum, new_from_vector3f) {
-  auto v = new Vector3f(0.5, 0.6, 0.7);
+  auto v = Vector3f(0.5, 0.6, 0.7);
   auto s = Spectrum(v);
   ASSERT_NEAR(0.5, s.r, EPS);
   ASSERT_NEAR(0.6, s.g, EPS);
