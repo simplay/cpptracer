@@ -47,10 +47,10 @@ Vector3f* Ray::pointAt(float t) const {
 
 Ray* Ray::transform(Matrix4f* invT) const {
   Vector4f orig(*origin, 1);
-  auto transRayOrig = invT->mult(&orig);
+  auto transRayOrig = invT->mult(orig);
 
   Vector4f dir(*direction, 0);
-  auto transRayDir = invT->mult(&dir);
+  auto transRayDir = invT->mult(dir);
 
   Ray* transRay = new Ray(new Vector3f(*transRayOrig), new Vector3f(*transRayDir));
   delete transRayOrig;

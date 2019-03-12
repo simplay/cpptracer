@@ -14,7 +14,7 @@ class Matrix3f {
   Matrix3f(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21,
            float m22);
 
-  Vector3f* mult(Vector3f* other);
+  Vector3f* mult(const Vector3f& other);
   float det();
   void scale(float);
   Matrix3f* inv();

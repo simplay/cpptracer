@@ -22,20 +22,20 @@ Camera::Camera(Vector3f* eye, Vector3f* lookAt, Vector3f* up, float fov, float a
   Vector3f w(from);
   w.sub(to);
   w.normalize();
-  Vector4f* zc = new Vector4f(w.x, w.y, w.z, 0.0);
+  auto zc = Vector4f(w.x, w.y, w.z, 0.0);
 
   // # x-axis
-  Vector3f* u = up->cross(w);
+  auto u = up->cross(w);
   u->normalize();
-  Vector4f* xc = new Vector4f(u->x, u->y, u->z, 0.0);
+  auto xc = Vector4f(u->x, u->y, u->z, 0.0);
 
   // # y-axis
-  Vector3f* v = w.cross(*u);
-  Vector4f* yc = new Vector4f(v->x, v->y, v->z, 0.0);
+  auto v = w.cross(*u);
+  auto yc = Vector4f(v->x, v->y, v->z, 0.0);
   delete v;
   delete u;
 
-  Vector4f* e = new Vector4f(from.x, from.y, from.z, 1.0);
+  auto e = Vector4f(from.x, from.y, from.z, 1.0);
 
   matrix = new Matrix4f(xc, yc, zc, e, false);
 
@@ -69,8 +69,8 @@ Ray Camera::makeWorldspaceRay(int i, int j, std::vector<float>* samples) const {
   float v_ij = bottom + (top - bottom) * (j + s2) / height;
   float w_ij = -1.0;
 
-  Vector4f v = Vector4f(u_ij, v_ij, w_ij, 0);
-  auto p_uvw = std::unique_ptr<Vector4f>(matrix->mult(&v));
+  auto v = Vector4f(u_ij, v_ij, w_ij, 0);
+  auto p_uvw = std::unique_ptr<Vector4f>(matrix->mult(v));
 
   return Ray(new Vector3f(*eye), new Vector3f(*p_uvw.get()), i, j);
 }
