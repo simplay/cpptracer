@@ -69,12 +69,9 @@ WhittedIntegrator::WhittedIntegrator(const IntersectableList* intersectableList,
 Spectrum* WhittedIntegrator::integrate(const Ray& ray) {
   int MAX_DEPTH = 5;
 
-  HitRecord* hitRecord = intersectableList->intersect(ray);
+  auto hitRecord = std::unique_ptr<HitRecord>(intersectableList->intersect(ray));
   if (!hitRecord->isValid()) {
-    // only delete hitRecord for deepest hit record
-    if (ray.depth == MAX_DEPTH) {
-      delete hitRecord;
-    }
+
     return new Spectrum();
   }
 
@@ -82,7 +79,7 @@ Spectrum* WhittedIntegrator::integrate(const Ray& ray) {
   Spectrum refraction;
 
   if (hitRecord->material->hasSpecularReflection() && ray.depth < MAX_DEPTH) {
-    ShadingSample sample = hitRecord->material->evaluateSpecularReflection(hitRecord);
+    ShadingSample sample = hitRecord->material->evaluateSpecularReflection(hitRecord.get());
     if (sample.isValid) {
       reflection.add(sample.brdf);
       Ray reflectedRay(new Vector3f(*hitRecord->position), new Vector3f(sample.w), ray.depth + 1);
@@ -94,7 +91,7 @@ Spectrum* WhittedIntegrator::integrate(const Ray& ray) {
   }
 
   if (hitRecord->material->hasSpecularRefraction() && ray.depth < MAX_DEPTH) {
-    ShadingSample sample = hitRecord->material->evaluateSpecularRefraction(hitRecord);
+    ShadingSample sample = hitRecord->material->evaluateSpecularRefraction(hitRecord.get());
     if (sample.isValid) {
       refraction.add(sample.brdf);
 
@@ -119,11 +116,10 @@ Spectrum* WhittedIntegrator::integrate(const Ray& ray) {
 
   Spectrum* contribution = new Spectrum();
   for (const PointLight* lightSource : *lights) {
-    Spectrum* currentContribution = contributionOf(lightSource, hitRecord);
+    Spectrum* currentContribution = contributionOf(lightSource, hitRecord.get());
     contribution->add(*currentContribution);
     delete currentContribution;
   }
-  delete hitRecord;
 
   return contribution;
 }
