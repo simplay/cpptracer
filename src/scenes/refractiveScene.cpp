@@ -51,7 +51,7 @@ void RefractiveTest::buildIntersectables() {
 
 void RefractiveTest::buildIntegrator() {
   // this->integrator = new DebugIntegrator(this);
-  this->integrator = new WhittedIntegrator(this);
+  this->integrator = new WhittedIntegrator(this->intersectableList, this->lightList);
 }
 
 void RefractiveTest::buildSampler() { this->sampler = new RandomSampler(); }

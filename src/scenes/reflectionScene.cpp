@@ -34,7 +34,9 @@ void ReflectionTest::buildIntersectables() {
   this->intersectableList = intersectableList;
 }
 
-void ReflectionTest::buildIntegrator() { this->integrator = new WhittedIntegrator(this); }
+void ReflectionTest::buildIntegrator() {
+  this->integrator = new WhittedIntegrator(this->intersectableList, this->lightList);
+}
 
 void ReflectionTest::buildSampler() {
   this->sampler = new RandomSampler();

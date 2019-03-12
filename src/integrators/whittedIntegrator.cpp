@@ -4,10 +4,10 @@
 #include <memory>
 #include "materials/material.h"
 
-bool WhittedIntegrator::isOccluded(Vector3f* hitPosition, Vector3f* lightDir, float eps) {
+bool WhittedIntegrator::isOccluded(Vector3f* hitPosition, Vector3f* lightDir, float eps) const {
   Ray shadowRay(new Vector3f(*hitPosition), lightDir);
 
-  HitRecord* shadowHit = scene->intersectableList->intersect(shadowRay);
+  HitRecord* shadowHit = intersectableList->intersect(shadowRay);
   if (!shadowHit->isValid()) {
     delete shadowRay.origin;
     delete shadowHit;
@@ -23,7 +23,8 @@ bool WhittedIntegrator::isOccluded(Vector3f* hitPosition, Vector3f* lightDir, fl
   return hasShadowHit;
 }
 
-Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* hitRecord) {
+Spectrum* WhittedIntegrator::contributionOf(const PointLight* lightSource,
+                                            HitRecord* hitRecord) const {
   HitRecord* lightHit = lightSource->sample();
   Vector3f lightDir(*lightHit->position);
   lightDir.sub(*hitRecord->position);
@@ -61,12 +62,14 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
   return new Spectrum(contribution);
 }
 
-WhittedIntegrator::WhittedIntegrator(Scene* scene) : scene(scene) {}
+WhittedIntegrator::WhittedIntegrator(const IntersectableList* intersectableList,
+                                     const std::vector<PointLight*>* lights)
+    : intersectableList(intersectableList), lights(lights) {}
 
 Spectrum* WhittedIntegrator::integrate(const Ray& ray) {
   int MAX_DEPTH = 5;
 
-  HitRecord* hitRecord = scene->intersectableList->intersect(ray);
+  HitRecord* hitRecord = intersectableList->intersect(ray);
   if (!hitRecord->isValid()) {
     // only delete hitRecord for deepest hit record
     if (ray.depth == MAX_DEPTH) {
@@ -116,7 +119,7 @@ Spectrum* WhittedIntegrator::integrate(const Ray& ray) {
   }
 
   Spectrum* contribution = new Spectrum();
-  for (auto const& lightSource : *scene->lightList) {
+  for (const PointLight* lightSource : *lights) {
     Spectrum* currentContribution = contributionOf(lightSource, hitRecord);
     contribution->add(*currentContribution);
     delete currentContribution;

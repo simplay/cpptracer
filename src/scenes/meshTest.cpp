@@ -48,6 +48,8 @@ void MeshTest::buildIntersectables() {
   this->intersectableList = intersectableList;
 }
 
-void MeshTest::buildIntegrator() { this->integrator = new WhittedIntegrator(this); }
+void MeshTest::buildIntegrator() {
+  this->integrator = new WhittedIntegrator(this->intersectableList, this->lightList);
+}
 
 void MeshTest::buildSampler() { this->sampler = new RandomSampler(); }
