@@ -7,7 +7,7 @@ TEST(Matrix3f, mult) {
   Matrix3f mat(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
   Vector3f v(1, 10, 100);
-  auto r = mat.mult(&v);
+  auto r = mat.mult(v);
   ASSERT_EQ(321, r->x);
   ASSERT_EQ(654, r->y);
   ASSERT_EQ(987, r->z);

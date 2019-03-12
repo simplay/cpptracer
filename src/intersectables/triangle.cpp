@@ -38,7 +38,7 @@ HitRecord* Triangle::intersect(const Ray& ray) const {
   auto invM = std::unique_ptr<Matrix3f>(m.inv());
 
   // matrix vector multiplication: A * params = y
-  auto params = std::unique_ptr<Vector3f>(invM->mult(&ao));
+  auto params = std::unique_ptr<Vector3f>(invM->mult(ao));
 
   // Perform conservative inside-outside check
   if (params->x <= 0 || params->x >= 1) {
