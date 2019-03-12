@@ -13,14 +13,12 @@
 #include "samplers/sampler.h"
 #include "spectrum.h"
 
-using namespace std;
-
 Renderer::Renderer(Scene* scene) : scene(scene), printProgress(true) {}
 Renderer::Renderer(Scene* scene, bool printProgress) : scene(scene), printProgress(printProgress) {}
 
-void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* taskCounters) {
+void Renderer::computeContribution(int id, RenderTask* renderTask, std::vector<int>* taskCounters) {
   // for each image index value
-  for (vector<int>::iterator idxValue = (*renderTask->indices).begin();
+  for (std::vector<int>::iterator idxValue = (*renderTask->indices).begin();
        idxValue != (*renderTask->indices).end(); ++idxValue) {
     auto samples = renderTask->scene->sampler->makeSample(renderTask->spp, 2);
 
@@ -55,11 +53,11 @@ void Renderer::computeContribution(int id, RenderTask* renderTask, vector<int>* 
 // Spawns a given number of threads that render the given scene in parallel.
 // Writes the result to an image.
 void Renderer::render(int threadCount, int spp) {
-  thread threads[threadCount];
-  vector<vector<int>>* indexLists = new vector<vector<int>>(threadCount);
-  vector<int>* taskCounters = new vector<int>(threadCount);
+  std::thread threads[threadCount];
+  std::vector<std::vector<int>>* indexLists = new std::vector<std::vector<int>>(threadCount);
+  std::vector<int>* taskCounters = new std::vector<int>(threadCount);
 
-  vector<int> indexValues;
+  std::vector<int> indexValues;
 
   int height = scene->film->height;
   int width = scene->film->width;
@@ -75,7 +73,7 @@ void Renderer::render(int threadCount, int spp) {
 
   // Equally assign each indexList random 1D image indices.
   int counter = 0;
-  for (vector<int>::iterator it = indexValues.begin(); it != indexValues.end(); ++it) {
+  for (std::vector<int>::iterator it = indexValues.begin(); it != indexValues.end(); ++it) {
     indexLists->at(counter % threadCount).push_back(*it);
     counter++;
   }
@@ -84,7 +82,7 @@ void Renderer::render(int threadCount, int spp) {
   for (int id = 0; id < threadCount; id++) {
     RenderTask* rt = new RenderTask(width, height, &indexLists->at(id), scene, spp);
 
-    threads[id] = thread(&Renderer::computeContribution, this, id, rt, taskCounters);
+    threads[id] = std::thread(&Renderer::computeContribution, this, id, rt, taskCounters);
   }
 
   int totalTasks = width * height * spp;
@@ -97,6 +95,7 @@ void Renderer::render(int threadCount, int spp) {
   for (auto& threads : threads) {
     threads.join();
   }
+
   if (printProgress) {
     progressBar.stop();
   }
