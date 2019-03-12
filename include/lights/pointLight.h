@@ -1,10 +1,10 @@
+#ifndef POINT_LIGHT_H
+#define POINT_LIGHT_H
+
 #include "../intersectables/lightGeometry.h"
 #include "../spectrum.h"
 
 class Material;
-
-#ifndef POINT_LIGHT_H
-#define POINT_LIGHT_H
 
 class PointLight : public LightGeometry {
  private:

@@ -1,3 +1,6 @@
+#ifndef HIT_RECORD_H
+#define HIT_RECORD_H
+
 #include <iostream>
 #include "math/matrix4f.h"
 #include "math/vector3f.h"
@@ -6,9 +9,6 @@
 // See https://stackoverflow.com/questions/4757565/what-are-forward-declarations-in-c
 class Material;
 class Intersectable;
-
-#ifndef HIT_RECORD_H
-#define HIT_RECORD_H
 
 // Stores information about a ray-surface intersection. This information is
 // typically used for shading.
@@ -72,5 +72,4 @@ class HitRecord {
     wIn->log();
   }
 };
-
 #endif

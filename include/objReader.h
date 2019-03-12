@@ -1,10 +1,10 @@
+#ifndef OBJ_READER_H
+#define OBJ_READER_H
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include "math/vector3f.h"
-
-#ifndef OBJ_READER_H
-#define OBJ_READER_H
 
 struct MeshData {
   std::vector<Vector3f> vertices;

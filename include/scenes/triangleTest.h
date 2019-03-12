@@ -1,7 +1,8 @@
-#include "scene.h"
-
 #ifndef TRIANGLE_TEST_H
 #define TRIANGLE_TEST_H
+
+#include "scene.h"
+
 class TriangleTest : public Scene {
  public:
   TriangleTest(int width, int height);

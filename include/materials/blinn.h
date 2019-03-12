@@ -1,7 +1,8 @@
-#include "material.h"
-
 #ifndef BLINN_H
 #define BLINN_H
+
+#include "material.h"
+
 class Blinn : public Material {
  private:
   const Spectrum diffuseContribution;

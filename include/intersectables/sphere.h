@@ -1,3 +1,6 @@
+#ifndef SPHERE_H
+#define SPHERE_H
+
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../ray.h"
@@ -5,8 +8,6 @@
 
 class Material;
 
-#ifndef SPHERE_H
-#define SPHERE_H
 class Sphere : public Intersectable {
  private:
   Material* material;

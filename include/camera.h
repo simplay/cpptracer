@@ -1,10 +1,10 @@
+#ifndef CAMERA_H
+#define CAMERA_H
+
 #include <vector>
 #include "math/matrix4f.h"
 #include "math/vector3f.h"
 #include "ray.h"
-
-#ifndef CAMERA_H
-#define CAMERA_H
 
 // We define our camera by:
 //  + the origin of the camera's eye (eye)
@@ -77,5 +77,4 @@ class Camera {
   // Creates primary rays
   Ray makeWorldspaceRay(int i, int j, std::vector<float>*) const;
 };
-
 #endif

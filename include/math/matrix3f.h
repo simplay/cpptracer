@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include "vector3f.h"
-
 #ifndef MATRIX3F_H
 #define MATRIX3F_H
+
+#include <stdio.h>
+#include "vector3f.h"
 
 class Matrix3f {
  public:
@@ -23,5 +23,4 @@ class Matrix3f {
     printf("%f, %f, %f\n%f, %f, %f\n%f, %f, %f\n", m00, m01, m02, m10, m11, m12, m20, m21, m22);
   }
 };
-
 #endif

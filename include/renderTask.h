@@ -1,8 +1,9 @@
+#ifndef RENDER_TASK_H
+#define RENDER_TASK_H
+
 #include <vector>
 #include "scenes/scene.h"
 
-#ifndef RENDER_TASK_H
-#define RENDER_TASK_H
 class RenderTask {
  public:
   int width;

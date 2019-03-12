@@ -1,7 +1,8 @@
-#include "scene.h"
-
 #ifndef MESH_TEST_H
 #define MESH_TEST_H
+
+#include "scene.h"
+
 class MeshTest : public Scene {
  public:
   MeshTest(int width, int height);

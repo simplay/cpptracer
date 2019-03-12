@@ -1,9 +1,9 @@
+#ifndef RAY_H
+#define RAY_H
+
 #include <string>
 #include "math/matrix4f.h"
 #include "math/vector3f.h"
-
-#ifndef RAY_H
-#define RAY_H
 
 /**
  * Float valued point with 3 coordinates.
@@ -38,5 +38,4 @@ class Ray {
     printf("(%i, %i, %i)\n", i, j, depth);
   }
 };
-
 #endif

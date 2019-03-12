@@ -1,7 +1,8 @@
-#include "scene.h"
-
 #ifndef CAMERA_TEST_H
 #define CAMERA_TEST_H
+
+#include "scene.h"
+
 class CameraTest : public Scene {
  public:
   CameraTest(int width, int height);

@@ -1,11 +1,11 @@
+#ifndef REFLECTIVE_MATERIAL_H
+#define REFLECTIVE_MATERIAL_H
+
 #include <algorithm>
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../spectrum.h"
 #include "material.h"
-
-#ifndef REFLECTIVE_MATERIAL_H
-#define REFLECTIVE_MATERIAL_H
 
 class ReflectiveMaterial : public Material {
  private:

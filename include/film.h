@@ -1,8 +1,8 @@
-#include <vector>
-#include "spectrum.h"
-
 #ifndef FILM_H
 #define FILM_H
+
+#include <vector>
+#include "spectrum.h"
 
 // Boxfilter-film
 class Film {
@@ -19,5 +19,4 @@ class Film {
   // Returns a copy of measurements normalized by sample counts.
   std::vector<Spectrum> normalMeasurements();
 };
-
 #endif

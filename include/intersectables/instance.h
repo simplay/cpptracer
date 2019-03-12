@@ -1,3 +1,6 @@
+#ifndef INSTANCE_H
+#define INSTANCE_H
+
 #include "../hitRecord.h"
 #include "../math/matrix4f.h"
 #include "../math/vector3f.h"
@@ -5,9 +8,6 @@
 #include "intersectable.h"
 
 class Material;
-
-#ifndef INSTANCE_H
-#define INSTANCE_H
 
 /**
  * Used to reduce memory usage: Instead re-creating very similar intersectables,
@@ -45,5 +45,4 @@ class Instance : public Intersectable {
 
   HitRecord* intersect(const Ray& ray) const;
 };
-
 #endif

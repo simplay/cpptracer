@@ -1,11 +1,11 @@
+#ifndef EXPLOSION_MATERIAL_H
+#define EXPLOSION_MATERIAL_H
+
 #include <algorithm>
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../spectrum.h"
 #include "material.h"
-
-#ifndef EXPLOSION_MATERIAL_H
-#define EXPLOSION_MATERIAL_H
 
 class ExplosionMaterial : public Material {
  private:

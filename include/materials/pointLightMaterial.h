@@ -1,10 +1,10 @@
+#ifndef POINT_LIGHT_MATERIAL_H
+#define POINT_LIGHT_MATERIAL_H
+
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../spectrum.h"
 #include "material.h"
-
-#ifndef POINT_LIGHT_MATERIAL_H
-#define POINT_LIGHT_MATERIAL_H
 
 class PointLightMaterial {
  private:
@@ -21,5 +21,4 @@ class PointLightMaterial {
   virtual ShadingSample* evaluateSpecularReflection(HitRecord* hitRecord);
   virtual ShadingSample* evaluateSpecularRefraction(HitRecord* hitRecord);
 };
-
 #endif

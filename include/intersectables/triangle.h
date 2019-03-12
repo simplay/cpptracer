@@ -1,12 +1,12 @@
+#ifndef TRIANGLE_H
+#define TRIANGLE_H
+
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../ray.h"
 #include "intersectable.h"
 
 class Material;
-
-#ifndef TRIANGLE_H
-#define TRIANGLE_H
 
 // Construct a plane given its normal and distance to the origin Note that the
 // distance is along the direction that the normal points (meaning that the
@@ -40,5 +40,4 @@ class Triangle : public Intersectable {
     c.log();
   }
 };
-
 #endif

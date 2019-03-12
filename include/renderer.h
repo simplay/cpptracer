@@ -1,9 +1,10 @@
+#ifndef RENDER_H
+#define RENDER_H
+
 #include <renderTask.h>
 #include <vector>
 #include "scenes/scene.h"
 
-#ifndef RENDER_H
-#define RENDER_H
 class Renderer {
  private:
   void computeContribution(int, RenderTask*, std::vector<int>*);

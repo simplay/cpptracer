@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include "vector4f.h"
-
 #ifndef MATRIX4F_H
 #define MATRIX4F_H
+
+#include <stdio.h>
+#include "vector4f.h"
 
 class Matrix4f {
  public:
@@ -33,5 +33,4 @@ class Matrix4f {
            m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
   }
 };
-
 #endif

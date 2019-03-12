@@ -1,3 +1,6 @@
+#ifndef EXPLOSION_H
+#define EXPLOSION_H
+
 #include <math.h>
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
@@ -6,8 +9,6 @@
 
 class Material;
 
-#ifndef EXPLOSION_H
-#define EXPLOSION_H
 class Explosion : public Intersectable {
  private:
   Material* material;

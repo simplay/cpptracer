@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include "vector4f.h"
-
 #ifndef VECTOR3F_H
 #define VECTOR3F_H
+
+#include <stdio.h>
+#include "vector4f.h"
 
 /**
  * Float valued point with 3 coordinates.
@@ -68,5 +68,4 @@ class Vector3f {
 
   void log() const { printf("(%f, %f, %f)\n", x, y, z); }
 };
-
 #endif

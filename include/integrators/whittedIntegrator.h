@@ -1,10 +1,11 @@
+#ifndef WHITTED_INTEGRATOR_H
+#define WHITTED_INTEGRATOR_H
+
 #include "../ray.h"
 #include "../scenes/scene.h"
 #include "../spectrum.h"
 #include "integrator.h"
 
-#ifndef WHITTED_INTEGRATOR_H
-#define WHITTED_INTEGRATOR_H
 class WhittedIntegrator : public Integrator {
  private:
   Scene* scene;

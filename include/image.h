@@ -1,9 +1,9 @@
+#ifndef IMAGE_H
+#define IMAGE_H
+
 #include <string>
 #include <vector>
 #include "spectrum.h"
-
-#ifndef IMAGE_H
-#define IMAGE_H
 
 class Image {
  public:
@@ -14,5 +14,4 @@ class Image {
   Image(int width, int height, const std::vector<Spectrum>& values, std::string);
   void print();
 };
-
 #endif

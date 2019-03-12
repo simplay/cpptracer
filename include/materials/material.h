@@ -1,10 +1,10 @@
+#ifndef IMATERIAL_H
+#define IMATERIAL_H
+
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../shadingSample.h"
 #include "../spectrum.h"
-
-#ifndef IMATERIAL_H
-#define IMATERIAL_H
 
 /**
  * Materials implement functionality for shading surfaces using their BRDFs.

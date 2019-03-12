@@ -1,8 +1,8 @@
-#include "math/vector3f.h"
-#include "spectrum.h"
-
 #ifndef SHADING_SAMPLE_H
 #define SHADING_SAMPLE_H
+
+#include "math/vector3f.h"
+#include "spectrum.h"
 
 class ShadingSample {
  public:
@@ -29,5 +29,4 @@ class ShadingSample {
   ShadingSample(Spectrum*, Spectrum*, Vector3f*, bool, float);
   ShadingSample();
 };
-
 #endif

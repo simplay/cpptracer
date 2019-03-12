@@ -1,10 +1,10 @@
+#ifndef DIFFUSE_H
+#define DIFFUSE_H
+
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../spectrum.h"
 #include "material.h"
-
-#ifndef DIFFUSE_H
-#define DIFFUSE_H
 
 class Diffuse : public Material {
  private:

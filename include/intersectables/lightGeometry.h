@@ -1,8 +1,8 @@
-#include "../hitRecord.h"
-#include "intersectable.h"
-
 #ifndef LIGHT_GEOMETRY_H
 #define LIGHT_GEOMETRY_H
+
+#include "../hitRecord.h"
+#include "intersectable.h"
 
 class LightGeometry : public Intersectable {
  public:

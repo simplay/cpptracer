@@ -1,9 +1,9 @@
+#ifndef VECTOR4F_H
+#define VECTOR4F_H
+
 #include <stdio.h>
 
 class Vector3f;
-
-#ifndef VECTOR4F_H
-#define VECTOR4F_H
 
 class Vector4f {
  public:
@@ -21,5 +21,4 @@ class Vector4f {
 
   Vector3f* toVector3f();
 };
-
 #endif

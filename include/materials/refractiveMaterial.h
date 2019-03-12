@@ -1,11 +1,11 @@
+#ifndef REFRACTIVE_MATERIAL_H
+#define REFRACTIVE_MATERIAL_H
+
 #include <algorithm>
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../spectrum.h"
 #include "material.h"
-
-#ifndef REFRACTIVE_MATERIAL_H
-#define REFRACTIVE_MATERIAL_H
 
 class RefractiveMaterial : public Material {
  private:

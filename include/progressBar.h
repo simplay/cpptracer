@@ -1,10 +1,11 @@
+#ifndef PROGRESS_BAR_H
+#define PROGRESS_BAR_H
+
 #include <renderTask.h>
 #include <thread>
 #include <vector>
 #include "scenes/scene.h"
 
-#ifndef PROGRESS_BAR_H
-#define PROGRESS_BAR_H
 class ProgressBar {
  private:
   std::vector<int>* taskCounters;

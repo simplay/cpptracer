@@ -1,7 +1,8 @@
-#include "scene.h"
-
 #ifndef REFRACTIVE_TEST_H
 #define REFRACTIVE_TEST_H
+
+#include "scene.h"
+
 class RefractiveTest : public Scene {
  public:
   RefractiveTest(int width, int height);

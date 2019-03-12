@@ -1,10 +1,10 @@
+#ifndef GRID_TEXTURED_MATERIAL_H
+#define GRID_TEXTURED_MATERIAL_H
+
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../spectrum.h"
 #include "diffuse.h"
-
-#ifndef GRID_TEXTURED_MATERIAL_H
-#define GRID_TEXTURED_MATERIAL_H
 
 class GridTexturedMaterial : public Material {
  private:

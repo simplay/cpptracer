@@ -1,3 +1,6 @@
+#ifndef SCENE_H
+#define SCENE_H
+
 #include <string.h>
 #include "../camera.h"
 #include "../film.h"
@@ -7,8 +10,6 @@
 
 class Integrator;
 
-#ifndef SCENE_H
-#define SCENE_H
 class Scene {
  public:
   Film* film;
