@@ -1,8 +1,3 @@
-// usage:
-//  ./main.x IMG_DIM
-//  ./main.x IMG_WIDTH IMG_HEIGHT
-//  ./main.x IMG_WIDTH IMG_HEIGHT SCENE_NR
-
 #include "exampleConfig.h"
 #include <iostream>
 #include <thread>
@@ -18,6 +13,37 @@
 
 using namespace std;
 
+cxxopts::ParseResult parse(int argc, char* argv[]) {
+  // clang-format off
+  try {
+    cxxopts::Options options(argv[0], "For example: ./main.x -w 200 -h 200 -s 2 -i 6");
+
+    options
+      .allow_unrecognised_options()
+      .add_options()
+      ("w, width", "Image pixel width", cxxopts::value<int>()->default_value("100"))
+      ("h, height", "Image pixel height", cxxopts::value<int>()->default_value("100"))
+      ("s, spp", "Samples per pixel", cxxopts::value<int>()->default_value("1"))
+      ("i, input-scene", "The scene to render", cxxopts::value<int>()->default_value("1"))
+      ("help", "Print this help message")
+    ;
+
+    auto result = options.parse(argc, argv);
+
+    if (result.count("help")) {
+      std::cout << options.help({""}) << std::endl;
+      exit(0);
+    }
+
+    return result;
+
+  } catch (const cxxopts::OptionException& e) {
+    std::cout << "Error parsing options: " << e.what() << std::endl;
+    exit(1);
+  }
+  // clang-format off
+}
+
 int main(int argc, char *argv[]) {
     cout << "C++ Raytracer v"
          << PROJECT_VERSION_MAJOR
@@ -25,29 +51,14 @@ int main(int argc, char *argv[]) {
          << PROJECT_VERSION_MINOR
          << endl;
 
-    // Default image resolution that should be used in case there were no args
-    // provided
-    int width = 400;
-    int height = 400;
-    int sceneNr = 1;
-    int spp = 1;
+    auto result = parse(argc, argv);
 
-    if (argc == 2) {
-      width = std::atoi(argv[1]);
-      height = width;
-    } else if (argc == 3) {
-      width = std::atoi(argv[1]);
-      height = std::atoi(argv[2]);
-    } else if (argc == 4) {
-      width = std::atoi(argv[1]);
-      height = std::atoi(argv[2]);
-      sceneNr = std::atoi(argv[3]);
-    } else if (argc == 5) {
-      width = std::atoi(argv[1]);
-      height = std::atoi(argv[2]);
-      sceneNr = std::atoi(argv[3]);
-      spp = std::atoi(argv[4]);
-    }
+    // // Default image resolution that should be used in case there were no args
+    // // provided
+    int width = result["w"].as<int>();
+    int height = result["h"].as<int>();
+    int sceneNr = result["i"].as<int>();
+    int spp = result["s"].as<int>();
 
     unsigned threadCount = thread::hardware_concurrency();
     cout << "Using " << threadCount << " threads" << endl;
