@@ -28,11 +28,17 @@ $ make
 
 ## Usage
 
-Inside `build/`, execute `./main.x WIDTH HEIGHT SCENE_NR`
+Inside `build/`, execute `./main.x`
+
+Execute `./main --help` to see a list of all available arguments.
 
 ## Running the tests
 
 Inside `build/`, execute `./unit_tests.x`
+
+## Running the benchmarks
+
+Inside `build/`, execute `./benchmarks.x`
 
 ## Contributing
 
