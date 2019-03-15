@@ -25,6 +25,7 @@ class Triangle : public Intersectable {
 
  public:
   Triangle(int, Material*, const Vector3f&, const Vector3f&, const Vector3f&);
+
   // plane-ray intersection ray: p(t) = orig + t * dir
   //
   // Implicit plane:
@@ -32,12 +33,13 @@ class Triangle : public Intersectable {
   // f(p(t)) = 0. Solve for t.  Plug t_i into
   // p(t_i) will give intersection point
   HitRecord* intersect(const Ray& ray) const;
-  virtual void log() const {
-    std::cout << "face-index: " << faceId << std::endl;
-    std::cout << "vertices: " << std::endl;
-    a.log();
-    b.log();
-    c.log();
-  }
+
+  int getFaceId() const { return faceId; }
+
+  Vector3f getVertexA() const { return a; }
+
+  Vector3f getVertexB() const { return b; }
+
+  Vector3f getVertexC() const { return c; }
 };
 #endif

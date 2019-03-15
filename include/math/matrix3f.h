@@ -1,7 +1,6 @@
 #ifndef MATRIX3F_H
 #define MATRIX3F_H
 
-#include <stdio.h>
 #include "vector3f.h"
 
 class Matrix3f {
@@ -18,9 +17,5 @@ class Matrix3f {
   float det();
   void scale(float);
   Matrix3f* inv();
-
-  void log() {
-    printf("%f, %f, %f\n%f, %f, %f\n%f, %f, %f\n", m00, m01, m02, m10, m11, m12, m20, m21, m22);
-  }
 };
 #endif

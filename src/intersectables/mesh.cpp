@@ -1,11 +1,12 @@
 #include "intersectables/mesh.h"
 #include "intersectables/meshTriangle.h"
 #include "intersectables/triangle.h"
+#include "logger.h"
 #include "objReader.h"
 
 Mesh::Mesh(Material* material, std::string filepath) : material(material) {
   MeshData mesh = ObjReader(filepath.c_str()).read();
-  mesh.log();
+  Logger().log(mesh);
 
   int faceIdx = 0;
   for (auto face : mesh.faces) {

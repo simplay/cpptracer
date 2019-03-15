@@ -2,6 +2,7 @@
 #define RAY_H
 
 #include <string>
+
 #include "math/matrix4f.h"
 #include "math/vector3f.h"
 
@@ -30,12 +31,5 @@ class Ray {
   Vector3f* pointAt(float t) const;
 
   Ray* transform(Matrix4f*) const;
-
-  void log() {
-    origin->log();
-    direction->log();
-
-    printf("(%i, %i, %i)\n", i, j, depth);
-  }
 };
 #endif

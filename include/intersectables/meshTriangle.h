@@ -19,16 +19,10 @@ class MeshTriangle : public Triangle {
   MeshTriangle(int, Material*, const Vector3f&, const Vector3f&, const Vector3f&, const Vector3f&,
                const Vector3f&, const Vector3f&);
 
-  void log() const {
-    std::cout << "face-index: " << faceId << std::endl;
-    std::cout << "vertices: " << std::endl;
-    a.log();
-    b.log();
-    c.log();
-    std::cout << "normals: " << std::endl;
-    na.log();
-    nb.log();
-    nc.log();
-  }
+  Vector3f getNormalA() const { return na; }
+
+  Vector3f getNormalB() const { return nb; }
+
+  Vector3f getNormalC() const { return nc; }
 };
 #endif
