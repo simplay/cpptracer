@@ -14,6 +14,7 @@
 #include "reflectionTest.h"
 #include "refractiveScene.h"
 #include "meshTest.h"
+#include "cxxopts.hpp"
 
 using namespace std;
 

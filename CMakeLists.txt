@@ -59,6 +59,7 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/include/scenes
   ${PROJECT_SOURCE_DIR}/include/math
   ${PROJECT_SOURCE_DIR}/external/googletest/include
+  ${PROJECT_SOURCE_DIR}/external/cxxopts/include
 )
 
 # Make variables referring to all the sources and test files.
