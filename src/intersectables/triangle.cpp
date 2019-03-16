@@ -30,10 +30,13 @@ HitRecord* Triangle::intersect(const Ray& ray) const {
   Vector3f ao = Vector3f(a);
   ao.sub(*ray.origin);
 
+  // clang-format off
   // Interpret a triangle with an infinite plane with constraints (given by
   // alpha and beta)
-  Matrix3f m(ab.x, ac.x, ray.direction->x, ab.y, ac.y, ray.direction->y, ab.z, ac.z,
-             ray.direction->z);
+  Matrix3f m(ab.x, ac.x, ray.direction->x,
+             ab.y, ac.y, ray.direction->y,
+             ab.z, ac.z, ray.direction->z);
+  // clang-format on
 
   auto invM = std::unique_ptr<Matrix3f>(m.inv());
 
@@ -61,6 +64,16 @@ HitRecord* Triangle::intersect(const Ray& ray) const {
   auto wIn = Vector3f().incidentDirection(*ray.direction);
   auto normal = computeNormal(params->x, params->y);
 
-  auto hit = new HitRecord(t, intersectionPosition, normal, new Vector3f(), wIn, material, this);
+  // clang-format off
+  auto hit = new HitRecord(
+    t,
+    intersectionPosition,
+    normal,
+    new Vector3f(),
+    wIn,
+    material,
+    this
+  );
+  // clang-format on
   return hit;
 }

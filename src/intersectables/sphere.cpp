@@ -84,7 +84,18 @@ HitRecord* Sphere::intersect(const Ray& ray) const {
 
     auto wIn = Vector3f().incidentDirection(*ray.direction);
 
-    return new HitRecord(t, hitPosition, hitNormal, new Vector3f(), wIn, material, this, ray.i,
-                         ray.j);
+    // clang-format off
+    return new HitRecord(
+      t,
+      hitPosition,
+      hitNormal,
+      new Vector3f(),
+      wIn,
+      material,
+      this,
+      ray.i,
+      ray.j
+    );
+    // clang-format on
   }
 }

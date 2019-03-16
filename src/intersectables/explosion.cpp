@@ -45,7 +45,18 @@ HitRecord* Explosion::intersect(const Ray& ray) const {
       Vector3f* wIn = new Vector3f(*ray.direction);
       wIn->negate();
       wIn->normalize();
-      return new HitRecord(t, new Vector3f(hitPos), norm, new Vector3f(), wIn, material, this);
+
+      // clang-format off
+      return new HitRecord(
+        t,
+        new Vector3f(hitPos),
+        norm,
+        new Vector3f(),
+        wIn,
+        material,
+        this
+      );
+      // clang-format on
     }
   }
   return new HitRecord();

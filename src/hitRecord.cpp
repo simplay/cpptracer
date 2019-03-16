@@ -88,8 +88,19 @@ HitRecord* HitRecord::transform(Matrix4f* T, Matrix4f* invTranposedT) {
   auto hit3fWIn = hitWIn->toVector3f();
   hit3fWIn->normalize();
 
-  HitRecord* finalHit = new HitRecord(t, hit3fPos, hit3fNormal, hit3fTangent, hit3fWIn, material,
-                                      intersectable, 0, 0);
+  // clang-format off
+  HitRecord* finalHit = new HitRecord(
+    t,
+    hit3fPos,
+    hit3fNormal,
+    hit3fTangent,
+    hit3fWIn,
+    material,
+    intersectable,
+    0,
+    0
+  );
+  // clang-format on
 
   return finalHit;
 }

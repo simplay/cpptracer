@@ -44,5 +44,15 @@ HitRecord* Plane::intersect(const Ray& ray) const {
   auto hitNormal = new Vector3f(normal);
   auto tangent = Vector3f(1, 0, 0).cross(*hitNormal);
 
-  return new HitRecord(t, intersectionPosition, hitNormal, tangent, wIn, material, this);
+  // clang-format off
+  return new HitRecord(
+    t,
+    intersectionPosition,
+    hitNormal,
+    tangent,
+    wIn,
+    material,
+    this
+  );
+  // clang-format on
 }

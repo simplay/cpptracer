@@ -129,8 +129,12 @@ float Matrix4f::det() {
 }
 
 Matrix4f* Matrix4f::transposed() {
-  return new Matrix4f(m00, m10, m20, m30, m01, m11, m21, m31, m02, m12, m22, m32, m03, m13, m23,
-                      m33);
+  // clang-format off
+  return new Matrix4f(m00, m10, m20, m30,
+                      m01, m11, m21, m31,
+                      m02, m12, m22, m32,
+                      m03, m13, m23, m33);
+  // clang-format on
 }
 
 Matrix4f* Matrix4f::inv() {
@@ -166,10 +170,13 @@ Matrix4f* Matrix4f::inv() {
 
   Matrix3f a33(m00, m01, m02, m10, m11, m12, m20, m21, m22);
 
+  // clang-format off
   // a_ij = (-1)^(i + j) det(a_ji)
-  auto mat = new Matrix4f(a00.det(), -a10.det(), a20.det(), -a30.det(), -a01.det(), a11.det(),
-                          -a21.det(), a31.det(), a02.det(), -a12.det(), a22.det(), -a32.det(),
-                          -a03.det(), a13.det(), -a23.det(), a33.det());
+  auto mat = new Matrix4f( a00.det(), -a10.det(),  a20.det(), -a30.det(),
+                          -a01.det(),  a11.det(), -a21.det(),  a31.det(),
+                           a02.det(), -a12.det(),  a22.det(), -a32.det(),
+                          -a03.det(),  a13.det(), -a23.det(),  a33.det());
+  // clang-format on
 
   mat->scale(1.0 / det());
 
