@@ -25,11 +25,11 @@ class WhittedIntegrator : public Integrator {
   // @param hitRecord closest intersection primary ray with scene.
   // @param t parameter of ray equation p_uvw(t) = 0 + t(s_uvw-0).
   // @return returns current spectrum of light source at intersaction point.
-  Spectrum* contributionOf(const PointLight* lightSource, HitRecord* hitRecord) const;
+  Spectrum contributionOf(const PointLight* lightSource, HitRecord* hitRecord) const;
 
  public:
   WhittedIntegrator(const IntersectableList* intersectableList,
                     const std::vector<PointLight*>* lights);
-  Spectrum* integrate(const Ray&);
+  Spectrum integrate(const Ray&) const override;
 };
 #endif

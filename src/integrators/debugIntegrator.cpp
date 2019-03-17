@@ -5,15 +5,15 @@ DebugIntegrator::DebugIntegrator(Scene* scene) : scene(scene), showBinary(false)
 DebugIntegrator::DebugIntegrator(Scene* scene, bool showBinary)
     : scene(scene), showBinary(showBinary) {}
 
-Spectrum* DebugIntegrator::integrate(const Ray& ray) {
+Spectrum DebugIntegrator::integrate(const Ray& ray) const {
   HitRecord* hitRecord = scene->intersectableList->intersect(ray);
   if (!hitRecord->isValid()) {
-    return new Spectrum();
+    return Spectrum();
   }
 
   if (hitRecord->t > 0) {
     if (showBinary) {
-      return new Spectrum(0, 1, 0);
+      return Spectrum(0, 1, 0);
     } else {
       auto n = Vector3f(*hitRecord->normal);
       n.scale(0.5);
@@ -23,9 +23,9 @@ Spectrum* DebugIntegrator::integrate(const Ray& ray) {
       // Uncomment this in case we want to dumb the normals
       // std::cout << "(" << hitRecord->i << ", " << hitRecord->j << ") => ";
       // n->log();
-      return new Spectrum(n);
+      return Spectrum(n);
     }
   } else {
-    return new Spectrum(1, 0, 0);
+    return Spectrum(1, 0, 0);
   }
 }

@@ -31,17 +31,16 @@ void Renderer::computeContribution(int id, RenderTask* renderTask, std::vector<i
       int colIdx = *idxValue % renderTask->width;
 
       const Ray ray = renderTask->scene->camera->makeWorldspaceRay(rowIdx, colIdx, sample);
-      Spectrum* raySpectrum = renderTask->scene->integrator->integrate(ray);
+      const Spectrum raySpectrum = renderTask->scene->integrator->integrate(ray);
 
       // consider coordinates in between pixel locations
       // store in row-first order
       renderTask->scene->film->addSample(rowIdx + sample->at(0), colIdx + sample->at(1),
-                                         *raySpectrum);
+                                         raySpectrum);
 
       taskCounters->at(id)++;
       delete ray.origin;
       delete ray.direction;
-      delete raySpectrum;
       delete sample;
     }
 
