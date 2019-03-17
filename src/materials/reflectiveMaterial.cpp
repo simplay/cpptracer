@@ -17,13 +17,11 @@ bool ReflectiveMaterial::hasSpecularRefraction() { return false; }
 
 bool ReflectiveMaterial::castsShadows() { return true; }
 
-ShadingSample* ReflectiveMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
+ShadingSample ReflectiveMaterial::evaluateSpecularReflection(HitRecord* hitRecord) const {
   auto reflectedDir = hitRecord->wIn->invReflected(*hitRecord->normal);
-  ShadingSample* sample =
-      new ShadingSample(new Spectrum(ks), new Spectrum(), reflectedDir, true, 1);
-  return sample;
+  return ShadingSample(Spectrum(ks), Spectrum(), *reflectedDir, true, 1);
 }
 
-ShadingSample* ReflectiveMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) {
-  return new ShadingSample();
+ShadingSample ReflectiveMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) const {
+  return ShadingSample();
 }

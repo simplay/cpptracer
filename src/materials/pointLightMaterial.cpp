@@ -17,10 +17,10 @@ bool PointLightMaterial::hasSpecularRefraction() { return false; }
 
 bool PointLightMaterial::castsShadows() { return false; }
 
-ShadingSample* PointLightMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
-  return new ShadingSample();
+ShadingSample PointLightMaterial::evaluateSpecularReflection(HitRecord* hitRecord) const {
+  return ShadingSample();
 }
 
-ShadingSample* PointLightMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) {
-  return new ShadingSample();
+ShadingSample PointLightMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) const {
+  return ShadingSample();
 }

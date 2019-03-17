@@ -6,27 +6,26 @@
 
 class ShadingSample {
  public:
-  Spectrum* brdf;
-  Spectrum* emission;
+  const Spectrum brdf;
+  const Spectrum emission;
 
   // sample direction
-  Vector3f* w;
+  const Vector3f w;
 
   /**
    * Tells the integrator whether this is a specular sample. In this case, a
    * cosine factor in the specular BRDF should be omitted in the returned
    * BRDF value, and the integrator should act accordingly.
    */
-  bool isSpecular;
-  bool isValid;
+  const bool isSpecular;
+  const bool isValid;
 
   /**
    * The (directional) probability density of the sample
    */
-  float p;
+  const float p;
 
-  ~ShadingSample();
-  ShadingSample(Spectrum*, Spectrum*, Vector3f*, bool, float);
+  ShadingSample(Spectrum, Spectrum, Vector3f, bool, float);
   ShadingSample();
 };
 #endif

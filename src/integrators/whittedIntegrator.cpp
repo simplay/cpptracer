@@ -79,29 +79,28 @@ Spectrum* WhittedIntegrator::integrate(const Ray& ray) {
   Spectrum refraction;
 
   if (hitRecord->material->hasSpecularReflection() && ray.depth < MAX_DEPTH) {
-    ShadingSample* sample = hitRecord->material->evaluateSpecularReflection(hitRecord);
-    if (sample->isValid) {
-      reflection.add(*sample->brdf);
-      Ray reflectedRay(new Vector3f(*hitRecord->position), sample->w, ray.depth + 1);
+    ShadingSample sample = hitRecord->material->evaluateSpecularReflection(hitRecord);
+    if (sample.isValid) {
+      reflection.add(sample.brdf);
+      Ray reflectedRay(new Vector3f(*hitRecord->position), new Vector3f(sample.w), ray.depth + 1);
       Spectrum* spec = integrate(reflectedRay);
       reflection.mult(*spec);
       delete reflectedRay.origin;
       delete spec;
     }
-    delete sample;
   }
 
   if (hitRecord->material->hasSpecularRefraction() && ray.depth < MAX_DEPTH) {
-    ShadingSample* sample = hitRecord->material->evaluateSpecularRefraction(hitRecord);
-    if (sample->isValid) {
-      refraction.add(*sample->brdf);
+    ShadingSample sample = hitRecord->material->evaluateSpecularRefraction(hitRecord);
+    if (sample.isValid) {
+      refraction.add(sample.brdf);
 
-      const Ray refractedRay(new Vector3f(*hitRecord->position), sample->w, ray.depth + 1);
+      const Ray refractedRay(new Vector3f(*hitRecord->position), new Vector3f(sample.w),
+                             ray.depth + 1);
       Spectrum* spec = integrate(refractedRay);
       refraction.mult(*spec);
 
       delete refractedRay.origin;
-      delete sample;
       delete spec;
     }
   }
