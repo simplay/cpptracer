@@ -41,6 +41,8 @@ void Scene::buildIntersectables() {
   std::cout << "Scene#buildIntersectables not implemented yet." << std::endl;
 }
 
-void Scene::buildIntegrator() { this->integrator = new WhittedIntegrator(this); }
+void Scene::buildIntegrator() {
+  this->integrator = new WhittedIntegrator(this->intersectableList, this->lightList);
+}
 
 void Scene::buildSampler() { this->sampler = new OneSampler(); }

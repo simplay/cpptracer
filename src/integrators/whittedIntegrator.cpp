@@ -4,10 +4,10 @@
 #include <memory>
 #include "materials/material.h"
 
-bool WhittedIntegrator::isOccluded(Vector3f* hitPosition, Vector3f* lightDir, float eps) {
+bool WhittedIntegrator::isOccluded(Vector3f* hitPosition, Vector3f* lightDir, float eps) const {
   Ray shadowRay(new Vector3f(*hitPosition), lightDir);
 
-  HitRecord* shadowHit = scene->intersectableList->intersect(shadowRay);
+  HitRecord* shadowHit = intersectableList->intersect(shadowRay);
   if (!shadowHit->isValid()) {
     delete shadowRay.origin;
     delete shadowHit;
@@ -23,7 +23,8 @@ bool WhittedIntegrator::isOccluded(Vector3f* hitPosition, Vector3f* lightDir, fl
   return hasShadowHit;
 }
 
-Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* hitRecord) {
+Spectrum WhittedIntegrator::contributionOf(const PointLight* lightSource,
+                                           HitRecord* hitRecord) const {
   HitRecord* lightHit = lightSource->sample();
   Vector3f lightDir(*lightHit->position);
   lightDir.sub(*hitRecord->position);
@@ -33,7 +34,7 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
 
   if (isOccluded(hitRecord->position, &lightDir, d2)) {
     delete lightHit;
-    return new Spectrum();
+    return Spectrum(0);
   }
 
   auto brdfContribution = std::unique_ptr<Spectrum>(
@@ -58,69 +59,63 @@ Spectrum* WhittedIntegrator::contributionOf(PointLight* lightSource, HitRecord* 
   // find a better scaling approach
   contribution.scale(1.0 / d2);
 
-  return new Spectrum(contribution);
+  return Spectrum(contribution);
 }
 
-WhittedIntegrator::WhittedIntegrator(Scene* scene) : scene(scene) {}
+WhittedIntegrator::WhittedIntegrator(const IntersectableList* intersectableList,
+                                     const std::vector<PointLight*>* lights)
+    : intersectableList(intersectableList), lights(lights) {}
 
-Spectrum* WhittedIntegrator::integrate(const Ray& ray) {
+Spectrum WhittedIntegrator::integrate(const Ray& ray) const {
   int MAX_DEPTH = 5;
 
-  HitRecord* hitRecord = scene->intersectableList->intersect(ray);
+  auto hitRecord = std::unique_ptr<HitRecord>(intersectableList->intersect(ray));
   if (!hitRecord->isValid()) {
-    // only delete hitRecord for deepest hit record
-    if (ray.depth == MAX_DEPTH) {
-      delete hitRecord;
-    }
-    return new Spectrum();
+    return Spectrum();
   }
 
   Spectrum reflection;
   Spectrum refraction;
 
   if (hitRecord->material->hasSpecularReflection() && ray.depth < MAX_DEPTH) {
-    ShadingSample sample = hitRecord->material->evaluateSpecularReflection(hitRecord);
+    ShadingSample sample = hitRecord->material->evaluateSpecularReflection(hitRecord.get());
     if (sample.isValid) {
       reflection.add(sample.brdf);
       Ray reflectedRay(new Vector3f(*hitRecord->position), new Vector3f(sample.w), ray.depth + 1);
-      Spectrum* spec = integrate(reflectedRay);
-      reflection.mult(*spec);
+      Spectrum spec = integrate(reflectedRay);
+      reflection.mult(spec);
       delete reflectedRay.origin;
-      delete spec;
     }
   }
 
   if (hitRecord->material->hasSpecularRefraction() && ray.depth < MAX_DEPTH) {
-    ShadingSample sample = hitRecord->material->evaluateSpecularRefraction(hitRecord);
+    ShadingSample sample = hitRecord->material->evaluateSpecularRefraction(hitRecord.get());
     if (sample.isValid) {
       refraction.add(sample.brdf);
 
       const Ray refractedRay(new Vector3f(*hitRecord->position), new Vector3f(sample.w),
                              ray.depth + 1);
-      Spectrum* spec = integrate(refractedRay);
-      refraction.mult(*spec);
+      Spectrum spec = integrate(refractedRay);
+      refraction.mult(spec);
 
       delete refractedRay.origin;
-      delete spec;
     }
   }
 
   if (hitRecord->material->hasSpecularReflection() ||
       hitRecord->material->hasSpecularRefraction()) {
-    Spectrum* total = new Spectrum();
-    total->add(reflection);
-    total->add(refraction);
+    Spectrum total = Spectrum(0);
+    total.add(reflection);
+    total.add(refraction);
 
     return total;
   }
 
-  Spectrum* contribution = new Spectrum();
-  for (auto const& lightSource : *scene->lightList) {
-    Spectrum* currentContribution = contributionOf(lightSource, hitRecord);
-    contribution->add(*currentContribution);
-    delete currentContribution;
+  Spectrum contribution = Spectrum(0);
+  for (const PointLight* lightSource : *lights) {
+    Spectrum currentContribution = contributionOf(lightSource, hitRecord.get());
+    contribution.add(currentContribution);
   }
-  delete hitRecord;
 
   return contribution;
 }

@@ -7,6 +7,6 @@
 
 class Integrator {
  public:
-  virtual Spectrum* integrate(const Ray&) = 0;
+  virtual Spectrum integrate(const Ray&) const = 0;
 };
 #endif

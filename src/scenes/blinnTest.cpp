@@ -42,5 +42,5 @@ void BlinnTest::buildIntersectables() {
 
 void BlinnTest::buildIntegrator() {
   // this->integrator = new DebugIntegrator(this);
-  this->integrator = new WhittedIntegrator(this);
+  this->integrator = new WhittedIntegrator(this->intersectableList, this->lightList);
 }
