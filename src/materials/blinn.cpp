@@ -35,10 +35,6 @@ bool Blinn::hasSpecularRefraction() { return false; }
 
 bool Blinn::castsShadows() { return true; }
 
-ShadingSample* Blinn::evaluateSpecularReflection(HitRecord*) {
-  return new ShadingSample();
-}
+ShadingSample Blinn::evaluateSpecularReflection(HitRecord*) const { return ShadingSample(); }
 
-ShadingSample* Blinn::evaluateSpecularRefraction(HitRecord*) {
-  return new ShadingSample();
-}
+ShadingSample Blinn::evaluateSpecularRefraction(HitRecord*) const { return ShadingSample(); }

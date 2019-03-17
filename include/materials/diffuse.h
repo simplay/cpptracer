@@ -18,7 +18,7 @@ class Diffuse : public Material {
   virtual bool hasSpecularReflection();
   virtual bool hasSpecularRefraction();
   virtual bool castsShadows();
-  virtual ShadingSample* evaluateSpecularReflection(HitRecord* hitRecord);
-  virtual ShadingSample* evaluateSpecularRefraction(HitRecord* hitRecord);
+  ShadingSample evaluateSpecularReflection(HitRecord* hitRecord) const override;
+  ShadingSample evaluateSpecularRefraction(HitRecord* hitRecord) const override;
 };
 #endif

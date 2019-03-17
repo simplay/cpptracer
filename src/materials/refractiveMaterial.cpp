@@ -59,16 +59,15 @@ bool RefractiveMaterial::hasSpecularRefraction() { return true; }
 
 bool RefractiveMaterial::castsShadows() { return false; }
 
-ShadingSample* RefractiveMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
+ShadingSample RefractiveMaterial::evaluateSpecularReflection(HitRecord* hitRecord) const {
   auto reflectedDir = hitRecord->wIn->invReflected(*hitRecord->normal);
   float r = fresnelFactor(hitRecord);
 
-  Spectrum* brdf = new Spectrum(r);
-  ShadingSample* sample = new ShadingSample(brdf, new Spectrum(), reflectedDir, true, r);
-  return sample;
+  Spectrum brdf = Spectrum(r);
+  return ShadingSample(brdf, Spectrum(0), *reflectedDir, true, r);
 }
 
-ShadingSample* RefractiveMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) {
+ShadingSample RefractiveMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) const {
   Vector3f wIn(*hitRecord->wIn);
   wIn.negate();
   wIn.normalize();
@@ -90,21 +89,19 @@ ShadingSample* RefractiveMaterial::evaluateSpecularRefraction(HitRecord* hitReco
   float phaseVelocity = n1 / n2;
   float sin2ThetaT = pow(phaseVelocity, 2.0) * (1.0 - pow(cosThetaI, 2.0));
   if (sin2ThetaT > 1.0) {
-    return new ShadingSample();
+    return ShadingSample();
   }
 
-  Vector3f* refractedDir = new Vector3f(wIn);
-  refractedDir->scale(phaseVelocity);
+  Vector3f refractedDir = wIn;
+  refractedDir.scale(phaseVelocity);
 
   Vector3f scaledNormal(normal);
   scaledNormal.scale(phaseVelocity * cosThetaI - sqrt(1.0 - sin2ThetaT));
-  refractedDir->add(scaledNormal);
+  refractedDir.add(scaledNormal);
 
-  Spectrum* brdf = new Spectrum(ks);
+  Spectrum brdf = Spectrum(ks);
   float r = fresnelFactor(hitRecord);
-  brdf->scale(1.0 - r);
+  brdf.scale(1.0 - r);
 
-  ShadingSample* sample = new ShadingSample(brdf, new Spectrum(), refractedDir, true, r);
-
-  return sample;
+  return ShadingSample(brdf, Spectrum(0), refractedDir, true, r);
 }

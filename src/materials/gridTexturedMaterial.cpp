@@ -49,10 +49,10 @@ bool GridTexturedMaterial::hasSpecularRefraction() { return diffuse.hasSpecularR
 
 bool GridTexturedMaterial::castsShadows() { return diffuse.castsShadows(); }
 
-ShadingSample* GridTexturedMaterial::evaluateSpecularReflection(HitRecord* hitRecord) {
+ShadingSample GridTexturedMaterial::evaluateSpecularReflection(HitRecord* hitRecord) const {
   return diffuse.evaluateSpecularReflection(hitRecord);
 }
 
-ShadingSample* GridTexturedMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) {
+ShadingSample GridTexturedMaterial::evaluateSpecularRefraction(HitRecord* hitRecord) const {
   return diffuse.evaluateSpecularRefraction(hitRecord);
 }

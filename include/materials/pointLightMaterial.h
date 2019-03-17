@@ -6,7 +6,7 @@
 #include "../spectrum.h"
 #include "material.h"
 
-class PointLightMaterial {
+class PointLightMaterial : public Material {
  private:
   const Spectrum emission;
 
@@ -18,7 +18,7 @@ class PointLightMaterial {
   virtual bool hasSpecularReflection();
   virtual bool hasSpecularRefraction();
   virtual bool castsShadows();
-  virtual ShadingSample* evaluateSpecularReflection(HitRecord* hitRecord);
-  virtual ShadingSample* evaluateSpecularRefraction(HitRecord* hitRecord);
+  ShadingSample evaluateSpecularReflection(HitRecord* hitRecord) const override;
+  ShadingSample evaluateSpecularRefraction(HitRecord* hitRecord) const override;
 };
 #endif

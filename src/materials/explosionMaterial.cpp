@@ -54,10 +54,10 @@ bool ExplosionMaterial::hasSpecularRefraction() { return false; }
 
 bool ExplosionMaterial::castsShadows() { return true; }
 
-ShadingSample* ExplosionMaterial::evaluateSpecularReflection(HitRecord*) {
-  return new ShadingSample();
+ShadingSample ExplosionMaterial::evaluateSpecularReflection(HitRecord*) const {
+  return ShadingSample();
 }
 
-ShadingSample* ExplosionMaterial::evaluateSpecularRefraction(HitRecord*) {
-  return new ShadingSample();
+ShadingSample ExplosionMaterial::evaluateSpecularRefraction(HitRecord*) const {
+  return ShadingSample();
 }

@@ -16,10 +16,10 @@ bool Diffuse::hasSpecularRefraction() { return false; }
 
 bool Diffuse::castsShadows() { return true; }
 
-ShadingSample* Diffuse::evaluateSpecularReflection(HitRecord* hitRecord) {
-  return new ShadingSample();
+ShadingSample Diffuse::evaluateSpecularReflection(HitRecord* hitRecord) const {
+  return ShadingSample();
 }
 
-ShadingSample* Diffuse::evaluateSpecularRefraction(HitRecord* hitRecord) {
-  return new ShadingSample();
+ShadingSample Diffuse::evaluateSpecularRefraction(HitRecord* hitRecord) const {
+  return ShadingSample();
 }
