@@ -1,6 +1,8 @@
 #include "logger.h"
 #include <stdio.h>
 #include <iostream>
+#include <sstream>
+#include <string>
 #include "hitRecord.h"
 #include "intersectables/meshTriangle.h"
 #include "intersectables/triangle.h"
@@ -12,61 +14,99 @@
 #include "ray.h"
 #include "spectrum.h"
 
-void Logger::log(const Vector3f& v) { printf("(%f, %f, %f)\n", v.x, v.y, v.z); }
-
-void Logger::log(const Vector4f& v) { printf("(%f, %f, %f, %f)\n", v.x, v.y, v.z, v.w); }
-
-void Logger::log(const Matrix3f& m) {
-  printf("%f, %f, %f\n%f, %f, %f\n%f, %f, %f\n", m.m00, m.m01, m.m02, m.m10, m.m11, m.m12, m.m20,
-         m.m21, m.m22);
+std::string Logger::toString(const Vector3f& v) {
+  std::ostringstream oss;
+  oss << "(" << v.x << ", " << v.y << ", " << v.z << ")";
+  return oss.str();
 }
 
-void Logger::log(const Matrix4f& m) {
-  printf("%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n%f, %f, %f, %f\n", m.m00, m.m01, m.m02,
-         m.m03, m.m10, m.m11, m.m12, m.m13, m.m20, m.m21, m.m22, m.m23, m.m30, m.m31, m.m32, m.m33);
+std::string Logger::toString(const Vector4f& v) {
+  std::ostringstream oss;
+  oss << "(" << v.x << ", " << v.y << ", " << v.z << ", " << v.w << ")";
+  return oss.str();
 }
 
-void Logger::log(const Spectrum& s) { printf("(%f, %f, %f)\n", s.r, s.g, s.b); }
-
-void Logger::log(const HitRecord& hit) {
-  std::cout << hit.t << std::endl;
-  Logger().log(*hit.position);
-  Logger().log(*hit.normal);
-  Logger().log(*hit.tangent);
-  Logger().log(*hit.wIn);
+std::string Logger::toString(const Matrix3f& m) {
+  std::ostringstream oss;
+  oss << "(" << std::endl
+      << m.m00 << " " << m.m01 << " " << m.m02 << std::endl
+      << m.m10 << " " << m.m11 << " " << m.m12 << std::endl
+      << m.m20 << " " << m.m21 << " " << m.m22 << std::endl
+      << ")";
+  return oss.str();
 }
 
-void Logger::log(const Ray& ray) {
-  Logger().log(*ray.origin);
-  Logger().log(*ray.direction);
-
-  printf("(%i, %i, %i)\n", ray.i, ray.j, ray.depth);
+std::string Logger::toString(const Matrix4f& m) {
+  std::ostringstream oss;
+  oss << "(" << std::endl
+      << m.m00 << " " << m.m01 << " " << m.m02 << " " << m.m03 << std::endl
+      << m.m10 << " " << m.m11 << " " << m.m12 << " " << m.m13 << std::endl
+      << m.m20 << " " << m.m21 << " " << m.m22 << " " << m.m23 << std::endl
+      << m.m30 << " " << m.m31 << " " << m.m32 << " " << m.m33 << std::endl
+      << ")";
+  return oss.str();
 }
 
-void Logger::log(const Triangle& triangle) {
-  std::cout << "face-index: " << triangle.getFaceId() << std::endl;
-  std::cout << "vertices: " << std::endl;
-  Logger().log(triangle.getVertexA());
-  Logger().log(triangle.getVertexB());
-  Logger().log(triangle.getVertexC());
+std::string Logger::toString(const Spectrum& s) {
+  std::ostringstream oss;
+  oss << "(" << s.r << ", " << s.g << ", " << s.b << ")";
+  return oss.str();
 }
 
-void Logger::log(const MeshTriangle& triangle) {
-  std::cout << "face-index: " << triangle.getFaceId() << std::endl;
-  std::cout << "vertices: " << std::endl;
-  Logger().log(triangle.getVertexA());
-  Logger().log(triangle.getVertexB());
-  Logger().log(triangle.getVertexC());
+std::string Logger::toString(const HitRecord& hit) {
+  std::ostringstream oss;
+  oss << "t: " << hit.t << std::endl
+      << "position: " << Logger().toString(*hit.position) << std::endl
+      << "normal: " << Logger().toString(*hit.normal) << std::endl
+      << "tangent: " << Logger().toString(*hit.tangent) << std::endl
+      << "wIn: " << Logger().toString(*hit.wIn);
 
-  std::cout << "normals: " << std::endl;
-  Logger().log(triangle.getVertexA());
-  Logger().log(triangle.getVertexB());
-  Logger().log(triangle.getVertexC());
+  return oss.str();
 }
 
-void Logger::log(const MeshData& md) {
-  std::cout << "Vertices extracted: " << md.vertices.size() << std::endl;
-  std::cout << "Normals extracted: " << md.normals.size() << std::endl;
-  std::cout << "Faces extracted: " << md.faces.size() << std::endl;
-  std::cout << "Normal Faces extracted: " << md.normalFaces.size() << std::endl;
+std::string Logger::toString(const Ray& ray) {
+  std::ostringstream oss;
+  oss << "origin: " << Logger().toString(*ray.origin) << std::endl
+      << "direction: " << Logger().toString(*ray.direction) << std::endl
+      << "(i, j): "
+      << "(" << ray.i << ", " << ray.j << ")" << std::endl
+      << "depth: " << ray.depth;
+
+  return oss.str();
+}
+
+std::string Logger::toString(const Triangle& triangle) {
+  std::ostringstream oss;
+  oss << "face-index: " << triangle.getFaceId() << std::endl
+      << "vertices: " << std::endl
+      << Logger().toString(triangle.getVertexA()) << std::endl
+      << Logger().toString(triangle.getVertexB()) << std::endl
+      << Logger().toString(triangle.getVertexC());
+
+  return oss.str();
+}
+
+std::string Logger::toString(const MeshTriangle& triangle) {
+  std::ostringstream oss;
+  oss << "face-index: " << triangle.getFaceId() << std::endl
+      << "vertices: " << std::endl
+      << Logger().toString(triangle.getVertexA()) << std::endl
+      << Logger().toString(triangle.getVertexB()) << std::endl
+      << Logger().toString(triangle.getVertexC()) << std::endl
+      << "normals: " << std::endl
+      << Logger().toString(triangle.getNormalA()) << std::endl
+      << Logger().toString(triangle.getNormalB()) << std::endl
+      << Logger().toString(triangle.getNormalC());
+
+  return oss.str();
+}
+
+std::string Logger::toString(const MeshData& md) {
+  std::ostringstream oss;
+  oss << "Vertices extracted: " << md.vertices.size() << std::endl
+      << "Normals extracted: " << md.normals.size() << std::endl
+      << "Faces extracted: " << md.faces.size() << std::endl
+      << "Normal Faces extracted: " << md.normalFaces.size();
+
+  return oss.str();
 }

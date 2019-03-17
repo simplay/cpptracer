@@ -1,5 +1,6 @@
 #include "logger.h"
 #include <gtest/gtest.h>
+#include <iostream>
 #include "hitRecord.h"
 #include "intersectables/meshTriangle.h"
 #include "intersectables/sphere.h"
@@ -21,7 +22,7 @@ TEST(Logger, log_spectrum) { Logger().log(Spectrum(1, 1, 1)); }
 
 TEST(Logger, log_matrix3f) { Logger().log(Matrix3f()); }
 
-TEST(Logger, log_matrix4f) { Logger().log(Matrix3f()); }
+TEST(Logger, log_matrix4f) { Logger().log(Matrix4f()); }
 
 TEST(Logger, log_ray) {
   Ray ray(new Vector3f(), new Vector3f());
