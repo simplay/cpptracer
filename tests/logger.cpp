@@ -39,8 +39,6 @@ TEST(Logger, log_matrix3f) {
 }
 
 TEST(Logger, log_matrix4f) {
-  Logger().log(Matrix4f());
-
   auto m = Matrix4f(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
   Logger().log(m);
   ASSERT_EQ("(\n1 2 3 4\n5 6 7 8\n9 10 11 12\n13 14 15 16\n)", Logger().toString(m));

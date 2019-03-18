@@ -36,10 +36,10 @@ class Triangle : public Intersectable {
 
   int getFaceId() const { return faceId; }
 
-  Vector3f getVertexA() const { return a; }
+  const Vector3f& getVertexA() const { return a; }
 
-  Vector3f getVertexB() const { return b; }
+  const Vector3f& getVertexB() const { return b; }
 
-  Vector3f getVertexC() const { return c; }
+  const Vector3f& getVertexC() const { return c; }
 };
 #endif

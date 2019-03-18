@@ -19,10 +19,10 @@ class MeshTriangle : public Triangle {
   MeshTriangle(const int, Material*, const Vector3f&, const Vector3f&, const Vector3f&, const Vector3f&,
                const Vector3f&, const Vector3f&);
 
-  Vector3f getNormalA() const { return na; }
+  const Vector3f& getNormalA() const { return na; }
 
-  Vector3f getNormalB() const { return nb; }
+  const Vector3f& getNormalB() const { return nb; }
 
-  Vector3f getNormalC() const { return nc; }
+  const Vector3f& getNormalC() const { return nc; }
 };
 #endif
