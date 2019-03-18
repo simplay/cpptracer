@@ -24,7 +24,7 @@ class Material {
    *  surface
    * @return BRDF value
    */
-  virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) = 0;
+  virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) const = 0;
 
   /**
    * Evaluate emission for outgoing direction. This method is typically
@@ -36,22 +36,22 @@ class Material {
    *  surface
    * @return emission value
    */
-  virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut) = 0;
+  virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut) const = 0;
 
   /**
    * Return whether material has perfect specular reflection.
    */
-  virtual bool hasSpecularReflection() = 0;
+  virtual bool hasSpecularReflection() const = 0;
 
   /**
    * Return whether the material has perfect specular refraction.
    */
-  virtual bool hasSpecularRefraction() = 0;
+  virtual bool hasSpecularRefraction() const = 0;
 
   /**
    * Indicate whether the material casts shadows or not.
    */
-  virtual bool castsShadows() = 0;
+  virtual bool castsShadows() const = 0;
 
   /**
    * Evaluate specular reflection. This method is typically called by a recursive

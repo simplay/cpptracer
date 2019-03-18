@@ -35,7 +35,7 @@ class HitRecord {
   Vector3f* wIn;
 
   // The material at the hit point.
-  Material* material;
+  const Material* material;
 
   const Intersectable* intersectable;
 
@@ -50,10 +50,10 @@ class HitRecord {
   HitRecord(HitRecord*);
 
   HitRecord(float t, Vector3f* position, Vector3f* normal, Vector3f* tangent, Vector3f* wIn,
-            Material* material, const Intersectable* intersectable);
+            const Material* material, const Intersectable* intersectable);
 
   HitRecord(float t, Vector3f* position, Vector3f* normal, Vector3f* tangent, Vector3f* wIn,
-            Material* material, const Intersectable* intersectable, int i, int j);
+            const Material* material, const Intersectable* intersectable, int i, int j);
 
   HitRecord(Vector3f* position, Material* material);
 

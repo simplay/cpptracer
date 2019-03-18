@@ -37,7 +37,7 @@ HitRecord::HitRecord(Vector3f* position, Material* material)
       material(material){};
 
 HitRecord::HitRecord(float t, Vector3f* position, Vector3f* normal, Vector3f* tangent,
-                     Vector3f* wIn, Material* material, const Intersectable* intersectable)
+                     Vector3f* wIn, const Material* material, const Intersectable* intersectable)
     : t(t),
       position(position),
       normal(normal),
@@ -47,8 +47,8 @@ HitRecord::HitRecord(float t, Vector3f* position, Vector3f* normal, Vector3f* ta
       intersectable(intersectable) {}
 
 HitRecord::HitRecord(float t, Vector3f* position, Vector3f* normal, Vector3f* tangent,
-                     Vector3f* wIn, Material* material, const Intersectable* intersectable, int i,
-                     int j)
+                     Vector3f* wIn, const Material* material, const Intersectable* intersectable,
+                     int i, int j)
     : t(t),
       position(position),
       normal(normal),
