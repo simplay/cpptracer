@@ -3,7 +3,7 @@
 #include <memory>
 #include "math/matrix3f.h"
 
-Triangle::Triangle(int faceId, Material* material, const Vector3f& a, const Vector3f& b,
+Triangle::Triangle(const int faceId, Material* material, const Vector3f& a, const Vector3f& b,
                    const Vector3f& c)
     : faceId(faceId), material(material), a(a), b(b), c(c) {}
 

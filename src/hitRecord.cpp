@@ -74,7 +74,7 @@ HitRecord* HitRecord::transform(Matrix4f* T, Matrix4f* invTranposedT) {
   hit3fNormal->normalize();
   delete hitNormal;
 
-  Vector3f* hit3fTangent = NULL;
+  Vector3f* hit3fTangent = nullptr;
   if (tangent) {
     Vector4f backHitTangent(*tangent, 0);
     auto hitTangent = invTranposedT->mult(backHitTangent);

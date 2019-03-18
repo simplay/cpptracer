@@ -1,7 +1,6 @@
 #ifndef VECTOR3F_H
 #define VECTOR3F_H
 
-#include <stdio.h>
 #include "vector4f.h"
 
 /**
@@ -65,7 +64,5 @@ class Vector3f {
   // reflect the inverse direction of this vector off from a given normal
   // reflected := v + 2 * dot(v, normal) * normal
   Vector3f* invReflected(const Vector3f&);
-
-  void log() const { printf("(%f, %f, %f)\n", x, y, z); }
 };
 #endif

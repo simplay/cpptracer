@@ -1,7 +1,6 @@
 #ifndef HIT_RECORD_H
 #define HIT_RECORD_H
 
-#include <iostream>
 #include "math/matrix4f.h"
 #include "math/vector3f.h"
 
@@ -63,13 +62,5 @@ class HitRecord {
   bool isValid();
 
   HitRecord* transform(Matrix4f*, Matrix4f*);
-
-  void log() {
-    std::cout << t << std::endl;
-    position->log();
-    normal->log();
-    tangent->log();
-    wIn->log();
-  }
 };
 #endif

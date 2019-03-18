@@ -67,9 +67,7 @@ void Vector3f::normalize() {
 
 float Vector3f::dot() const { return x * x + y * y + z * z; }
 
-float Vector3f::dot(const Vector3f& other) const {
-  return x * other.x + y * other.y + z * other.z;
-}
+float Vector3f::dot(const Vector3f& other) const { return x * other.x + y * other.y + z * other.z; }
 
 Vector3f* Vector3f::scaleAdd(float scale, const Vector3f& base, const Vector3f& other) {
   x = scale * base.x + other.x;

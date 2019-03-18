@@ -13,7 +13,7 @@ class Material;
 // sign of distance matters)
 class Triangle : public Intersectable {
  protected:
-  int faceId;
+  const int faceId;
   Material* material;
 
   // normal of the plane
@@ -24,7 +24,8 @@ class Triangle : public Intersectable {
   virtual Vector3f* computeNormal(float alpha, float beta) const;
 
  public:
-  Triangle(int, Material*, const Vector3f&, const Vector3f&, const Vector3f&);
+  Triangle(const int, Material*, const Vector3f&, const Vector3f&, const Vector3f&);
+
   // plane-ray intersection ray: p(t) = orig + t * dir
   //
   // Implicit plane:
@@ -32,12 +33,13 @@ class Triangle : public Intersectable {
   // f(p(t)) = 0. Solve for t.  Plug t_i into
   // p(t_i) will give intersection point
   HitRecord* intersect(const Ray& ray) const;
-  virtual void log() const {
-    std::cout << "face-index: " << faceId << std::endl;
-    std::cout << "vertices: " << std::endl;
-    a.log();
-    b.log();
-    c.log();
-  }
+
+  int getFaceId() const { return faceId; }
+
+  const Vector3f& getVertexA() const { return a; }
+
+  const Vector3f& getVertexB() const { return b; }
+
+  const Vector3f& getVertexC() const { return c; }
 };
 #endif
