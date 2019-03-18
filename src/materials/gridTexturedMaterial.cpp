@@ -12,9 +12,9 @@ GridTexturedMaterial::GridTexturedMaterial(Spectrum* lineColor, Spectrum* tileCo
       scale(scale),
       diffuse(new Spectrum(1)) {}
 
-Spectrum* GridTexturedMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut,
-                                             Vector3f* wIn) const {
-  Spectrum* diffuseBRDF = diffuse.evaluateBrdf(hitRecord, wOut, wIn);
+Spectrum GridTexturedMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut,
+                                            Vector3f* wIn) const {
+  Spectrum diffuseBRDF = diffuse.evaluateBrdf(hitRecord, wOut, wIn);
 
   Vector3f* hitPoint = new Vector3f(*hitRecord->position);
 
@@ -33,14 +33,14 @@ Spectrum* GridTexturedMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOu
 
   if (shifted->x < relativeThickness || shifted->y < relativeThickness ||
       shifted->z < relativeThickness)
-    diffuseBRDF->mult(lineColor);
+    diffuseBRDF.mult(lineColor);
   else
-    diffuseBRDF->mult(tileColor);
+    diffuseBRDF.mult(tileColor);
 
   return diffuseBRDF;
 }
 
-Spectrum* GridTexturedMaterial::evaluateEmission(HitRecord* hitRecord, Vector3f* wIn) const {
+Spectrum GridTexturedMaterial::evaluateEmission(HitRecord* hitRecord, Vector3f* wIn) const {
   return diffuse.evaluateEmission(hitRecord, wIn);
 }
 

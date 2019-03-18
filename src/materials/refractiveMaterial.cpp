@@ -47,14 +47,12 @@ RefractiveMaterial::RefractiveMaterial(float refractionIndex)
 RefractiveMaterial::RefractiveMaterial(float refractionIndex, Spectrum* ks)
     : refractionIndex(refractionIndex), ks(*ks) {}
 
-Spectrum* RefractiveMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut,
-                                           Vector3f* wIn) const {
-  return new Spectrum();
+Spectrum RefractiveMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut,
+                                          Vector3f* wIn) const {
+  return Spectrum();
 }
 
-Spectrum* RefractiveMaterial::evaluateEmission(HitRecord*, Vector3f*) const {
-  return new Spectrum();
-}
+Spectrum RefractiveMaterial::evaluateEmission(HitRecord*, Vector3f*) const { return Spectrum(); }
 
 bool RefractiveMaterial::hasSpecularReflection() const { return true; }
 

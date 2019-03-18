@@ -24,7 +24,7 @@ class Material {
    *  surface
    * @return BRDF value
    */
-  virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) const = 0;
+  virtual Spectrum evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) const = 0;
 
   /**
    * Evaluate emission for outgoing direction. This method is typically
@@ -36,7 +36,7 @@ class Material {
    *  surface
    * @return emission value
    */
-  virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut) const = 0;
+  virtual Spectrum evaluateEmission(HitRecord* hitRecord, Vector3f* wOut) const = 0;
 
   /**
    * Return whether material has perfect specular reflection.

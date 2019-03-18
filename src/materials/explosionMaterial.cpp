@@ -8,8 +8,8 @@ ExplosionMaterial::ExplosionMaterial(Spectrum* diffuseContribution, Spectrum* sp
       specularContribution(*specularContribution),
       shinynessPower(shinynessPower) {}
 
-Spectrum* ExplosionMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut,
-                                          Vector3f* wIn) const {
+Spectrum ExplosionMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut,
+                                         Vector3f* wIn) const {
   Spectrum diffuse = Spectrum();
   Spectrum specular = specularContribution;
   Spectrum ambient = diffuseContribution;
@@ -39,17 +39,15 @@ Spectrum* ExplosionMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut,
   }
   diffuse.scale(wIn->dot(*hitRecord->normal));
 
-  Spectrum* contribution = new Spectrum();
-  contribution->add(diffuse);
-  contribution->add(specular);
-  contribution->add(ambient);
+  Spectrum contribution;
+  contribution.add(diffuse);
+  contribution.add(specular);
+  contribution.add(ambient);
 
   return contribution;
 }
 
-Spectrum* ExplosionMaterial::evaluateEmission(HitRecord*, Vector3f*) const {
-  return new Spectrum();
-}
+Spectrum ExplosionMaterial::evaluateEmission(HitRecord*, Vector3f*) const { return Spectrum(); }
 
 bool ExplosionMaterial::hasSpecularReflection() const { return false; }
 
