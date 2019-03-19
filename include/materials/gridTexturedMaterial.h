@@ -19,12 +19,12 @@ class GridTexturedMaterial : public Material {
   GridTexturedMaterial(Spectrum* lineColor, Spectrum* tileColor, float thickness, Vector3f* shift,
                        float scale);
 
-  virtual Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn);
-  virtual Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut);
+  Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) const override;
+  Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut) const override;
 
-  virtual bool hasSpecularReflection();
-  virtual bool hasSpecularRefraction();
-  virtual bool castsShadows();
+  bool hasSpecularReflection() const override;
+  bool hasSpecularRefraction() const override;
+  bool castsShadows() const override;
 
   ShadingSample evaluateSpecularReflection(HitRecord* hitRecord) const override;
   ShadingSample evaluateSpecularRefraction(HitRecord* hitRecord) const override;

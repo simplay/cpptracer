@@ -6,15 +6,17 @@ Diffuse::Diffuse(const Spectrum* emission) : emission(*emission) {
   this->emission.scale(1.0 / M_PI);
 }
 
-Spectrum* Diffuse::evaluateBrdf(HitRecord*, Vector3f*, Vector3f*) { return new Spectrum(emission); }
+Spectrum* Diffuse::evaluateBrdf(HitRecord*, Vector3f*, Vector3f*) const {
+  return new Spectrum(emission);
+}
 
-Spectrum* Diffuse::evaluateEmission(HitRecord*, Vector3f*) { return new Spectrum(); }
+Spectrum* Diffuse::evaluateEmission(HitRecord*, Vector3f*) const { return new Spectrum(); }
 
-bool Diffuse::hasSpecularReflection() { return false; }
+bool Diffuse::hasSpecularReflection() const { return false; }
 
-bool Diffuse::hasSpecularRefraction() { return false; }
+bool Diffuse::hasSpecularRefraction() const { return false; }
 
-bool Diffuse::castsShadows() { return true; }
+bool Diffuse::castsShadows() const { return true; }
 
 ShadingSample Diffuse::evaluateSpecularReflection(HitRecord* hitRecord) const {
   return ShadingSample();

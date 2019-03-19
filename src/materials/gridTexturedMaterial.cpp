@@ -12,7 +12,8 @@ GridTexturedMaterial::GridTexturedMaterial(Spectrum* lineColor, Spectrum* tileCo
       scale(scale),
       diffuse(new Spectrum(1)) {}
 
-Spectrum* GridTexturedMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
+Spectrum* GridTexturedMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut,
+                                             Vector3f* wIn) const {
   Spectrum* diffuseBRDF = diffuse.evaluateBrdf(hitRecord, wOut, wIn);
 
   Vector3f* hitPoint = new Vector3f(*hitRecord->position);
@@ -39,15 +40,15 @@ Spectrum* GridTexturedMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOu
   return diffuseBRDF;
 }
 
-Spectrum* GridTexturedMaterial::evaluateEmission(HitRecord* hitRecord, Vector3f* wIn) {
+Spectrum* GridTexturedMaterial::evaluateEmission(HitRecord* hitRecord, Vector3f* wIn) const {
   return diffuse.evaluateEmission(hitRecord, wIn);
 }
 
-bool GridTexturedMaterial::hasSpecularReflection() { return diffuse.hasSpecularReflection(); }
+bool GridTexturedMaterial::hasSpecularReflection() const { return diffuse.hasSpecularReflection(); }
 
-bool GridTexturedMaterial::hasSpecularRefraction() { return diffuse.hasSpecularRefraction(); }
+bool GridTexturedMaterial::hasSpecularRefraction() const { return diffuse.hasSpecularRefraction(); }
 
-bool GridTexturedMaterial::castsShadows() { return diffuse.castsShadows(); }
+bool GridTexturedMaterial::castsShadows() const { return diffuse.castsShadows(); }
 
 ShadingSample GridTexturedMaterial::evaluateSpecularReflection(HitRecord* hitRecord) const {
   return diffuse.evaluateSpecularReflection(hitRecord);

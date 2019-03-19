@@ -7,7 +7,7 @@ Blinn::Blinn(Spectrum* diffuseContribution, Spectrum* specularContribution, floa
       specularContribution(*specularContribution),
       shinynessPower(shinynessPower) {}
 
-Spectrum* Blinn::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
+Spectrum* Blinn::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) const {
   Spectrum* contribution = new Spectrum();
   Spectrum diffuse = diffuseContribution;
   Spectrum specular = specularContribution;
@@ -27,13 +27,13 @@ Spectrum* Blinn::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wI
   return contribution;
 }
 
-Spectrum* Blinn::evaluateEmission(HitRecord*, Vector3f*) { return new Spectrum(); }
+Spectrum* Blinn::evaluateEmission(HitRecord*, Vector3f*) const { return new Spectrum(); }
 
-bool Blinn::hasSpecularReflection() { return false; }
+bool Blinn::hasSpecularReflection() const { return false; }
 
-bool Blinn::hasSpecularRefraction() { return false; }
+bool Blinn::hasSpecularRefraction() const { return false; }
 
-bool Blinn::castsShadows() { return true; }
+bool Blinn::castsShadows() const { return true; }
 
 ShadingSample Blinn::evaluateSpecularReflection(HitRecord*) const { return ShadingSample(); }
 

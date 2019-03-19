@@ -47,17 +47,20 @@ RefractiveMaterial::RefractiveMaterial(float refractionIndex)
 RefractiveMaterial::RefractiveMaterial(float refractionIndex, Spectrum* ks)
     : refractionIndex(refractionIndex), ks(*ks) {}
 
-Spectrum* RefractiveMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) {
+Spectrum* RefractiveMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut,
+                                           Vector3f* wIn) const {
   return new Spectrum();
 }
 
-Spectrum* RefractiveMaterial::evaluateEmission(HitRecord*, Vector3f*) { return new Spectrum(); }
+Spectrum* RefractiveMaterial::evaluateEmission(HitRecord*, Vector3f*) const {
+  return new Spectrum();
+}
 
-bool RefractiveMaterial::hasSpecularReflection() { return true; }
+bool RefractiveMaterial::hasSpecularReflection() const { return true; }
 
-bool RefractiveMaterial::hasSpecularRefraction() { return true; }
+bool RefractiveMaterial::hasSpecularRefraction() const { return true; }
 
-bool RefractiveMaterial::castsShadows() { return false; }
+bool RefractiveMaterial::castsShadows() const { return false; }
 
 ShadingSample RefractiveMaterial::evaluateSpecularReflection(HitRecord* hitRecord) const {
   auto reflectedDir = hitRecord->wIn->invReflected(*hitRecord->normal);
