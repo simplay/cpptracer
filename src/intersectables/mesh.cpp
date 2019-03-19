@@ -7,6 +7,7 @@
 Mesh::Mesh(Material* material, std::string filepath) : material(material) {
   MeshData mesh = ObjReader(filepath.c_str()).read();
   Logger().log(mesh);
+  Logger().log("\n");
 
   int faceIdx = 0;
   for (auto face : mesh.faces) {

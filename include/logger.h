@@ -27,10 +27,11 @@ class Logger {
   std::string static toString(const Triangle&);
   std::string static toString(const MeshTriangle&);
   std::string static toString(const MeshData&);
+  std::string static toString(const std::string&);
 
   template <typename Loggable>
   inline void log(const Loggable& l) {
-    std::cout << toString(l) << std::endl;
+    std::cout << toString(l);
   }
 };
 #endif

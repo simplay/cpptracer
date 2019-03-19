@@ -1,14 +1,17 @@
 #include "image.h"
+#include <logger.h>
 #include <stdio.h>
 #include <string.h>
 #include <cmath>
 #include <iostream>
+#include <sstream>
 
 Image::Image(int width, int height, const std::vector<Spectrum>& values, std::string filename)
     : width(width), height(height), values(values), filename(filename) {}
 
 void Image::print() {
-  std::cout << "Printing " << width << " x " << height << " image" << std::endl;
+  std::ostringstream oss;
+  oss << "Printing " << width << " x " << height << " image... ";
 
   int x;
   int y;
@@ -78,5 +81,8 @@ void Image::print() {
   free(img);
   fclose(f);
 
-  std::cout << "Saved image '" << filename << "'" << std::endl;
+  oss << "Done" << std::endl;
+  oss << "Saved image '" << filename << "'" << std::endl;
+
+  Logger().log(oss.str());
 }
