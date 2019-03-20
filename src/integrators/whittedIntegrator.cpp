@@ -37,20 +37,17 @@ Spectrum WhittedIntegrator::contributionOf(const PointLight* lightSource,
     return Spectrum(0);
   }
 
-  auto brdfContribution = std::unique_ptr<Spectrum>(
-      hitRecord->material->evaluateBrdf(hitRecord, hitRecord->wIn, &lightDir));
+  Spectrum contribution = hitRecord->material->evaluateBrdf(hitRecord, hitRecord->wIn, &lightDir);
 
   // shading: brdf * emission * dot(normal,light_dir) * geom_term
-  Spectrum contribution = *brdfContribution;
 
   Vector3f oppositeLightDir(lightDir);
   oppositeLightDir.negate();
 
-  Spectrum* lightEmission = lightHit->material->evaluateEmission(lightHit, &oppositeLightDir);
+  Spectrum lightEmission = lightHit->material->evaluateEmission(lightHit, &oppositeLightDir);
   delete lightHit;
 
-  contribution.mult(*lightEmission);
-  delete lightEmission;
+  contribution.mult(lightEmission);
 
   float angle = hitRecord->normal->dot(lightDir);
   float cosTheta = 0 > angle ? 0 : angle;
@@ -59,7 +56,7 @@ Spectrum WhittedIntegrator::contributionOf(const PointLight* lightSource,
   // find a better scaling approach
   contribution.scale(1.0 / d2);
 
-  return Spectrum(contribution);
+  return contribution;
 }
 
 WhittedIntegrator::WhittedIntegrator(const IntersectableList* intersectableList,
@@ -67,7 +64,7 @@ WhittedIntegrator::WhittedIntegrator(const IntersectableList* intersectableList,
     : intersectableList(intersectableList), lights(lights) {}
 
 Spectrum WhittedIntegrator::integrate(const Ray& ray) const {
-  int MAX_DEPTH = 5;
+  constexpr int MAX_DEPTH = 5;
 
   auto hitRecord = std::unique_ptr<HitRecord>(intersectableList->intersect(ray));
   if (!hitRecord->isValid()) {

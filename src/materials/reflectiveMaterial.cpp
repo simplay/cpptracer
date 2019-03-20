@@ -5,14 +5,12 @@ ReflectiveMaterial::ReflectiveMaterial() : ks(1, 1, 1) {}
 // TODO(panmari): Change constructor to expect a const ref. This is currently a memory leak.
 ReflectiveMaterial::ReflectiveMaterial(Spectrum* ks) : ks(*ks) {}
 
-Spectrum* ReflectiveMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut,
-                                           Vector3f* wIn) const {
-  return new Spectrum(1);
+Spectrum ReflectiveMaterial::evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut,
+                                          Vector3f* wIn) const {
+  return Spectrum(1);
 }
 
-Spectrum* ReflectiveMaterial::evaluateEmission(HitRecord*, Vector3f*) const {
-  return new Spectrum();
-}
+Spectrum ReflectiveMaterial::evaluateEmission(HitRecord*, Vector3f*) const { return Spectrum(); }
 
 bool ReflectiveMaterial::hasSpecularReflection() const { return true; }
 

@@ -12,8 +12,8 @@ class PointLightMaterial : public Material {
 
  public:
   PointLightMaterial(Spectrum*);
-  Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) const override;
-  Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut) const override;
+  Spectrum evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) const override;
+  Spectrum evaluateEmission(HitRecord* hitRecord, Vector3f* wOut) const override;
 
   bool hasSpecularReflection() const override;
   bool hasSpecularRefraction() const override;

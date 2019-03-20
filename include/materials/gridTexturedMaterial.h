@@ -19,8 +19,8 @@ class GridTexturedMaterial : public Material {
   GridTexturedMaterial(Spectrum* lineColor, Spectrum* tileColor, float thickness, Vector3f* shift,
                        float scale);
 
-  Spectrum* evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) const override;
-  Spectrum* evaluateEmission(HitRecord* hitRecord, Vector3f* wOut) const override;
+  Spectrum evaluateBrdf(HitRecord* hitRecord, Vector3f* wOut, Vector3f* wIn) const override;
+  Spectrum evaluateEmission(HitRecord* hitRecord, Vector3f* wOut) const override;
 
   bool hasSpecularReflection() const override;
   bool hasSpecularRefraction() const override;

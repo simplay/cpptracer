@@ -3,13 +3,11 @@
 // TODO(panmari): Change constructor to only allow const ref. Currently, this is a memory leak.
 PointLightMaterial::PointLightMaterial(Spectrum* emission) : emission(*emission) {}
 
-Spectrum* PointLightMaterial::evaluateBrdf(HitRecord*, Vector3f*, Vector3f*) const {
-  return new Spectrum();
+Spectrum PointLightMaterial::evaluateBrdf(HitRecord*, Vector3f*, Vector3f*) const {
+  return Spectrum();
 }
 
-Spectrum* PointLightMaterial::evaluateEmission(HitRecord*, Vector3f*) const {
-  return new Spectrum(emission);
-}
+Spectrum PointLightMaterial::evaluateEmission(HitRecord*, Vector3f*) const { return emission; }
 
 bool PointLightMaterial::hasSpecularReflection() const { return false; }
 
