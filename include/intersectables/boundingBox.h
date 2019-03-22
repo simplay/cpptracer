@@ -6,6 +6,8 @@
 #include "intersectable.h"
 #include "math/vector3f.h"
 
+#include <vector>
+
 /**
  * Axis Aligned Bounding Box (AABB)
  *
@@ -26,7 +28,17 @@ class BoundingBox : public Intersectable {
   const Vector3f topRight;
 
  public:
+  BoundingBox static buildFromVectors(const std::vector<Vector3f>& vectors);
+
   BoundingBox(const Vector3f& bottomLeft, const Vector3f& topRight);
   HitRecord* intersect(const Ray& ray) const;
+
+  const Vector3f& getBottomLeft() {
+    return bottomLeft;
+  }
+
+  const Vector3f& getTopRight() {
+    return topRight;
+  }
 };
 #endif
