@@ -1,17 +1,16 @@
-#include "exampleConfig.h"
 #include <iostream>
 #include <thread>
-#include "renderer.h"
-#include "cameraTest.h"
 #include "blinnTest.h"
+#include "cameraTest.h"
+#include "cxxopts.hpp"
+#include "exampleConfig.h"
 #include "explosionTest.h"
-#include "triangleTest.h"
+#include "logger.h"
+#include "meshTest.h"
 #include "reflectionTest.h"
 #include "refractiveScene.h"
-#include "meshTest.h"
-#include "cxxopts.hpp"
-
-using namespace std;
+#include "renderer.h"
+#include "triangleTest.h"
 
 cxxopts::ParseResult parse(int argc, char* argv[]) {
   // clang-format off
@@ -45,11 +44,12 @@ cxxopts::ParseResult parse(int argc, char* argv[]) {
 }
 
 int main(int argc, char *argv[]) {
-    cout << "C++ Raytracer v"
-         << PROJECT_VERSION_MAJOR
-         << "."
-         << PROJECT_VERSION_MINOR
-         << endl;
+    std::ostringstream oss;
+    oss << "C++ Raytracer v"
+        << PROJECT_VERSION_MAJOR
+        << "."
+        << PROJECT_VERSION_MINOR
+        << std::endl;
 
     auto result = parse(argc, argv);
 
@@ -60,10 +60,12 @@ int main(int argc, char *argv[]) {
     int sceneNr = result["i"].as<int>();
     int spp = result["s"].as<int>();
 
-    unsigned threadCount = thread::hardware_concurrency();
-    cout << "Using " << threadCount << " threads" << endl;
-    cout << "Rendering scene Nr " << sceneNr << endl;
-    cout << "Rendering " << spp << " sample(s) per pixel" << endl;
+    unsigned threadCount = std::thread::hardware_concurrency();
+    oss << "Using " << threadCount << " threads" << std::endl
+        << "Rendering scene Nr " << sceneNr << std::endl
+        << "Rendering " << spp << " sample(s) per pixel" << std::endl;
+
+    Logger().log(oss.str());
 
     Scene* scene;
     switch(sceneNr) {

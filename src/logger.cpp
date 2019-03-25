@@ -1,8 +1,6 @@
 #include "logger.h"
 #include <stdio.h>
-#include <iostream>
 #include <sstream>
-#include <string>
 #include "hitRecord.h"
 #include "intersectables/meshTriangle.h"
 #include "intersectables/triangle.h"
@@ -109,4 +107,8 @@ std::string Logger::toString(const MeshData& md) {
       << "Normal Faces extracted: " << md.normalFaces.size();
 
   return oss.str();
+}
+
+std::string Logger::toString(const std::string& str) {
+  return str;
 }
