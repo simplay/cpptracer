@@ -35,3 +35,5 @@ BoundingBox BoundingBox::buildFromVectors(const std::vector<Vector3f>& vectors) 
 
   return BoundingBox(bottomLeft, topRight);
 }
+
+BoundingBox BoundingBox::getBoundingBox() const { return *this; }

@@ -2,6 +2,8 @@
 #include <limits>
 #include "hitRecord.h"
 
+class BoundingBox;
+
 IntersectableList::IntersectableList() { container = new std::vector<Intersectable*>; }
 
 HitRecord* IntersectableList::intersect(const Ray& ray) const {

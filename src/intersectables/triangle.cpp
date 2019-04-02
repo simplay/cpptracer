@@ -5,7 +5,7 @@
 
 Triangle::Triangle(const int faceId, Material* material, const Vector3f& a, const Vector3f& b,
                    const Vector3f& c)
-    : faceId(faceId), material(material), a(a), b(b), c(c) {}
+    : faceId(faceId), material(material), a(a), b(b), c(c), aabb(computeAABB(a, b, c)) {}
 
 Vector3f* Triangle::computeNormal(float, float) const {
   Vector3f ba(b);
@@ -77,3 +77,4 @@ HitRecord* Triangle::intersect(const Ray& ray) const {
   // clang-format on
   return hit;
 }
+

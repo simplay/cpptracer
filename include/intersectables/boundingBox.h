@@ -32,13 +32,10 @@ class BoundingBox : public Intersectable {
 
   BoundingBox(const Vector3f& bottomLeft, const Vector3f& topRight);
   HitRecord* intersect(const Ray& ray) const;
+  BoundingBox getBoundingBox() const;
 
-  const Vector3f& getBottomLeft() {
-    return bottomLeft;
-  }
+  const Vector3f& getBottomLeft() const { return bottomLeft; }
 
-  const Vector3f& getTopRight() {
-    return topRight;
-  }
+  const Vector3f& getTopRight() const { return topRight; }
 };
 #endif

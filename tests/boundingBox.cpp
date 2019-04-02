@@ -1,7 +1,7 @@
 #include "intersectables/boundingBox.h"
 #include <gtest/gtest.h>
-#include "math/vector3f.h"
 #include <vector>
+#include "math/vector3f.h"
 
 TEST(BoundingBox, buildFromVectors) {
   auto vectors = std::vector<Vector3f>();
