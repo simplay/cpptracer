@@ -24,4 +24,6 @@ TEST(Triangle, getBoundingBox) {
   ASSERT_EQ(1, topRight.x);
   ASSERT_EQ(2, topRight.y);
   ASSERT_EQ(3, topRight.z);
+
+  delete diffuse;
 }
