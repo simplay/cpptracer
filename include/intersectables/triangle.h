@@ -47,27 +47,27 @@ class Triangle : public Intersectable {
     auto maxY = a.y;
     auto maxZ = a.z;
 
-    if (b.x < maxX) {
+    if (b.x > maxX) {
       maxX = b.x;
     }
 
-    if (b.y < maxY) {
+    if (b.y > maxY) {
       maxY = b.y;
     }
 
-    if (b.z < maxZ) {
+    if (b.z > maxZ) {
       maxZ = b.z;
     }
 
-    if (c.x < maxX) {
+    if (c.x > maxX) {
       maxX = c.x;
     }
 
-    if (c.y < maxY) {
+    if (c.y > maxY) {
       maxY = c.y;
     }
 
-    if (c.z < maxZ) {
+    if (c.z > maxZ) {
       maxZ = c.z;
     }
 
