@@ -10,9 +10,9 @@ TEST(MeshTriangle, getBoundingBox) {
   auto b = Vector3f(1, -2, 0);
   auto c = Vector3f(0, 2, -3);
   auto d = Vector3f(0, 0, 0);
-
-  auto diffuse = new Diffuse(new Spectrum(0.0, 0.5, 0.5));
-  auto tri = MeshTriangle(1, diffuse, a, b, c, d, d, d);
+  auto s = Spectrum(0.0, 0.5, 0.5);
+  auto diffuse = Diffuse(&s);
+  auto tri = MeshTriangle(1, &diffuse, a, b, c, d, d, d);
 
   auto bb = tri.getBoundingBox();
 
@@ -26,6 +26,4 @@ TEST(MeshTriangle, getBoundingBox) {
   ASSERT_EQ(1, topRight.x);
   ASSERT_EQ(2, topRight.y);
   ASSERT_EQ(3, topRight.z);
-
-  delete diffuse;
 }
