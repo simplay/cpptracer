@@ -4,6 +4,7 @@
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../ray.h"
+#include "boundingBox.h"
 #include "intersectable.h"
 
 class Material;
@@ -32,5 +33,10 @@ class Plane : public Intersectable {
   // f(p(t)) = 0. Solve for t.  Plug t_i into
   // p(t_i) will give intersection point
   virtual HitRecord* intersect(const Ray& ray) const;
+
+  BoundingBox getBoundingBox() const {
+    BoundingBox foo(Vector3f(0, 0, 0), Vector3f(0, 0, 0));
+    return foo;
+  }
 };
 #endif

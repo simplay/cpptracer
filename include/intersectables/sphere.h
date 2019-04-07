@@ -32,6 +32,6 @@ class Sphere : public Intersectable {
   Sphere(Material*, const Vector3f&, float);
   virtual HitRecord* intersect(const Ray& ray) const;
 
-  const BoundingBox& getBoundingBox() const { return aabb; }
+  BoundingBox getBoundingBox() const { return aabb; }
 };
 #endif
