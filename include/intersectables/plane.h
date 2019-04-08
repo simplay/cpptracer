@@ -1,6 +1,7 @@
 #ifndef PLANE_H
 #define PLANE_H
 
+#include <limits>
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../ray.h"
@@ -35,8 +36,9 @@ class Plane : public Intersectable {
   virtual HitRecord* intersect(const Ray& ray) const;
 
   BoundingBox getBoundingBox() const {
-    BoundingBox foo(Vector3f(0, 0, 0), Vector3f(0, 0, 0));
-    return foo;
+    float minT = std::numeric_limits<float>::min();
+    float maxT = std::numeric_limits<float>::max();
+    return BoundingBox (Vector3f(minT, minT, minT), Vector3f(maxT, maxT, maxT));
   }
 };
 #endif
