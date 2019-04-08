@@ -6,7 +6,7 @@
 #include "intersectable.h"
 
 class IntersectableList : public Intersectable {
- private:
+ protected:
   std::vector<Intersectable*>* container;
 
  public:
