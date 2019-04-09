@@ -1,6 +1,7 @@
 #include "boundingBox.h"
 #include <algorithm>
 #include <limits>
+#include "logger.h"
 
 BoundingBox::BoundingBox(const Vector3f& bottomLeft, const Vector3f& topRight)
     : bottomLeft(bottomLeft), topRight(topRight) {}
@@ -37,3 +38,15 @@ BoundingBox BoundingBox::buildFromVectors(const std::vector<Vector3f>& vectors) 
 }
 
 BoundingBox BoundingBox::getBoundingBox() const { return *this; }
+
+BoundingBox BoundingBox::transform(Matrix4f& transformation) const {
+  auto transformedBottomLeft = transformation.mult(Vector4f(bottomLeft, 1))->toVector3f();
+  auto transformedTopRight = transformation.mult(Vector4f(topRight, 1))->toVector3f();
+
+  auto transformedBoundingBox = BoundingBox(*transformedBottomLeft, *transformedTopRight);
+
+  delete transformedBottomLeft;
+  delete transformedTopRight;
+
+  return transformedBoundingBox;
+}

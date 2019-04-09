@@ -46,8 +46,8 @@ class Instance : public Intersectable {
 
   HitRecord* intersect(const Ray& ray) const;
   BoundingBox getBoundingBox() const {
-    BoundingBox foo(Vector3f(0, 0, 0), Vector3f(0, 0, 0));
-    return foo;
+    auto aabb = intersectable->getBoundingBox();
+    return aabb.transform(*transformation);
   }
 };
 #endif
