@@ -7,8 +7,15 @@
 #include "intersectable.h"
 
 class IntersectableList : public Intersectable {
+ private:
+  std::vector<Intersectable*> initContainer() {
+    auto _container = std::vector<Intersectable*>();
+    _container.reserve(1000);
+    return _container;
+  }
+
  protected:
-  std::vector<Intersectable*>* container;
+  std::vector<Intersectable*> container;
 
  public:
   IntersectableList();

@@ -2,14 +2,12 @@
 #include <limits>
 #include "hitRecord.h"
 
-class BoundingBox;
-
-IntersectableList::IntersectableList() { container = new std::vector<Intersectable*>; }
+IntersectableList::IntersectableList() : container(initContainer()) {}
 
 HitRecord* IntersectableList::intersect(const Ray& ray) const {
   float minT = std::numeric_limits<float>::max();
   auto hitRecord = new HitRecord();
-  for (auto const& intersectable : *container) {
+  for (auto const& intersectable : container) {
     HitRecord* currentHitRecord = intersectable->intersect(ray);
     if (!currentHitRecord->isValid()) {
       delete currentHitRecord;
@@ -25,7 +23,7 @@ HitRecord* IntersectableList::intersect(const Ray& ray) const {
     }
 
     // only delete the current hitRecord if there is more than one intersectable in the scene
-    if (container->size() > 1) {
+    if (container.size() > 1) {
       delete currentHitRecord;
     }
   }
@@ -45,7 +43,7 @@ BoundingBox IntersectableList::getBoundingBox() const {
   auto maxY = minT;
   auto maxZ = minT;
 
-  for (auto const& intersectable : *container) {
+  for (auto const& intersectable : container) {
     auto boundingBox = intersectable->getBoundingBox();
     auto bottomLeft = boundingBox.getBottomLeft();
     auto topRight = boundingBox.getTopRight();
@@ -62,4 +60,4 @@ BoundingBox IntersectableList::getBoundingBox() const {
   return BoundingBox(Vector3f(minX, minY, minZ), Vector3f(maxX, maxY, maxZ));
 }
 
-void IntersectableList::put(Intersectable* intersectable) { container->push_back(intersectable); }
+void IntersectableList::put(Intersectable* intersectable) { container.push_back(intersectable); }
