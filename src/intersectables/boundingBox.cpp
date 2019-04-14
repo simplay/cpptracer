@@ -50,3 +50,18 @@ BoundingBox BoundingBox::transform(Matrix4f& transformation) const {
 
   return transformedBoundingBox;
 }
+
+void BoundingBox::expand(const Intersectable* intersectable) {
+  auto otherBB = intersectable->getBoundingBox();
+
+  auto minX = std::min((double)bottomLeft.x, (double)otherBB.getBottomLeft().x);
+  auto minY = std::min((double)bottomLeft.y, (double)otherBB.getBottomLeft().y);
+  auto minZ = std::min((double)bottomLeft.z, (double)otherBB.getBottomLeft().z);
+
+  auto maxX = std::max((double)topRight.x, (double)otherBB.getTopRight().x);
+  auto maxY = std::max((double)topRight.y, (double)otherBB.getTopRight().y);
+  auto maxZ = std::max((double)topRight.z, (double)otherBB.getTopRight().z);
+
+  *(Vector3f*)&bottomLeft = Vector3f(minX, minY, minZ);
+  *(Vector3f*)&topRight = Vector3f(maxX, maxY, maxZ);
+}

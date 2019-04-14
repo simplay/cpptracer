@@ -47,5 +47,6 @@ class BoundingBox : public Intersectable {
   const Vector3f& getTopRight() const { return topRight; }
 
   BoundingBox transform(Matrix4f& transformation) const;
+  void expand(const Intersectable*);
 };
 #endif
