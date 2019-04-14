@@ -37,7 +37,7 @@ BoundingBox BoundingBox::buildFromVectors(const std::vector<Vector3f>& vectors) 
   return BoundingBox(bottomLeft, topRight);
 }
 
-BoundingBox BoundingBox::getBoundingBox() const { return *this; }
+const BoundingBox& BoundingBox::getBoundingBox() const { return *this; }
 
 BoundingBox BoundingBox::transform(Matrix4f& transformation) const {
   auto transformedBottomLeft = transformation.mult(Vector4f(bottomLeft, 1))->toVector3f();

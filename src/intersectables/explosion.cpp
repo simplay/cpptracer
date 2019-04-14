@@ -3,7 +3,7 @@
 #include <iostream>
 
 Explosion::Explosion(Material* material, const Vector3f& center, float radius)
-    : material(material), center(center), radius(radius) {}
+    : material(material), center(center), radius(radius), aabb(initBoundingBox()) {}
 
 HitRecord* Explosion::intersect(const Ray& ray) const {
   const Vector3f& orig = *ray.origin;
@@ -111,3 +111,5 @@ float Explosion::fractal_brownian_motion(const Vector3f& x) const {
   f += 0.0625 * noise(p);
   return f / 0.9375;
 }
+
+const BoundingBox& Explosion::getBoundingBox() const { return aabb; }

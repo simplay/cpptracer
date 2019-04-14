@@ -108,6 +108,6 @@ class Triangle : public Intersectable {
 
   const Vector3f& getVertexC() const { return c; }
 
-  BoundingBox getBoundingBox() const { return aabb; }
+  const BoundingBox& getBoundingBox() const;
 };
 #endif

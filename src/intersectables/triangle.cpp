@@ -78,3 +78,5 @@ HitRecord* Triangle::intersect(const Ray& ray) const {
   return hit;
 }
 
+const BoundingBox& Triangle::getBoundingBox() const { return aabb; }
+

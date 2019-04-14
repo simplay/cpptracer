@@ -2,7 +2,8 @@
 #include <limits>
 #include "hitRecord.h"
 
-IntersectableList::IntersectableList() : container(initContainer()) {}
+IntersectableList::IntersectableList()
+    : container(initContainer()), aabb(BoundingBox(Vector3f(0, 0, 0), Vector3f(0, 0, 0))) {}
 
 HitRecord* IntersectableList::intersect(const Ray& ray) const {
   float minT = std::numeric_limits<float>::max();
@@ -31,7 +32,9 @@ HitRecord* IntersectableList::intersect(const Ray& ray) const {
   return hitRecord;
 }
 
-BoundingBox IntersectableList::getBoundingBox() const {
+const BoundingBox& IntersectableList::getBoundingBox() const { return aabb; }
+
+BoundingBox IntersectableList::computeBoundingBox() {
   float minT = std::numeric_limits<float>::min();
   float maxT = std::numeric_limits<float>::max();
 
@@ -60,4 +63,10 @@ BoundingBox IntersectableList::getBoundingBox() const {
   return BoundingBox(Vector3f(minX, minY, minZ), Vector3f(maxX, maxY, maxZ));
 }
 
-void IntersectableList::put(Intersectable* intersectable) { container.push_back(intersectable); }
+void IntersectableList::put(Intersectable* intersectable) {
+  container.push_back(intersectable);
+
+  // update bounding box
+  auto newBoundingBox = computeBoundingBox();
+  this->aabb = newBoundingBox;
+}

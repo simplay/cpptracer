@@ -31,12 +31,13 @@ class Explosion : public Intersectable {
     return x - floor(x);
   }
 
+  BoundingBox initBoundingBox() { return BoundingBox(Vector3f(0, 0, 0), Vector3f(0, 0, 0)); }
+
+  BoundingBox aabb;
+
  public:
   Explosion(Material*, const Vector3f&, float);
   virtual HitRecord* intersect(const Ray& ray) const;
-  BoundingBox getBoundingBox() const {
-    BoundingBox foo(Vector3f(0, 0, 0), Vector3f(0, 0, 0));
-    return foo;
-  }
+  const BoundingBox& getBoundingBox() const;
 };
 #endif

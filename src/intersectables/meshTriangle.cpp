@@ -1,9 +1,9 @@
 #include "intersectables/meshTriangle.h"
 #include "math/vector3f.h"
 
-MeshTriangle::MeshTriangle(const int faceId, Material* material, const Vector3f& a, const Vector3f& b,
-                           const Vector3f& c, const Vector3f& na, const Vector3f& nb,
-                           const Vector3f& nc)
+MeshTriangle::MeshTriangle(const int faceId, Material* material, const Vector3f& a,
+                           const Vector3f& b, const Vector3f& c, const Vector3f& na,
+                           const Vector3f& nb, const Vector3f& nc)
     : Triangle(faceId, material, a, b, c), na(na), nb(nb), nc(nc) {}
 
 // weighted average of provided vertex normals

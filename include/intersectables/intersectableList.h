@@ -14,13 +14,17 @@ class IntersectableList : public Intersectable {
     return _container;
   }
 
+  BoundingBox computeBoundingBox();
+
  protected:
   std::vector<Intersectable*> container;
+  BoundingBox aabb;
 
  public:
   IntersectableList();
+
   HitRecord* intersect(const Ray&) const;
-  BoundingBox getBoundingBox() const;
+  const BoundingBox& getBoundingBox() const;
 
   void put(Intersectable*);
 };

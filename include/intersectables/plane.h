@@ -14,6 +14,13 @@ class Material;
 // distance is along the direction that the normal points (meaning that the
 // sign of distance matters)
 class Plane : public Intersectable {
+ private:
+  BoundingBox initBoundingBox() {
+    float minT = std::numeric_limits<float>::min();
+    float maxT = std::numeric_limits<float>::max();
+    return BoundingBox(Vector3f(minT, minT, minT), Vector3f(maxT, maxT, maxT));
+  }
+
  protected:
   const float EPSILON = 0.000001;
 
@@ -25,6 +32,8 @@ class Plane : public Intersectable {
   // distance to origin measured along normal direction
   const float distance;
 
+  BoundingBox aabb;
+
  public:
   Plane(Material*, const Vector3f&, float);
   // plane-ray intersection ray: p(t) = orig + t * dir
@@ -35,10 +44,6 @@ class Plane : public Intersectable {
   // p(t_i) will give intersection point
   virtual HitRecord* intersect(const Ray& ray) const;
 
-  BoundingBox getBoundingBox() const {
-    float minT = std::numeric_limits<float>::min();
-    float maxT = std::numeric_limits<float>::max();
-    return BoundingBox (Vector3f(minT, minT, minT), Vector3f(maxT, maxT, maxT));
-  }
+  const BoundingBox& getBoundingBox() const { return aabb; }
 };
 #endif

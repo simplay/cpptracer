@@ -4,15 +4,20 @@
 #include "math/vector4f.h"
 
 Instance::Instance(Intersectable* intersectable)
-    : intersectable(intersectable), transformation(Matrix4f().eye()) {
+    : intersectable(intersectable),
+      transformation(Matrix4f().eye()),
+      aabb(intersectable->getBoundingBox()) {
   this->invTransformation = Matrix4f().eye();
   this->invTrasnposedTransformation = Matrix4f().eye();
 }
 
 Instance::Instance(Intersectable* intersectable, Matrix4f* transformation)
-    : intersectable(intersectable), transformation(transformation) {
+    : intersectable(intersectable),
+      transformation(transformation),
+      aabb(intersectable->getBoundingBox()) {
   this->invTransformation = transformation->inv();
   this->invTrasnposedTransformation = invTransformation->transposed();
+  this->aabb.transform(*transformation);
 }
 
 Instance::~Instance() {
@@ -34,3 +39,5 @@ HitRecord* Instance::intersect(const Ray& ray) const {
 
   return finalHit;
 }
+
+const BoundingBox& Instance::getBoundingBox() const { return aabb; }

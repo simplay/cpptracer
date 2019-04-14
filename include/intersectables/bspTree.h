@@ -3,9 +3,9 @@
 
 #include "../hitRecord.h"
 #include "../ray.h"
+#include "boundingBox.h"
 #include "intersectable.h"
 #include "math/vector3f.h"
-#include "boundingBox.h"
 
 #include <vector>
 
@@ -15,10 +15,13 @@
  */
 class BspTree : public Intersectable {
  private:
-   const Intersectable& intersectable;
+  const Intersectable& intersectable;
+  BoundingBox aabb;
+  BoundingBox initBoundingBox() { return BoundingBox(Vector3f(0, 0, 0), Vector3f(0, 0, 0)); }
+
  public:
   BspTree(const Intersectable&);
   HitRecord* intersect(const Ray& ray) const;
-  BoundingBox getBoundingBox() const;
+  const BoundingBox& getBoundingBox() const;
 };
 #endif

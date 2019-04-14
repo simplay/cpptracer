@@ -19,6 +19,6 @@ class Intersectable {
    */
   virtual HitRecord* intersect(const Ray& ray) const = 0;
 
-  virtual BoundingBox getBoundingBox() const = 0;
+  virtual const BoundingBox& getBoundingBox() const = 0;
 };
 #endif

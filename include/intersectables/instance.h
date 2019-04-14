@@ -39,15 +39,15 @@ class Instance : public Intersectable {
   // normals and tangent vectors, described in world coordinate system
   Matrix4f* invTrasnposedTransformation;
 
+  BoundingBox aabb;
+
  public:
   Instance(Intersectable*);
   Instance(Intersectable*, Matrix4f*);
   ~Instance();
 
   HitRecord* intersect(const Ray& ray) const;
-  BoundingBox getBoundingBox() const {
-    auto aabb = intersectable->getBoundingBox();
-    return aabb.transform(*transformation);
-  }
+
+  const BoundingBox& getBoundingBox() const;
 };
 #endif
