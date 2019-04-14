@@ -14,10 +14,9 @@ Instance::Instance(Intersectable* intersectable)
 Instance::Instance(Intersectable* intersectable, Matrix4f* transformation)
     : intersectable(intersectable),
       transformation(transformation),
-      aabb(intersectable->getBoundingBox()) {
+      aabb(intersectable->getBoundingBox().transform(*transformation)) {
   this->invTransformation = transformation->inv();
   this->invTrasnposedTransformation = invTransformation->transposed();
-  this->aabb.transform(*transformation);
 }
 
 Instance::~Instance() {
