@@ -12,6 +12,7 @@
 /**
  * Axis Aligned Bounding Box (AABB)
  *
+ *
  *                           top-right
  *         (min_x, max_y)    (max_x, max_y)
  *               +-----------------+
@@ -22,6 +23,24 @@
  *               +-----------------+
  *         (min_x, min_y)    (max_x, min_y)
  *         bottom-left
+ *
+ * A computationally- and memory-efficient way of representing a volume that
+ * encloses the surface of intersectable. The edges of the box are parallel to
+ * the coordinate axes.
+ *
+ * It is typically used to check if two objects might be touching / are
+ * intersecting.
+ *
+ * Example
+ *  Source: https://stackoverflow.com/questions/22512319/what-is-aabb-collision-detection:
+ *  Imagine you are in a 2D, which can be drawn on a sheet of paper. You have
+ *  some objects in the world (a ball, a tree, whatever). To make an AABB for one
+ *  of the objects, you draw a rectangle around the object, making your lines
+ *  parallel to the grid lines on the paper.
+
+ *  If you have the AABB for two objects, you can do some pretty simple math to
+ *  see if those AABBs overlap. If they don't overlap, those two objects couldn't
+ *  possibly be touching, so it's an easy early-out for your collision algorithm.
  */
 class BoundingBox : public Intersectable {
  private:
@@ -29,6 +48,7 @@ class BoundingBox : public Intersectable {
   const Vector3f topRight;
 
  public:
+  // Builds a bounding box around the convex hull of all vectors
   BoundingBox static buildFromVectors(const std::vector<Vector3f>& vectors);
   BoundingBox& operator=(const BoundingBox& newBB) {
     // This is a hack used to update certain const members whenever we put new
