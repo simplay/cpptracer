@@ -16,9 +16,8 @@ class Material;
 class Plane : public Intersectable {
  private:
   BoundingBox initBoundingBox() {
-    float minT = std::numeric_limits<float>::min();
-    float maxT = std::numeric_limits<float>::max();
-    return BoundingBox(Vector3f(minT, minT, minT), Vector3f(maxT, maxT, maxT));
+    return BoundingBox(Vector3f(std::numeric_limits<float>::min()),
+                       Vector3f(std::numeric_limits<float>::max()));
   }
 
  protected:

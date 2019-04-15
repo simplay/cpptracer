@@ -1,7 +1,6 @@
 #include "boundingBox.h"
 #include <algorithm>
 #include <limits>
-#include "logger.h"
 
 BoundingBox::BoundingBox(const Vector3f& bottomLeft, const Vector3f& topRight)
     : bottomLeft(bottomLeft), topRight(topRight) {}
