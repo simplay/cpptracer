@@ -8,33 +8,22 @@ BoundingBox::BoundingBox(const Vector3f& bottomLeft, const Vector3f& topRight)
 HitRecord* BoundingBox::intersect(const Ray& ray) const { return new HitRecord(); }
 
 BoundingBox BoundingBox::buildFromVectors(const std::vector<Vector3f>& vectors) {
-  float minT = std::numeric_limits<float>::min();
-  float maxT = std::numeric_limits<float>::max();
-
-  auto minX = maxT;
-  auto minY = maxT;
-  auto minZ = maxT;
-
-  auto maxX = minT;
-  auto maxY = minT;
-  auto maxZ = minT;
+  Vector3f min(std::numeric_limits<float>::max());
+  Vector3f max(std::numeric_limits<float>::min());
 
   // The bounding box is spanned by the find the minimum and maximum
   // components.
   for (auto v : vectors) {
-    minX = std::min((double)v.x, (double)minX);
-    minY = std::min((double)v.y, (double)minY);
-    minZ = std::min((double)v.z, (double)minZ);
+    min.x = std::min(v.x, min.x);
+    min.y = std::min(v.y, min.y);
+    min.z = std::min(v.z, min.z);
 
-    maxX = std::max((double)v.x, (double)maxX);
-    maxY = std::max((double)v.y, (double)maxY);
-    maxZ = std::max((double)v.z, (double)maxZ);
+    max.x = std::max(v.x, max.x);
+    max.y = std::max(v.y, max.y);
+    max.z = std::max(v.z, max.z);
   }
 
-  auto bottomLeft = Vector3f(minX, minY, minZ);
-  auto topRight = Vector3f(maxX, maxY, maxZ);
-
-  return BoundingBox(bottomLeft, topRight);
+  return BoundingBox(min, max);
 }
 
 const BoundingBox& BoundingBox::getBoundingBox() const { return *this; }
