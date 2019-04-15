@@ -14,69 +14,6 @@ class Material;
 // sign of distance matters)
 class Triangle : public Intersectable {
  private:
-  BoundingBox computeAABB(const Vector3f& a, const Vector3f& b, const Vector3f& c) {
-    auto minX = a.x;
-    auto minY = a.y;
-    auto minZ = a.z;
-
-    if (b.x < minX) {
-      minX = b.x;
-    }
-
-    if (b.y < minY) {
-      minY = b.y;
-    }
-
-    if (b.z < minZ) {
-      minZ = b.z;
-    }
-
-    if (c.x < minX) {
-      minX = c.x;
-    }
-
-    if (c.y < minY) {
-      minY = c.y;
-    }
-
-    if (c.z < minZ) {
-      minZ = c.z;
-    }
-
-    auto maxX = a.x;
-    auto maxY = a.y;
-    auto maxZ = a.z;
-
-    if (b.x > maxX) {
-      maxX = b.x;
-    }
-
-    if (b.y > maxY) {
-      maxY = b.y;
-    }
-
-    if (b.z > maxZ) {
-      maxZ = b.z;
-    }
-
-    if (c.x > maxX) {
-      maxX = c.x;
-    }
-
-    if (c.y > maxY) {
-      maxY = c.y;
-    }
-
-    if (c.z > maxZ) {
-      maxZ = c.z;
-    }
-
-    auto bottomLeft = Vector3f(minX, minY, minZ);
-    auto topRight = Vector3f(maxX, maxY, maxZ);
-
-    return BoundingBox(bottomLeft, topRight);
-  }
-
  protected:
   const int faceId;
   Material* material;
