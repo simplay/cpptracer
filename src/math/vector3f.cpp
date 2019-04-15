@@ -7,6 +7,8 @@ Vector3f::Vector3f() : x(0), y(0), z(0) {}
 
 Vector3f::Vector3f(float x, float y, float z) : x(x), y(y), z(z) {}
 
+Vector3f::Vector3f(float t) : x(t), y(t), z(t) {}
+
 Vector3f::Vector3f(const Vector3f& other) {
   x = other.x;
   y = other.y;

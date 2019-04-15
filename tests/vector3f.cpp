@@ -18,6 +18,13 @@ TEST(Vector3f, create_from_other) {
   ASSERT_EQ(3, p.z);
 }
 
+TEST(Vector3f, create_from_parameter) {
+  auto p = Vector3f(2);
+  ASSERT_EQ(2, p.x);
+  ASSERT_EQ(2, p.y);
+  ASSERT_EQ(2, p.z);
+}
+
 TEST(Vector3f, create_from_vector4) {
   auto other = Vector4f(1, 2, 3, 4);
   auto p = Vector3f(other);

@@ -14,6 +14,7 @@ class Vector3f {
 
   Vector3f();
   Vector3f(float, float, float);
+  Vector3f(float);
   Vector3f(const Vector3f&);
   Vector3f(const Vector4f&);
 
