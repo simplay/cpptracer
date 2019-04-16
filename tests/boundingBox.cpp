@@ -52,3 +52,12 @@ TEST(BoundingBox, transform) {
   ASSERT_NEAR(-9.2, topRight.y, 1e-5);
   ASSERT_NEAR(1, topRight.z, 1e-5);
 }
+
+TEST(BoundingBox, overlaps) {
+  auto bb1 = BoundingBox(Vector3f(0), Vector3f(1));
+  auto bb2 = BoundingBox(Vector3f(0), Vector3f(0.5));
+  auto bb3 = BoundingBox(Vector3f(-1), Vector3f(-0.5));
+
+  ASSERT_EQ(true, bb1.overlaps(bb2));
+  ASSERT_EQ(false, bb1.overlaps(bb3));
+}

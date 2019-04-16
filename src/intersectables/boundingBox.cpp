@@ -2,6 +2,23 @@
 #include <algorithm>
 #include <limits>
 
+namespace {
+bool overlaps1D(float min1, float min2, float max1, float max2) {
+  return max1 >= min2 && max2 >= min1;
+}
+}  // namespace
+
+bool BoundingBox::overlaps(const BoundingBox& other) const {
+  auto overlapsInX =
+      overlaps1D(other.getBottomLeft().x, bottomLeft.x, other.getTopRight().x, topRight.x);
+  auto overlapsInY =
+      overlaps1D(other.getBottomLeft().y, bottomLeft.y, other.getTopRight().y, topRight.y);
+  auto overlapsInZ =
+      overlaps1D(other.getBottomLeft().z, bottomLeft.z, other.getTopRight().z, topRight.z);
+
+  return overlapsInX && overlapsInY && overlapsInZ;
+}
+
 BoundingBox::BoundingBox(const Vector3f& bottomLeft, const Vector3f& topRight)
     : bottomLeft(bottomLeft), topRight(topRight) {}
 HitRecord* BoundingBox::intersect(const Ray& ray) const { return new HitRecord(); }

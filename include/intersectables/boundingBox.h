@@ -68,5 +68,7 @@ class BoundingBox : public Intersectable {
 
   BoundingBox transform(Matrix4f& transformation) const;
   void expand(const Intersectable*);
+
+  bool overlaps(const BoundingBox&) const;
 };
 #endif
