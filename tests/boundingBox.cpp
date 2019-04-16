@@ -58,6 +58,54 @@ TEST(BoundingBox, overlaps) {
   auto bb2 = BoundingBox(Vector3f(0), Vector3f(0.5));
   auto bb3 = BoundingBox(Vector3f(-1), Vector3f(-0.5));
 
-  ASSERT_EQ(true, bb1.overlaps(bb2));
-  ASSERT_EQ(false, bb1.overlaps(bb3));
+  EXPECT_TRUE(bb1.overlaps(bb2));
+  EXPECT_FALSE(bb1.overlaps(bb3));
+}
+
+TEST(BoundingBox, overlaps_window) {
+  auto bb1 = BoundingBox(Vector3f(0, 0, 0), Vector3f(1, 0, 0));
+  auto bb2 = BoundingBox(Vector3f(0.75, 0, 0), Vector3f(1.25, 0, 0));
+  EXPECT_TRUE(bb1.overlaps(bb2));
+}
+
+TEST(BoundingBox, overlaps_edge) {
+  auto bb1 = BoundingBox(Vector3f(0, 0, 0), Vector3f(1, 0, 0));
+  auto bb2 = BoundingBox(Vector3f(1, 0, 0), Vector3f(1.25, 0, 0));
+  EXPECT_TRUE(bb1.overlaps(bb2));
+}
+
+TEST(BoundingBox, overlaps_corner) {
+  auto bb1 = BoundingBox(Vector3f(0), Vector3f(1));
+  auto bb2 = BoundingBox(Vector3f(-1), Vector3f(0));
+  EXPECT_TRUE(bb1.overlaps(bb2));
+}
+
+TEST(BoundingBox, overlaps_corner_section) {
+  auto bb1 = BoundingBox(Vector3f(0, 0, 0), Vector3f(1));
+  auto bb2 = BoundingBox(Vector3f(0.75), Vector3f(1.25));
+  EXPECT_TRUE(bb1.overlaps(bb2));
+}
+
+TEST(BoundingBox, overlaps_on_top) {
+  auto bb1 = BoundingBox(Vector3f(0), Vector3f(1));
+  auto bb2 = BoundingBox(Vector3f(0), Vector3f(1));
+  EXPECT_TRUE(bb1.overlaps(bb2));
+}
+
+TEST(BoundingBox, overlaps_inclusion) {
+  auto bb1 = BoundingBox(Vector3f(0), Vector3f(1));
+  auto bb2 = BoundingBox(Vector3f(0.25), Vector3f(0.5));
+  EXPECT_TRUE(bb1.overlaps(bb2));
+}
+
+TEST(BoundingBox, no_overlap1) {
+  auto bb1 = BoundingBox(Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+  auto bb2 = BoundingBox(Vector3f(2, 0, 0), Vector3f(3, 1, 1));
+  EXPECT_FALSE(bb1.overlaps(bb2));
+}
+
+TEST(BoundingBox, no_overlap2) {
+  auto bb1 = BoundingBox(Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+  auto bb2 = BoundingBox(Vector3f(2, 1, 3), Vector3f(3, 2, 4));
+  EXPECT_FALSE(bb1.overlaps(bb2));
 }
