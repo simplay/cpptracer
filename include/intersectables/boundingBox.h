@@ -1,7 +1,6 @@
 #ifndef BOUNDING_BOX_H
 #define BOUNDING_BOX_H
 
-#include <utility>
 #include "../hitRecord.h"
 #include "../ray.h"
 #include "intersectable.h"
