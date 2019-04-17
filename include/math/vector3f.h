@@ -54,6 +54,14 @@ class Vector3f {
   // direction.
   void normalize();
 
+  /**
+   * @param index index of component that should be updated. Here, X has the
+   * index 0, Y the index 1 and Z the index 2. Indices greater than 2 are
+   * ignored.
+   * @param value new value at target index.
+   */
+  void update(unsigned index, float value);
+
   // Overwrites this vector's components by a first scaled and then shifted
   // vector. In other words, it overwrites this vector by scale * base +
   // other

@@ -67,6 +67,22 @@ void Vector3f::normalize() {
   this->scale(1.0 / scale);
 }
 
+void Vector3f::update(unsigned index, float value) {
+  switch (index) {
+    case 0:
+      this->x = value;
+      break;
+    case 1:
+      this->y = value;
+      break;
+    case 2:
+      this->z = value;
+      break;
+    default:
+      break;
+  }
+}
+
 float Vector3f::dot() const { return x * x + y * y + z * z; }
 
 float Vector3f::dot(const Vector3f& other) const { return x * other.x + y * other.y + z * other.z; }

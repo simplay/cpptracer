@@ -80,6 +80,32 @@ TEST(Vector3f, normalize_zero) {
   ASSERT_EQ(0, p.dot());
 }
 
+TEST(Vector3f, update) {
+  Vector3f p1(0, 0, 0);
+  p1.update(0, 10);
+  ASSERT_EQ(10, p1.x);
+  ASSERT_EQ(0, p1.y);
+  ASSERT_EQ(0, p1.z);
+
+  Vector3f p2(0, 0, 0);
+  p2.update(1, 20);
+  ASSERT_EQ(0, p2.x);
+  ASSERT_EQ(20, p2.y);
+  ASSERT_EQ(0, p2.z);
+
+  Vector3f p3(0, 0, 0);
+  p3.update(2, 30);
+  ASSERT_EQ(0, p3.x);
+  ASSERT_EQ(0, p3.y);
+  ASSERT_EQ(30, p3.z);
+
+  Vector3f p4(0, 0, 0);
+  p4.update(3, 40);
+  ASSERT_EQ(0, p4.x);
+  ASSERT_EQ(0, p4.y);
+  ASSERT_EQ(0, p4.z);
+}
+
 TEST(Vector3f, sub) {
   auto p = Vector3f(9, 1, 7.5);
   auto q = Vector3f(1, 2, 3);
