@@ -109,3 +109,33 @@ TEST(BoundingBox, no_overlap2) {
   auto bb2 = BoundingBox(Vector3f(2, 1, 3), Vector3f(3, 2, 4));
   EXPECT_FALSE(bb1.overlaps(bb2));
 }
+
+TEST(BoundingBox, split) {
+  auto bb = BoundingBox(Vector3f(0, 0, 0), Vector3f(10, 10, 10));
+
+  // split the bounding box along the x-axis at t = 5
+  auto splits = bb.split(Axis::Label::X, 5);
+  auto left = splits[0];
+  auto right = splits[1];
+
+  auto leftBottomLeft = left.getBottomLeft();
+  auto leftTopRight = left.getTopRight();
+  auto rightBottomLeft = right.getBottomLeft();
+  auto rightTopRight = right.getTopRight();
+
+  ASSERT_EQ(0, leftBottomLeft.x);
+  ASSERT_EQ(0, leftBottomLeft.y);
+  ASSERT_EQ(0, leftBottomLeft.z);
+
+  ASSERT_EQ(5, leftTopRight.x);
+  ASSERT_EQ(10, leftTopRight.y);
+  ASSERT_EQ(10, leftTopRight.z);
+
+  ASSERT_EQ(5, rightBottomLeft.x);
+  ASSERT_EQ(0, rightBottomLeft.y);
+  ASSERT_EQ(0, rightBottomLeft.z);
+
+  ASSERT_EQ(10, rightTopRight.x);
+  ASSERT_EQ(10, rightTopRight.y);
+  ASSERT_EQ(10, rightTopRight.z);
+}

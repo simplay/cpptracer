@@ -70,3 +70,17 @@ void BoundingBox::expand(const Intersectable* intersectable) {
   *(Vector3f*)&bottomLeft = Vector3f(minX, minY, minZ);
   *(Vector3f*)&topRight = Vector3f(maxX, maxY, maxZ);
 }
+
+std::array<BoundingBox, 2> BoundingBox::split(Axis::Label label, float t) {
+  Vector3f p1(bottomLeft);
+  Vector3f p2(topRight);
+
+  Vector3f q1(topRight);
+  Vector3f q2(bottomLeft);
+
+  q1.update(label, t);
+  q2.update(label, t);
+
+  std::array<BoundingBox, 2> splits = {BoundingBox(p1, q1), BoundingBox(q2, p2)};
+  return splits;
+}

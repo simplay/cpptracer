@@ -5,8 +5,10 @@
 #include "../ray.h"
 #include "intersectable.h"
 #include "math/vector3f.h"
+#include "axis.h"
 
 #include <vector>
+#include <array>
 
 /**
  * Axis Aligned Bounding Box (AABB)
@@ -67,6 +69,15 @@ class BoundingBox : public Intersectable {
 
   BoundingBox transform(Matrix4f& transformation) const;
   void expand(const Intersectable*);
+
+  /**
+   * Splits this bounding box into two bounding boxes.
+   *
+   * @param label The coordinate axis along which the box should be split.
+   * @param t position on 1D coordinate axis along we want to split the bounding box.
+   * @return An array that contains two bounding boxes.
+   */
+  std::array<BoundingBox, 2> split(Axis::Label label, float t);
 
   bool overlaps(const BoundingBox&) const;
 };
