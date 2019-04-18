@@ -5,6 +5,8 @@
 #include "../ray.h"
 #include "boundingBox.h"
 #include "intersectable.h"
+#include "intersectableList.h"
+#include "intersectables/bspNode.h"
 #include "math/vector3f.h"
 
 #include <vector>
@@ -15,12 +17,16 @@
  */
 class BspTree : public Intersectable {
  private:
-  const Intersectable& intersectable;
+  const BspNode root;
+  const IntersectableList& intersectables;
+  const int maxDepth;
+  const int maxIntersectablesPerNode;
   BoundingBox aabb;
   BoundingBox initBoundingBox() { return BoundingBox(Vector3f(0, 0, 0), Vector3f(0, 0, 0)); }
 
  public:
-  BspTree(const Intersectable&);
+  BspTree(const IntersectableList&, int, int);
+  BspTree(const IntersectableList&);
   HitRecord* intersect(const Ray& ray) const;
   const BoundingBox& getBoundingBox() const;
 };

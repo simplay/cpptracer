@@ -1,5 +1,5 @@
-#ifndef BSP_TREE_H
-#define BSP_TREE_H
+#ifndef BSP_NODE_H
+#define BSP_NODE_H
 
 #include <array>
 #include <vector>
@@ -13,7 +13,7 @@ class BspNode {
   const float planePosition;
   const BoundingBox boundingBox;
   const Axis::Label axis;
-  const std::vector<Intersectable> objects;
+  std::vector<Intersectable> objects;
 
  public:
   BspNode below();

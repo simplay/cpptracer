@@ -40,3 +40,7 @@ void IntersectableList::put(Intersectable* intersectable) {
   // update bounding box
   aabb.expand(intersectable);
 }
+
+int IntersectableList::size() const {
+  return container.size();
+}

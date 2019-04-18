@@ -27,5 +27,6 @@ class IntersectableList : public Intersectable {
   const BoundingBox& getBoundingBox() const;
 
   void put(Intersectable*);
+  int size() const;
 };
 #endif
