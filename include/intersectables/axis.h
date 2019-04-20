@@ -22,16 +22,16 @@ class Axis {
     }
   }
 
-  Vector3f static valueOf(Label axis) {
+  float static valueOf(Label axis, Vector3f v) {
     switch (axis) {
       case X:
-        return Vector3f(1, 0, 0);
+        return v.x;
       case Y:
-        return Vector3f(0, 1, 0);
+        return v.y;
       case Z:
-        return Vector3f(0, 0, 1);
+        return v.z;
       default:
-        return Vector3f(1, 0, 0);
+        return v.x;
     }
   }
 };

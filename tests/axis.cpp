@@ -8,18 +8,8 @@ TEST(Axis, nextLabel) {
 }
 
 TEST(Axis, valueOf) {
-  auto expectedX = Axis::valueOf(Axis::Label::X);
-  ASSERT_EQ(1, expectedX.x);
-  ASSERT_EQ(0, expectedX.y);
-  ASSERT_EQ(0, expectedX.z);
-
-  auto expectedY = Axis::valueOf(Axis::Label::Y);
-  ASSERT_EQ(0, expectedY.x);
-  ASSERT_EQ(1, expectedY.y);
-  ASSERT_EQ(0, expectedY.z);
-
-  auto expectedZ = Axis::valueOf(Axis::Label::Z);
-  ASSERT_EQ(0, expectedZ.x);
-  ASSERT_EQ(0, expectedZ.y);
-  ASSERT_EQ(1, expectedZ.z);
+  auto v = Vector3f(3, 4, 5);
+  ASSERT_EQ(3, Axis::valueOf(Axis::Label::X, v));
+  ASSERT_EQ(4, Axis::valueOf(Axis::Label::Y, v));
+  ASSERT_EQ(5, Axis::valueOf(Axis::Label::Z, v));
 }
