@@ -71,7 +71,7 @@ void BoundingBox::expand(const Intersectable* intersectable) {
   *(Vector3f*)&topRight = Vector3f(maxX, maxY, maxZ);
 }
 
-std::array<BoundingBox, 2> BoundingBox::split(Axis::Label label, float t) {
+std::array<BoundingBox, 2> BoundingBox::split(Axis::Label label, float t) const {
   Vector3f p1(bottomLeft);
   Vector3f p2(topRight);
 
@@ -83,4 +83,12 @@ std::array<BoundingBox, 2> BoundingBox::split(Axis::Label label, float t) {
 
   std::array<BoundingBox, 2> splits = {BoundingBox(p1, q1), BoundingBox(q2, p2)};
   return splits;
+}
+
+Vector3f BoundingBox::center() const {
+  auto halfDiag = Vector3f(topRight);
+  halfDiag.sub(bottomLeft);
+  Vector3f center(0);
+  center.scaleAdd(0.5f, halfDiag, bottomLeft);
+  return center;
 }

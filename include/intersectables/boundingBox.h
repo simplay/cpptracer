@@ -77,8 +77,10 @@ class BoundingBox : public Intersectable {
    * @param t position on 1D coordinate axis along we want to split the bounding box.
    * @return An array that contains two bounding boxes.
    */
-  std::array<BoundingBox, 2> split(Axis::Label label, float t);
+  std::array<BoundingBox, 2> split(Axis::Label label, float t) const;
 
   bool overlaps(const BoundingBox&) const;
+
+  Vector3f center() const;
 };
 #endif

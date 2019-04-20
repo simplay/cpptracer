@@ -139,3 +139,12 @@ TEST(BoundingBox, split) {
   ASSERT_EQ(10, rightTopRight.y);
   ASSERT_EQ(10, rightTopRight.z);
 }
+
+TEST(BoundingBox, center) {
+  auto bb = BoundingBox(Vector3f(0, 2, -10), Vector3f(1, 3, -2));
+  auto center = bb.center();
+
+  ASSERT_EQ(0.5, center.x);
+  ASSERT_EQ(2.5, center.y);
+  ASSERT_EQ(-6, center.z);
+}
