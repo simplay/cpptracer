@@ -1,5 +1,6 @@
 #include "intersectables/bspTree.h"
 #include <cmath>
+#include <iostream>
 
 namespace {
 int computeMaxDepth(const IntersectableList& intersectables) {
@@ -19,9 +20,10 @@ int computeSplitPlanePosition(const IntersectableList& intersectables, Axis::Lab
 }  // namespace
 
 BspNode BspTree::buildTree(const IntersectableList& currentIntersectables,
-                           const BoundingBox& boundingBox, Axis::Label currentAxis, float depth) {
+                           const BoundingBox& boundingBox, Axis::Label currentAxis, float depth,
+                           unsigned maxIntersectablesPerNode, unsigned maxDepth) {
   // terminate recursion and build a leaf node
-  if (depth == maxDepth || intersectables.size() <= maxIntersectablesPerNode) {
+  if (depth == maxDepth || currentIntersectables.size() <= maxIntersectablesPerNode) {
     return BspNode(boundingBox, currentIntersectables);
   }
 
@@ -47,20 +49,23 @@ BspNode BspTree::buildTree(const IntersectableList& currentIntersectables,
   }
 
   auto nextAxis = Axis::nextLabel(currentAxis);
-  BspNode left = buildTree(leftIntersectables, leftBoundingBox, nextAxis, depth + 1);
-  BspNode right = buildTree(rightIntersectables, rightBoundingBox, nextAxis, depth + 1);
+  BspNode left = buildTree(leftIntersectables, leftBoundingBox, nextAxis, depth + 1,
+                           maxIntersectablesPerNode, maxDepth);
+  BspNode right = buildTree(rightIntersectables, rightBoundingBox, nextAxis, depth + 1,
+                            maxIntersectablesPerNode, maxDepth);
 
   auto currentNode =
       BspNode(splitPosition, boundingBox, currentAxis, currentIntersectables, &left, &right);
   return currentNode;
 }
 
-BspTree::BspTree(const IntersectableList& intersectables, int maxIntersectablesPerNode,
-                 int maxDepth)
-    : root(buildTree(intersectables, intersectables.getBoundingBox(), Axis::Label::X, 0)),
+BspTree::BspTree(const IntersectableList& intersectables, unsigned maxIntersectablesPerNode,
+                 unsigned maxDepth)
+    : root(buildTree(intersectables, intersectables.getBoundingBox(), Axis::Label::X, 0,
+                     maxIntersectablesPerNode, maxDepth)),
       intersectables(intersectables),
-      maxDepth(maxDepth),
       maxIntersectablesPerNode(maxIntersectablesPerNode),
+      maxDepth(maxDepth),
       aabb(initBoundingBox()) {}
 
 BspTree::BspTree(const IntersectableList& intersectables)

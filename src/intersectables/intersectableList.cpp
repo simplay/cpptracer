@@ -41,6 +41,6 @@ void IntersectableList::put(Intersectable* intersectable) {
   aabb.expand(intersectable);
 }
 
-int IntersectableList::size() const {
+unsigned IntersectableList::size() const {
   return container.size();
 }
