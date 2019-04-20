@@ -23,6 +23,8 @@ class BspTree : public Intersectable {
   const int maxIntersectablesPerNode;
   BoundingBox aabb;
   BoundingBox initBoundingBox() { return BoundingBox(Vector3f(0, 0, 0), Vector3f(0, 0, 0)); }
+  BspNode buildTree(const IntersectableList& intersectables, const BoundingBox& boundingBox,
+                    Axis::Label axis, float depth);
 
  public:
   BspTree(const IntersectableList&, int, int);

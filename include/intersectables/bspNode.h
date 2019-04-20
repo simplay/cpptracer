@@ -5,7 +5,7 @@
 #include <vector>
 #include "intersectables/axis.h"
 #include "intersectables/boundingBox.h"
-#include "intersectables/intersectable.h"
+#include "intersectables/intersectableList.h"
 #include "ray.h"
 
 class BspNode {
@@ -13,13 +13,17 @@ class BspNode {
   const float planePosition;
   const BoundingBox boundingBox;
   const Axis::Label axis;
-  std::vector<Intersectable> objects;
+  const IntersectableList& intersectables;
+  bool isLeaf;
+  const BspNode* above;
+  const BspNode* below;
 
  public:
-  BspNode below();
-  BspNode above();
+  BspNode();
+  BspNode(float planePosition, const BoundingBox& boundingBox, Axis::Label axis,
+          const IntersectableList& intersectables, const BspNode* below, const BspNode* above);
 
-  BspNode(float planePosition, const BoundingBox& boundingBox, Axis::Label axis);
+  BspNode(const BoundingBox& boundingBox, const IntersectableList&);
   const BoundingBox& getBoundingBox() const;
   std::array<float, 2> intersect(const Ray&) const;
 };

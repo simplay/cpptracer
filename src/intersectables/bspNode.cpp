@@ -1,14 +1,24 @@
 #include "intersectables/bspNode.h"
 
-namespace {
-std::vector<Intersectable> initObjects() {
-  auto objects = std::vector<Intersectable>();
-  return objects;
-}
-}  // namespace
+BspNode::BspNode(float planePosition, const BoundingBox& boundingBox, Axis::Label axis,
+                 const IntersectableList& intersectables, const BspNode* below,
+                 const BspNode* above)
+    : planePosition(planePosition),
+      boundingBox(boundingBox),
+      axis(axis),
+      intersectables(intersectables),
+      isLeaf(false),
+      above(above),
+      below(below) {}
 
-BspNode::BspNode(float planePosition, const BoundingBox& boundingBox, Axis::Label axis)
-    : planePosition(planePosition), boundingBox(boundingBox), axis(axis), objects(initObjects()) {}
+BspNode::BspNode(const BoundingBox& boundingBox, const IntersectableList& intersectables)
+    : planePosition(0),
+      boundingBox(boundingBox),
+      axis(Axis::Label::X),
+      intersectables(intersectables),
+      isLeaf(true),
+      above(nullptr),
+      below(nullptr) {}
 
 std::array<float, 2> BspNode::intersect(const Ray& ray) const {
   std::array<float, 2> intersections;

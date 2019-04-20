@@ -28,5 +28,9 @@ class IntersectableList : public Intersectable {
 
   void put(Intersectable*);
   int size() const;
+
+  const std::vector<Intersectable*> getContainer() const {
+    return container;
+  }
 };
 #endif
