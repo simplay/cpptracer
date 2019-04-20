@@ -22,7 +22,7 @@ BspNode BspTree::buildTree(const IntersectableList& currentIntersectables,
                            const BoundingBox& boundingBox, Axis::Label currentAxis, float depth) {
   // terminate recursion and build a leaf node
   if (depth == maxDepth || intersectables.size() <= maxIntersectablesPerNode) {
-    return BspNode(boundingBox, intersectables);
+    return BspNode(boundingBox, currentIntersectables);
   }
 
   // Split the bounding box into left and right subtree
