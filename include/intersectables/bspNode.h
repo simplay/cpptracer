@@ -26,6 +26,12 @@ class BspNode {
   BspNode(const BoundingBox& boundingBox, const IntersectableList&);
   const BoundingBox& getBoundingBox() const;
   std::array<float, 2> intersect(const Ray&) const;
+  bool getIsLeaf() const;
+  const IntersectableList& getIntersectables() const;
+  const Axis::Label& getAxis() const;
+  const BspNode* getAbove() const;
+  const BspNode* getBelow() const;
+  float getPlanePositionParam() const;
 };
 
 #endif

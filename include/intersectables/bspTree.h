@@ -11,6 +11,11 @@
 
 #include <vector>
 
+struct BspStrackItem {
+  const BspNode* node;
+  float tmin, tmax, tsplit;
+};
+
 /**
  * An acceleration data-structure that performs a spatial sibdivision via
  * binary space partition trees.
