@@ -91,12 +91,13 @@ HitRecord* BspTree::intersect(const Ray& ray) const {
   if (hits.size() == 0) {
     return new HitRecord();
   }
-  HitRecord* closest;
+  HitRecord* closest = new HitRecord();
 
   float tmin = hits[0];
   float tmax = hits[1];
   float t = std::numeric_limits<float>::max();
 
+  std::cout << root.getIsLeaf() << std::endl;
   const BspNode* node = &root;
   while (node != nullptr) {
     if (t < tmin) {
