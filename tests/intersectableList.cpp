@@ -89,3 +89,20 @@ TEST(IntersectableList, put) {
   ASSERT_EQ(3, topRight.y);
   ASSERT_NEAR(3, topRight.z, 1e-5);
 }
+
+
+TEST(IntersectableList, size) {
+  auto intersectableList = IntersectableList();
+
+  auto s = Spectrum(0.0, 0.5, 0.5);
+  auto diffuse = Diffuse(&s);
+
+  auto tri = Triangle(1, &diffuse, Vector3f(0.0, 0.0, 0.0), Vector3f(1.0, 0.0, 0.0),
+      Vector3f(0.0, 1.0, 0.0));
+
+  ASSERT_EQ(0, intersectableList.size());
+  intersectableList.put(&tri);
+  intersectableList.put(&tri);
+  intersectableList.put(&tri);
+  ASSERT_EQ(3, intersectableList.size());
+}
