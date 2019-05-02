@@ -5,17 +5,17 @@
 #include <stack>
 
 namespace {
-int computeMaxDepth(const IntersectableList& intersectables) {
-  return (int)std::round(8.0 + 1.3 * std::log(intersectables.size()));
+int computeMaxDepth(const IntersectableList* intersectables) {
+  return (int)std::round(8.0 + 1.3 * std::log(intersectables->size()));
 }
 
-int computeSplitPlanePosition(const IntersectableList& intersectables, Axis::Label axis) {
+int computeSplitPlanePosition(const IntersectableList* intersectables, Axis::Label axis) {
   Vector3f centroid(0);
-  for (auto* intersectable : intersectables.getContainer()) {
+  for (auto* intersectable : intersectables->getContainer()) {
     auto bb = intersectable->getBoundingBox();
     centroid.add(bb.center());
   }
-  centroid.scale(1.0 / intersectables.size());
+  centroid.scale(1.0 / intersectables->size());
   return Axis::valueOf(axis, centroid);
 }
 
@@ -33,61 +33,61 @@ float computeRaySplitPlaneIntersectionParam(const Ray& ray, const BspNode& node)
 
 }  // namespace
 
-BspNode BspTree::buildTree(const IntersectableList& currentIntersectables,
-                           const BoundingBox& boundingBox, Axis::Label currentAxis, float depth,
+BspNode* BspTree::buildTree(const IntersectableList* currentIntersectables,
+                           const BoundingBox* boundingBox, Axis::Label currentAxis, float depth,
                            unsigned maxIntersectablesPerNode, unsigned maxDepth) {
   // terminate recursion and build a leaf node
-  if (depth == maxDepth || currentIntersectables.size() <= maxIntersectablesPerNode) {
-    return BspNode(boundingBox, currentIntersectables);
+  if (depth == maxDepth || currentIntersectables->size() <= maxIntersectablesPerNode) {
+    return new BspNode(boundingBox, currentIntersectables);
   }
 
   // Split the bounding box into left and right subtree
   float splitPosition = computeSplitPlanePosition(currentIntersectables, currentAxis);
-  auto boxes = boundingBox.split(currentAxis, splitPosition);
-  auto leftBoundingBox = boxes[0];
-  auto rightBoundingBox = boxes[1];
+  auto boxes = boundingBox->split(currentAxis, splitPosition);
+  auto leftBoundingBox = &boxes[0];
+  auto rightBoundingBox = &boxes[1];
 
-  IntersectableList leftIntersectables;
-  IntersectableList rightIntersectables;
+  IntersectableList* leftIntersectables = new IntersectableList();
+  IntersectableList* rightIntersectables = new IntersectableList();
 
-  for (auto* intersectable : currentIntersectables.getContainer()) {
+  for (auto* intersectable : currentIntersectables->getContainer()) {
     auto bb = intersectable->getBoundingBox();
-    if (bb.overlaps(leftBoundingBox)) {
-      leftIntersectables.put(intersectable);
+    if (bb.overlaps(*leftBoundingBox)) {
+      leftIntersectables->put(intersectable);
     }
 
-    if (bb.overlaps(rightBoundingBox)) {
-      rightIntersectables.put(intersectable);
+    if (bb.overlaps(*rightBoundingBox)) {
+      rightIntersectables->put(intersectable);
     }
   }
 
   auto nextAxis = Axis::nextLabel(currentAxis);
-  BspNode left = buildTree(leftIntersectables, leftBoundingBox, nextAxis, depth + 1,
+  BspNode* left = buildTree(leftIntersectables, leftBoundingBox, nextAxis, depth + 1,
                            maxIntersectablesPerNode, maxDepth);
-  BspNode right = buildTree(rightIntersectables, rightBoundingBox, nextAxis, depth + 1,
+  BspNode* right = buildTree(rightIntersectables, rightBoundingBox, nextAxis, depth + 1,
                             maxIntersectablesPerNode, maxDepth);
 
   auto currentNode =
-      BspNode(splitPosition, boundingBox, currentAxis, currentIntersectables, &left, &right);
+      new BspNode(splitPosition, boundingBox, currentAxis, currentIntersectables, left, right);
   return currentNode;
 }
 
-BspTree::BspTree(const IntersectableList& intersectables, unsigned maxIntersectablesPerNode,
+BspTree::BspTree(const IntersectableList* intersectables, unsigned maxIntersectablesPerNode,
                  unsigned maxDepth)
-    : root(buildTree(intersectables, intersectables.getBoundingBox(), Axis::Label::X, 0,
+    : root(buildTree(intersectables, &(intersectables->getBoundingBox()), Axis::Label::X, 0,
                      maxIntersectablesPerNode, maxDepth)),
       intersectables(intersectables),
       maxIntersectablesPerNode(maxIntersectablesPerNode),
       maxDepth(maxDepth),
       aabb(initBoundingBox()) {}
 
-BspTree::BspTree(const IntersectableList& intersectables)
+BspTree::BspTree(const IntersectableList* intersectables)
     : BspTree(intersectables, 5, computeMaxDepth(intersectables)) {}
 
 HitRecord* BspTree::intersect(const Ray& ray) const {
   float EPSILON = 0.001;
   std::stack<BspStrackItem> stack;
-  auto hits = root.intersect(ray);
+  auto hits = root->intersect(ray);
   if (hits.size() == 0) {
     return new HitRecord();
   }
@@ -97,8 +97,7 @@ HitRecord* BspTree::intersect(const Ray& ray) const {
   float tmax = hits[1];
   float t = std::numeric_limits<float>::max();
 
-  std::cout << root.getIsLeaf() << std::endl;
-  const BspNode* node = &root;
+  const BspNode* node = root;
   while (node != nullptr) {
     if (t < tmin) {
       break;
@@ -135,7 +134,7 @@ HitRecord* BspTree::intersect(const Ray& ray) const {
         tmax = tsplit;
       }
     } else {
-      auto hit = node->getIntersectables().intersect(ray);
+      auto hit = node->getIntersectables()->intersect(ray);
       if (hit->isValid() && hit->t < t && hit->t > 0.0) {
         closest = hit;
         t = hit->t;

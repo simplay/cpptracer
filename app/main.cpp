@@ -11,6 +11,9 @@
 #include "refractiveScene.h"
 #include "renderer.h"
 #include "triangleTest.h"
+#include "materials/diffuse.h"
+#include "intersectables/mesh.h"
+#include "bspTree.h"
 
 cxxopts::ParseResult parse(int argc, char* argv[]) {
   // clang-format off
@@ -61,11 +64,26 @@ int main(int argc, char *argv[]) {
     int spp = result["s"].as<int>();
 
     unsigned threadCount = std::thread::hardware_concurrency();
+    threadCount = 1;
     oss << "Using " << threadCount << " threads" << std::endl
         << "Rendering scene Nr " << sceneNr << std::endl
         << "Rendering " << spp << " sample(s) per pixel" << std::endl;
 
     Logger().log(oss.str());
+
+
+    // auto s = Spectrum(0.0, 0.5, 0.5);
+    // auto diffuse = Diffuse(&s);
+    // auto mesh = Mesh(&diffuse, "../meshes/teapot.obj");
+    // auto kdTree = BspTree(mesh, 2, 4);
+    // auto origin = new Vector3f(0);
+    // auto dir = new Vector3f(1, 0, 0);
+    // auto ray = Ray(origin, dir);
+    // IntersectableList* intersectableList = new IntersectableList();
+    // intersectableList->put(&kdTree);
+    // auto hit = intersectableList->intersect(ray);
+
+    // return 0;
 
     Scene* scene;
     switch(sceneNr) {

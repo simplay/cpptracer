@@ -1,7 +1,7 @@
 #include "intersectables/bspNode.h"
 
-BspNode::BspNode(float planePosition, const BoundingBox& boundingBox, Axis::Label axis,
-                 const IntersectableList& intersectables, const BspNode* below,
+BspNode::BspNode(float planePosition, const BoundingBox* boundingBox, Axis::Label axis,
+                 const IntersectableList* intersectables, const BspNode* below,
                  const BspNode* above)
     : planePosition(planePosition),
       boundingBox(boundingBox),
@@ -11,7 +11,7 @@ BspNode::BspNode(float planePosition, const BoundingBox& boundingBox, Axis::Labe
       above(above),
       below(below) {}
 
-BspNode::BspNode(const BoundingBox& boundingBox, const IntersectableList& intersectables)
+BspNode::BspNode(const BoundingBox* boundingBox, const IntersectableList* intersectables)
     : planePosition(0),
       boundingBox(boundingBox),
       axis(Axis::Label::X),
@@ -25,13 +25,13 @@ std::array<float, 2> BspNode::intersect(const Ray& ray) const {
   return intersections;
 }
 
-const BoundingBox& BspNode::getBoundingBox() const { return boundingBox; }
+const BoundingBox* BspNode::getBoundingBox() const { return boundingBox; }
 
 bool BspNode::getIsLeaf() const {
   return isLeaf;
 }
 
-const IntersectableList& BspNode::getIntersectables() const {
+const IntersectableList* BspNode::getIntersectables() const {
   return intersectables;
 }
 

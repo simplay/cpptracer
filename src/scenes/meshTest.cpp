@@ -5,10 +5,12 @@
 #include "intersectables/mesh.h"
 #include "intersectables/plane.h"
 #include "intersectables/sphere.h"
+#include "intersectables/bspTree.h"
 #include "materials/blinn.h"
 #include "materials/diffuse.h"
 #include "materials/gridTexturedMaterial.h"
 #include "samplers/randomSampler.h"
+#include <iostream>
 
 MeshTest::MeshTest(int width, int height) : Scene(width, height) {}
 
@@ -39,11 +41,14 @@ void MeshTest::buildIntersectables() {
       new GridTexturedMaterial(new Spectrum(0.2f, 0.f, 0.f), new Spectrum(1.f, 1.f, 1.f), 0.01f,
                                new Vector3f(0.f, 0.f, 0.f), 0.125f);
 
-  Matrix4f* transform = new Matrix4f(1, 0, 0, 1, 0, 0, -1, -1, 0, 1, 0, 0, 0, 0, 0, 1);
+  // Matrix4f* transform = new Matrix4f(1, 0, 0, 1, 0, 0, -1, -1, 0, 1, 0, 0, 0, 0, 0, 1);
 
   Mesh* mesh = new Mesh(material, "../meshes/teapot.obj");
-  Instance* instance = new Instance(mesh, transform);
-  intersectableList->put(instance);
+  // TODO: re-integrate
+  // Instance* instance = new Instance(mesh, transform);
+  auto kdTree = new BspTree(mesh);
+
+  intersectableList->put(kdTree);
   intersectableList->put(new Plane(grid, Vector3f(0.0, 0.0, 1.0f), 2.15));
   this->intersectableList = intersectableList;
 }

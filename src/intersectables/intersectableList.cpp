@@ -1,6 +1,7 @@
 #include "intersectables/intersectableList.h"
 #include <limits>
 #include "hitRecord.h"
+#include <iostream>
 
 IntersectableList::IntersectableList()
     : container(initContainer()), aabb(BoundingBox(Vector3f(0, 0, 0), Vector3f(0, 0, 0))) {}
