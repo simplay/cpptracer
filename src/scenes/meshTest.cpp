@@ -10,7 +10,6 @@
 #include "materials/diffuse.h"
 #include "materials/gridTexturedMaterial.h"
 #include "samplers/randomSampler.h"
-#include <iostream>
 
 MeshTest::MeshTest(int width, int height) : Scene(width, height) {}
 

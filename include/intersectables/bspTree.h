@@ -22,6 +22,8 @@ struct BspStrackItem {
  */
 class BspTree : public Intersectable {
  private:
+  const float kEps = 0.001;
+
   const BspNode* root;
   const IntersectableList* intersectables;
   const unsigned maxIntersectablesPerNode;

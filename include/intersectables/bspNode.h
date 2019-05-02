@@ -15,7 +15,11 @@ class BspNode {
   const Axis::Label axis;
   const IntersectableList* intersectables;
   bool isLeaf = false;
+
+  // the nodes above the split plane
   const BspNode* above;
+
+  // the nodes below the split plane
   const BspNode* below;
 
  public:

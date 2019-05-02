@@ -85,7 +85,6 @@ BspTree::BspTree(const IntersectableList* intersectables)
     : BspTree(intersectables, 5, computeMaxDepth(intersectables)) {}
 
 HitRecord* BspTree::intersect(const Ray& ray) const {
-  float EPSILON = 0.001;
   std::stack<BspStrackItem> stack;
   auto hits = root->intersect(ray);
   if (hits.size() == 0) {
@@ -116,10 +115,10 @@ HitRecord* BspTree::intersect(const Ray& ray) const {
 
       // case 1: only first child is hit
       if (tsplit > tmax || tsplit < 0 ||
-          (std::abs(tsplit) < EPSILON && !first->intersect(ray).empty())) {
+          (std::abs(tsplit) < kEps && !first->intersect(ray).empty())) {
         node = first;
         // case 2: only second child is hit
-      } else if (tsplit < tmin || (std::abs(tsplit) < EPSILON && !second->intersect(ray).empty())) {
+      } else if (tsplit < tmin || (std::abs(tsplit) < kEps && !second->intersect(ray).empty())) {
         node = second;
 
         // case 3: both children are hit

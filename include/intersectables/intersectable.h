@@ -19,6 +19,10 @@ class Intersectable {
    */
   virtual HitRecord* intersect(const Ray& ray) const = 0;
 
+  /**
+  * @return an axis aligned bounding box that encloses this intersectable.
+  *   It is used to optimize the intersection tests.
+  */
   virtual const BoundingBox& getBoundingBox() const = 0;
 };
 #endif
