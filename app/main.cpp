@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
     int spp = result["s"].as<int>();
 
     unsigned threadCount = std::thread::hardware_concurrency();
-    threadCount = 1;
+
     oss << "Using " << threadCount << " threads" << std::endl
         << "Rendering scene Nr " << sceneNr << std::endl
         << "Rendering " << spp << " sample(s) per pixel" << std::endl;
