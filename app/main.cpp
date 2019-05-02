@@ -71,20 +71,6 @@ int main(int argc, char *argv[]) {
 
     Logger().log(oss.str());
 
-
-    // auto s = Spectrum(0.0, 0.5, 0.5);
-    // auto diffuse = Diffuse(&s);
-    // auto mesh = Mesh(&diffuse, "../meshes/teapot.obj");
-    // auto kdTree = BspTree(mesh, 2, 4);
-    // auto origin = new Vector3f(0);
-    // auto dir = new Vector3f(1, 0, 0);
-    // auto ray = Ray(origin, dir);
-    // IntersectableList* intersectableList = new IntersectableList();
-    // intersectableList->put(&kdTree);
-    // auto hit = intersectableList->intersect(ray);
-
-    // return 0;
-
     Scene* scene;
     switch(sceneNr) {
       case 1:
