@@ -11,9 +11,6 @@
 #include "refractiveScene.h"
 #include "renderer.h"
 #include "triangleTest.h"
-#include "materials/diffuse.h"
-#include "intersectables/mesh.h"
-#include "bspTree.h"
 
 cxxopts::ParseResult parse(int argc, char* argv[]) {
   // clang-format off

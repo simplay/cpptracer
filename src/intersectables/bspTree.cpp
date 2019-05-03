@@ -34,8 +34,8 @@ float computeRaySplitPlaneIntersectionParam(const Ray& ray, const BspNode& node)
 }  // namespace
 
 BspNode* BspTree::buildTree(const IntersectableList* currentIntersectables,
-                           const BoundingBox* boundingBox, Axis::Label currentAxis, float depth,
-                           unsigned maxIntersectablesPerNode, unsigned maxDepth) {
+                            const BoundingBox* boundingBox, Axis::Label currentAxis, float depth,
+                            unsigned maxIntersectablesPerNode, unsigned maxDepth) {
   // terminate recursion and build a leaf node
   if (depth == maxDepth || currentIntersectables->size() <= maxIntersectablesPerNode) {
     return new BspNode(boundingBox, currentIntersectables);
@@ -63,9 +63,9 @@ BspNode* BspTree::buildTree(const IntersectableList* currentIntersectables,
 
   auto nextAxis = Axis::nextLabel(currentAxis);
   BspNode* left = buildTree(leftIntersectables, leftBoundingBox, nextAxis, depth + 1,
-                           maxIntersectablesPerNode, maxDepth);
-  BspNode* right = buildTree(rightIntersectables, rightBoundingBox, nextAxis, depth + 1,
                             maxIntersectablesPerNode, maxDepth);
+  BspNode* right = buildTree(rightIntersectables, rightBoundingBox, nextAxis, depth + 1,
+                             maxIntersectablesPerNode, maxDepth);
 
   auto currentNode =
       new BspNode(splitPosition, boundingBox, currentAxis, currentIntersectables, left, right);

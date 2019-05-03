@@ -31,16 +31,14 @@ class BspTree : public Intersectable {
   BoundingBox aabb;
   BoundingBox initBoundingBox() { return BoundingBox(Vector3f(0, 0, 0), Vector3f(0, 0, 0)); }
   BspNode* buildTree(const IntersectableList* intersectables, const BoundingBox* boundingBox,
-                    Axis::Label axis, float depth, unsigned maxIntersectablesPerNode,
-                    unsigned maxDepth);
+                     Axis::Label axis, float depth, unsigned maxIntersectablesPerNode,
+                     unsigned maxDepth);
 
  public:
   BspTree(const IntersectableList*, unsigned maxIntersectablesPerNode, unsigned maxDepth);
   BspTree(const IntersectableList*);
   HitRecord* intersect(const Ray& ray) const;
   const BoundingBox& getBoundingBox() const;
-  const BspNode* getRoot() const {
-    return root;
-  }
+  const BspNode* getRoot() const { return root; }
 };
 #endif
