@@ -7,6 +7,8 @@ Vector3f::Vector3f() : x(0), y(0), z(0) {}
 
 Vector3f::Vector3f(float x, float y, float z) : x(x), y(y), z(z) {}
 
+Vector3f::Vector3f(float t) : x(t), y(t), z(t) {}
+
 Vector3f::Vector3f(const Vector3f& other) {
   x = other.x;
   y = other.y;
@@ -63,6 +65,22 @@ void Vector3f::normalize() {
   if (scale == 0)
     return;
   this->scale(1.0 / scale);
+}
+
+void Vector3f::update(unsigned index, float value) {
+  switch (index) {
+    case 0:
+      this->x = value;
+      break;
+    case 1:
+      this->y = value;
+      break;
+    case 2:
+      this->z = value;
+      break;
+    default:
+      break;
+  }
 }
 
 float Vector3f::dot() const { return x * x + y * y + z * z; }

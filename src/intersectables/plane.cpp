@@ -3,7 +3,7 @@
 #include <iostream>
 
 Plane::Plane(Material* material, const Vector3f& normal, float distance)
-    : material(material), normal(normal), distance(distance) {}
+    : material(material), normal(normal), distance(distance), aabb(initBoundingBox()) {}
 
 /**
  * The distance D between a point p and a plane can be computed by:

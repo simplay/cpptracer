@@ -20,7 +20,14 @@ void TriangleTest::buildIntersectables() {
   auto tri = new Triangle(1, material, Vector3f(0.0, 0.0, 0.0), Vector3f(1.0, 0.0, 0.0),
                           Vector3f(0.0, 1.0, 0.0));
 
-  Matrix4f* transform = new Matrix4f(1, 0, 0, 1.2, 0, 0.8, 0, -1.2, 0, 0, 1, 0, 0, 0, 0, 1);
+  // clang-format off
+  Matrix4f* transform = new Matrix4f(
+    1.0, 0.0, 0.0, 1.2,
+    0.0, 0.8, 0.0, -1.2,
+    0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 1.0
+  );
+  // clang-format on
 
   auto instance = new Instance(tri);
   auto transformedInstance = new Instance(tri, transform);

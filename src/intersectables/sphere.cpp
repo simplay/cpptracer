@@ -3,7 +3,7 @@
 #include <iostream>
 
 Sphere::Sphere(Material* material, const Vector3f& center, float radius)
-    : material(material), center(center), radius(radius) {}
+    : material(material), center(center), radius(radius), aabb(computeAABB(center, radius)) {}
 
 /**
  * Details how to compute the ray-sphere intersection:

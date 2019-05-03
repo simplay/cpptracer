@@ -1,13 +1,15 @@
 #include "intersectables/intersectableList.h"
 #include <limits>
 #include "hitRecord.h"
+#include <iostream>
 
-IntersectableList::IntersectableList() { container = new std::vector<Intersectable*>; }
+IntersectableList::IntersectableList()
+    : container(initContainer()), aabb(BoundingBox(Vector3f(0, 0, 0), Vector3f(0, 0, 0))) {}
 
 HitRecord* IntersectableList::intersect(const Ray& ray) const {
   float minT = std::numeric_limits<float>::max();
   auto hitRecord = new HitRecord();
-  for (auto const& intersectable : *container) {
+  for (auto const& intersectable : container) {
     HitRecord* currentHitRecord = intersectable->intersect(ray);
     if (!currentHitRecord->isValid()) {
       delete currentHitRecord;
@@ -23,11 +25,23 @@ HitRecord* IntersectableList::intersect(const Ray& ray) const {
     }
 
     // only delete the current hitRecord if there is more than one intersectable in the scene
-    if (container->size() > 1) {
+    if (container.size() > 1) {
       delete currentHitRecord;
     }
   }
 
   return hitRecord;
 }
-void IntersectableList::put(Intersectable* intersectable) { container->push_back(intersectable); }
+
+const BoundingBox& IntersectableList::getBoundingBox() const { return aabb; }
+
+void IntersectableList::put(Intersectable* intersectable) {
+  container.push_back(intersectable);
+
+  // update bounding box
+  aabb.expand(intersectable);
+}
+
+unsigned IntersectableList::size() const {
+  return container.size();
+}

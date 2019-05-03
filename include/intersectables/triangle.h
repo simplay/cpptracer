@@ -4,6 +4,7 @@
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../ray.h"
+#include "boundingBox.h"
 #include "intersectable.h"
 
 class Material;
@@ -12,6 +13,7 @@ class Material;
 // distance is along the direction that the normal points (meaning that the
 // sign of distance matters)
 class Triangle : public Intersectable {
+ private:
  protected:
   const int faceId;
   Material* material;
@@ -20,6 +22,7 @@ class Triangle : public Intersectable {
   const Vector3f a;
   const Vector3f b;
   const Vector3f c;
+  const BoundingBox aabb;
 
   virtual Vector3f* computeNormal(float alpha, float beta) const;
 
@@ -41,5 +44,7 @@ class Triangle : public Intersectable {
   const Vector3f& getVertexB() const { return b; }
 
   const Vector3f& getVertexC() const { return c; }
+
+  const BoundingBox& getBoundingBox() const;
 };
 #endif

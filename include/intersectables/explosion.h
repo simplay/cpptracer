@@ -5,6 +5,7 @@
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../ray.h"
+#include "boundingBox.h"
 #include "intersectable.h"
 
 class Material;
@@ -30,8 +31,13 @@ class Explosion : public Intersectable {
     return x - floor(x);
   }
 
+  BoundingBox initBoundingBox() { return BoundingBox(Vector3f(0, 0, 0), Vector3f(0, 0, 0)); }
+
+  BoundingBox aabb;
+
  public:
   Explosion(Material*, const Vector3f&, float);
   virtual HitRecord* intersect(const Ray& ray) const;
+  const BoundingBox& getBoundingBox() const;
 };
 #endif

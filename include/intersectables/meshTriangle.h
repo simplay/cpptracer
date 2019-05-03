@@ -16,8 +16,8 @@ class MeshTriangle : public Triangle {
   Vector3f* computeNormal(float alpha, float beta) const;
 
  public:
-  MeshTriangle(const int, Material*, const Vector3f&, const Vector3f&, const Vector3f&, const Vector3f&,
-               const Vector3f&, const Vector3f&);
+  MeshTriangle(const int, Material*, const Vector3f&, const Vector3f&, const Vector3f&,
+               const Vector3f&, const Vector3f&, const Vector3f&);
 
   const Vector3f& getNormalA() const { return na; }
 

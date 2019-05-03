@@ -1,6 +1,7 @@
 #include "scenes/meshTest.h"
 #include "integrators/debugIntegrator.h"
 #include "integrators/whittedIntegrator.h"
+#include "intersectables/bspTree.h"
 #include "intersectables/instance.h"
 #include "intersectables/mesh.h"
 #include "intersectables/plane.h"
@@ -39,10 +40,22 @@ void MeshTest::buildIntersectables() {
       new GridTexturedMaterial(new Spectrum(0.2f, 0.f, 0.f), new Spectrum(1.f, 1.f, 1.f), 0.01f,
                                new Vector3f(0.f, 0.f, 0.f), 0.125f);
 
-  Matrix4f* transform = new Matrix4f(1, 0, 0, 1, 0, 0, -1, -1, 0, 1, 0, 0, 0, 0, 0, 1);
+  // clang-format off
+  Matrix4f* transform = new Matrix4f(
+    1, 0, 0, 1,
+    0, 0, -1, -1,
+    0, 1, 0, 0,
+    0, 0, 0, 1
+  );
+  // clang-format on
 
+  // load the mesh data and build acceleration structure
   Mesh* mesh = new Mesh(material, "../meshes/teapot.obj");
-  Instance* instance = new Instance(mesh, transform);
+  auto kdTree = new BspTree(mesh);
+
+  // transform the mesh by relying on instancing
+  Instance* instance = new Instance(kdTree, transform);
+
   intersectableList->put(instance);
   intersectableList->put(new Plane(grid, Vector3f(0.0, 0.0, 1.0f), 2.15));
   this->intersectableList = intersectableList;

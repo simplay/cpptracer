@@ -5,6 +5,7 @@
 #include "../math/matrix4f.h"
 #include "../math/vector3f.h"
 #include "../ray.h"
+#include "boundingBox.h"
 #include "intersectable.h"
 
 class Material;
@@ -38,11 +39,15 @@ class Instance : public Intersectable {
   // normals and tangent vectors, described in world coordinate system
   Matrix4f* invTrasnposedTransformation;
 
+  BoundingBox aabb;
+
  public:
   Instance(Intersectable*);
   Instance(Intersectable*, Matrix4f*);
   ~Instance();
 
   HitRecord* intersect(const Ray& ray) const;
+
+  const BoundingBox& getBoundingBox() const;
 };
 #endif
