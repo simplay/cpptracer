@@ -1,12 +1,12 @@
 #include "intersectables/accelerator/bspTree.h"
 #include <gtest/gtest.h>
 #include <iostream>
-#include "intersectables/mesh.h"
+#include "hitRecord.h"
+#include "intersectables/containers/mesh.h"
 #include "materials/diffuse.h"
 #include "math/vector3f.h"
-#include "spectrum.h"
-#include "hitRecord.h"
 #include "ray.h"
+#include "spectrum.h"
 
 TEST(BspTree, buildTree) {
   auto s = Spectrum(0.0, 0.5, 0.5);

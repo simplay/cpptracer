@@ -2,11 +2,11 @@
 #define SCENE_H
 
 #include <string.h>
-#include "../camera.h"
-#include "../film.h"
-#include "../intersectables/intersectableList.h"
-#include "../lights/pointLight.h"
-#include "../samplers/sampler.h"
+#include "camera.h"
+#include "film.h"
+#include "intersectables/containers/intersectableList.h"
+#include "lights/pointLight.h"
+#include "samplers/sampler.h"
 
 class Integrator;
 

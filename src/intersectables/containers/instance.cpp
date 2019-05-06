@@ -1,4 +1,4 @@
-#include "intersectables/instance.h"
+#include "intersectables/containers/instance.h"
 
 #include <memory>
 #include "math/vector4f.h"

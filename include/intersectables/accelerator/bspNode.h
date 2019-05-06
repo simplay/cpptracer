@@ -5,7 +5,7 @@
 #include <vector>
 #include "axis.h"
 #include "boundingBox.h"
-#include "intersectables/intersectableList.h"
+#include "intersectables/containers/intersectableList.h"
 #include "ray.h"
 
 class BspNode {

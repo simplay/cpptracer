@@ -1,4 +1,4 @@
-#include "intersectables/instance.h"
+#include "intersectables/containers/instance.h"
 #include <gtest/gtest.h>
 #include "intersectables/accelerator/boundingBox.h"
 #include "intersectables/geometries/triangle.h"

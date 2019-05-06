@@ -54,6 +54,7 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/include/intersectables
   ${PROJECT_SOURCE_DIR}/include/intersectables/accelerator
   ${PROJECT_SOURCE_DIR}/include/intersectables/geometires
+  ${PROJECT_SOURCE_DIR}/include/intersectables/containers
   ${PROJECT_SOURCE_DIR}/include/materials
   ${PROJECT_SOURCE_DIR}/include/lights
   ${PROJECT_SOURCE_DIR}/include/integrators
@@ -66,14 +67,14 @@ include_directories(
 
 # Make variables referring to all the sources and test files.
 file(GLOB SOURCES "src/*.cpp")
-file(GLOB INTERSECTABLE_SOURCES "src/intersectables/*.cpp", "src/intersectables/accelerator/*.cpp", "src/intersectables/geometries/*.cpp")
+file(GLOB INTERSECTABLE_SOURCES "src/intersectables/*.cpp", "src/intersectables/accelerator/*.cpp", "src/intersectables/geometries/*.cpp", "src/intersectables/containers/*.cpp")
 file(GLOB MATERIAL_SOURCES "src/materials/*.cpp")
 file(GLOB LIGHT_SOURCES "src/lights/*.cpp")
 file(GLOB INTEGRATOR_SOURCES "src/integrators/*.cpp")
 file(GLOB SAMPLERS_SOURCES "src/samplers/*.cpp")
 file(GLOB SCENE_SOURCES "src/scenes/*.cpp")
 file(GLOB MATH_SOURCES "src/math/*.cpp")
-file(GLOB TESTFILES "tests/*.cpp", "tests/math/*.cpp", "tests/intersectables/*.cpp", "tests/intersectables/accelerator/*.cpp", "tests/intersectables/geometries/*.cpp")
+file(GLOB TESTFILES "tests/*.cpp", "tests/math/*.cpp", "tests/intersectables/*.cpp", "tests/intersectables/accelerator/*.cpp", "tests/intersectables/geometries/*.cpp", "tests/intersectables/containers/*.cpp")
 file(GLOB BENCHMARKFILES "benchmarks/*.cpp")
 
 set(TEST_MAIN unit_tests.x)

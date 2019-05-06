@@ -1,5 +1,5 @@
+#include "intersectables/containers/mesh.h"
 #include <gtest/gtest.h>
-#include "intersectables/mesh.h"
 #include "materials/diffuse.h"
 #include "math/vector3f.h"
 #include "spectrum.h"

@@ -4,7 +4,7 @@
 #include <limits>
 #include <vector>
 #include "intersectables/accelerator/boundingBox.h"
-#include "intersectable.h"
+#include "intersectables/intersectable.h"
 
 class IntersectableList : public Intersectable {
  private:
@@ -29,8 +29,6 @@ class IntersectableList : public Intersectable {
   void put(Intersectable*);
   unsigned size() const;
 
-  const std::vector<Intersectable*> getContainer() const {
-    return container;
-  }
+  const std::vector<Intersectable*> getContainer() const { return container; }
 };
 #endif

@@ -1,7 +1,7 @@
-#include "intersectables/intersectableList.h"
+#include "intersectables/containers/intersectableList.h"
+#include <iostream>
 #include <limits>
 #include "hitRecord.h"
-#include <iostream>
 
 IntersectableList::IntersectableList()
     : container(initContainer()), aabb(BoundingBox(Vector3f(0, 0, 0), Vector3f(0, 0, 0))) {}
@@ -42,6 +42,4 @@ void IntersectableList::put(Intersectable* intersectable) {
   aabb.expand(intersectable);
 }
 
-unsigned IntersectableList::size() const {
-  return container.size();
-}
+unsigned IntersectableList::size() const { return container.size(); }

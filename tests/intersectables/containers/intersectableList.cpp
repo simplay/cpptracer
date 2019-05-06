@@ -1,4 +1,4 @@
-#include "intersectables/intersectableList.h"
+#include "intersectables/containers/intersectableList.h"
 #include <gtest/gtest.h>
 #include "intersectables/geometries/triangle.h"
 #include "materials/diffuse.h"

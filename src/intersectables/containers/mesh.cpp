@@ -1,4 +1,4 @@
-#include "intersectables/mesh.h"
+#include "intersectables/containers/mesh.h"
 #include "intersectables/geometries/meshTriangle.h"
 #include "intersectables/geometries/triangle.h"
 #include "logger.h"

@@ -4,7 +4,7 @@
 #include <limits>
 #include <string>
 #include "intersectables/accelerator/boundingBox.h"
-#include "intersectableList.h"
+#include "intersectables/containers/intersectableList.h"
 
 class Mesh : public IntersectableList {
  private:
