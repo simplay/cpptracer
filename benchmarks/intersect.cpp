@@ -1,13 +1,13 @@
 #include <benchmark/benchmark.h>
 #include <memory>
-#include "../intersectables/explosion.h"
-#include "../intersectables/meshTriangle.h"
-#include "../intersectables/plane.h"
-#include "../intersectables/sphere.h"
-#include "../intersectables/triangle.h"
-#include "../lights/pointLight.h"
-#include "../materials/diffuse.h"
-#include "../math/vector4f.h"
+#include "intersectables/geometries/explosion.h"
+#include "intersectables/geometries/meshTriangle.h"
+#include "intersectables/geometries/plane.h"
+#include "intersectables/geometries/sphere.h"
+#include "intersectables/geometries/triangle.h"
+#include "lights/pointLight.h"
+#include "materials/diffuse.h"
+#include "math/vector4f.h"
 
 namespace {
 

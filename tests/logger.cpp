@@ -2,9 +2,9 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include "hitRecord.h"
-#include "intersectables/meshTriangle.h"
-#include "intersectables/sphere.h"
-#include "intersectables/triangle.h"
+#include "intersectables/geometries/meshTriangle.h"
+#include "intersectables/geometries/sphere.h"
+#include "intersectables/geometries/triangle.h"
 #include "materials/diffuse.h"
 #include "math/matrix3f.h"
 #include "math/matrix4f.h"

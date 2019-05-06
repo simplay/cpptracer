@@ -1,4 +1,4 @@
-#include "sphere.h"
+#include "intersectables/geometries/sphere.h"
 #include <gtest/gtest.h>
 #include "materials/diffuse.h"
 #include "math/vector3f.h"

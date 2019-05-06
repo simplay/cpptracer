@@ -1,4 +1,4 @@
-#include "intersectables/triangle.h"
+#include "intersectables/geometries/triangle.h"
 #include <iostream>
 #include <memory>
 #include "math/matrix3f.h"

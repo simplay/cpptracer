@@ -1,4 +1,4 @@
-#include "intersectables/explosion.h"
+#include "intersectables/geometries/explosion.h"
 #include <cmath>
 #include <iostream>
 

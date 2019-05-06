@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <sstream>
 #include "hitRecord.h"
-#include "intersectables/meshTriangle.h"
-#include "intersectables/triangle.h"
+#include "intersectables/geometries/meshTriangle.h"
+#include "intersectables/geometries/triangle.h"
 #include "math/matrix3f.h"
 #include "math/matrix4f.h"
 #include "math/vector3f.h"
@@ -109,6 +109,4 @@ std::string Logger::toString(const MeshData& md) {
   return oss.str();
 }
 
-std::string Logger::toString(const std::string& str) {
-  return str;
-}
+std::string Logger::toString(const std::string& str) { return str; }

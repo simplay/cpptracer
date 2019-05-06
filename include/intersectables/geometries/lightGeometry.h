@@ -1,9 +1,9 @@
 #ifndef LIGHT_GEOMETRY_H
 #define LIGHT_GEOMETRY_H
 
-#include "../hitRecord.h"
+#include "hitRecord.h"
 #include "intersectables/accelerator/boundingBox.h"
-#include "intersectable.h"
+#include "intersectables/intersectable.h"
 
 class LightGeometry : public Intersectable {
  private:

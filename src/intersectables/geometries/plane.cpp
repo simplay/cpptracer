@@ -1,4 +1,4 @@
-#include "intersectables/plane.h"
+#include "intersectables/geometries/plane.h"
 #include <cmath>
 #include <iostream>
 

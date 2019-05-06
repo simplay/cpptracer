@@ -1,6 +1,6 @@
 #include <benchmark/benchmark.h>
 #include "integrators/whittedIntegrator.h"
-#include "intersectables/sphere.h"
+#include "intersectables/geometries/sphere.h"
 #include "materials/diffuse.h"
 #include "materials/reflectiveMaterial.h"
 #include "materials/refractiveMaterial.h"

@@ -1,4 +1,4 @@
-#include "intersectables/meshTriangle.h"
+#include "intersectables/geometries/meshTriangle.h"
 #include <gtest/gtest.h>
 #include <iostream>
 #include "materials/diffuse.h"

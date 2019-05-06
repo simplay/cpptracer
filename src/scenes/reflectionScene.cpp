@@ -1,6 +1,6 @@
 #include "integrators/whittedIntegrator.h"
-#include "intersectables/plane.h"
-#include "intersectables/sphere.h"
+#include "intersectables/geometries/plane.h"
+#include "intersectables/geometries/sphere.h"
 #include "materials/blinn.h"
 #include "materials/diffuse.h"
 #include "materials/reflectiveMaterial.h"

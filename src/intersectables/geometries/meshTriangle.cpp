@@ -1,4 +1,4 @@
-#include "intersectables/meshTriangle.h"
+#include "intersectables/geometries/meshTriangle.h"
 #include "math/vector3f.h"
 
 MeshTriangle::MeshTriangle(const int faceId, Material* material, const Vector3f& a,

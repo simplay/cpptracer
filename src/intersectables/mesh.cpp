@@ -1,6 +1,6 @@
 #include "intersectables/mesh.h"
-#include "intersectables/meshTriangle.h"
-#include "intersectables/triangle.h"
+#include "intersectables/geometries/meshTriangle.h"
+#include "intersectables/geometries/triangle.h"
 #include "logger.h"
 #include "objReader.h"
 

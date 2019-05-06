@@ -2,11 +2,11 @@
 #define PLANE_H
 
 #include <limits>
-#include "../hitRecord.h"
-#include "../math/vector3f.h"
-#include "../ray.h"
+#include "hitRecord.h"
 #include "intersectables/accelerator/boundingBox.h"
-#include "intersectable.h"
+#include "intersectables/intersectable.h"
+#include "math/vector3f.h"
+#include "ray.h"
 
 class Material;
 

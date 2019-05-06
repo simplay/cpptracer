@@ -1,4 +1,4 @@
-#include "intersectables/sphere.h"
+#include "intersectables/geometries/sphere.h"
 #include <cmath>
 #include <iostream>
 

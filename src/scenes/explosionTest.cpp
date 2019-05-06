@@ -1,7 +1,7 @@
 #include "scenes/explosionTest.h"
-#include "intersectables/explosion.h"
-#include "intersectables/plane.h"
-#include "intersectables/sphere.h"
+#include "intersectables/geometries/explosion.h"
+#include "intersectables/geometries/plane.h"
+#include "intersectables/geometries/sphere.h"
 #include "materials/diffuse.h"
 #include "materials/explosionMaterial.h"
 

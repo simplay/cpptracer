@@ -1,9 +1,9 @@
-#include "instance.h"
+#include "intersectables/instance.h"
 #include <gtest/gtest.h>
 #include "intersectables/accelerator/boundingBox.h"
+#include "intersectables/geometries/triangle.h"
 #include "materials/diffuse.h"
 #include "math/vector3f.h"
-#include "triangle.h"
 
 TEST(Instance, getBoundingBox) {
   auto a = Vector3f(1, 0, 0);

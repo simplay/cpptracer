@@ -1,4 +1,4 @@
-#include "triangle.h"
+#include "intersectables/geometries/triangle.h"
 #include <gtest/gtest.h>
 #include "materials/diffuse.h"
 #include "math/vector3f.h"
