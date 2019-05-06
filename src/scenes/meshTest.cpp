@@ -1,7 +1,7 @@
 #include "scenes/meshTest.h"
 #include "integrators/debugIntegrator.h"
 #include "integrators/whittedIntegrator.h"
-#include "intersectables/bspTree.h"
+#include "intersectables/accelerator/bspTree.h"
 #include "intersectables/instance.h"
 #include "intersectables/mesh.h"
 #include "intersectables/plane.h"

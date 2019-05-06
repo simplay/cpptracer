@@ -1,4 +1,4 @@
-#include "intersectables/bspTree.h"
+#include "intersectables/accelerator/bspTree.h"
 #include <cmath>
 #include <iostream>
 #include <limits>

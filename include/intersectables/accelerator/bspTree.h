@@ -1,12 +1,12 @@
 #ifndef BSP_TREE_H
 #define BSP_TREE_H
 
-#include "../hitRecord.h"
-#include "../ray.h"
+#include "../../hitRecord.h"
+#include "../../ray.h"
 #include "boundingBox.h"
-#include "intersectable.h"
-#include "intersectableList.h"
-#include "intersectables/bspNode.h"
+#include "../intersectable.h"
+#include "../intersectableList.h"
+#include "bspNode.h"
 #include "math/vector3f.h"
 
 #include <vector>

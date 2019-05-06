@@ -4,7 +4,7 @@
 #include "../hitRecord.h"
 #include "../math/vector3f.h"
 #include "../ray.h"
-#include "boundingBox.h"
+#include "intersectables/accelerator/boundingBox.h"
 #include "intersectable.h"
 
 class Material;

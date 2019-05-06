@@ -1,6 +1,6 @@
 #include "instance.h"
 #include <gtest/gtest.h>
-#include "intersectables/boundingBox.h"
+#include "intersectables/accelerator/boundingBox.h"
 #include "materials/diffuse.h"
 #include "math/vector3f.h"
 #include "triangle.h"

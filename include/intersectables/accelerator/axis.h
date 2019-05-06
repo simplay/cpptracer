@@ -1,7 +1,7 @@
 #ifndef AXIS_H
 #define AXIS_H
 
-#include "../math/vector3f.h"
+#include "../../math/vector3f.h"
 
 /**
  * Models a coordinate axis used to split axis aligned bounding boxes

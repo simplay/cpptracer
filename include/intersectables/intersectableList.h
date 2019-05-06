@@ -3,7 +3,7 @@
 
 #include <limits>
 #include <vector>
-#include "boundingBox.h"
+#include "intersectables/accelerator/boundingBox.h"
 #include "intersectable.h"
 
 class IntersectableList : public Intersectable {

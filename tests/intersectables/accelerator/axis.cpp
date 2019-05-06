@@ -1,4 +1,4 @@
-#include "intersectables/axis.h"
+#include "intersectables/accelerator/axis.h"
 #include <gtest/gtest.h>
 
 TEST(Axis, nextLabel) {

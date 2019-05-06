@@ -1,4 +1,4 @@
-#include "intersectables/boundingBox.h"
+#include "intersectables/accelerator/boundingBox.h"
 #include <gtest/gtest.h>
 #include <vector>
 #include "math/vector3f.h"

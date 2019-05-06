@@ -3,8 +3,8 @@
 
 #include <array>
 #include <vector>
-#include "intersectables/axis.h"
-#include "intersectables/boundingBox.h"
+#include "axis.h"
+#include "boundingBox.h"
 #include "intersectables/intersectableList.h"
 #include "ray.h"
 

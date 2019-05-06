@@ -1,4 +1,4 @@
-#include "bspTree.h"
+#include "intersectables/accelerator/bspTree.h"
 #include <gtest/gtest.h>
 #include <iostream>
 #include "intersectables/mesh.h"

@@ -2,7 +2,7 @@
 #define LIGHT_GEOMETRY_H
 
 #include "../hitRecord.h"
-#include "boundingBox.h"
+#include "intersectables/accelerator/boundingBox.h"
 #include "intersectable.h"
 
 class LightGeometry : public Intersectable {

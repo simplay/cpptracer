@@ -1,4 +1,4 @@
-#include "intersectables/bspNode.h"
+#include "intersectables/accelerator/bspNode.h"
 
 BspNode::BspNode(float planePosition, const BoundingBox* boundingBox, Axis::Label axis,
                  const IntersectableList* intersectables, const BspNode* below,

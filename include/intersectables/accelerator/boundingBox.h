@@ -1,14 +1,14 @@
 #ifndef BOUNDING_BOX_H
 #define BOUNDING_BOX_H
 
-#include "../hitRecord.h"
-#include "../ray.h"
-#include "intersectable.h"
-#include "math/vector3f.h"
+#include "../../hitRecord.h"
+#include "../../math/vector3f.h"
+#include "../../ray.h"
+#include "../intersectable.h"
 #include "axis.h"
 
-#include <vector>
 #include <array>
+#include <vector>
 
 /**
  * Axis Aligned Bounding Box (AABB)

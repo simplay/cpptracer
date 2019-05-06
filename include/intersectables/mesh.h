@@ -3,7 +3,7 @@
 
 #include <limits>
 #include <string>
-#include "boundingBox.h"
+#include "intersectables/accelerator/boundingBox.h"
 #include "intersectableList.h"
 
 class Mesh : public IntersectableList {
