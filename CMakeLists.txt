@@ -71,7 +71,7 @@ file(GLOB INTEGRATOR_SOURCES "src/integrators/*.cpp")
 file(GLOB SAMPLERS_SOURCES "src/samplers/*.cpp")
 file(GLOB SCENE_SOURCES "src/scenes/*.cpp")
 file(GLOB MATH_SOURCES "src/math/*.cpp")
-file(GLOB TESTFILES "tests/*.cpp")
+file(GLOB TESTFILES "tests/*.cpp", "tests/math/*.cpp", "tests/intersectables/*.cpp")
 file(GLOB BENCHMARKFILES "benchmarks/*.cpp")
 
 set(TEST_MAIN unit_tests.x)
