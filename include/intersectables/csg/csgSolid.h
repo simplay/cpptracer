@@ -28,7 +28,7 @@ class CsgSolid : public Intersectable {
     BoundaryType type;
 
     // The hit record of the intersection
-    HitRecord hitRecord;
+    HitRecord* hitRecord;
 
     BelongsTo belongsTo;
 

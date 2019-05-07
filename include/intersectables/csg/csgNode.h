@@ -11,11 +11,11 @@ class CsgNode : public CsgSolid {
   enum SetOperation { UNION = 0, INTERSECTION = 1, DIFFERENCE = 2 };
 
  private:
-  const CsgSolid left;
-  const CsgSolid right;
+  const CsgSolid* left;
+  const CsgSolid* right;
   const SetOperation operation;
 
  public:
-  CsgNode(const CsgSolid& left, const CsgSolid& right, SetOperation operation);
+  CsgNode(const CsgSolid* left, const CsgSolid* right, SetOperation operation);
 };
 #endif
