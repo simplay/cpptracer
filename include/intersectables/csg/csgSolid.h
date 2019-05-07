@@ -14,6 +14,27 @@
  * interval).
  */
 class CsgSolid : public Intersectable {
+ public:
+  enum BoundaryType { START = 0, END = 1 };
+  enum BelongsTo { LEFT = 0, RIGHT = 1 };
+
+  /**
+   * Boundary of an intersection interval.
+   */
+  struct IntervalBoundary {
+    // t value of intersection
+    float t;
+    // Type of boundary of intersection interval (start or end)
+    BoundaryType type;
+
+    // The hit record of the intersection
+    HitRecord hitRecord;
+
+    BelongsTo belongsTo;
+
+    bool operator>(const IntervalBoundary& other) { return t > other.t; };
+  };
+
   BoundingBox aabb = BoundingBox(Vector3f(std::numeric_limits<float>::min()),
                                  Vector3f(std::numeric_limits<float>::max()));
 
