@@ -14,6 +14,4 @@ HitRecord* CsgSolid::intersect(const Ray& ray) const {
   return new HitRecord();
 }
 
-const BoundingBox& CsgSolid::getBoundingBox() const {
-  return aabb;
-}
+const BoundingBox& CsgSolid::getBoundingBox() const { return aabb; }

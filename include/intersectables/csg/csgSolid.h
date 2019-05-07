@@ -41,13 +41,13 @@ class CsgSolid : public Intersectable {
   virtual HitRecord* intersect(const Ray& ray) const;
   virtual const BoundingBox& getBoundingBox() const;
 
-	/**
-   * Compute the boundaries of the intersection intervals of this CSG solid
+  /**
+   * Compute the boundaries of the intersection intervals of this CsgSolid
    * with a ray.
-	 *
-	 * @param r the ray that intersects the CSG solid
-	 * @return boundaries of intersection intervals
-	 */
-	virtual std::vector<IntervalBoundary>& getIntervalBoundaries(Ray r) const = 0;
+   *
+   * @param r the ray that intersects the CsgSolid
+   * @return boundaries of intersection intervals
+   */
+  virtual std::vector<IntervalBoundary>& getIntervalBoundaries(Ray r) const = 0;
 };
 #endif
