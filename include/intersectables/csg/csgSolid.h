@@ -32,7 +32,7 @@ class CsgSolid : public Intersectable {
 
     BelongsTo belongsTo;
 
-    bool operator>(const IntervalBoundary& other) { return t > other.t; };
+    bool operator<(const IntervalBoundary& other) { return t < other.t; };
   };
 
   BoundingBox aabb = BoundingBox(Vector3f(std::numeric_limits<float>::min()),
