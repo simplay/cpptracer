@@ -27,6 +27,7 @@ class IntersectableList : public Intersectable {
   const BoundingBox& getBoundingBox() const;
 
   void put(Intersectable*);
+  Intersectable* at(unsigned index) const;
   unsigned size() const;
 
   const std::vector<Intersectable*> getContainer() const { return container; }
