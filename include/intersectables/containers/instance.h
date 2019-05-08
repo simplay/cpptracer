@@ -23,7 +23,7 @@ class Material;
  * many similar intersectable instances
  */
 class Instance : public Intersectable {
- private:
+ protected:
   // A reference to an intersectable, e.g. a sphere or a plane.
   Intersectable* intersectable;
 
@@ -46,8 +46,8 @@ class Instance : public Intersectable {
   Instance(Intersectable*, Matrix4f*);
   ~Instance();
 
-  HitRecord* intersect(const Ray& ray) const;
+  virtual HitRecord* intersect(const Ray& ray) const;
 
-  const BoundingBox& getBoundingBox() const;
+  virtual const BoundingBox& getBoundingBox() const;
 };
 #endif
