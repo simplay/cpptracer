@@ -3,13 +3,13 @@
 
 #include "hitRecord.h"
 #include "intersectables/accelerator/boundingBox.h"
-#include "intersectables/intersectable.h"
+#include "intersectables/csg/csgSolid.h"
 #include "math/vector3f.h"
 #include "ray.h"
 
 class Material;
 
-class Sphere : public Intersectable {
+class Sphere : public CsgSolid {
  private:
   Material* material;
   const Vector3f center;
@@ -28,10 +28,13 @@ class Sphere : public Intersectable {
     return BoundingBox(bottomLeft, topRight);
   }
 
+  HitRecord* buildHitRecord(float t, const Ray& ray) const;
+
  public:
   Sphere(Material*, const Vector3f&, float);
   virtual HitRecord* intersect(const Ray& ray) const;
 
   const BoundingBox& getBoundingBox() const { return aabb; }
+  virtual std::vector<IntervalBoundary> getIntervalBoundaries(const Ray& ray) const;
 };
 #endif

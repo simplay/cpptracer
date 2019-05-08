@@ -2,6 +2,28 @@
 #include <cmath>
 #include <iostream>
 
+HitRecord* Sphere::buildHitRecord(float t, const Ray& ray) const {
+  auto hitPosition = ray.pointAt(t);
+  auto hitNormal = new Vector3f(*hitPosition);
+  hitNormal->sub(center);
+  hitNormal->scale(1.0 / radius);
+
+  auto wIn = Vector3f().incidentDirection(*ray.direction);
+
+  // clang-format off
+    return new HitRecord(
+      t,
+      hitPosition,
+      hitNormal,
+      new Vector3f(),
+      wIn,
+      material,
+      this,
+      ray.i,
+      ray.j
+    );
+	}
+
 Sphere::Sphere(Material* material, const Vector3f& center, float radius)
     : material(material), center(center), radius(radius), aabb(computeAABB(center, radius)) {}
 
@@ -77,25 +99,44 @@ HitRecord* Sphere::intersect(const Ray& ray) const {
       }
     }
 
-    auto hitPosition = ray.pointAt(t);
-    auto hitNormal = new Vector3f(*hitPosition);
-    hitNormal->sub(center);
-    hitNormal->scale(1.0 / radius);
-
-    auto wIn = Vector3f().incidentDirection(*ray.direction);
-
-    // clang-format off
-    return new HitRecord(
-      t,
-      hitPosition,
-      hitNormal,
-      new Vector3f(),
-      wIn,
-      material,
-      this,
-      ray.i,
-      ray.j
-    );
-    // clang-format on
+    return buildHitRecord(t, ray);
   }
+}
+
+std::vector<CsgSolid::IntervalBoundary> Sphere::getIntervalBoundaries(const Ray& ray) const {
+  std::vector<IntervalBoundary> boundaries(100);
+
+  Vector3f oc(*ray.origin);
+  oc.sub(center);
+
+  Vector3f rd(*ray.direction);
+  float a = rd.dot();
+  float b = 2.0 * rd.dot(oc);
+  float c = oc.dot() - radius * radius;
+  float discriminant = b * b - 4 * a * c;
+
+  if (discriminant < 0) {
+    return boundaries;
+  }
+
+  float t1 = (-b + sqrt(discriminant)) / (2.0 * a);
+  float t2 = (-b - sqrt(discriminant)) / (2.0 * a);
+
+  auto hit1 = buildHitRecord(t1, ray);
+  IntervalBoundary b1;
+  b1.t = hit1->t;
+  b1.type = findBoundaryType(hit1, ray);
+  b1.hitRecord = hit1;
+
+
+  auto hit2 = buildHitRecord(t2, ray);
+  IntervalBoundary b2;
+  b2.t = hit2->t;
+  b2.type = findBoundaryType(hit2, ray);
+  b2.hitRecord = hit2;
+
+  boundaries.push_back(b1);
+  boundaries.push_back(b2);
+
+  return boundaries;
 }

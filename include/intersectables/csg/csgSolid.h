@@ -45,11 +45,11 @@ class CsgSolid : public Intersectable {
    * Compute the boundaries of the intersection intervals of this CsgSolid
    * with a ray.
    *
-   * @param r the ray that intersects the CsgSolid
+   * @param ray the ray that intersects the CsgSolid
    * @return boundaries of intersection intervals
    */
-  virtual std::vector<IntervalBoundary> getIntervalBoundaries(Ray r) const = 0;
+  virtual std::vector<IntervalBoundary> getIntervalBoundaries(const Ray& ray) const = 0;
 
-  BoundaryType findBoundaryType(const HitRecord& hit, const Ray& ray);
+  BoundaryType findBoundaryType(const HitRecord& hit, const Ray& ray) const;
 };
 #endif
