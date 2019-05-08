@@ -8,11 +8,11 @@
 
 ## Features
 
- + Recursive raytracing (Whitted Integrator)
- + Can render [Constructive solid geometries](http://en.wikipedia.org/wiki/Constructive_solid_geometry)
- + Can process triangle meshes through the [.obj](https://en.wikipedia.org/wiki/Wavefront_.obj_file) format
- + Multithreaded
- + Supports reflective and refractive materials
++ Recursive raytracing (Whitted Integrator)
++ Can render [Constructive solid geometries](http://en.wikipedia.org/wiki/Constructive_solid_geometry)
++ Can process triangle meshes through the [.obj](https://en.wikipedia.org/wiki/Wavefront_.obj_file) format
++ Multithreaded
++ Supports reflective and refractive materials
 
 ## Dependencies
 
