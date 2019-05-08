@@ -3,7 +3,9 @@
 #include "integrators/whittedIntegrator.h"
 #include "intersectables/geometries/plane.h"
 #include "intersectables/geometries/sphere.h"
+#include "intersectables/geometries/cube.h"
 #include "intersectables/csg/csgNode.h"
+#include "intersectables/csg/csgInstance.h"
 #include "materials/blinn.h"
 #include "materials/diffuse.h"
 
@@ -35,9 +37,29 @@ void CsgScene::buildIntersectables() {
 
   auto s1 = new Sphere(material, Vector3f(0.0, -0.4, 0.0), 0.5);
   auto s2 = new Sphere(material, Vector3f(0.0, 0.4, 0.0), 0.5);
+  auto s3 = new Sphere(material, Vector3f(0.0, 0.0, 0.0), 0.25);
 
-  auto node = new CsgNode(s1, s2, SetOperation::INTERSECTION);
-  intersectableList->put(node);
+
+  auto n = new CsgNode(s1, s2, SetOperation::INTERSECTION);
+  auto node = new CsgNode(s3, n, SetOperation::INTERSECTION);
+
+  // clang-format off
+  Matrix4f* transform = new Matrix4f(
+    3.0, 0.0, 0.0, 0.0,
+    0.0, 3.0, 0.0, 0.0,
+    0.0, 0.0, 3.0, 0.0,
+    0.0, 0.0, 0.0, 1.0
+  );
+  // clang-format on
+
+  Instance* instance = new CsgInstance(node, transform);
+  intersectableList->put(instance);
+
+  // auto c1 = new Cube(material);
+  // auto c2 = new Cube(material);
+  // auto node2 = new CsgNode(s1, c2, SetOperation::INTERSECTION);
+  // intersectableList->put(node2);
+  // intersectableList->put(c1);
 
   intersectableList->put(new Plane(diffuse, Vector3f(1.0, 0.0, 0.0), 1));
   intersectableList->put(new Plane(diffuse, Vector3f(-1.0, 0.0, 0.0), 1));
