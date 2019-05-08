@@ -22,7 +22,8 @@ HitRecord* Sphere::buildHitRecord(float t, const Ray& ray) const {
       ray.i,
       ray.j
     );
-	}
+  // clang-format on
+}
 
 Sphere::Sphere(Material* material, const Vector3f& center, float radius)
     : material(material), center(center), radius(radius), aabb(computeAABB(center, radius)) {}
@@ -127,7 +128,6 @@ std::vector<CsgSolid::IntervalBoundary> Sphere::getIntervalBoundaries(const Ray&
   b1.t = hit1->t;
   b1.type = findBoundaryType(hit1, ray);
   b1.hitRecord = hit1;
-
 
   auto hit2 = buildHitRecord(t2, ray);
   IntervalBoundary b2;
