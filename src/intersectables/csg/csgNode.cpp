@@ -62,5 +62,5 @@ std::vector<CsgNode::IntervalBoundary> CsgNode::getIntervalBoundaries(Ray ray) c
     prev.type = interval.type;
   }
 
-  return combined;
+  return finalCombination;
 }
