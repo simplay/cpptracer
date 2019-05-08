@@ -10,6 +10,7 @@
 #include "reflectionTest.h"
 #include "refractiveScene.h"
 #include "renderer.h"
+#include "scenes/csgScene.h"
 #include "triangleTest.h"
 
 cxxopts::ParseResult parse(int argc, char* argv[]) {
@@ -90,6 +91,9 @@ int main(int argc, char *argv[]) {
         break;
       case 7:
         scene = new MeshTest(width, height);
+        break;
+      case 8:
+        scene = new CsgScene(width, height);
         break;
       default:
         scene = new CameraTest(width, height);
