@@ -17,5 +17,8 @@ class CsgNode : public CsgSolid {
 
  public:
   CsgNode(const CsgSolid* left, const CsgSolid* right, SetOperation operation);
+
+  std::vector<IntervalBoundary> getIntervalBoundaries(Ray r) const;
+
 };
 #endif
