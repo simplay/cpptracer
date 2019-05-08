@@ -5,7 +5,7 @@
 CsgNode::CsgNode(const CsgSolid* left, const CsgSolid* right, SetOperation operation)
     : left(left), right(right), operation(operation) {}
 
-std::vector<CsgNode::IntervalBoundary> CsgNode::getIntervalBoundaries(Ray ray) const {
+std::vector<CsgNode::IntervalBoundary> CsgNode::getIntervalBoundaries(const Ray& ray) const {
   std::vector<CsgNode::IntervalBoundary> combined(100);
 
   auto leftIntervals = left->getIntervalBoundaries(ray);

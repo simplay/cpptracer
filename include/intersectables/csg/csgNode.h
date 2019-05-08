@@ -3,12 +3,13 @@
 
 #include "intersectables/csg/csgSolid.h"
 
+enum SetOperation { UNION = 0, INTERSECTION = 1, DIFFERENCE = 2 };
+
 /**
  * A CsgNode combines two CsgSolid instances by a binary set operation: Either
  * by a union-, intersection or difference- operation.
  */
 class CsgNode : public CsgSolid {
-  enum SetOperation { UNION = 0, INTERSECTION = 1, DIFFERENCE = 2 };
 
  private:
   const CsgSolid* left;
@@ -18,7 +19,7 @@ class CsgNode : public CsgSolid {
  public:
   CsgNode(const CsgSolid* left, const CsgSolid* right, SetOperation operation);
 
-  std::vector<IntervalBoundary> getIntervalBoundaries(Ray r) const;
+  std::vector<IntervalBoundary> getIntervalBoundaries(const Ray& ray) const;
 
 };
 #endif
