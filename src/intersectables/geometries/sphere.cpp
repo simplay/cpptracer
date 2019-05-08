@@ -105,7 +105,7 @@ HitRecord* Sphere::intersect(const Ray& ray) const {
 }
 
 std::vector<CsgSolid::IntervalBoundary> Sphere::getIntervalBoundaries(const Ray& ray) const {
-  std::vector<IntervalBoundary> boundaries(100);
+  std::vector<IntervalBoundary> boundaries;
 
   Vector3f oc(*ray.origin);
   oc.sub(center);

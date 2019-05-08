@@ -15,7 +15,7 @@
  */
 class CsgSolid : public Intersectable {
  public:
-  enum BoundaryType { START = 0, END = 1 };
+  enum BoundaryType { UNKOWN = 0, START = 1, END = 2 };
   enum BelongsTo { LEFT = 0, RIGHT = 1 };
 
   /**
@@ -25,7 +25,7 @@ class CsgSolid : public Intersectable {
     // t value of intersection
     float t;
     // Type of boundary of intersection interval (start or end)
-    BoundaryType type;
+    BoundaryType type = BoundaryType::UNKOWN;
 
     // The hit record of the intersection
     HitRecord* hitRecord;
