@@ -15,3 +15,11 @@ HitRecord* CsgSolid::intersect(const Ray& ray) const {
 }
 
 const BoundingBox& CsgSolid::getBoundingBox() const { return aabb; }
+
+CsgSolid::BoundaryType CsgSolid::findBoundaryType(const HitRecord& hit, const Ray& ray) {
+  if (hit.normal->dot(*ray.direction) < 0.0) {
+    return BoundaryType::START;
+  } else {
+    return BoundaryType::END;
+  }
+}
