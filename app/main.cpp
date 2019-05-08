@@ -1,17 +1,17 @@
 #include <iostream>
 #include <thread>
-#include "blinnTest.h"
-#include "cameraTest.h"
 #include "cxxopts.hpp"
 #include "exampleConfig.h"
-#include "explosionTest.h"
 #include "logger.h"
-#include "meshTest.h"
-#include "reflectionTest.h"
-#include "refractiveScene.h"
 #include "renderer.h"
+#include "scenes/blinnTest.h"
+#include "scenes/cameraTest.h"
 #include "scenes/csgScene.h"
-#include "triangleTest.h"
+#include "scenes/explosionTest.h"
+#include "scenes/meshTest.h"
+#include "scenes/reflectionTest.h"
+#include "scenes/refractiveScene.h"
+#include "scenes/triangleTest.h"
 
 cxxopts::ParseResult parse(int argc, char* argv[]) {
   // clang-format off
