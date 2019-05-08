@@ -56,3 +56,38 @@ HitRecord* Plane::intersect(const Ray& ray) const {
   );
   // clang-format on
 }
+
+std::vector<CsgSolid::IntervalBoundary> Plane::getIntervalBoundaries(const Ray& ray) const {
+  std::vector<IntervalBoundary> boundaries;
+
+  IntervalBoundary b1, b2;
+  auto hit = intersect(ray);
+
+  if (hit->isValid()) {
+    b1.hitRecord = hit;
+    b1.t = hit->t;
+
+    // Determine if ray entered or left the half-space defined by the plane.
+    if (normal.dot(*ray.direction) < 0.0) {
+      b1.type = BoundaryType::START;
+      b2.type = BoundaryType::END;
+
+      // If the t value of the START boundary was positive, so is
+      // the t value of the END boundary
+      b2.t = (hit->t > 0.0) ? std::numeric_limits<float>::max() : std::numeric_limits<float>::min();
+
+    } else {
+      b1.type = BoundaryType::END;
+      b2.type = BoundaryType::START;
+
+      // If the t value of the END boundary was positive, then
+      // the t value of the START boundary is negative
+      b2.t = (hit->t > 0.0) ? std::numeric_limits<float>::min() : std::numeric_limits<float>::max();
+    }
+
+    boundaries.push_back(b1);
+    boundaries.push_back(b2);
+  }
+
+  return boundaries;
+}
