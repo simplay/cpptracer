@@ -23,7 +23,7 @@ class Material;
  * many similar intersectable instances
  */
 class Instance : public Intersectable {
- protected:
+ private:
   // A reference to an intersectable, e.g. a sphere or a plane.
   Intersectable* intersectable;
 
