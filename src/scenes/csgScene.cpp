@@ -1,11 +1,11 @@
 #include "scenes/csgScene.h"
 #include "integrators/debugIntegrator.h"
 #include "integrators/whittedIntegrator.h"
+#include "intersectables/csg/csgInstance.h"
+#include "intersectables/csg/csgNode.h"
+#include "intersectables/geometries/cube.h"
 #include "intersectables/geometries/plane.h"
 #include "intersectables/geometries/sphere.h"
-#include "intersectables/geometries/cube.h"
-#include "intersectables/csg/csgNode.h"
-#include "intersectables/csg/csgInstance.h"
 #include "materials/blinn.h"
 #include "materials/diffuse.h"
 
@@ -25,8 +25,7 @@ void CsgScene::buildCamera() {
 
 void CsgScene::buildLights() {
   std::vector<PointLight*>* lightList = new std::vector<PointLight*>;
-  lightList->push_back(new PointLight(Vector3f(0.5, 0.5, 2.0), new Spectrum(1.0)));
-  lightList->push_back(new PointLight(Vector3f(-0.75, 0.75, 2.0), new Spectrum(1.0, 0.0, 10.0)));
+  lightList->push_back(new PointLight(Vector3f(0.5, 0, 2.0), new Spectrum(2)));
   this->lightList = lightList;
 }
 
@@ -39,27 +38,19 @@ void CsgScene::buildIntersectables() {
   auto s2 = new Sphere(material, Vector3f(0.0, 0.4, 0.0), 0.5);
   auto s3 = new Sphere(material, Vector3f(0.0, 0.0, 0.0), 0.25);
 
-
   auto n = new CsgNode(s1, s2, SetOperation::INTERSECTION);
   auto node = new CsgNode(s3, n, SetOperation::INTERSECTION);
 
   // clang-format off
   Matrix4f* transform = new Matrix4f(
-    3.0, 0.0, 0.0, 0.0,
-    0.0, 3.0, 0.0, 0.0,
-    0.0, 0.0, 3.0, 0.0,
+    2.5, 0.0, 0.0, 0.0,
+    0.0, 2.5, 0.0, 0.0,
+    0.0, 0.0, 2.5, 0.5,
     0.0, 0.0, 0.0, 1.0
   );
   // clang-format on
-
-  Instance* instance = new CsgInstance(node, transform);
+  auto instance = new CsgInstance(node, transform);
   intersectableList->put(instance);
-
-  // auto c1 = new Cube(material);
-  // auto c2 = new Cube(material);
-  // auto node2 = new CsgNode(s1, c2, SetOperation::INTERSECTION);
-  // intersectableList->put(node2);
-  // intersectableList->put(c1);
 
   intersectableList->put(new Plane(diffuse, Vector3f(1.0, 0.0, 0.0), 1));
   intersectableList->put(new Plane(diffuse, Vector3f(-1.0, 0.0, 0.0), 1));
