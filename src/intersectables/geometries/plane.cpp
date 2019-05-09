@@ -1,6 +1,5 @@
 #include "intersectables/geometries/plane.h"
 #include <cmath>
-#include <iostream>
 
 Plane::Plane(Material* material, const Vector3f& normal, float distance)
     : material(material), normal(normal), distance(distance), aabb(initBoundingBox()) {}
@@ -34,7 +33,7 @@ HitRecord* Plane::intersect(const Ray& ray) const {
 
   // assumption: point is zero and then we shift by distance
   float t = -(ray.origin->dot(normal) + distance) / cosTheta;
-  if (t < 0) {
+  if (t <= 0) {
     return new HitRecord();
   }
 
@@ -74,7 +73,7 @@ std::vector<CsgSolid::IntervalBoundary> Plane::getIntervalBoundaries(const Ray& 
 
       // If the t value of the START boundary was positive, so is the t value
       // of the END boundary
-      b2.t = (hit->t > 0.0) ? std::numeric_limits<float>::max() : std::numeric_limits<float>::min();
+      b2.t = (hit->t > 0.0) ? std::numeric_limits<float>::max() : -std::numeric_limits<float>::max();
 
     } else {
       b1.type = BoundaryType::END;
@@ -82,7 +81,7 @@ std::vector<CsgSolid::IntervalBoundary> Plane::getIntervalBoundaries(const Ray& 
 
       // If the t value of the END boundary was positive, then the t value of
       // the START boundary is negative
-      b2.t = (hit->t > 0.0) ? std::numeric_limits<float>::min() : std::numeric_limits<float>::max();
+      b2.t = (hit->t > 0.0) ? -std::numeric_limits<float>::max() : std::numeric_limits<float>::max();
     }
 
     boundaries.push_back(b1);
