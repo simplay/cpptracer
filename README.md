@@ -48,6 +48,11 @@ Inside `build/`, execute `./unit_tests.x`
 
 Inside `build/`, execute `./benchmarks.x`
 
+## Generate Documentation
+
+Inside `build/`, execute `make doc`
+
+
 ## Contributing
 
 1. Fork this repository
