@@ -25,13 +25,13 @@ class Cube : public CsgSolid {
                        Vector3f(std::numeric_limits<float>::max()));
   }
 
-  CsgNode* computeRootNode(const Material*) {
-    auto right = new Plane(material, Vector3f(1.f, 0.f, 0.f), 1.0);
-    auto left = new Plane(material, Vector3f(-1.f, 0.f, 0.f), 1.0);
-    auto top = new Plane(material, Vector3f(0.f, 1.f, 0.f), 1.0);
-    auto bottom = new Plane(material, Vector3f(0.f, -1.f, 0.f), 1.0);
-    auto front = new Plane(material, Vector3f(0.f, 0.f, 1.f), 1.0);
-    auto back = new Plane(material, Vector3f(0.f, 0.f, -1.f), 1.0);
+  CsgNode* computeRootNode(Material*) {
+    auto right = new Plane(material, Vector3f(1.0, 0.0, 0.0), 1.0);
+    auto left = new Plane(material, Vector3f(-1.0, 0.0, 0.0), 1.0);
+    auto top = new Plane(material, Vector3f(0.0, 1.0, 0.0), 1.0);
+    auto bottom = new Plane(material, Vector3f(0.0, -1.0, 0.0), 1.0);
+    auto front = new Plane(material, Vector3f(0.0, 0.0, 1.0), 1.0);
+    auto back = new Plane(material, Vector3f(0.0, 0.0, -1.0), 1.0);
 
     sides->put(right);
     sides->put(left);

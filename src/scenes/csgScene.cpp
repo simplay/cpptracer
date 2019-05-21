@@ -12,8 +12,12 @@
 CsgScene::CsgScene(int width, int height) : Scene(width, height) {}
 
 void CsgScene::buildCamera() {
-  Vector3f* eye = new Vector3f(0.0, 0.0, 3.0);
+  Vector3f* eye = new Vector3f(0.0, 0.0, 2.5);
+
+  // positive x => bottom negative x => top
+  // positive y => right  negative y => left
   Vector3f* lookAt = new Vector3f(0.0, 0.0, 0.0);
+
   Vector3f* up = new Vector3f(0.0, 1.0, 0.0);
   float fov = 60.0;
 
@@ -52,11 +56,11 @@ void CsgScene::buildIntersectables() {
   auto instance = new CsgInstance(node, transform);
   intersectableList->put(instance);
 
-  intersectableList->put(new Plane(diffuse, Vector3f(1.0, 0.0, 0.0), 1));
-  intersectableList->put(new Plane(diffuse, Vector3f(-1.0, 0.0, 0.0), 1));
-  intersectableList->put(new Plane(diffuse, Vector3f(0.0, 1.0, 0.0), 1));
-  intersectableList->put(new Plane(diffuse, Vector3f(0.0, -1.0, 0.0), 1));
-  intersectableList->put(new Plane(diffuse, Vector3f(0.0, 0.0, 1.0), 1));
+  intersectableList->put(new Plane(diffuse, Vector3f(1.0, 0.0, 0.0), 1));   // top
+  intersectableList->put(new Plane(diffuse, Vector3f(-1.0, 0.0, 0.0), 1));  // bottom
+  intersectableList->put(new Plane(diffuse, Vector3f(0.0, 1.0, 0.0), 1));   // left
+  intersectableList->put(new Plane(diffuse, Vector3f(0.0, -1.0, 0.0), 1));  // right
+  intersectableList->put(new Plane(diffuse, Vector3f(0.0, 0.0, 1.0), 1));   // back
 
   this->intersectableList = intersectableList;
 }
