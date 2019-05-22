@@ -37,19 +37,23 @@ Plane::Plane(Material* material, const Vector3f& normal, float distance)
  * which is the definition of the intersection parameter t.
  *
  * However, we can further simplify the formula of t when assuming[1]
- * and that p0 is defined as p0 := m * n, where m denotes a scalar.
+ * and that p0 is defined as p0 := m * (0 - n), where m denotes a scalar and 0
+ * the origin of the work coordinate system. Notice that (0 - n) is the is a
+ * outwards pointing normal.
  *
  * This is useful when we want to define a plane by a distance value m and a
  * normal n. By using this assumption, we can simplify the expression
  *
- * dot(p0 - o, n) = dot(m*n - o, n)
- *                = m * dot(n, n) - dot(o, n)
- *                = m * 1 - dot(o, n)
- *                = m - dot(o, n)
+ * dot(p0 - o, n) = dot(m*(0 - n) - o, n)
+ *                = m * dot(-n, n) - dot(o, n)
+ *                = m * (-1) * dot(n, n) - dot(o, n)
+ *                = m * (-1) * (1) - dot(o, n)
+ *                = -m - dot(o, n)
+ *                = -(m + dot(o, n))
  *
  * and hence derive
  *
- * t = (m - dot(o, n)) / dot(d, n)
+ * t = -(m + dot(o, n)) / dot(d, n)
  *
  *
  * Remarks:
@@ -66,7 +70,7 @@ HitRecord* Plane::intersect(const Ray& ray) const {
   }
 
   // assumption: point is zero and then we shift by distance
-  float t = -(ray.origin->dot(normal) + distance) / cosTheta;
+  float t = -(distance + ray.origin->dot(normal)) / cosTheta;
   if (t <= 0) {
     return new HitRecord();
   }
