@@ -37,16 +37,18 @@ Plane::Plane(Material* material, const Vector3f& normal, float distance)
  * which is the definition of the intersection parameter t.
  *
  * However, we can further simplify the formula of t when assuming[1]
+ * and that p0 is defined as p0 := m * n, where m denotes a scalar.
  *
- * that p0 is defined as p0 = m * n, where m denotes a scalar.
  * This is useful when we want to define a plane by a distance value m and a
- * normal n
+ * normal n. By using this assumption, we can simplify the expression
  *
- * then dot(p0 - o, n) = dot(m*n - o, n)
- *                     = m * dot(n, n) - dot(o, n)
- *                     = m * 1 - dot(o, n)
- *                     = m - dot(o, n)
- * and hence
+ * dot(p0 - o, n) = dot(m*n - o, n)
+ *                = m * dot(n, n) - dot(o, n)
+ *                = m * 1 - dot(o, n)
+ *                = m - dot(o, n)
+ *
+ * and hence derive
+ *
  * t = (m - dot(o, n)) / dot(d, n)
  *
  *
