@@ -16,7 +16,7 @@ Plane::Plane(Material* material, const Vector3f& normal, float distance)
  * This the implicit representation of a plane.
  *
  * A point on ray is given by the parametrization
- * r(t) = o + t*d [1] where
+ * r(t) = o + t*d where
  * o := (ox, oy, oz) denotes the origin of the ray and
  * d := (dx, dy, dz) denotes the direction of the ray and
  * t is float-valued parameter
@@ -36,7 +36,7 @@ Plane::Plane(Material* material, const Vector3f& normal, float distance)
  *
  * which is the definition of the intersection parameter t.
  *
- * However, we can further simplify the formula of t when assuming[1]
+ * However, we can further simplify the formula of t when assuming [1]
  * and that p0 is defined as p0 := m * (0 - n), where m denotes a scalar and 0
  * the origin of the work coordinate system. Notice that (0 - n) is the is a
  * outwards pointing normal.
@@ -54,7 +54,6 @@ Plane::Plane(Material* material, const Vector3f& normal, float distance)
  * and hence derive
  *
  * t = -(m + dot(o, n)) / dot(d, n)
- *
  *
  * Remarks:
  *
