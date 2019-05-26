@@ -39,7 +39,7 @@ Plane::Plane(Material* material, const Vector3f& normal, float distance)
  * However, we can further simplify the formula of t when assuming [1]
  * and that p0 is defined as p0 := m * (0 - n), where m denotes a scalar and 0
  * the origin of the work coordinate system. Notice that (0 - n) is the is a
- * outwards pointing normal.
+ * inwards pointing normal (the normal that points to the viewer)
  *
  * This is useful when we want to define a plane by a distance value m and a
  * normal n. By using this assumption, we can simplify the expression
