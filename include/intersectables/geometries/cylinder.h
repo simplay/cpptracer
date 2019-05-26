@@ -9,6 +9,9 @@
 
 class Material;
 
+/**
+ * Infinite cylinder along z-axis with radius 1.
+ **/
 class Cylinder : public CsgSolid {
  private:
   Material* material;
