@@ -1,6 +1,6 @@
 #include "intersectables/geometries/cylinder.h"
-#include <cmath>
 #include <iostream>
+#include <math/quadraticSolver.h>
 
 HitRecord* Cylinder::buildHitRecord(float t, const Ray& ray) const {
   auto hitPosition = ray.pointAt(t);
@@ -36,13 +36,13 @@ HitRecord* Cylinder::intersect(const Ray& ray) const {
   float b = 2.0 * rex * rdx + 2.0 * rey * rdy;
   float c = rex * rex + rey * rey - 1;
 
-  float discriminant = b * b - 4 * a * c;
+  auto zeros = QuadraticSolver(a, b, c).solve();
 
-  if (discriminant < 0) {
+  if (zeros.size() < 2) {
     return new HitRecord();
   } else {
-    float t1 = (-b + sqrt(discriminant)) / (2.0 * a);
-    float t2 = (-b - sqrt(discriminant)) / (2.0 * a);
+    float t1 = zeros.at(0);
+    float t2 = zeros.at(1);
 
     float t = std::min(t1, t2);
     if (t < 0) {
@@ -66,16 +66,16 @@ std::vector<CsgSolid::IntervalBoundary> Cylinder::getIntervalBoundaries(const Ra
 
   float a = rdx * rdx + rdy * rdy;
   float b = 2.0 * rex * rdx + 2.0 * rey * rdy;
-  float c = rex * rex + rey * rey - 1;
+  float c = rex * rex + rey * rey - 1.0;
 
-  float discriminant = b * b - 4 * a * c;
+  auto zeros = QuadraticSolver(a, b, c).solve();
 
-  if (discriminant < 0) {
+  if (zeros.size() < 2) {
     return boundaries;
   }
 
-  float t1 = (-b + sqrt(discriminant)) / (2.0 * a);
-  float t2 = (-b - sqrt(discriminant)) / (2.0 * a);
+  float t1 = zeros.at(0);
+  float t2 = zeros.at(1);
 
   auto hit1 = buildHitRecord(t1, ray);
   IntervalBoundary b1;

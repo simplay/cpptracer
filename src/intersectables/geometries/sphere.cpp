@@ -1,6 +1,6 @@
 #include "intersectables/geometries/sphere.h"
-#include <cmath>
 #include <iostream>
+#include <math/quadraticSolver.h>
 
 HitRecord* Sphere::buildHitRecord(float t, const Ray& ray) const {
   auto hitPosition = ray.pointAt(t);
@@ -84,13 +84,14 @@ HitRecord* Sphere::intersect(const Ray& ray) const {
   float a = rd.dot();
   float b = 2.0 * rd.dot(oc);
   float c = oc.dot() - radius * radius;
-  float discriminant = b * b - 4 * a * c;
 
-  if (discriminant < 0) {
+  auto zeros = QuadraticSolver(a, b, c).solve();
+
+  if (zeros.size() < 2) {
     return new HitRecord();
   } else {
-    float t1 = (-b + sqrt(discriminant)) / (2.0 * a);
-    float t2 = (-b - sqrt(discriminant)) / (2.0 * a);
+    float t1 = zeros.at(0);
+    float t2 = zeros.at(1);
 
     float t = std::min(t1, t2);
     if (t < 0) {
@@ -114,14 +115,15 @@ std::vector<CsgSolid::IntervalBoundary> Sphere::getIntervalBoundaries(const Ray&
   float a = rd.dot();
   float b = 2.0 * rd.dot(oc);
   float c = oc.dot() - radius * radius;
-  float discriminant = b * b - 4 * a * c;
 
-  if (discriminant < 0) {
+  auto zeros = QuadraticSolver(a, b, c).solve();
+
+  if (zeros.size() < 2) {
     return boundaries;
   }
 
-  float t1 = (-b + sqrt(discriminant)) / (2.0 * a);
-  float t2 = (-b - sqrt(discriminant)) / (2.0 * a);
+  float t1 = zeros.at(0);
+  float t2 = zeros.at(1);
 
   auto hit1 = buildHitRecord(t1, ray);
   IntervalBoundary b1;

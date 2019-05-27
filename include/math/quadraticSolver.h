@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "ray.h"
 
 /**
  * Float valued point with 3 coordinates.
