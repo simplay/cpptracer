@@ -80,6 +80,37 @@ Matrix4f::Matrix4f(const Vector4f& v1, const Vector4f& v2, const Vector4f& v3, c
   }
 }
 
+Matrix4f* Matrix4f::mult(const Matrix4f& other) {
+  auto r00 = m00 * other.m00 + m01 * other.m10 + m02 * other.m20 + m03 * other.m30;
+  auto r01 = m00 * other.m01 + m01 * other.m11 + m02 * other.m21 + m03 * other.m31;
+  auto r02 = m00 * other.m02 + m01 * other.m12 + m02 * other.m22 + m03 * other.m32;
+  auto r03 = m00 * other.m03 + m01 * other.m13 + m02 * other.m23 + m03 * other.m33;
+
+  auto r10 = m10 * other.m00 + m11 * other.m10 + m12 * other.m20 + m13 * other.m30;
+  auto r11 = m10 * other.m01 + m11 * other.m11 + m12 * other.m21 + m13 * other.m31;
+  auto r12 = m10 * other.m02 + m11 * other.m12 + m12 * other.m22 + m13 * other.m32;
+  auto r13 = m10 * other.m03 + m11 * other.m13 + m12 * other.m23 + m13 * other.m33;
+
+  auto r20 = m20 * other.m00 + m21 * other.m10 + m22 * other.m20 + m23 * other.m30;
+  auto r21 = m20 * other.m01 + m21 * other.m11 + m22 * other.m21 + m23 * other.m31;
+  auto r22 = m20 * other.m02 + m21 * other.m12 + m22 * other.m22 + m23 * other.m32;
+  auto r23 = m20 * other.m03 + m21 * other.m13 + m22 * other.m23 + m23 * other.m33;
+
+  auto r30 = m30 * other.m00 + m31 * other.m10 + m32 * other.m20 + m33 * other.m30;
+  auto r31 = m30 * other.m01 + m31 * other.m11 + m32 * other.m21 + m33 * other.m31;
+  auto r32 = m30 * other.m02 + m31 * other.m12 + m32 * other.m22 + m33 * other.m32;
+  auto r33 = m30 * other.m03 + m31 * other.m13 + m32 * other.m23 + m33 * other.m33;
+
+  // clang-format off
+  return new Matrix4f(
+    r00, r01, r02, r03,
+    r10, r11, r12, r13,
+    r20, r21, r22, r23,
+    r30, r31, r32, r33
+  );
+  // clang-format on
+}
+
 Vector4f* Matrix4f::mult(const Vector4f& other) {
   Vector4f v1(m00, m01, m02, m03);
   Vector4f v2(m10, m11, m12, m13);

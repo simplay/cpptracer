@@ -42,6 +42,48 @@ TEST(Matrix4f, mult) {
   delete r;
 }
 
+TEST(Matrix4f, matrixMult) {
+  // clang-format off
+  Matrix4f A(
+    5, 2, 6, 1,
+    0, 6, 2, 0,
+    3, 8, 1, 4,
+    1, 8, 5, 6
+  );
+
+  Matrix4f B(
+    7, 5, 8, 0,
+    1, 8, 2, 6,
+    9, 4, 3, 8,
+    5, 3, 7, 9
+  );
+  // clang-format on
+
+  auto mat = A.mult(B);
+
+  ASSERT_EQ(96, mat->m00);
+  ASSERT_EQ(68, mat->m01);
+  ASSERT_EQ(69, mat->m02);
+  ASSERT_EQ(69, mat->m03);
+
+  ASSERT_EQ(24, mat->m10);
+  ASSERT_EQ(56, mat->m11);
+  ASSERT_EQ(18, mat->m12);
+  ASSERT_EQ(52, mat->m13);
+
+  ASSERT_EQ(58, mat->m20);
+  ASSERT_EQ(95, mat->m21);
+  ASSERT_EQ(71, mat->m22);
+  ASSERT_EQ(92, mat->m23);
+
+  ASSERT_EQ(90, mat->m30);
+  ASSERT_EQ(107, mat->m31);
+  ASSERT_EQ(81, mat->m32);
+  ASSERT_EQ(142, mat->m33);
+
+  delete mat;
+}
+
 TEST(Matrix4f, rotX) {
   float v = 1.0 / sqrt(2.0);
   float angle = 3.1415 / 4.0;
