@@ -7,6 +7,7 @@
 #include "refractiveScene.h"
 #include "renderer.h"
 #include "triangleTest.h"
+#include "csgScene.h"
 
 namespace {
 const int WIDTH = 40;
@@ -55,6 +56,22 @@ TEST(Renderer, RefractiveTest) {
 
 TEST(Renderer, MeshTest) {
   auto scene = new MeshTest(WIDTH, HEIGHT);
+  scene->setup();
+
+  Renderer renderer(scene, false);
+  renderer.render(1, SPP);
+}
+
+TEST(Renderer, TriangleTest) {
+  auto scene = new TriangleTest(WIDTH, HEIGHT);
+  scene->setup();
+
+  Renderer renderer(scene, false);
+  renderer.render(1, SPP);
+}
+
+TEST(Renderer, CsgScene) {
+  auto scene = new CsgScene(WIDTH, HEIGHT);
   scene->setup();
 
   Renderer renderer(scene, false);
