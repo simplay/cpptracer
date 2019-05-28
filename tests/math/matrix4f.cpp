@@ -42,6 +42,96 @@ TEST(Matrix4f, mult) {
   delete r;
 }
 
+TEST(Matrix4f, rotX) {
+  float v = 1.0 / sqrt(2.0);
+  float angle = 3.1415 / 4.0;
+  auto m = Matrix4f::rotX(angle);
+
+  float eps = 1e-4;
+  // computed via octave
+  ASSERT_NEAR(1.0, m->m00, eps);
+  ASSERT_NEAR(0.0, m->m01, eps);
+  ASSERT_NEAR(0.0, m->m02, eps);
+  ASSERT_NEAR(0, m->m03, eps);
+
+  ASSERT_NEAR(0., m->m10, eps);
+  ASSERT_NEAR(v, m->m11, eps);
+  ASSERT_NEAR(-v, m->m12, eps);
+  ASSERT_NEAR(0., m->m13, eps);
+
+  ASSERT_NEAR(0., m->m20, eps);
+  ASSERT_NEAR(v, m->m21, eps);
+  ASSERT_NEAR(v, m->m22, eps);
+  ASSERT_NEAR(0., m->m23, eps);
+
+  ASSERT_NEAR(0., m->m30, eps);
+  ASSERT_NEAR(0., m->m31, eps);
+  ASSERT_NEAR(0., m->m32, eps);
+  ASSERT_NEAR(1., m->m33, eps);
+
+  delete m;
+}
+
+TEST(Matrix4f, rotY) {
+  float v = 1.0 / sqrt(2.0);
+  float angle = 3.1415 / 4.0;
+  auto m = Matrix4f::rotY(angle);
+
+  float eps = 1e-4;
+  // computed via octave
+  ASSERT_NEAR(v, m->m00, eps);
+  ASSERT_NEAR(0.0, m->m01, eps);
+  ASSERT_NEAR(v, m->m02, eps);
+  ASSERT_NEAR(0, m->m03, eps);
+
+  ASSERT_NEAR(0., m->m10, eps);
+  ASSERT_NEAR(1, m->m11, eps);
+  ASSERT_NEAR(0, m->m12, eps);
+  ASSERT_NEAR(0., m->m13, eps);
+
+  ASSERT_NEAR(-v, m->m20, eps);
+  ASSERT_NEAR(0, m->m21, eps);
+  ASSERT_NEAR(v, m->m22, eps);
+  ASSERT_NEAR(0., m->m23, eps);
+
+  ASSERT_NEAR(0., m->m30, eps);
+  ASSERT_NEAR(0., m->m31, eps);
+  ASSERT_NEAR(0., m->m32, eps);
+  ASSERT_NEAR(1., m->m33, eps);
+
+  delete m;
+}
+
+TEST(Matrix4f, rotZ) {
+  float v = 1.0 / sqrt(2.0);
+  float angle = 3.1415 / 4.0;
+  auto m = Matrix4f::rotZ(angle);
+
+  float eps = 1e-4;
+  // computed via octave
+  ASSERT_NEAR(v, m->m00, eps);
+  ASSERT_NEAR(-v, m->m01, eps);
+  ASSERT_NEAR(0, m->m02, eps);
+  ASSERT_NEAR(0, m->m03, eps);
+
+  ASSERT_NEAR(v, m->m10, eps);
+  ASSERT_NEAR(v, m->m11, eps);
+  ASSERT_NEAR(0, m->m12, eps);
+  ASSERT_NEAR(0., m->m13, eps);
+
+  ASSERT_NEAR(0, m->m20, eps);
+  ASSERT_NEAR(0, m->m21, eps);
+  ASSERT_NEAR(1, m->m22, eps);
+  ASSERT_NEAR(0., m->m23, eps);
+
+  ASSERT_NEAR(0., m->m30, eps);
+  ASSERT_NEAR(0., m->m31, eps);
+  ASSERT_NEAR(0., m->m32, eps);
+  ASSERT_NEAR(1., m->m33, eps);
+
+  delete m;
+}
+
 TEST(Matrix4f, det) {
   Matrix4f mat(3, 2, -1, 4, 2, 1, 5, 7, 0, 5, 2, -6, -1, 2, 1, 0);
   ASSERT_EQ(-418, mat.det());
@@ -124,7 +214,7 @@ TEST(Matrix4f, transposed) {
 }
 
 TEST(Matrix4f, eye) {
-  auto m = Matrix4f().eye();
+  auto m = Matrix4f::eye();
 
   auto mat = m->transposed();
   ASSERT_EQ(1, mat->m00);
