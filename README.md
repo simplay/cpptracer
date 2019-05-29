@@ -52,7 +52,6 @@ Inside `build/`, execute `./benchmarks.x`
 
 Inside `build/`, execute `make doc`
 
-
 ## Contributing
 
 1. Fork this repository
