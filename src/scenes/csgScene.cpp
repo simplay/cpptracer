@@ -6,6 +6,7 @@
 #include "intersectables/geometries/cube.h"
 #include "intersectables/geometries/plane.h"
 #include "intersectables/geometries/sphere.h"
+#include "intersectables/geometries/cylinder.h"
 #include "materials/blinn.h"
 #include "materials/diffuse.h"
 
@@ -53,6 +54,7 @@ void CsgScene::buildIntersectables() {
     0.0, 0.0, 0.0, 1.0
   );
   // clang-format on
+
   auto instance = new CsgInstance(node, transform);
   intersectableList->put(instance);
 

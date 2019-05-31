@@ -16,10 +16,10 @@ class Cylinder : public CsgSolid {
  private:
   Material* material;
   const BoundingBox aabb;
+  float radius;
 
   BoundingBox computeAABB() {
     Vector3f center(0, 0, 0);
-    float radius = 1;
     auto bottomLeft = Vector3f(center);
     auto shift = Vector3f(-radius, -radius, -radius);
     bottomLeft.add(shift);
@@ -34,7 +34,8 @@ class Cylinder : public CsgSolid {
   HitRecord* buildHitRecord(float t, const Ray& ray) const;
 
  public:
-  Cylinder(Material*);
+  Cylinder(Material* material);
+  Cylinder(Material* material, float radius);
   virtual HitRecord* intersect(const Ray& ray) const;
 
   const BoundingBox& getBoundingBox() const { return aabb; }

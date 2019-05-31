@@ -1,6 +1,6 @@
 #include "intersectables/geometries/cylinder.h"
-#include <iostream>
 #include <math/quadraticSolver.h>
+#include <iostream>
 
 HitRecord* Cylinder::buildHitRecord(float t, const Ray& ray) const {
   auto hitPosition = ray.pointAt(t);
@@ -23,7 +23,9 @@ HitRecord* Cylinder::buildHitRecord(float t, const Ray& ray) const {
   // clang-format on
 }
 
-Cylinder::Cylinder(Material* material) : material(material), aabb(computeAABB()) {}
+Cylinder::Cylinder(Material* material) : material(material), aabb(computeAABB()), radius(1.0) {}
+Cylinder::Cylinder(Material* material, float radius)
+    : material(material), aabb(computeAABB()), radius(radius) {}
 
 HitRecord* Cylinder::intersect(const Ray& ray) const {
   auto rdx = ray.direction->x;
@@ -34,7 +36,7 @@ HitRecord* Cylinder::intersect(const Ray& ray) const {
 
   float a = rdx * rdx + rdy * rdy;
   float b = 2.0 * rex * rdx + 2.0 * rey * rdy;
-  float c = rex * rex + rey * rey - 1;
+  float c = rex * rex + rey * rey - radius;
 
   auto zeros = QuadraticSolver(a, b, c).solve();
 
