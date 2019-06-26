@@ -1,5 +1,5 @@
-#ifndef SPHERE_H
-#define SPHERE_H
+#ifndef CYLINDER_H
+#define CYLINDER_H
 
 #include "hitRecord.h"
 #include "intersectables/accelerator/boundingBox.h"
@@ -9,14 +9,17 @@
 
 class Material;
 
-class Sphere : public CsgSolid {
+/**
+ * Infinite cylinder along z-axis with radius 1.
+ **/
+class Cylinder : public CsgSolid {
  private:
   Material* material;
-  const Vector3f center;
-  const float radius;
   const BoundingBox aabb;
+  float radius;
 
-  BoundingBox computeAABB(const Vector3f& center, float radius) {
+  BoundingBox computeAABB() {
+    Vector3f center(0, 0, 0);
     auto bottomLeft = Vector3f(center);
     auto shift = Vector3f(-radius, -radius, -radius);
     bottomLeft.add(shift);
@@ -31,7 +34,8 @@ class Sphere : public CsgSolid {
   HitRecord* buildHitRecord(float t, const Ray& ray) const;
 
  public:
-  Sphere(Material*, const Vector3f&, float);
+  Cylinder(Material* material);
+  Cylinder(Material* material, float radius);
   virtual HitRecord* intersect(const Ray& ray) const;
 
   const BoundingBox& getBoundingBox() const { return aabb; }

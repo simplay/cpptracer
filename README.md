@@ -6,6 +6,14 @@
 
 ![alt tag](https://github.com/simplay/cpptracer/blob/master/examples/blinn.bmp)
 
+## Features
+
++ Recursive raytracing (Whitted Integrator)
++ Can render [Constructive solid geometries](http://en.wikipedia.org/wiki/Constructive_solid_geometry)
++ Can process triangle meshes through the [.obj](https://en.wikipedia.org/wiki/Wavefront_.obj_file) format
++ Multithreaded
++ Supports reflective and refractive materials
+
 ## Dependencies
 
 + `cmake >= 3.1.3`
@@ -39,6 +47,10 @@ Inside `build/`, execute `./unit_tests.x`
 ## Running the benchmarks
 
 Inside `build/`, execute `./benchmarks.x`
+
+## Generate Documentation
+
+Inside `build/`, execute `make doc`
 
 ## Contributing
 

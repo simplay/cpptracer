@@ -4,7 +4,7 @@
 #include <limits>
 #include "hitRecord.h"
 #include "intersectables/accelerator/boundingBox.h"
-#include "intersectables/intersectable.h"
+#include "intersectables/csg/csgSolid.h"
 #include "math/vector3f.h"
 #include "ray.h"
 
@@ -13,7 +13,7 @@ class Material;
 // Construct a plane given its normal and distance to the origin Note that the
 // distance is along the direction that the normal points (meaning that the
 // sign of distance matters)
-class Plane : public Intersectable {
+class Plane : public CsgSolid {
  private:
   BoundingBox initBoundingBox() {
     return BoundingBox(Vector3f(std::numeric_limits<float>::min()),
@@ -44,5 +44,7 @@ class Plane : public Intersectable {
   virtual HitRecord* intersect(const Ray& ray) const;
 
   const BoundingBox& getBoundingBox() const { return aabb; }
+
+  virtual std::vector<IntervalBoundary> getIntervalBoundaries(const Ray& ray) const;
 };
 #endif

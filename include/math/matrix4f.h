@@ -1,6 +1,7 @@
 #ifndef MATRIX4F_H
 #define MATRIX4F_H
 
+#include <cmath>
 #include "vector4f.h"
 
 class Matrix4f {
@@ -16,8 +17,63 @@ class Matrix4f {
   Matrix4f(float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13,
            float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33);
 
-  static Matrix4f* eye() { return new Matrix4f(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  static Matrix4f* eye() {
+    // clang-format off
+    return new Matrix4f(
+      1, 0, 0, 0,
+      0, 1, 0, 0,
+      0, 0, 1, 0,
+      0, 0, 0, 1
+    );
+    // clang-format on
+  }
 
+  /**
+   * @param angle value between 0 and 2*pi
+   * @return homogeneous transformation matrix
+   **/
+  static Matrix4f* rotX(float angle) {
+    // clang-format off
+    return new Matrix4f(
+      1, 0, 0, 0,
+      0, cos(angle), -sin(angle), 0,
+      0, sin(angle),  cos(angle), 0,
+      0, 0,           0,          1
+    );
+    // clang-format on
+  }
+
+  /**
+   * @param angle value between 0 and 2*pi
+   * @return homogeneous transformation matrix
+   **/
+  static Matrix4f* rotY(float angle) {
+    // clang-format off
+    return new Matrix4f(
+      cos(angle), 0, sin(angle), 0,
+      0,          1, 0,          0,
+     -sin(angle), 0, cos(angle), 0,
+      0,          0, 0,          1
+    );
+    // clang-format on
+  }
+
+  /**
+   * @param angle value between 0 and 2*pi
+   * @return homogeneous transformation matrix
+   **/
+  static Matrix4f* rotZ(float angle) {
+    // clang-format off
+    return new Matrix4f(
+      cos(angle), -sin(angle), 0, 0,
+      sin(angle),  cos(angle), 0, 0,
+      0,           0,          1, 0,
+      0,           0,          0, 1
+    );
+    // clang-format on
+  }
+
+  Matrix4f* mult(const Matrix4f& other);
   Vector4f* mult(const Vector4f& other);
   void scale(float f);
 

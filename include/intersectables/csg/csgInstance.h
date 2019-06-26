@@ -1,31 +1,17 @@
-#ifndef INSTANCE_H
-#define INSTANCE_H
+#ifndef CSG_INSTANCE_H
+#define CSG_INSTANCE_H
 
 #include "hitRecord.h"
 #include "intersectables/accelerator/boundingBox.h"
-#include "intersectables/intersectable.h"
+#include "intersectables/containers/instance.h"
+#include "intersectables/csg/csgSolid.h"
 #include "math/matrix4f.h"
 #include "math/vector3f.h"
 #include "ray.h"
 
-class Material;
-
-/**
- * Used to reduce memory usage: Instead re-creating very similar intersectables,
- * try to re-use them.
- *
- * An instance has a reference shadered intersectable and a homogeneous
- * tranformation which describes how an object is rotated, translated, scaled
- * and sheared in its using scene.
- *
- * An instance of an intersectable then never gets modified, only its
- * transformation matrix gets updated. This allows to save us from creating
- * many similar intersectable instances
- */
-class Instance : public Intersectable {
+class CsgInstance : public CsgSolid {
  private:
-  // A reference to an intersectable, e.g. a sphere or a plane.
-  Intersectable* intersectable;
+  CsgSolid* solid;
 
   // homogeneous tranformation matrix T described in local object coordinate
   // system, i.e. from object coordinates to world coords.
@@ -42,9 +28,9 @@ class Instance : public Intersectable {
   BoundingBox aabb;
 
  public:
-  Instance(Intersectable*);
-  Instance(Intersectable*, Matrix4f*);
-  ~Instance();
+  CsgInstance(CsgSolid*);
+  CsgInstance(CsgSolid*, Matrix4f*);
+  std::vector<CsgSolid::IntervalBoundary> getIntervalBoundaries(const Ray& ray) const;
 
   virtual HitRecord* intersect(const Ray& ray) const;
 

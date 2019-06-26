@@ -55,6 +55,7 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/include/intersectables/accelerator
   ${PROJECT_SOURCE_DIR}/include/intersectables/geometires
   ${PROJECT_SOURCE_DIR}/include/intersectables/containers
+  ${PROJECT_SOURCE_DIR}/include/intersectables/csg
   ${PROJECT_SOURCE_DIR}/include/materials
   ${PROJECT_SOURCE_DIR}/include/lights
   ${PROJECT_SOURCE_DIR}/include/integrators
@@ -67,7 +68,7 @@ include_directories(
 
 # Make variables referring to all the sources and test files.
 file(GLOB SOURCES "src/*.cpp")
-file(GLOB INTERSECTABLE_SOURCES "src/intersectables/*.cpp", "src/intersectables/accelerator/*.cpp", "src/intersectables/geometries/*.cpp", "src/intersectables/containers/*.cpp")
+file(GLOB INTERSECTABLE_SOURCES "src/intersectables/*.cpp", "src/intersectables/accelerator/*.cpp", "src/intersectables/geometries/*.cpp", "src/intersectables/containers/*.cpp", "src/intersectables/csg/*.cpp")
 file(GLOB MATERIAL_SOURCES "src/materials/*.cpp")
 file(GLOB LIGHT_SOURCES "src/lights/*.cpp")
 file(GLOB INTEGRATOR_SOURCES "src/integrators/*.cpp")
