@@ -3,8 +3,6 @@ dist: bionic
 notifications:
   email: false
 
-# Define builds on mulitple OS/compiler combinations.
-# Feel free to add/remove entries from this list.
 matrix:
   include:
     - os: linux
@@ -45,7 +43,6 @@ before_script:
   - mkdir $PARENTDIR/build && cd $PARENTDIR/build
 
 script:
-  - make gtest
   - make coverage
 
 after_success:
