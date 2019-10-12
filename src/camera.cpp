@@ -9,13 +9,10 @@
 Camera::Camera(Vector3f* eye, Vector3f* lookAt, Vector3f* up, float fov, float aspectRatio,
                float width, float height)
     : eye(eye),
-      lookAt(lookAt),
-      up(up),
-      fov(fov),
-      aspectRatio(aspectRatio),
       width(width),
       height(height) {
   Vector3f from(*eye);
+
   Vector3f to(*lookAt);
 
   // z-axis

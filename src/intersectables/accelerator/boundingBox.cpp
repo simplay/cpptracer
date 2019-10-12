@@ -1,4 +1,4 @@
-#include "boundingBox.h"
+#include "intersectables/accelerator/boundingBox.h"
 #include <algorithm>
 #include <limits>
 

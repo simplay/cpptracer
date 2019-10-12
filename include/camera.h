@@ -44,19 +44,6 @@ class Camera {
   // origin of camera's viewing direction
   Vector3f* eye;
 
-  // the point in the scene we are looking at
-  Vector3f* lookAt;
-
-  // reference vector that define the upwards direction. Notice, that according
-  // to our coordinate-system, upwards means having a positive y value.
-  Vector3f* up;
-
-  // vertical field of view, an angle
-  float fov;
-
-  // fraction between width and height of the image.
-  float aspectRatio;
-
   float width;
   float height;
 
@@ -69,6 +56,15 @@ class Camera {
   double left;
 
  public:
+
+  /**
+   * @param fov vertical field of view, an angle
+   * @param lookAt the point in the scene we are looking at.
+   * @param up reference vector that define the upwards direction.
+   *  Notice, that according to our coordinate-system, upwards means
+   *  having a positive y value.
+   * @param aspectRatio fraction between width and height of the image.
+   **/
   Camera(Vector3f* eye, Vector3f* lookAt, Vector3f* up, float fov, float aspectRatio, float width,
          float height);
 

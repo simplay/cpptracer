@@ -13,7 +13,7 @@ class HitRecord;
 class Ray;
 class Triangle;
 class MeshTriangle;
-class MeshData;
+struct MeshData;
 
 class Logger {
  public:

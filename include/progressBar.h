@@ -9,7 +9,6 @@
 class ProgressBar {
  private:
   std::vector<int>* taskCounters;
-  int totalTasks;
 
   bool isRunning = true;
   int progress = 0;
