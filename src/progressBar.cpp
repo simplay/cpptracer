@@ -4,7 +4,7 @@
 #include "logger.h"
 
 ProgressBar::ProgressBar(std::vector<int>* taskCounters, int totalTasks)
-    : taskCounters(taskCounters), totalTasks(totalTasks) {
+    : taskCounters(taskCounters) {
   this->stepSize = std::max(totalTasks / progressIntervals, 1);
 }
 
