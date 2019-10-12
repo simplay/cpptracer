@@ -32,9 +32,6 @@ install:
   - gem install coveralls-lcov
 
 before_script:
-  - lcov --version
-  - gcov --version
-  - g++ --version
   - PARENTDIR=$(pwd)
   - mkdir -p $PARENTDIR/build && cd $PARENTDIR/build
 
