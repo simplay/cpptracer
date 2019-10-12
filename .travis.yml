@@ -27,8 +27,6 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
-  - PARENTDIR=$(pwd)
-  - mkdir $PARENTDIR/build
 
 install:
   - gem install coveralls-lcov
@@ -38,7 +36,7 @@ before_script:
   - gcov --version
   - g++ --version
   - PARENTDIR=$(pwd)
-  - mkdir $PARENTDIR/build && cd $PARENTDIR/build
+  - mkdir -p $PARENTDIR/build && cd $PARENTDIR/build
 
 script:
   - cd $PARENTDIR/build
