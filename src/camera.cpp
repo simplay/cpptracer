@@ -11,30 +11,27 @@ Camera::Camera(Vector3f* eye, Vector3f* lookAt, Vector3f* up, float fov, float a
     : eye(eye),
       width(width),
       height(height) {
-  Vector3f from(*eye);
 
   Vector3f to(*lookAt);
 
   // z-axis
-  Vector3f w(from);
+  Vector3f w(*eye);
   w.sub(to);
   w.normalize();
   auto zc = Vector4f(w.x, w.y, w.z, 0.0);
 
   // # x-axis
-  auto u = up->cross(w);
+  std::unique_ptr<Vector3f> u(up->cross(w));
   u->normalize();
   auto xc = Vector4f(u->x, u->y, u->z, 0.0);
 
   // # y-axis
-  auto v = w.cross(*u);
+  std::unique_ptr<Vector3f> v(w.cross(*u));
   auto yc = Vector4f(v->x, v->y, v->z, 0.0);
-  delete v;
-  delete u;
 
-  auto e = Vector4f(from.x, from.y, from.z, 1.0);
+  auto e = Vector4f(eye->x, eye->y, eye->z, 1.0);
 
-  matrix = new Matrix4f(xc, yc, zc, e, false);
+  this->matrix = new Matrix4f(xc, yc, zc, e, false);
 
   // compute image corners
   double angularFov = M_PI * (fov / 180.0);
