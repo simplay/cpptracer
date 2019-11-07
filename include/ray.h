@@ -12,6 +12,7 @@
 class Ray {
  private:
   float EPSILON = 0.00001;
+  Vector3f* perturbatedOrigin(Vector3f* oldOrigin, Vector3f* direction);
 
  public:
   Vector3f* origin;
