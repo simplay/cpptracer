@@ -1,12 +1,10 @@
 #include "scenes/csgScene.h"
-#include "integrators/debugIntegrator.h"
 #include "integrators/whittedIntegrator.h"
 #include "intersectables/csg/csgInstance.h"
 #include "intersectables/csg/csgNode.h"
 #include "intersectables/geometries/cube.h"
 #include "intersectables/geometries/plane.h"
 #include "intersectables/geometries/sphere.h"
-#include "intersectables/geometries/cylinder.h"
 #include "materials/blinn.h"
 #include "materials/diffuse.h"
 

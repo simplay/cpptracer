@@ -1,6 +1,5 @@
 #include "renderer.h"
 #include <algorithm>
-#include <chrono>
 #include <iostream>
 #include <thread>
 #include <vector>
@@ -9,8 +8,6 @@
 #include "progressBar.h"
 #include "ray.h"
 #include "renderTask.h"
-#include "samplers/oneSampler.h"
-#include "samplers/sampler.h"
 #include "spectrum.h"
 
 Renderer::Renderer(Scene* scene) : scene(scene), printProgress(true) {}

@@ -1,5 +1,4 @@
 #include "logger.h"
-#include <stdio.h>
 #include <sstream>
 #include "hitRecord.h"
 #include "intersectables/geometries/meshTriangle.h"

@@ -1,6 +1,4 @@
 #include "spectrum.h"
-#include <algorithm>
-#include <cmath>
 
 Spectrum::Spectrum() : r(0), g(0), b(0) {}
 

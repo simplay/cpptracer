@@ -1,13 +1,10 @@
 #include "scenes/meshTest.h"
-#include "integrators/debugIntegrator.h"
 #include "integrators/whittedIntegrator.h"
 #include "intersectables/accelerator/bspTree.h"
 #include "intersectables/containers/instance.h"
 #include "intersectables/containers/mesh.h"
 #include "intersectables/geometries/plane.h"
-#include "intersectables/geometries/sphere.h"
 #include "materials/blinn.h"
-#include "materials/diffuse.h"
 #include "materials/gridTexturedMaterial.h"
 #include "samplers/randomSampler.h"
 

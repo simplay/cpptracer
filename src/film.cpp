@@ -1,5 +1,4 @@
 #include <math.h>
-#include <iostream>
 
 #include "film.h"
 #include "spectrum.h"

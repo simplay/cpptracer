@@ -1,7 +1,4 @@
 #include "ray.h"
-
-#include <iostream>
-
 #include <memory>
 #include "math/vector3f.h"
 

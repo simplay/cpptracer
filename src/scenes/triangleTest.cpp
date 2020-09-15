@@ -1,7 +1,6 @@
 #include "scenes/triangleTest.h"
 #include "integrators/debugIntegrator.h"
 #include "intersectables/containers/instance.h"
-#include "intersectables/geometries/meshTriangle.h"
 #include "intersectables/geometries/triangle.h"
 #include "materials/diffuse.h"
 #include "math/matrix4f.h"

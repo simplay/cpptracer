@@ -1,6 +1,5 @@
 #include "camera.h"
 #include <math.h>
-#include <iostream>
 #include <memory>
 #include "math/vector3f.h"
 #include "math/vector4f.h"

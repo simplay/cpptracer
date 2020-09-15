@@ -1,12 +1,9 @@
 #include "scenes/refractiveScene.h"
-#include "integrators/debugIntegrator.h"
 #include "integrators/whittedIntegrator.h"
 #include "intersectables/geometries/plane.h"
 #include "intersectables/geometries/sphere.h"
 #include "materials/blinn.h"
-#include "materials/diffuse.h"
 #include "materials/gridTexturedMaterial.h"
-#include "materials/reflectiveMaterial.h"
 #include "materials/refractiveMaterial.h"
 #include "samplers/randomSampler.h"
 

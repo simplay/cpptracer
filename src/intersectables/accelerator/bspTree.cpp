@@ -1,6 +1,5 @@
 #include "intersectables/accelerator/bspTree.h"
 #include <cmath>
-#include <iostream>
 #include <limits>
 #include <stack>
 

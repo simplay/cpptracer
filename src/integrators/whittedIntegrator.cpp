@@ -1,6 +1,5 @@
 #include "integrators/whittedIntegrator.h"
 #include <algorithm>
-#include <iostream>
 #include <memory>
 #include "materials/material.h"
 

@@ -1,5 +1,4 @@
 #include "materials/reflectiveMaterial.h"
-#include <math.h>
 
 ReflectiveMaterial::ReflectiveMaterial() : ks(1, 1, 1) {}
 // TODO(panmari): Change constructor to expect a const ref. This is currently a memory leak.

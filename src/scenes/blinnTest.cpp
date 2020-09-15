@@ -1,5 +1,4 @@
 #include "scenes/blinnTest.h"
-#include "integrators/debugIntegrator.h"
 #include "integrators/whittedIntegrator.h"
 #include "intersectables/geometries/plane.h"
 #include "intersectables/geometries/sphere.h"
