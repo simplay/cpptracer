@@ -1,0 +1,10 @@
+clang++
+-I
+include
+-I
+include
+src
+external
+-std=gnu++14
+-stdlib=libc++
+-fPIC
